@@ -7,5 +7,6 @@
 int main()
 {
     printf( "%s\n", readline( " " ) );
+    printf("salam\n");
     return 0;
 }

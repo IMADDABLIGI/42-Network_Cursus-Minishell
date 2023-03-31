@@ -7,5 +7,8 @@
 int main()
 {
     printf( "%s\n", readline( " " ) );
+    printf( "helo\n" );
+
+
     return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/04/01 13:30:11 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/04/01 15:20:02 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,13 @@
 #include <stdlib.h>
 #include <readline/readline.h>
 #include <unistd.h>
-#define COLOUR_RED = \033[1;31m
+
+typedef struct data 
+{
+    char *input;
+    int z;
+    int i;
+    int k;
+}t_data ;
 
 #endif

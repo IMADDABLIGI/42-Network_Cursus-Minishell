@@ -2,7 +2,7 @@ NAME = minishell
 
 FLAGS = -Wall -Wextra -Werror 
 
-SRC_FILE = 	Rijal.c \
+SRC_FILE = 	main.c \
 			
 
 COLOUR_GREEN=\033[1;32m

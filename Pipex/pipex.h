@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/31 13:24:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/03/31 13:24:32 by hznagui          ###   ########.fr       */
+/*   Created: 2023/03/21 15:13:53 by idabligi          #+#    #+#             */
+/*   Updated: 2023/03/21 15:15:30 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <stdlib.h>
+#ifndef PIPEX_H
+# define PIPEX_H
 
-#include <readline/readline.h>
-#include <readline/history.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <unistd.h>
 
-int main()
-{
-    printf( "%s\n", readline( " " ) );
-    printf("salam\n");
-    return 0;
-}
+#endif

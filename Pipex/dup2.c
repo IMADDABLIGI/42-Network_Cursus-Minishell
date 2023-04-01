@@ -1,28 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   run_commands.c                                     :+:      :+:    :+:   */
+/*   dup2.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/20 19:09:27 by idabligi          #+#    #+#             */
-/*   Updated: 2023/03/30 15:12:54 by idabligi         ###   ########.fr       */
+/*   Created: 2023/03/31 13:17:14 by idabligi          #+#    #+#             */
+/*   Updated: 2023/03/31 13:27:04 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
+#include "pipex.h"
 
-int	main()
+int main()
 {
-	char	*argv[] = {"ls", "-l", "/Users/idabligi/Desktop/minishell/pipex", NULL}; 
-	char	*envp[] = {NULL};
-	int		status = execve("/bin/ls", argv, envp);
+	int		i;
+	int		fd[2];
+	int		pid;
+	char	buff[20];
+	char	*arg[] = {"ls", "/Users/idabligi/Desktop/Minishell/Pipex", NULL};
+	char	*env[] = {NULL};
 
-	if (status == -1)
+	pipe(fd);
+	pid = fork();
+
+	if (pid == 0)
 	{
-		perror("execve");
-		return 1;
+		close (fd[0]);
+		dup2(fd[1], 1);
+		close(fd[1]);
+		execve("/bin/ls", arg, env);
 	}
-	return 0;
+	else
+	{
+		close(fd[1]);
+		while (read())
+	}
 }

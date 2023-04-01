@@ -1,24 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Rijal.c                                            :+:      :+:    :+:   */
+/*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/31 13:24:27 by hznagui           #+#    #+#             */
-/*   Updated: 2023/04/01 12:35:05 by hznagui          ###   ########.fr       */
+/*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
+/*   Updated: 2023/04/01 12:31:25 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef MINISHELL_H
+#define MINISHELL_H
 
-int main() {
-    char *input;
-    
-    while (1)
-    {
-        input = readline("minishell : ");
-        printf("You entered: %s\n", input);
-    }
-    return 0;
-}
+#include <stdio.h>
+#include <stdlib.h>
+#include <readline/readline.h>
+// #include <unistd.h>
+
+#endif

@@ -16,7 +16,7 @@ OBJ_FILE = $(SRC_FILE:.c=.o)
 all : $(NAME)
 
 $(NAME) : $(OBJ_FILE) minishell.h 
-	@cc $(FLAGS) $(OBJ_FILE) -lreadline  -o $(NAME)
+	@cc $(FLAGS) -lreadline  $(OBJ_FILE)   -o $(NAME) 
 	@echo  "$(COLOUR_GREEN)--->[mandatory part successfully created ✅]<---"
 
 %.o: %.c minishell.h 

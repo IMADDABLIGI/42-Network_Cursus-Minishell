@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 15:44:19 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/01 22:25:30 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/02 00:12:21 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,9 @@ int main(int ac, char **av)
 {
 	int		pid;
 	int		fd[2];
-    (void)ac;
-
+    
+    if (ac < 5)
+        ft_write_error("Error in Arguments");
 	pipe(fd);
 	pid = fork();
 

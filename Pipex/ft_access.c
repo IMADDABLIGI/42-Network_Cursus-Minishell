@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 14:26:09 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/01 16:17:23 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/02 16:08:01 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@ char	*ft_access(char **p_cmd, char *s_cmd)
 			return (ft_strjoin(p_cmd[i], s_cmd));
 		i++;
 	}
-	ft_write_error("This is not a command");
+	// write(1, "command not found : ", 20);
+	// write(1, s_cmd, ft_strlen(s_cmd));
+	printf("zsh: command not found: %s", s_cmd);
 	return (NULL);
 }

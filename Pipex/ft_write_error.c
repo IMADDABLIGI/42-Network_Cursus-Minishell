@@ -1,39 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dup2.c                                             :+:      :+:    :+:   */
+/*   ft_write_error.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/31 13:17:14 by idabligi          #+#    #+#             */
-/*   Updated: 2023/03/31 13:27:04 by idabligi         ###   ########.fr       */
+/*   Created: 2023/04/01 15:09:05 by idabligi          #+#    #+#             */
+/*   Updated: 2023/04/01 16:15:17 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-int main()
+void	ft_write_error(char *str)
 {
-	int		i;
-	int		fd[2];
-	int		pid;
-	char	buff[20];
-	char	*arg[] = {"ls", "/Users/idabligi/Desktop/Minishell/Pipex", NULL};
-	char	*env[] = {NULL};
-
-	pipe(fd);
-	pid = fork();
-
-	if (pid == 0)
-	{
-		close (fd[0]);
-		dup2(fd[1], 1);
-		close(fd[1]);
-		execve("/bin/ls", arg, env);
-	}
-	else
-	{
-		close(fd[1]);
-		while (read())
-	}
+	printf("%s\n", str);
+	exit (1);
 }

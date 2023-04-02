@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/04/02 14:00:09 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/04/02 17:56:21 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <readline/history.h>
 #include <readline/readline.h>
 #include <unistd.h>
 
@@ -24,6 +25,7 @@ typedef struct data
     int z;
     int i;
     int k;
+    char t;
 }t_data ;
 
 #endif

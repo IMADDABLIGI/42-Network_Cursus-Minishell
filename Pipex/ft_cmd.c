@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 01:54:38 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/01 22:26:09 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/02 02:44:07 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,15 @@ void	ft_secoundcmd(char *infile, char *cmd)
 	char	**s_cmd;
 	int		file;
 
-	file = open(infile, O_WRONLY);
+	if ((file = open(infile, O_WRONLY)) > 0)
+        {
+            if (unlink(infile) == 0)
+                printf("Infile has been successfully deleted.\n");
+                usleep(100);
+		    file = open(infile, O_CREAT | O_WRONLY);
+        }
 	if (file < 0)
-		ft_write_error("Error in file name2");
+		file = open(infile, O_CREAT | O_WRONLY);
 	dup2(file, STDOUT_FILENO);
 	path = getenv("PATH");
 	p_cmd = ft_split(path, ':');

@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 15:44:19 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/02 00:12:21 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/02 02:11:05 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,12 @@ void	ft_execute(char *arg1, char *arg2[])
 	execve(arg1, arg2, NULL);
 }
 
+
 int main(int ac, char **av)
 {
 	int		pid;
 	int		fd[2];
-    
+
     if (ac < 5)
         ft_write_error("Error in Arguments");
 	pipe(fd);

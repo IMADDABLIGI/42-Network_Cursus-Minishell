@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:24:27 by hznagui           #+#    #+#             */
-/*   Updated: 2023/04/03 16:07:07 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/04/03 17:21:01 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void ft_separit(t_data *a)
 {
     a->i = 0;
-    a->tab=ft_split(a->input,' ');
+    a->tab = ft_split(a->input,' ');
     while (a->tab[a->i])
     {
         printf("%s\n",a->tab[a->i]);

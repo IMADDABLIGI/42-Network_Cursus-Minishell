@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 15:52:56 by hznagui           #+#    #+#             */
-/*   Updated: 2023/04/03 16:05:00 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/04/03 17:07:24 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,18 @@ static char	**ft_return(char *s, char c, char **p)
 	p[u] = NULL;
 	return (p);
 }
+char	**ft_split(char *s, char c)
+{
+	char	**p;
+
+	if (!s)
+		return (0);
+	p = malloc((nbr_of_words((char *)s, c) + 1) * (sizeof(char *)));
+	if (!p)
+		return (0);
+	return (ft_return((char *)s, c, p));
+}
+/*----------------------------------------------------------------*/
 static size_t	leakskiller(char *s, unsigned int start, size_t len)
 {
 	if (ft_strlen(s + start) >= len)
@@ -85,7 +97,6 @@ static size_t	leakskiller(char *s, unsigned int start, size_t len)
 		return (ft_strlen(s + start));
 	}
 }
-
 char	*ft_substr(char *s, unsigned int start, size_t len)
 {
 	size_t	o;
@@ -107,17 +118,7 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 	p[o] = '\0';
 	return (p);
 }
-char	**ft_split(char *s, char c)
-{
-	char	**p;
-
-	if (!s)
-		return (0);
-	p = malloc((nbr_of_words((char *)s, c) + 1) * (sizeof(char *)));
-	if (!p)
-		return (0);
-	return (ft_return((char *)s, c, p));
-}
+/*----------------------------------------------------------------*/
 char	*ft_strdup(char *s1)
 {
 	size_t	i;
@@ -137,6 +138,7 @@ char	*ft_strdup(char *s1)
 	f[y] = '\0';
 	return (f);
 }
+/*----------------------------------------------------------------*/
 size_t	ft_strlen(char *s)
 {
 	size_t	i;

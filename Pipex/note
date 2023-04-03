@@ -1,6 +1,12 @@
+Read_me_a_sat.txt
 ft_access.c
 ft_cmd.c
 ft_split.c
 ft_write_error.c
+makefile
+note
+pipex
 pipex.c
+pipex.h
 pipex_utils.c
+store

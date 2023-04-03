@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 01:54:38 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/02 15:58:02 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/03 01:28:29 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,10 @@ void	ft_secoundcmd(char *infile, char *cmd, int fd)
 	char	**s_cmd;
 	int		file;
 
-	if ((file = open(infile, O_WRONLY)) > 0)
-		{
-			unlink(infile);
-			usleep(100);
-			file = open(infile, O_CREAT | O_WRONLY);
-		}
+	unlink(infile);
+	file = open(infile, O_CREAT | O_WRONLY, 0644);
 	if (file < 0)
-		file = open(infile, O_CREAT | O_WRONLY);
+		file = open(infile, O_CREAT | O_WRONLY, 0644);
 	path = getenv("PATH");
 	p_cmd = ft_split(path, ':');
 	s_cmd = ft_split(cmd, ' ');

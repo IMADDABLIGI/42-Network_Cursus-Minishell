@@ -1,0 +1,6 @@
+ft_access.c
+ft_cmd.c
+ft_split.c
+ft_write_error.c
+pipex.c
+pipex_utils.c

@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:13:53 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/04 01:06:40 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/04 18:28:17 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void	ft_write_error(char *str);
 int		ft_strlen(const char *s);
 void	ft_write_error2(char *str);
 char	*ft_access(char **p_cmd, char *s_cmd);
-void	ft_firstcmd(char *infile, char *cmd, int *fd);
-void	ft_midcmd(char *cmd, int *fd);
-void	ft_lastcmd(char *infile, char *cmd, int *fd);
+void	ft_firstcmd(char *infile, char *cmd);
+void	ft_midcmd(char *cmd, int check);
+void	ft_lastcmd(char *outfile, char *cmd, int check);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 01:54:38 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/04 01:03:31 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/04 02:49:41 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ void	ft_firstcmd(char *infile, char *cmd, int *fd)
 	p_cmd = ft_split(path, ':');
 	s_cmd = ft_split(cmd, ' ');
 	path = ft_access(p_cmd, s_cmd[0]);
-	close(fd[0]);
+		
+	close (fd[0]);
 	dup2(fd[1], STDOUT_FILENO);
 	close (fd[1]);
 	dup2(file, STDIN_FILENO);
@@ -43,10 +44,10 @@ void	ft_midcmd(char *cmd, int *fd)
 	p_cmd = ft_split(path, ':');
 	s_cmd = ft_split(cmd, ' ');
 	path = ft_access(p_cmd, s_cmd[0]);
-	
+
 	dup2(fd[0] ,STDIN_FILENO);
 	close (fd[0]);
-	dup2(fd[1], STDIN_FILENO);
+	dup2(fd[1], STDOUT_FILENO);
 	close (fd[1]);
 	execve(path, s_cmd, NULL);
 }

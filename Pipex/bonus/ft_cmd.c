@@ -6,13 +6,13 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 01:54:38 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/03 01:28:29 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/04 01:03:31 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void	ft_firstcmd(char *infile, char *cmd, int fd)
+void	ft_firstcmd(char *infile, char *cmd, int *fd)
 {
 	char	*path;
 	char	**p_cmd;
@@ -26,15 +26,32 @@ void	ft_firstcmd(char *infile, char *cmd, int fd)
 	p_cmd = ft_split(path, ':');
 	s_cmd = ft_split(cmd, ' ');
 	path = ft_access(p_cmd, s_cmd[0]);
-
-	dup2(fd, STDOUT_FILENO);
-	close (fd);
+	close(fd[0]);
+	dup2(fd[1], STDOUT_FILENO);
+	close (fd[1]);
 	dup2(file, STDIN_FILENO);
-	
 	execve(path, s_cmd, NULL);
 }
 
-void	ft_secoundcmd(char *infile, char *cmd, int fd)
+void	ft_midcmd(char *cmd, int *fd)
+{
+	char	*path;
+	char	**p_cmd;
+	char	**s_cmd;
+
+	path = getenv("PATH");
+	p_cmd = ft_split(path, ':');
+	s_cmd = ft_split(cmd, ' ');
+	path = ft_access(p_cmd, s_cmd[0]);
+	
+	dup2(fd[0] ,STDIN_FILENO);
+	close (fd[0]);
+	dup2(fd[1], STDIN_FILENO);
+	close (fd[1]);
+	execve(path, s_cmd, NULL);
+}
+
+void	ft_lastcmd(char *infile, char *cmd, int *fd)
 {
 	char	*path;
 	char	**p_cmd;
@@ -49,10 +66,12 @@ void	ft_secoundcmd(char *infile, char *cmd, int fd)
 	p_cmd = ft_split(path, ':');
 	s_cmd = ft_split(cmd, ' ');
 	path = ft_access(p_cmd, s_cmd[0]);
-	
-	dup2(fd, STDIN_FILENO);
-	close (fd);
+
+	close(fd[1]);
+	dup2(fd[0], STDIN_FILENO);
+	close (fd[0]);
+
 	dup2(file, STDOUT_FILENO);
-	
+
 	execve(path, s_cmd, NULL);
 }

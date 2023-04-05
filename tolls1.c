@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 15:52:56 by hznagui           #+#    #+#             */
-/*   Updated: 2023/04/05 00:25:51 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/04/05 01:48:34 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,36 @@ static size_t	nbr_of_words(t_data *a)
 {
 	a->k = 0;
 	a->lock = 0;
+	a->lock1 = 0;
 	a->length = 0;
+	a->t = '\0';
 	while (a->input[a->k])
 	{
-		// a->input[a->i] == 39 && a->input[a->i] == 34 &&
-		if ( a->input[a->k] != ' ' && a->lock == 0)
+		if (a->input[a->k] != 39 && a->input[a->k] != 34 && a->input[a->k] != ' ' && a->lock == 0)
 		{
 			a->length++;
 			a->lock = 1;
 		}
-		// else if ((a->input[a->i] == (34 || 39)))
-		// {
-		// 	if ()
-		// }
-		else if (a->input[a->k] == ' ' && a->lock == 1)
+		else if (a->input[a->k] == 39 || a->input[a->k] == 34)
+		{
+			
+			if (!a->lock1)
+			{
+				a->t = a->input[a->k];
+				a->lock1 = 1;
+				if (a->lock == 1)
+					a->length--;
+				a->lock = 1;
+			}
+			else if (a->input[a->k] == a->t && a->lock1)
+            {
+				a->lock = 0;
+                a->lock1 = 0;
+				if (!a->input[a->k+1] || a->input[a->k+1] == ' ')
+					a->length++;
+            }
+		}
+		else if (a->input[a->k] == ' '  && a->lock == 1 && a->lock1 == 0)
 			a->lock = 0;
 		a->k++;
 	}

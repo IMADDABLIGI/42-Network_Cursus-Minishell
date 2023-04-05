@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:24:27 by hznagui           #+#    #+#             */
-/*   Updated: 2023/04/05 00:26:55 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/04/05 00:33:36 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void open_quote(t_data *a)
     a->z = 0;
     a->i = 0;
     a->lock = 0;
+    a->t = '\0';
     while (a->input[a->i])
     {
         if ((a->input[a->i] == 39 || a->input[a->i] == 34) && a->lock == 0)

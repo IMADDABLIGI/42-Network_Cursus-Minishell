@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/04/05 00:23:31 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/04/05 00:55:34 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct data
     int z;
     int length;
     int lock;
+    int lock1;
     size_t i;
     size_t k;
     char t;

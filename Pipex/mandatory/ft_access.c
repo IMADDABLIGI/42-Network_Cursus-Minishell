@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   run_commands.c                                     :+:      :+:    :+:   */
+/*   ft_access.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/20 19:09:27 by idabligi          #+#    #+#             */
-/*   Updated: 2023/03/30 15:12:54 by idabligi         ###   ########.fr       */
+/*   Created: 2023/04/01 14:26:09 by idabligi          #+#    #+#             */
+/*   Updated: 2023/04/03 14:52:25 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include <stdio.h>
+#include "pipex.h"
 
-int	main()
+char	*ft_access(char **p_cmd, char *s_cmd)
 {
-	char	*argv[] = {"ls", "-l", "/Users/idabligi/Desktop/minishell/pipex", NULL}; 
-	char	*envp[] = {NULL};
-	int		status = execve("/bin/ls", argv, envp);
+	int	check;
+	int i;
 
-	if (status == -1)
+	i = 0;
+	while (p_cmd[i])
 	{
-		perror("execve");
-		return 1;
+		check = access(ft_strjoin(p_cmd[i], s_cmd), F_OK);
+		if (check == 0)
+			return (ft_strjoin(p_cmd[i], s_cmd));
+		i++;
 	}
-	return 0;
+	write(1, "command not found : ", 20);
+	write(1, s_cmd, ft_strlen(s_cmd));
+	// printf("zsh: command not found: %s", s_cmd);
+	return (NULL);
 }

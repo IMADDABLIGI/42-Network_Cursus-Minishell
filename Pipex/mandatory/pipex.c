@@ -1,42 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fork().c                                           :+:      :+:    :+:   */
+/*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/17 17:22:35 by idabligi          #+#    #+#             */
-/*   Updated: 2023/03/17 17:27:40 by idabligi         ###   ########.fr       */
+/*   Created: 2023/03/31 15:44:19 by idabligi          #+#    #+#             */
+/*   Updated: 2023/04/03 15:27:30 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
+#include "pipex.h"
+
+void	ft_execute(char *arg1, char *arg2[])
+{
+	execve(arg1, arg2, NULL);
+}
 
 int main(int ac, char **av)
 {
-	int i = 0;
-	int	child1;
-	int	child2;
+	int		pid;
+	int		fd[2];
 
-	child1 = fork();
-	child2 = fork();
+    if (ac < 5)
+        ft_write_error("Error in Arguments");
+	pipe(fd);
+	pid = fork();
 
-	if (child1 == 0)
+	if (pid == 0)
 	{
-		if (child2 == 0)
-			printf("Process from child2 of child1 here\n");
-		else
-			printf("Process from child1 here\n");
+		close (fd[0]);
+		// close (fd[1]);
+		ft_firstcmd(av[1], av[2], fd[1]);
 	}
 	else
 	{
-		if (child2 == 0)
-			printf("Process from child2 of parent here\n");
-		else
-			printf("Process of parent here\n");
+		wait(NULL);
+		close (fd[1]);
+		// close (fd[0]);
+		ft_secoundcmd(av[4], av[3], fd[0]);
 	}
-	return (0);
 }
-

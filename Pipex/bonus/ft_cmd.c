@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 01:54:38 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/04 18:27:53 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/05 15:28:37 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_firstcmd(char *infile, char *cmd)
 	file = open(infile, O_RDONLY);
 	if (file < 0)
 		ft_write_error("Error in file name");
-	output = open("/tmp/output", O_WRONLY , O_TRUNC);
+	output = open("/tmp/output", O_WRONLY | O_TRUNC);
 	
 	path = getenv("PATH");
 	p_cmd = ft_split(path, ':');
@@ -50,12 +50,12 @@ void	ft_midcmd(char *cmd, int check)
 	if ((check % 2) != 0)
 	{
 		input = open("/tmp/output", O_RDONLY);
-		output = open("/tmp/input", O_WRONLY , O_TRUNC);
-	}	
+		output = open("/tmp/input", O_WRONLY | O_TRUNC);
+	}
 	else
 	{
 		input = open("/tmp/input", O_RDONLY);
-		output = open("/tmp/output", O_WRONLY , O_TRUNC);
+		output = open("/tmp/output", O_WRONLY | O_TRUNC);
 	}
 	path = getenv("PATH");
 	p_cmd = ft_split(path, ':');
@@ -81,9 +81,9 @@ void	ft_lastcmd(char *outfile, char *cmd, int check)
 
 	file = open(outfile, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	if ((check % 2) != 0)
-		input = open("/tmp/input", O_RDONLY);
-	else
 		input = open("/tmp/output", O_RDONLY);
+	else
+		input = open("/tmp/input", O_RDONLY);
 	path = getenv("PATH");
 	p_cmd = ft_split(path, ':');
 	s_cmd = ft_split(cmd, ' ');

@@ -1,1 +1,11 @@
-      55
+/*   Created: 2023/04/03 17:08:33 by idabligi          #+#    #+#             */
+/*   Updated: 2023/04/05 14:20:01 by idabligi         ###   ########.fr       */
+	if (ac == 1)
+	size = ac - 1;
+			write(1, "here starts\n", 13);
+			ft_firstcmd(av[1], av[i]);
+			if ((size - i) == 1)
+				write(1, "here last\n", 11);
+				ft_lastcmd(av[i + 1], av[i], i);
+				write(1, "here middle\n", 13);
+			write(1, "here parent\n", 13);

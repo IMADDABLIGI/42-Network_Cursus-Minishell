@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 17:08:33 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/04 18:27:39 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/05 15:38:01 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	main(int ac ,char **av)
 		{
 			if ((size - i) == 1)
 			{
-				write(1, "here LAST\n", 11);
+				write(1, "here last\n", 11);
 				ft_lastcmd(av[i + 1], av[i], i);
 			}
 			else
@@ -47,7 +47,7 @@ int	main(int ac ,char **av)
 		}
 		else
 		{
-			usleep(300);
+            waitpid(pid, NULL, 0);
 			write(1, "here parent\n", 13);
 			i++;
 		}

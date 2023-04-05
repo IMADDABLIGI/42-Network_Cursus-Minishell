@@ -6,21 +6,23 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:24:27 by hznagui           #+#    #+#             */
-/*   Updated: 2023/04/05 00:33:36 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/04/05 16:55:29 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void ft_separit(t_data *a)
+int ft_separit(t_data *a)
 {
-    ft_split(a);
-    // a->i = 0;
-    // while (a->tab[a->i])
-    // {
-    //     printf("%s\n",a->tab[a->i]);
-    //     a->i++;
-    // }
+    if (!ft_split(a))
+        return(printf("problem in malloc !\n"));
+    a->i = 0;
+    while (a->tab[a->i])
+    {
+        printf("%s\n",a->tab[a->i]);
+        a->i++;
+    }
+    return(0);
 }
 void open_quote(t_data *a)
 {

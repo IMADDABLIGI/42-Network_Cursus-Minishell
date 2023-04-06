@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 01:44:41 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/06 02:05:35 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/06 14:59:30 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int main()
 {
-    if (ft_check_cmd("ls -al") == 0)
+    if (ft_check_cmd("ls -al"))
         printf("HAD LCOMMAND KAYNA\n");//You can try every CMD you like.
     else
         printf("LA WALLO HAD LCOMMAND GA3MA KAYNA\n");//if a valid CMD wouldn't have been found, that means u have to make it ur own and not by execve standard function.

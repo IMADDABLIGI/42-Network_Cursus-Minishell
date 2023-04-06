@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:13:53 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/04 18:28:17 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/06 01:29:46 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <fcntl.h>
 # include <unistd.h>
+# include <stdbool.h>
 
 char	*ft_strjoin(char const *s1, char const *s2);
 void	*ft_memcpy(void *dst, const void *src, int n);

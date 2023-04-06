@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/31 13:24:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/04/06 01:14:46 by idabligi         ###   ########.fr       */
+/*   Created: 2023/03/21 15:13:53 by idabligi          #+#    #+#             */
+/*   Updated: 2023/04/06 01:48:34 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef PIPEX_H
+# define PIPEX_H
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <readline/readline.h>
-#include <readline/history.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <fcntl.h>
+# include <unistd.h>
+# include <stdbool.h>
 
-int main(int argc,char **argv)
-{
-    int i = 1;
-    while (argv[i])
-    {
-       printf("<%s>\n",argv[i]);
-       i++;
-    }
-    return 0;
-}
+char	*ft_strjoin(char const *s1, char const *s2);
+int		ft_check_cmd(char *cmd);
+int		ft_check_path(char *path);
+void	*ft_memcpy(void *dst, const void *src, int n);
+char	**ft_split(char const *s, char c);
+int		ft_strlen(const char *s);
 
+#endif

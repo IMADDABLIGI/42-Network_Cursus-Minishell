@@ -1,89 +1,104 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   split1.c                                           :+:      :+:    :+:   */
+/*   tolls1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 15:52:56 by hznagui           #+#    #+#             */
-/*   Updated: 2023/04/03 17:07:24 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/04/05 01:48:34 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static size_t	nbr_of_words(char *s, char c)
+static size_t	nbr_of_words(t_data *a)
 {
-	size_t	k;
-	size_t	h;
-	size_t	l;
-
-	k = 0;
-	h = 0;
-	l = 0;
-	while (s[k])
+	a->k = 0;
+	a->lock = 0;
+	a->lock1 = 0;
+	a->length = 0;
+	a->t = '\0';
+	while (a->input[a->k])
 	{
-		if (s[k] != c && h == 0)
+		if (a->input[a->k] != 39 && a->input[a->k] != 34 && a->input[a->k] != ' ' && a->lock == 0)
 		{
-			l++;
-			h = 1;
+			a->length++;
+			a->lock = 1;
 		}
-		else if (s[k] == c && h == 1)
+		else if (a->input[a->k] == 39 || a->input[a->k] == 34)
 		{
-			h = 0;
+			
+			if (!a->lock1)
+			{
+				a->t = a->input[a->k];
+				a->lock1 = 1;
+				if (a->lock == 1)
+					a->length--;
+				a->lock = 1;
+			}
+			else if (a->input[a->k] == a->t && a->lock1)
+            {
+				a->lock = 0;
+                a->lock1 = 0;
+				if (!a->input[a->k+1] || a->input[a->k+1] == ' ')
+					a->length++;
+            }
 		}
-		k++;
+		else if (a->input[a->k] == ' '  && a->lock == 1 && a->lock1 == 0)
+			a->lock = 0;
+		a->k++;
 	}
-	return (l);
+    printf("<<%d>>\n",a->length);
+	
+	return (a->length);
 }
 
-static char	**free_all(char **str, size_t max)
+// static char	**free_all(char **str, size_t max)
+// {
+// 	int	i;
+
+// 	i = max;
+// 	while (i >= 0)
+// 		free(str[i--]);
+// 	free (str);
+// 	return (0);
+// }
+
+// static char	**ft_return(t_data *a)
+// {
+// 	size_t	end;
+// 	size_t	start;
+
+// 	a->i = 0;
+// 	start = 0;
+// 	while (a->i < nbr_of_words(a))
+// 	{
+// 		while (a->input[start] == ' ' && a->input[start] != '\0')
+// 			start++;
+// 		end = start;
+// 		while (a->input[end] != ' ' && a->input[end] != '\0')
+// 			end++;
+// 		a->tab[a->i] = ft_substr(a->input, start, end - start);
+// 		if (!a->tab[a->i])
+// 			return (free_all(a->tab, a->i));
+// 		a->i++;
+// 		start = end;
+// 	}
+// 	a->tab[a->i] = NULL;
+// 	return (a->tab);
+// }
+char	**ft_split(t_data *a)
 {
-	int	i;
 
-	i = max;
-	while (i >= 0)
-		free(str[i--]);
-	free (str);
-	return (0);
-}
-
-static char	**ft_return(char *s, char c, char **p)
-{
-	size_t	e;
-	size_t	u;
-	size_t	a;
-
-	u = 0;
-	a = 0;
-	while (u < nbr_of_words((char *)s, c))
-	{
-		while (s[a] == c && s[a] != '\0')
-			a++;
-		e = a;
-		while (s[e] != c && s[e] != '\0')
-			e++;
-		p[u] = ft_substr((char *)s, a, e - a);
-		if (!p[u])
-		{
-			return (free_all(p, u));
-		}
-		u++;
-		a = e;
-	}
-	p[u] = NULL;
-	return (p);
-}
-char	**ft_split(char *s, char c)
-{
-	char	**p;
-
-	if (!s)
+	if (!a->input)
 		return (0);
-	p = malloc((nbr_of_words((char *)s, c) + 1) * (sizeof(char *)));
-	if (!p)
-		return (0);
-	return (ft_return((char *)s, c, p));
+	nbr_of_words(a);
+	return(0);
+	// a->tab = malloc((nbr_of_words(a) + 1) * (sizeof(char *)));
+	// if (!a->tab)
+	// 	return (0);
+	// return (ft_return(a));
 }
 /*----------------------------------------------------------------*/
 static size_t	leakskiller(char *s, unsigned int start, size_t len)

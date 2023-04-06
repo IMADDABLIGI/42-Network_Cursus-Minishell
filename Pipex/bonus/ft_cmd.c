@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 01:54:38 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/05 15:28:37 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/05 16:04:35 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,18 +24,14 @@ void	ft_firstcmd(char *infile, char *cmd)
 	if (file < 0)
 		ft_write_error("Error in file name");
 	output = open("/tmp/output", O_WRONLY | O_TRUNC);
-	
 	path = getenv("PATH");
 	p_cmd = ft_split(path, ':');
 	s_cmd = ft_split(cmd, ' ');
 	path = ft_access(p_cmd, s_cmd[0]);
-
 	dup2(file, STDIN_FILENO);
 	close (file);
-	
 	dup2(output, STDOUT_FILENO);
 	close (output);
-
 	execve(path, s_cmd, NULL);
 }
 
@@ -61,13 +57,10 @@ void	ft_midcmd(char *cmd, int check)
 	p_cmd = ft_split(path, ':');
 	s_cmd = ft_split(cmd, ' ');
 	path = ft_access(p_cmd, s_cmd[0]);
-	
-	dup2(input ,STDIN_FILENO);
+	dup2(input, STDIN_FILENO);
 	close (input);
-	
 	dup2(output, STDOUT_FILENO);
 	close (output);
-
 	execve(path, s_cmd, NULL);
 }
 
@@ -88,12 +81,11 @@ void	ft_lastcmd(char *outfile, char *cmd, int check)
 	p_cmd = ft_split(path, ':');
 	s_cmd = ft_split(cmd, ' ');
 	path = ft_access(p_cmd, s_cmd[0]);
-
 	dup2(input, STDIN_FILENO);
 	close (input);
-
 	dup2(file, STDOUT_FILENO);
 	close (file);
-
+    unlink("/tmp/input");
+    unlink("/tmp/output");
 	execve(path, s_cmd, NULL);
 }

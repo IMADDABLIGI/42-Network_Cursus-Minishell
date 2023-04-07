@@ -1,31 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_access.c                                        :+:      :+:    :+:   */
+/*   ft_get_path.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/01 14:26:09 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/07 02:40:14 by idabligi         ###   ########.fr       */
+/*   Created: 2023/04/07 02:36:15 by idabligi          #+#    #+#             */
+/*   Updated: 2023/04/07 02:48:17 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "minishell.h"
 
-char	*ft_access(char **p_cmd, char *s_cmd)
+char	*ft_getpath(char *cmd)
 {
-	int	check;
-	int i;
+	int		i;
+	char	*path;
+	char	**p_cmd;
+	char	**s_cmd;
 
 	i = 0;
+	path = getenv("PATH");
+	p_cmd = ft_split(path, ':');
+	s_cmd = ft_split(cmd, ' ');
 	while (p_cmd[i])
 	{
-		check = access(ft_strjoin(p_cmd[i], s_cmd), F_OK);
-		if (check == 0)
-			return (ft_strjoin(p_cmd[i], s_cmd));
+		if (access(ft_strjoin(p_cmd[i], s_cmd[0]), F_OK) == 0)
+			return (ft_strjoin(p_cmd[i], s_cmd[0]));
 		i++;
 	}
-	write(1, "command not found : ", 20);
-	write(1, s_cmd, ft_strlen(s_cmd));
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 01:54:38 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/04 15:34:00 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/07 02:26:01 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ void	ft_secoundcmd(char *outfile, char *cmd, int fd)
 	char	**p_cmd;
 	char	**s_cmd;
 	int		file;
-
-	// unlink(outfile);
 	
 	file = open(outfile, O_CREAT | O_WRONLY | O_TRUNC, 0644);
 	path = getenv("PATH");

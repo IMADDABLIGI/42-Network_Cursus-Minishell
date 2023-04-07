@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:00:58 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/07 00:55:00 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/07 02:49:54 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,23 @@
 
 void    ft_check_arg(t_list *data)
 {
-    t_list  *ptr;
+	t_list  *ptr;
 
-    ptr = data;
-    data->exec = 0;
-    while (data)
-    {
-        if (data->tatto == 4)
-            data->exec = 1;
-        if (data->tatto == 5 || data->tatto == 6  ||
-            data->tatto == 7  || data->tatto == 8)
-            {
-                data->exec = 2;
-                break ;
-            }
-    }
+	ptr = data;
+	data->exec = 0;
+	while (data)
+	{
+		if (data->tatto == 4)
+			data->exec = 1;
+		if (data->tatto == 5 || data->tatto == 6  ||
+			data->tatto == 7  || data->tatto == 8)
+			{
+				data->exec = 2;
+				break ;
+			}
+		data = data ->next;
+	}
 }
-
 
 int	main(int ac, char **av)
 {
@@ -39,15 +39,18 @@ int	main(int ac, char **av)
 	(void )ac;
 
 	i = 1;
+	if (ac == 1)
+		return (0);
 	while (av[i])
 	{
 		data = ft_lstadd_back(data, ft_lstnew(av[i], av[i + 1]));
 		i += 2;
 	}
-    // ft_check_arg(data);
-	while (data)
-	{
-		printf("%s t-> : %d\n", data->arg, data->tatto);
-		data = data->next;
-	}
+	ft_check_arg(data);
+	ft_execution(data);
+	// while (data)
+	// {
+	// 	printf("%s t-> : %d\n", data->arg, data->tatto);
+	// 	data = data->next;
+	// }
 }

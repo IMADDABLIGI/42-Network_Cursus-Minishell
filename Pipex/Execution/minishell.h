@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:03:42 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/07 02:49:20 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/07 16:46:38 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	ft_lastcmd(char *outfile, char *cmd, int check);
 char	*ft_getpath(char *cmd);
 void	ft_execution(t_list *data);
 void	ft_exec1(t_list *data);
+char	**ft_arg(char **arg, char *path);
 
 t_list	*ft_lstnew(char *arg, char *tatto);
 t_list	*ft_lstlast(t_list *lst);

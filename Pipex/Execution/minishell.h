@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:03:42 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/07 16:46:38 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/08 02:49:31 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,19 @@
 # include <unistd.h>
 # include <stdbool.h>
 
+typedef struct t_data
+{
+	char			i_o;
+	int				exec;
+}				t_store;
+
+
 typedef struct t_shell
 {
-
 	char			*arg;
 	int				tatto;
-	int				exec;
+	int				cmd_ord;
+	t_store			*store;
 	struct t_shell	*next;
 
 }					t_list;
@@ -44,6 +51,8 @@ char	*ft_getpath(char *cmd);
 void	ft_execution(t_list *data);
 void	ft_exec1(t_list *data);
 char	**ft_arg(char **arg, char *path);
+void	ft_pipe(t_list *data);
+void    ft_exec2(t_list *data);
 
 t_list	*ft_lstnew(char *arg, char *tatto);
 t_list	*ft_lstlast(t_list *lst);

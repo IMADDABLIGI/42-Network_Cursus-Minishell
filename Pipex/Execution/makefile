@@ -6,7 +6,7 @@
 #    By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/07 16:26:10 by idabligi          #+#    #+#              #
-#    Updated: 2023/04/07 16:30:29 by idabligi         ###   ########.fr        #
+#    Updated: 2023/04/08 02:49:18 by idabligi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ FLAGS = -Wall -Wextra -Werror
 RM = rm -f
 HEADER = minishell.h
 
-FLS = main ft_execution ft_split ft_get_path mininshell_utils lst_functions\
+FLS = main ft_execution ft_split ft_get_path mininshell_utils lst_functions ft_pipe\
 
 FO = $(FLS:=.o)
 

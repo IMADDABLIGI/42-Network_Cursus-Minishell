@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:36:15 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/07 16:46:28 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/08 00:01:37 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ char	**ft_arg(char **arg, char *path)
 	i = 0;
 	while (arg[i])
 		i++;
-	printf("%d\n", i);
 	n_arg = malloc((i + 2) * sizeof(char *));
 	i = 0;
 	while (arg[i] != NULL)

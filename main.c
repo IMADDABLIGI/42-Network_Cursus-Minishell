@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: Invalid date        by                   #+#    #+#             */
-/*   Updated: 2023/04/08 00:02:57 by hznagui          ###   ########.fr       */
+/*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
+/*   Updated: 2023/04/08 17:40:45 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 int ft_separit(t_data *a)
 {
-    ft_split(a);
-    // if (!ft_split(a))
-        // return(printf("problem in malloc !\n"));
-    // a->i = 0;
-    // while (a->tab[a->i])
-    // {
-    //     printf("%s\n",a->tab[a->i]);
-    //     a->i++;
-    // }
+    // ft_split(a);
+    if (!ft_split(a))
+        return(printf("problem in malloc !\n"));
+    a->i = 0;
+    while (a->tab[a->i])
+    {
+        printf("%s\n",a->tab[a->i]);
+        a->i++;
+    }
     return(0);
 }
 void open_quote(t_data *a)

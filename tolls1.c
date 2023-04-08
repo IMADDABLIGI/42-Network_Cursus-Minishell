@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 15:52:56 by hznagui           #+#    #+#             */
-/*   Updated: 2023/04/05 17:16:55 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/04/08 02:44:43 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static size_t	nbr_of_words(t_data *a)
 	a->t = '\0';
 	while (a->input[a->k])
 	{
-		if (a->input[a->k] != 39 && a->input[a->k] != 34 && a->input[a->k] != ' ' && a->lock == 0)
+		if (a->input[a->k] != 39 && a->input[a->k] != 34 && a->input[a->k] != ' '&&a->input[a->k] != '<' && a->input[a->k] != '>' && a->input[a->k] != '|'&& a->lock == 0)
 		{
 			a->length++;
 			a->lock = 1;
@@ -41,9 +41,16 @@ static size_t	nbr_of_words(t_data *a)
             {
 				a->lock = 0;
                 a->lock1 = 0;
-				if (!a->input[a->k+1] || a->input[a->k+1] == ' ')
+				if (!a->input[a->k+1] || a->input[a->k+1] == ' ' ||a->input[a->k+1] == '<' || a->input[a->k+1] == '>' || a->input[a->k+1] == '|')
 					a->length++;
             }
+		}
+		else if ((a->input[a->k] == '<' || a->input[a->k] == '>' || a->input[a->k] == '|') && !a->lock1)
+		{
+			if ((a->input[a->k] == '<' && a->input[a->k+1] == '<') || (a->input[a->k] == '>' && a->input[a->k+1] == '>'))
+				a->k+=1;
+			a->length++;
+			a->lock = 0;
 		}
 		else if (a->input[a->k] == ' '  && a->lock == 1 && a->lock1 == 0)
 			a->lock = 0;
@@ -54,60 +61,60 @@ static size_t	nbr_of_words(t_data *a)
 	return (a->length);
 }
 
-static char	**free_all(char **str, size_t max)
-{
-	int	i;
+// static char	**free_all(char **str, size_t max)
+// {
+// 	int	i;
 
-	i = max;
-	while (i >= 0)
-		free(str[i--]);
-	free (str);
-	return (0);
-}
+// 	i = max;
+// 	while (i >= 0)
+// 		free(str[i--]);
+// 	free (str);
+// 	return (0);
+// }
 
-static char	**ft_return(t_data *a)
-{
-	size_t	end;
-	size_t	start;
+// static char	**ft_return(t_data *a)
+// {
+// 	size_t	end;
+// 	size_t	start;
 
-	a->i = 0;
-	start = 0;
-	while (a->i < a->length)
-	{
-		while (a->input[start] == ' ' && a->input[start] != '\0')
-			start++;
-		end = start;
-		while (((a->input[end] != ' ' || a->lock1 == 1) && a->input[end] != '\0'))
-		{
-			if ((a->input[end] == 39 || a->input[end] == 34) && !a->lock1)
-			{
-				a->t=a->input[end];
-				a->lock1=1;
-			}else if (a->lock1 && a->t == a->input[end])
-				a->lock1=0;
+// 	a->i = 0;
+// 	start = 0;
+// 	while (a->i < a->length)
+// 	{
+// 		while (a->input[start] == ' ' && a->input[start] != '\0')
+// 			start++;
+// 		end = start;
+// 		while (((a->input[end] != ' ' || a->lock1 == 1) && a->input[end] != '\0'))
+// 		{
+// 			if ((a->input[end] == 39 || a->input[end] == 34) && !a->lock1)
+// 			{
+// 				a->t=a->input[end];
+// 				a->lock1=1;
+// 			}else if (a->lock1 && a->t == a->input[end])
+// 				a->lock1=0;
 				
-			end++;
-		}
-		a->tab[a->i] = ft_substr(a->input, start, end - start);
-		if (!a->tab[a->i])
-			return (free_all(a->tab, a->i));
-		a->i++;
-		start = end;
-	}
-	a->tab[a->i] = NULL;
-	return (a->tab);
-}
+// 			end++;
+// 		}
+// 		a->tab[a->i] = ft_substr(a->input, start, end - start);
+// 		if (!a->tab[a->i])
+// 			return (free_all(a->tab, a->i));
+// 		a->i++;
+// 		start = end;
+// 	}
+// 	a->tab[a->i] = NULL;
+// 	return (a->tab);
+// }
 char	**ft_split(t_data *a)
 {
 
 	if (!a->input)
 		return (0);
-	// nbr_of_words(a);
-	// return(0);
-	a->tab = malloc((nbr_of_words(a) + 1) * (sizeof(char *)));
-	if (!a->tab)
-		return (0);
-	return (ft_return(a));
+	nbr_of_words(a);
+	return(0);
+	// a->tab = malloc((nbr_of_words(a) + 1) * (sizeof(char *)));
+	// if (!a->tab)
+	// 	return (0);
+	// return (ft_return(a));
 }
 /*----------------------------------------------------------------*/
 static size_t	leakskiller(char *s, unsigned int start, size_t len)

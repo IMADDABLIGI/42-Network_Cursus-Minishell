@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/31 13:24:27 by hznagui           #+#    #+#             */
-/*   Updated: 2023/04/05 16:55:29 by hznagui          ###   ########.fr       */
+/*   Created: Invalid date        by                   #+#    #+#             */
+/*   Updated: 2023/04/08 00:02:57 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,15 @@
 
 int ft_separit(t_data *a)
 {
-    if (!ft_split(a))
-        return(printf("problem in malloc !\n"));
-    a->i = 0;
-    while (a->tab[a->i])
-    {
-        printf("%s\n",a->tab[a->i]);
-        a->i++;
-    }
+    ft_split(a);
+    // if (!ft_split(a))
+        // return(printf("problem in malloc !\n"));
+    // a->i = 0;
+    // while (a->tab[a->i])
+    // {
+    //     printf("%s\n",a->tab[a->i]);
+    //     a->i++;
+    // }
     return(0);
 }
 void open_quote(t_data *a)
@@ -53,7 +54,41 @@ void open_quote(t_data *a)
     else
         ft_separit(a);
 }
-
+// void check_parsing(t_data *a)
+// {
+//     a->k = 0;
+//     a->lock = 0;   
+//     a->z = 0;
+// 	a->lock1 = 0;
+// 	a->t = '\0';
+//        while (a->input[a->k])
+//        {
+//             if(a->input[a->k] == 39 || a->input[a->k] == 34)
+//             {
+//                 if (!a->lock1)
+//                 {
+//                     a->t = a->input[a->k];
+//                     a->lock1 = 1;
+//                 }
+//                 else if (a->input[a->k] == a->t && a->lock1)
+//                 {
+//                     a->t = a->input[a->k];
+//                     a->lock1 = 0;
+//                 } 
+//             }
+//             else if ((a->input[a->k] == '<' || a->input[a->k] == '>' || a->input[a->k] == '|' ) && !a->lock1)
+//             {
+//                 if ((a->input[a->k] == '<' && a->input[a->k+1] == '<') || (a->input[a->k] == '>' && a->input[a->k+1] == '>'))
+//                     a->k+=1;
+//                 if (!a->z)
+//                     a->z=1;
+//                 else if (a->z)
+//                     return(1);
+//             }
+//             a->k++;
+//        }   
+//        return(0);
+// }
 int main() {
     t_data a;
     while (1)

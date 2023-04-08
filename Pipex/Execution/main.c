@@ -6,37 +6,41 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:00:58 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/08 02:24:15 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/08 17:13:19 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void    ft_check_arg(t_list *data)
+void    ft_check_arg(t_list *data, t_store *store)
 {
 	t_list  *ptr;
 
 	ptr = data;
-	data->store->exec = 0;
-    data->store->i_o = 'F';
-	while (data)
-	{
-		if (data->tatto == 4)
-			data->store->exec = 1;
-		if (data->tatto == 5 || data->tatto == 6  ||
-			data->tatto == 7  || data->tatto == 8)
-			{
-				data->store->exec = 2;
-				break ;
-			}
-		data = data->next;
-	}
+    store->exec = 4;
+    store->count = 2;
+	// while (ptr)
+	// {
+	// 	if (ptr->tatto == 4)
+	// 	{
+	// 		data->store->exec = 1;
+	// 		break ;
+	// 	}
+	// 	if (ptr->tatto == 5 || ptr->tatto == 6  ||
+	// 		ptr->tatto == 7  || ptr->tatto == 8)
+	// 		{
+	// 			data->store->exec = 2;
+	// 			break ;
+	// 		}
+	// 	ptr = ptr->next;
+	// }
 }
 
 int	main(int ac, char **av)
 {
 	int 	i;
 	t_list	*data;
+    t_store store;
 
 	i = 1;
 	if ((ac % 2) == 0)
@@ -46,6 +50,13 @@ int	main(int ac, char **av)
 		data = ft_lstadd_back(data, ft_lstnew(av[i], av[i + 1]));
 		i += 2;
 	}
-	ft_check_arg(data);
-	ft_execution(data);
+	ft_check_arg(data, &store);
+	ft_execution(data, &store);
 }
+
+
+	// while (data)
+	// {
+	// 	printf("%s t-> %d\n", data->arg, data->tatto);
+	// 	data = data->next;
+	// }

@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/08 02:48:36 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/08 17:15:52 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,36 +31,44 @@
 // }
 
 
-void    ft_exec2(t_list *data)
+void	ft_exec2(t_list *data, t_store *store)
 {
-	int	pid;
+	int		pid;
+	int		i;
 
+	i = 1;
 	open("/tmp/input", O_CREAT, 0644);
 	open("/tmp/output", O_CREAT, 0644);
-	while (data)
+	while(i <= store->count)
 	{
 		if (data->tatto == 1)
 			pid = fork();
 		if (pid == 0)
 		{
-			ft_pipe(data);
+			write(1, "child\n", 6);
+			printf("CMD : %s\n", data->arg);
+			printf("%d\n", i);
+			ft_pipe(data, i);
 		}
 		else
 		{
 			waitpid(pid, NULL, 0);
-			while (data->tatto != 1 && data)
-				data = data->next; 
+			write(1, "Parent\n", 7);
+			data = data->next;
+			while (data && data->tatto != 1)
+				data = data->next;
+			i++;
 		}
 	}
 }
 
 
-void	ft_execution(t_list *data)
+void	ft_execution(t_list *data, t_store *store)
 {
-	// if (data->store->exec == 0)
+	// if (store->exec == 0)
 	// 	ft_exec1(data);
-	// else if (data->store->exec == 1)
-		ft_exec2(data);
+	// else if (store->exec == 1)
+		ft_exec2(data, store);
 	// else
 	// 	ft_exec3(data);
 }

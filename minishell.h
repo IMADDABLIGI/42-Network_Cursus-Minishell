@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/04/05 16:34:27 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/04/09 01:45:41 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,12 @@ typedef struct data
     size_t k;
     char t;
 }t_data ;
+/*
+command 1
+path_to_file */
 char	**ft_split(t_data *a);
 char	*ft_strdup(char *s1);
 size_t	ft_strlen(char *s);
 char	*ft_substr(char *s, unsigned int start, size_t len);
+char	**free_all(char **str, size_t max);
 #endif

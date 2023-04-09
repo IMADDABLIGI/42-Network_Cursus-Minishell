@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/04/08 17:40:45 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/04/09 01:48:57 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ void open_quote(t_data *a)
     if (a->z == 1)
         printf("\e[1;31m open quotes!\n\e[0m");
     else
+        {
         ft_separit(a);
+        free_all(a->tab,a->length);
+        }
 }
 // void check_parsing(t_data *a)
 // {
@@ -97,6 +100,7 @@ int main() {
         if (*(a.input))
             add_history(a.input);
         open_quote(&a);
+        // if (a.tab)
         free(a.input);
     }
     return 0;

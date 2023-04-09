@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:00:58 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/08 17:13:19 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/09 00:19:18 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,30 +17,29 @@ void    ft_check_arg(t_list *data, t_store *store)
 	t_list  *ptr;
 
 	ptr = data;
-    store->exec = 4;
-    store->count = 2;
-	// while (ptr)
-	// {
-	// 	if (ptr->tatto == 4)
-	// 	{
-	// 		data->store->exec = 1;
-	// 		break ;
-	// 	}
-	// 	if (ptr->tatto == 5 || ptr->tatto == 6  ||
-	// 		ptr->tatto == 7  || ptr->tatto == 8)
-	// 		{
-	// 			data->store->exec = 2;
-	// 			break ;
-	// 		}
-	// 	ptr = ptr->next;
-	// }
+	store->exec = 0;
+	store->count = 0;
+	while (ptr)
+	{
+		if (ptr->tatto == 1)
+			store->count++;
+		if (ptr->tatto == 4)
+			store->exec = 1;
+		if (ptr->tatto == 5 || ptr->tatto == 6  ||
+			ptr->tatto == 7  || ptr->tatto == 8)
+			{
+				store->exec = 2;
+				break ;
+			}
+		ptr = ptr->next;
+	}
 }
 
 int	main(int ac, char **av)
 {
 	int 	i;
 	t_list	*data;
-    t_store store;
+	t_store store;
 
 	i = 1;
 	if ((ac % 2) == 0)

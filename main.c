@@ -6,23 +6,39 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/04/09 01:48:57 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/04/09 18:36:49 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void create_linked(t_data *a)
+{
+    t_arg *o;
+    
+    a->i=0;
+    a->p=NULL;
+    while (a->tab[a->i])
+    {
+        o = ft_lstnew(a->tab[a->i]);
+        if (!o)
+            ft_lstclear(&a->p); 
+        ft_lstadd_back(&a->p,o);
+        a->i++;
+    }
+    // o=a->p;
+    // while (o)
+    // {
+    //     printf("%s\n",o->arg);
+    //    o = o->next;
+    // }
+}
 int ft_separit(t_data *a)
 {
-    // ft_split(a);
     if (!ft_split(a))
         return(printf("problem in malloc !\n"));
     a->i = 0;
-    while (a->tab[a->i])
-    {
-        printf("%s\n",a->tab[a->i]);
-        a->i++;
-    }
+    create_linked(a);
     return(0);
 }
 void open_quote(t_data *a)
@@ -53,45 +69,11 @@ void open_quote(t_data *a)
         printf("\e[1;31m open quotes!\n\e[0m");
     else
         {
-        ft_separit(a);
-        free_all(a->tab,a->length);
+        if(!ft_separit(a))
+            free_all(a->tab,a->length);
+            ft_lstclear(&a->p);
         }
 }
-// void check_parsing(t_data *a)
-// {
-//     a->k = 0;
-//     a->lock = 0;   
-//     a->z = 0;
-// 	a->lock1 = 0;
-// 	a->t = '\0';
-//        while (a->input[a->k])
-//        {
-//             if(a->input[a->k] == 39 || a->input[a->k] == 34)
-//             {
-//                 if (!a->lock1)
-//                 {
-//                     a->t = a->input[a->k];
-//                     a->lock1 = 1;
-//                 }
-//                 else if (a->input[a->k] == a->t && a->lock1)
-//                 {
-//                     a->t = a->input[a->k];
-//                     a->lock1 = 0;
-//                 } 
-//             }
-//             else if ((a->input[a->k] == '<' || a->input[a->k] == '>' || a->input[a->k] == '|' ) && !a->lock1)
-//             {
-//                 if ((a->input[a->k] == '<' && a->input[a->k+1] == '<') || (a->input[a->k] == '>' && a->input[a->k+1] == '>'))
-//                     a->k+=1;
-//                 if (!a->z)
-//                     a->z=1;
-//                 else if (a->z)
-//                     return(1);
-//             }
-//             a->k++;
-//        }   
-//        return(0);
-// }
 int main() {
     t_data a;
     while (1)
@@ -100,7 +82,6 @@ int main() {
         if (*(a.input))
             add_history(a.input);
         open_quote(&a);
-        // if (a.tab)
         free(a.input);
     }
     return 0;

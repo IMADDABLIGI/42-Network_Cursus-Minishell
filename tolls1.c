@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 15:52:56 by hznagui           #+#    #+#             */
-/*   Updated: 2023/04/05 17:16:55 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/04/10 01:03:52 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static size_t	nbr_of_words(t_data *a)
 	a->t = '\0';
 	while (a->input[a->k])
 	{
-		if (a->input[a->k] != 39 && a->input[a->k] != 34 && a->input[a->k] != ' ' && a->lock == 0)
+		if (a->input[a->k] != 39 && a->input[a->k] != 34 && a->input[a->k] != ' '&&a->input[a->k] != '<' && a->input[a->k] != '>' && a->input[a->k] != '|'&& a->lock == 0)
 		{
 			a->length++;
 			a->lock = 1;
@@ -41,20 +41,26 @@ static size_t	nbr_of_words(t_data *a)
             {
 				a->lock = 0;
                 a->lock1 = 0;
-				if (!a->input[a->k+1] || a->input[a->k+1] == ' ')
+				if (!a->input[a->k+1] || a->input[a->k+1] == ' ' ||a->input[a->k+1] == '<' || a->input[a->k+1] == '>' || a->input[a->k+1] == '|')
 					a->length++;
             }
+		}
+		else if ((a->input[a->k] == '<' || a->input[a->k] == '>' || a->input[a->k] == '|') && !a->lock1)
+		{
+			if ((a->input[a->k] == '<' && a->input[a->k+1] == '<') || (a->input[a->k] == '>' && a->input[a->k+1] == '>'))
+				a->k+=1;
+			a->length++;
+			a->lock = 0;
 		}
 		else if (a->input[a->k] == ' '  && a->lock == 1 && a->lock1 == 0)
 			a->lock = 0;
 		a->k++;
 	}
-    printf("<<%zu>>\n",a->length);
 	
 	return (a->length);
 }
 
-static char	**free_all(char **str, size_t max)
+char	**free_all(char **str, size_t max)
 {
 	int	i;
 
@@ -77,7 +83,14 @@ static char	**ft_return(t_data *a)
 		while (a->input[start] == ' ' && a->input[start] != '\0')
 			start++;
 		end = start;
-		while (((a->input[end] != ' ' || a->lock1 == 1) && a->input[end] != '\0'))
+		if ((a->input[end] == '<' || a->input[end] == '>' || a->input[end] == '|' || a->input[end] == ' '))
+		{
+				if ((a->input[end] == '<' && a->input[end+1] == '<') || (a->input[end] == '>' && a->input[end+1] == '>'))
+					end+=1;
+			end++;
+		}
+		else {
+		while ((((a->input[end] != '<' && a->input[end] != '>' && a->input[end] != '|' && a->input[end] != ' ') || a->lock1 == 1) && a->input[end] != '\0'))
 		{
 			if ((a->input[end] == 39 || a->input[end] == 34) && !a->lock1)
 			{
@@ -85,8 +98,8 @@ static char	**ft_return(t_data *a)
 				a->lock1=1;
 			}else if (a->lock1 && a->t == a->input[end])
 				a->lock1=0;
-				
 			end++;
+		}
 		}
 		a->tab[a->i] = ft_substr(a->input, start, end - start);
 		if (!a->tab[a->i])

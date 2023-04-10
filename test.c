@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:24:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/04/06 01:14:46 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/10 17:11:51 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int main(int argc,char **argv)
     int i = 1;
     while (argv[i])
     {
-       printf("<%s>\n",argv[i]);
+       printf("%s\n",argv[i]);
        i++;
     }
     return 0;

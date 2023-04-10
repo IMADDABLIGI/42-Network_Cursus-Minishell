@@ -4,6 +4,7 @@ FLAGS = -Wall -Wextra -Werror
 
 SRC_FILE = 	main.c \
 			tolls1.c\
+			tolls2.c\
 			
 
 COLOUR_GREEN=\033[1;32m
@@ -19,11 +20,11 @@ OBJ_FILE = $(SRC_FILE:.c=.o)
 all : $(NAME)
 
 $(NAME) : $(OBJ_FILE) minishell.h 
-	@cc $(FLAGS) -lreadline  -L /Users/hznagui/.brew/opt/readline  $(OBJ_FILE)   -o $(NAME) 
+	@cc  -lreadline  -L /Users/hznagui/.brew/opt/readline  $(OBJ_FILE)   -o $(NAME) 
 	@echo  "$(COLOUR_GREEN)--->[mandatory part successfully created ✅]<---$(COLOUR_RESET)"
 
 %.o: %.c minishell.h 
-	@$(CC) $(FLAGS)   -c $< -o $@
+	@$(CC)    -c $< -o $@
 
 clean :
 	@rm -rf $(OBJ_FILE)

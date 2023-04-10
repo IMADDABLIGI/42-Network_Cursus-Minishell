@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 15:52:56 by hznagui           #+#    #+#             */
-/*   Updated: 2023/04/09 16:52:46 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/04/10 01:03:52 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ static size_t	nbr_of_words(t_data *a)
 			a->lock = 0;
 		a->k++;
 	}
-    printf("<<%zu>>\n",a->length);
 	
 	return (a->length);
 }

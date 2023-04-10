@@ -6,13 +6,13 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 17:42:15 by hznagui           #+#    #+#             */
-/*   Updated: 2023/04/09 18:06:00 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/04/10 01:25:41 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_arg	*ft_lstnew(char *content)
+t_arg	*ft_lstnew(t_data *a)
 {
 	t_arg	*p;
 
@@ -21,7 +21,8 @@ t_arg	*ft_lstnew(char *content)
 		return (0);
 	p -> next = NULL;
 	p -> tatto = 0;
-	p -> arg = content;
+	p -> arg = str(a);
+	printf("%s\n",p->arg);
     
 	return (p);
 }
@@ -57,6 +58,7 @@ t_arg	*ft_lstclear(t_arg **lst)
 	{
 		p = (*lst);
 		*lst = (*lst)->next;
+		free(p->arg);
 		free (p);
 	}
 	return (0);

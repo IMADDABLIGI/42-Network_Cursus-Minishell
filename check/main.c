@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 01:44:41 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/07 13:32:11 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/10 23:24:50 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int main()
 
     //-------------------------------------------------//
     
-    if (ft_check_path("/Users/hznagui/Desktop/Minishell"))//Read the path again.
+    if (ft_check_path("/Users/idabligi"))//Read the path again.
         printf("HAD PATH KAYN\n");
     else
         printf("ah youssef zaml\n");

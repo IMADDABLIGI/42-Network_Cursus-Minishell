@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:00:58 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/09 18:26:22 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/11 00:59:58 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ int	main(int ac, char **av)
 	ft_check_arg(data, &store);
 	ft_execution(data, &store);
 }
-
 
 	// while (data)
 	// {

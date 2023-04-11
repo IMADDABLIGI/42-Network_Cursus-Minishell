@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:03:42 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/08 21:51:00 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/11 00:15:37 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ typedef struct t_shell
 {
 	char			*arg;
 	int				tatto;
-	int				cmd_ord;
 	struct t_shell	*next;
 
 }					t_list;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_cmd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 01:17:54 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/10 17:15:45 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/04/10 23:15:29 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int ft_check_path(char *path)
 {
-	if (access(path, F_OK) == 0)// Check if a path to a file is exist or no. 
+	if (access(path, X_OK) == 0)// Check if a path to a file is exist or no. 
 		return true;
 	return false;
 }

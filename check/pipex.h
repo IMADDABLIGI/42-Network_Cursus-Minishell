@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 15:13:53 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/06 01:48:34 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/11 01:53:04 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ int		ft_check_path(char *path);
 void	*ft_memcpy(void *dst, const void *src, int n);
 char	**ft_split(char const *s, char c);
 int		ft_strlen(const char *s);
+char	**free_all(char **ptr, size_t i);
 
 #endif

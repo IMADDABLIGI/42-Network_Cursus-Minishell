@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 00:00:44 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/01 00:01:00 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/11 01:52:53 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static char	*wrt_stg(char const *s, char c)
 	return (pptr);
 }
 
-static char	**free_all(char **ptr, size_t i)
+char	**free_all(char **ptr, size_t i)
 {
 	while (i--)
 		free(ptr[i]);

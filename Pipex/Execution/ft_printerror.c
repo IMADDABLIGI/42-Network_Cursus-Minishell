@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   maintest.c                                         :+:      :+:    :+:   */
+/*   ft_printerror.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/11 01:48:24 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/11 23:13:57 by idabligi         ###   ########.fr       */
+/*   Created: 2023/04/11 23:29:30 by idabligi          #+#    #+#             */
+/*   Updated: 2023/04/11 23:54:42 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stdio.h"
+#include "minishell.h"
 
-int main(int ac, char **av)
+void	ft_printerror(char *str, char *cmd)
 {
-    (void)ac;
-    (void)av;
-    printf("hello\n");
-    printf("how are u\n");
-    printf("doing\n");
-    // printf("%s %s\n", av[1], av[2]);
+	write(1, cmd, ft_strlen(cmd));
+	write(1, str, ft_strlen(str));
+	write(1, "\n", 1);
 }

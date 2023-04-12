@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:36:15 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/11 16:58:44 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/11 23:44:32 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,32 +25,27 @@ char	*ft_getpath(char *cmd)
 	{
 		if (access((ft_split(cmd, ' ')[0]), X_OK) == 0)
 			return (ft_split(cmd, ' ')[0]);
-		write(1, "zsh: no such file or directory: ", 33);
-		write(1, cmd, ft_strlen(cmd));
-		return (NULL);
+		ft_printerror(": No such file or directory", cmd);
 	}
 	if (((cmd[0] == '.') && (cmd[1] == '/')) || ((cmd[0] == '.') && (cmd[1] == '.')))
 	{
 		if (access((ft_split(cmd, ' ')[0]), X_OK) == 0)
 			return (ft_split(cmd, ' ')[0]);
 		else if (access((ft_split(cmd, ' ')[0]), F_OK) == 0)
+			ft_printerror(": Permission denied", cmd);
+		else
+			ft_printerror(": No such file or directory", cmd);
+	}
+	else 
+	{	
+		while (p_cmd[i])
 		{
-			write(1, "zsh: permission denied: ", 25);
-			write(1, cmd, ft_strlen(cmd));
-			return (NULL);
+			if (access(ft_strjoin(p_cmd[i], s_cmd[0]), F_OK) == 0)
+				return (ft_strjoin(p_cmd[i], s_cmd[0]));
+			i++;
 		}
-		write(1, "zsh: no such file or directory: ", 33);
-		write(1, cmd, ft_strlen(cmd));
-		return (NULL);
+		ft_printerror(": command not found", cmd);
 	}
-	while (p_cmd[i])
-	{
-		if (access(ft_strjoin(p_cmd[i], s_cmd[0]), F_OK) == 0)
-			return (ft_strjoin(p_cmd[i], s_cmd[0]));
-		i++;
-	}
-	write(1, "zsh: command not found: ", 25);
-	write(1, cmd, ft_strlen(cmd));
 	return (NULL);
 }
 

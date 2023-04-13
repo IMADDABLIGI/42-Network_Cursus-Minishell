@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/12 01:23:53 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/13 01:51:06 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@ void	ft_exec2(t_list *data, t_store *store)
 
 	i = 1;
 	if (open("/tmp/input", O_CREAT, 0644) < 0)
-        perror("Error Creating input file");
+		perror("Error Creating input file");
 	if (open("/tmp/output", O_CREAT, 0644) < 0)
-        perror("Error Creating output file");
+		perror("Error Creating output file");
 	while(i <= store->count)
 	{
 		pid = fork();
@@ -64,23 +64,24 @@ void	ft_exec2(t_list *data, t_store *store)
 
 //---------------------------------------------------------------------------//
 
-
 void	ft_exec3(t_list *data, t_store *store)
 {
 	int		i;
 	int		pid;
 
 	i = 1;
+	if (store->count == 1)
+		ft_redcmd(data);
 	if (open("/tmp/input", O_CREAT, 0644) < 0)
-        perror("Error Creating input file");
+		perror("Error Creating input file");
 	if (open("/tmp/output", O_CREAT, 0644) < 0)
-        perror("Error Creating output file");
+		perror("Error Creating output file");
 	while(i <= store->count)
 	{
 		pid = fork();
-		if ((pid == 0) && (i == 1) && (data->tatto = 5))
-			ft_redpipe(data);
-		else if (pid == 0 && i == 1)
+		// if ((pid == 0) && (i == 1) && (data->tatto = 5))
+		// 	ft_redpipe(data);
+		if (pid == 0 && i == 1)
 			ft_pipefirstcmd(data);
 		else if (pid == 0 && i == store->count)
 			ft_pipelastcmd(data, i);
@@ -97,10 +98,6 @@ void	ft_exec3(t_list *data, t_store *store)
 	}
 }
 
-
-
-
-
 //---------------------------------------------------------------------------//
 
 void	ft_execution(t_list *data, t_store *store)
@@ -109,6 +106,7 @@ void	ft_execution(t_list *data, t_store *store)
 		ft_exec1(data);
 	else if (store->exec == 1)
 		ft_exec2(data, store);
-	else
-		ft_exec3(data, store);
+	// else if (store->exec == 2)
+	// 	ft_redcmd(data);
+		// ft_exec3(data, store);
 }

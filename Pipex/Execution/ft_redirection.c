@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 01:36:49 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/14 01:07:04 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/14 02:23:39 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,24 +33,20 @@ int	ft_getfile(t_list *data)
 
 //---------------------------------------------------------------------------//
 
-void	ft_redcmd(t_list *data)
+void	ft_redcmd(t_list *data, int pid, int file)
 {
-	int	pid;
-	int	input;
-	int	output;
-
 	if (data->tatto == 5)
 	{
 		pid = fork();
 		if (pid == 0)
 		{
-			if ((input = open(data->next->arg, O_RDONLY)) < 0)
+			if ((file = open(data->next->arg, O_RDONLY)) < 0)
 			{
 				ft_printerror(": No such file or directory", data->next->arg);
 				return ;
 			}
-			dup2(input, STDIN_FILENO);
-			close (input);
+			dup2(file, STDIN_FILENO);
+			close (file);
 			execve(ft_getpath(data->next->next->arg), ft_split((data->next->next->arg), ' '), NULL);
 		}
 		else
@@ -61,9 +57,9 @@ void	ft_redcmd(t_list *data)
 		pid = fork();
 		if (pid == 0)
 		{
-			output = ft_getfile(data);
-			dup2(output, STDOUT_FILENO);
-			close(output);
+			file = ft_getfile(data);
+			dup2(file, STDOUT_FILENO);
+			close(file);
 			if (data->next->tatto == 2)
 				execve(ft_getpath(data->arg), ft_arg(ft_split((data->arg), ' '),
 						data->next->arg), NULL);

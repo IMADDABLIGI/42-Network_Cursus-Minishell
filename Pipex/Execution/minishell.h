@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:03:42 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/13 01:41:46 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/14 17:28:21 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,13 +48,13 @@ void	ft_lastcmd(char *outfile, char *cmd, int check);
 char	*ft_getpath(char *cmd);
 void	ft_execution(t_list *data, t_store *store);
 void	ft_exec1(t_list *data);
-char	**ft_arg(char **arg, char *path);
+char	**ft_arg(t_list *data);
 void	ft_pipefirstcmd(t_list *data);
 void	ft_pipemidllecmd(t_list *data, int i);
 void	ft_pipelastcmd(t_list *data, int i);
 void	ft_exec2(t_list *data, t_store *store);
 void	ft_printerror(char *str, char *cmd);
-void	ft_redcmd(t_list *data);
+void	ft_redcmd(t_list *data, int pid, int file);
 
 t_list	*ft_lstnew(char *arg, char *tatto);
 t_list	*ft_lstlast(t_list *lst);

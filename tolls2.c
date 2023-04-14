@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 17:42:15 by hznagui           #+#    #+#             */
-/*   Updated: 2023/04/10 01:25:41 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/04/14 23:18:32 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ t_arg	*ft_lstnew(t_data *a)
 		return (0);
 	p -> next = NULL;
 	p -> tatto = 0;
-	p -> arg = str(a);
-	printf("%s\n",p->arg);
+	p -> arg = str(a,&p->tatto);
+	printf("%d\n",p->tatto);
     
 	return (p);
 }

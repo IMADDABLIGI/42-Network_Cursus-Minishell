@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/13 22:05:58 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/14 02:16:42 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ void	ft_exec3(t_list *data, t_store *store)
 	int		pid;
 
 	i = 1;
-	if (store->count == 1)
-		ft_redcmd(data);
 	if (open("/tmp/input", O_CREAT, 0644) < 0)
 		perror("Error Creating input file");
 	if (open("/tmp/output", O_CREAT, 0644) < 0)
@@ -79,8 +77,6 @@ void	ft_exec3(t_list *data, t_store *store)
 	while(i <= store->count)
 	{
 		pid = fork();
-		// if ((pid == 0) && (i == 1) && (data->tatto = 5))
-		// 	ft_redpipe(data);
 		if (pid == 0 && i == 1)
 			ft_pipefirstcmd(data);
 		else if (pid == 0 && i == store->count)
@@ -106,6 +102,8 @@ void	ft_execution(t_list *data, t_store *store)
 		ft_exec1(data);
 	else if (store->exec == 1)
 		ft_exec2(data, store);
-	else if (store->exec == 2)
+	else if ((store->exec == 2) && (store->count == 1))
+        ft_redcmd(data);
+    else if (store->exec == 2)
 		ft_exec3(data, store);
 }

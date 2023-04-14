@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:36:15 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/11 23:44:32 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/14 17:52:22 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,9 @@ char	*ft_getpath(char *cmd)
 {
 	int		i;
 	char	**p_cmd;
-	char	**s_cmd;
 
 	i = 0;
 	p_cmd = ft_split(getenv("PATH"), ':');
-	s_cmd = ft_split(cmd, ' ');
 	if (cmd[0] == '/')
 	{
 		if (access((ft_split(cmd, ' ')[0]), X_OK) == 0)
@@ -40,8 +38,8 @@ char	*ft_getpath(char *cmd)
 	{	
 		while (p_cmd[i])
 		{
-			if (access(ft_strjoin(p_cmd[i], s_cmd[0]), F_OK) == 0)
-				return (ft_strjoin(p_cmd[i], s_cmd[0]));
+			if (access(ft_strjoin(p_cmd[i], cmd), F_OK) == 0)
+				return (ft_strjoin(p_cmd[i], cmd));
 			i++;
 		}
 		ft_printerror(": command not found", cmd);
@@ -49,22 +47,28 @@ char	*ft_getpath(char *cmd)
 	return (NULL);
 }
 
-char	**ft_arg(char **arg, char *path)
+char	**ft_arg(t_list *data)
 {
 	int		i;
 	char	**n_arg;
+	t_list *ptr;
 
+	ptr = data;
 	i = 0;
-	while (arg[i])
-		i++;
-	n_arg = malloc((i + 2) * sizeof(char *));
-	i = 0;
-	while (arg[i] != NULL)
+	while ((data) && (data->tatto != 5) && (data->tatto != 6) && (data->tatto != 7) && (data->tatto != 8) && (data->tatto != 4))
 	{
-		n_arg[i] = arg[i];
+		i++;
+		data = data->next;
+	}
+	n_arg = malloc((i + 1) * sizeof(char *));
+	i = 0;
+	while ((ptr) && (ptr->tatto != 5) && (ptr->tatto != 6) && (ptr->tatto != 7) && (ptr->tatto != 8) && (ptr->tatto != 4))
+	{
+		n_arg[i] = ptr->arg;
+		ptr = ptr->next;
 		i++;
 	}
-	n_arg[i] = path;
 	n_arg[i + 1] = NULL;
+	i = 0;
 	return (n_arg);
 }

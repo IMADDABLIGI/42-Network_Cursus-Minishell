@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 01:17:54 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/15 16:01:04 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/04/15 16:59:13 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,10 @@ int	ft_check_cmd(char *cmd)
 	{
 		join=ft_strjoin(s_path[i], cmd);
 		if (access(join, X_OK) == 0)
-			return (true);//free_all(s_path,legnth(s_path))
+			return (free(join),free_all22(s_path,legnth(s_path)),true);//free_all(s_path,legnth(s_path))
 		free(join);
 		join=NULL;
 		i++;
 	}
-	
-	return (false);//CMD not found.
+	return (free_all(s_path,legnth(s_path)),false);
 }

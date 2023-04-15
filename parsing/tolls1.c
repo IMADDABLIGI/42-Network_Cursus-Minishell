@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 15:52:56 by hznagui           #+#    #+#             */
-/*   Updated: 2023/04/15 15:59:39 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/04/15 16:21:23 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,16 @@ static size_t	nbr_of_words22(t_data *a)
 	return (a->length);
 }
 
-char	**free_all22(char **str, size_t max) 
+char    **free_all22(char **str, int max) 
 {
-	while (max >= 0)
-		free(str[max--]);
-	free (str);
-	return (0);
+  max--;
+    while (max >= 0){
+        free(str[max]);
+        max--;}
+    free (str);
+    return (0);
 }
+
 
 static char	**ft_return22(t_data *a)
 {

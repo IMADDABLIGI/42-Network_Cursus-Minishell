@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:00:58 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/15 02:07:40 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/15 21:49:08 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,13 @@ int	main(int ac, char **av)
 	t_store store;
 
 	i = 1;
-	if ((ac % 2) == 0)
-		write(1 , "Check Argumetns\n", 17);
-	while (av[i])
-	{
-		data = ft_lstadd_back(data, ft_lstnew(av[i], av[i + 1]));
-		i += 2;
-	}
+	// if ((ac % 2) == 0)
+	// 	write(1 , "Check Argumetns\n", 17);
+	// while (av[i])
+	// {
+	// 	data = ft_lstadd_back(data, ft_lstnew(av[i], av[i + 1]));
+	// 	i += 2;
+	// }
 	ft_check_arg(data, &store);
 	ft_execution(data, &store);
 }

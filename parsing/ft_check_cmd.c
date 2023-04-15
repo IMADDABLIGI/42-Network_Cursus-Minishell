@@ -6,11 +6,11 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 01:17:54 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/14 15:18:24 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/04/15 16:59:13 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "minishell.h"
 
 int ft_check_path(char *path)
 {
@@ -40,10 +40,11 @@ int	ft_check_cmd(char *cmd)
 	while (s_path[i])
 	{
 		join=ft_strjoin(s_path[i], cmd);
-		if (access(join, X_OK) == 0)//strjoin has been modified, check it.
-			return (free_all(s_path,legnth(s_path)),true);
-		free(join);//CMD has been found.
+		if (access(join, X_OK) == 0)
+			return (free(join),free_all22(s_path,legnth(s_path)),true);//free_all(s_path,legnth(s_path))
+		free(join);
+		join=NULL;
 		i++;
 	}
-	return (free_all(s_path,legnth(s_path)),false);//CMD not found.
+	return (free_all(s_path,legnth(s_path)),false);
 }

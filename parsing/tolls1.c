@@ -6,13 +6,13 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 15:52:56 by hznagui           #+#    #+#             */
-/*   Updated: 2023/04/10 01:03:52 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/04/15 16:21:23 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static size_t	nbr_of_words(t_data *a)
+static size_t	nbr_of_words22(t_data *a)
 {
 	a->k = 0;
 	a->lock = 0;
@@ -60,18 +60,18 @@ static size_t	nbr_of_words(t_data *a)
 	return (a->length);
 }
 
-char	**free_all(char **str, size_t max)
+char    **free_all22(char **str, int max) 
 {
-	int	i;
-
-	i = max;
-	while (i >= 0)
-		free(str[i--]);
-	free (str);
-	return (0);
+  max--;
+    while (max >= 0){
+        free(str[max]);
+        max--;}
+    free (str);
+    return (0);
 }
 
-static char	**ft_return(t_data *a)
+
+static char	**ft_return22(t_data *a)
 {
 	size_t	end;
 	size_t	start;
@@ -110,17 +110,17 @@ static char	**ft_return(t_data *a)
 	a->tab[a->i] = NULL;
 	return (a->tab);
 }
-char	**ft_split(t_data *a)
+char	**ft_split22(t_data *a)
 {
 
 	if (!a->input)
 		return (0);
 	// nbr_of_words(a);
 	// return(0);
-	a->tab = malloc((nbr_of_words(a) + 1) * (sizeof(char *)));
+	a->tab = malloc((nbr_of_words22(a) + 1) * (sizeof(char *)));
 	if (!a->tab)
 		return (0);
-	return (ft_return(a));
+	return (ft_return22(a));
 }
 /*----------------------------------------------------------------*/
 static size_t	leakskiller(char *s, unsigned int start, size_t len)
@@ -184,4 +184,43 @@ size_t	ft_strlen(char *s)
 	while (s[i])
 		i++;
 	return (i);
+}
+/*----------------------------------------------------------------*/
+void	*ft_memcpy(void *dst,  void *src, int n)
+{
+	int	i;
+
+	i = 0;
+	if (src == dst)
+		return (dst);
+	if (!dst && !src)
+		return (0);
+	while (i < n)
+	{
+		*((unsigned char *)dst + i) = *((unsigned char *)src + i);
+		i++;
+	}
+	return (dst);
+}
+
+char	*ft_strjoin(char *s1, char *s2)
+{
+	char	*string;
+	int	lens1;
+	int	lens2;
+	int	mix;
+
+	if (!s1 && !s2)
+		return (0);
+	lens1 = ft_strlen(s1);
+	lens2 = ft_strlen(s2);
+	mix = ft_strlen(s1) + ft_strlen(s2) + 1;
+	string = malloc((mix + 1) * sizeof(char));
+	if (!string)
+		return (0);
+	ft_memcpy(string, s1, lens1);
+    string[lens1] = '/';//The modification; I've added '/' to append the cmd with it's own path.
+	ft_memcpy(string + lens1 + 1, s2, lens2);
+	string[mix] = '\0';
+	return (string);
 }

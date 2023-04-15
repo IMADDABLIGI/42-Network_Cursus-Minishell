@@ -5,6 +5,8 @@ FLAGS = -Wall -Wextra -Werror
 SRC_FILE = 	main.c \
 			tolls1.c\
 			tolls2.c\
+			ft_split.c\
+			ft_check_cmd.c\
 			
 
 COLOUR_GREEN=\033[1;32m

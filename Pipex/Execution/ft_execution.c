@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/15 02:10:20 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/15 14:47:33 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,8 @@ void	ft_exec3(t_list *data, t_store *store)
 		else
 		{
 			waitpid(pid, NULL, 0);
+            if (data->tatto == 5)
+                data = data->next->next;
 			data = data->next;
 			while (data && (data->tatto != 1) && (data->tatto != 5))
 				data = data->next;

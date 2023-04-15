@@ -1,0 +1,7 @@
+/*   ft_pipe.c                                          :+:      :+:    :+:   */
+void	ft_pipefirstcmd(t_list *data)
+	execve(ft_getpath(data->arg), ft_arg(data), NULL);
+void	ft_pipemidllecmd(t_list *data, int i)
+	execve(ft_getpath(data->arg), ft_arg(data), NULL);
+void	ft_pipelastcmd(t_list *data, int i)
+	execve(ft_getpath(data->arg), ft_arg(data), NULL);

@@ -6,13 +6,40 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/04/11 01:34:36 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/04/14 23:24:08 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-size_t ft_length(t_data *a)
+int	ft_strcmp(char *s1,char *s2)
+{
+	size_t	i;
+
+	i = 0;
+	while (s1[i] || s2[i])
+	{
+		if (s1[i] != s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		else
+			i++;
+	}
+	return (0);
+}
+void check_tato(t_data *a,int *tatto)
+{
+    if (!ft_strcmp(a->tab[a->i],">>"))
+        *tatto = 8;
+    else if (!ft_strcmp(a->tab[a->i],"<<"))
+        *tatto = 7;
+    else if (!ft_strcmp(a->tab[a->i],"<"))
+        *tatto = 5;
+    else if (!ft_strcmp(a->tab[a->i],">"))
+        *tatto = 6;
+    else if (!ft_strcmp(a->tab[a->i],"|"))
+        *tatto = 4;     
+}
+size_t ft_length(t_data *a,int *tatto)
 {
     size_t x;
     size_t len;
@@ -20,7 +47,8 @@ size_t ft_length(t_data *a)
     
     lock = 0;
     x = 0;
-    len=0;
+    len = 0;
+    check_tato(a,tatto);
     while (a->tab[a->i][x])
     {
         if ((a->tab[a->i][x] == 39 || a->tab[a->i][x] == 34) && !lock)
@@ -39,13 +67,13 @@ size_t ft_length(t_data *a)
     }
     return(len);
 }
-char *str(t_data *a)
+char *str(t_data *a,int *tatto)
 {
     char *p;
     size_t x;
     int lock;
     
-    p = malloc(sizeof(char)*ft_length(a));
+    p = malloc(sizeof(char)*ft_length(a,tatto));
     a->k=0;
     lock = 0;
     x = 0;
@@ -130,9 +158,15 @@ void open_quote(t_data *a)
     {
         if(!ft_separit(a))
             free_all(a->tab,a->length);
+        //
         ft_lstclear(&a->p);
     }
 }
+// void test(int y)
+// {
+//     (void)y;
+//     printf("salam\n");
+// }
 int main() {
     t_data a;
     while (1)

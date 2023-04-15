@@ -6,13 +6,13 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 00:00:44 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/11 01:52:53 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/04/15 13:34:08 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "minishell.h"
 
-static char	**ft_callstg(char **ptr, char const *s, char c)
+static char	**ft_callstg(char **ptr, char *s, char c)
 {
 	size_t	i;
 	size_t	count;
@@ -41,7 +41,7 @@ static char	**ft_callstg(char **ptr, char const *s, char c)
 	return (ptr);
 }
 
-static size_t	len_string(char const *s, char c)
+static size_t	len_string(char *s, char c)
 {
 	size_t	i;
 
@@ -51,7 +51,7 @@ static size_t	len_string(char const *s, char c)
 	return (i);
 }
 
-static char	*wrt_stg(char const *s, char c)
+static char	*wrt_stg(char *s, char c)
 {
 	size_t	len_s;
 	char	*pptr;
@@ -76,7 +76,7 @@ char	**free_all(char **ptr, size_t i)
 	return (0);
 }
 
-char	**ft_split(char const *s, char c)
+char	**ft_split(char*s, char c)
 {
 	char	**ptr;
 	size_t	i;

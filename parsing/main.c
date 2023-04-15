@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/04/14 23:24:08 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/04/15 13:03:37 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,13 @@ int	ft_strcmp(char *s1,char *s2)
 			i++;
 	}
 	return (0);
+}
+void tato(char *k,int *tatto)
+{
+    if (*tatto == 0 && ft_check_cmd(k))
+        *tatto = 1;
+    else if (*tatto == 0 && ft_check_path(k))
+        *tatto = 2;
 }
 void check_tato(t_data *a,int *tatto)
 {
@@ -122,7 +129,7 @@ void create_linked(t_data *a)
 }
 int ft_separit(t_data *a)
 {
-    if (!ft_split(a))
+    if (!ft_split22(a))
         return(printf("problem in malloc !\n"));
     a->i = 0;
     create_linked(a);

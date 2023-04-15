@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/14 17:50:55 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/15 02:10:20 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,7 @@ void	ft_exec1(t_list *data)
 
 	pid = fork();
 	if (pid == 0)
-	{
-		// if (ft_lstsize(data) == 2)
-		// 	execve(ft_getpath(data->arg), ft_arg(ft_split((data->arg), ' '), data->next->arg), NULL);
-		// execve(ft_getpath(data->arg), ft_split((data->arg), ' '), NULL);
 		execve(ft_getpath(data->arg), ft_arg(data), NULL);
-	}
 	else
 	{
 		waitpid(pid, NULL, 0);
@@ -56,7 +51,7 @@ void	ft_exec2(t_list *data, t_store *store)
 		{
 			waitpid(pid, NULL, 0);
 			data = data->next;
-			while (data && data->tatto != 1)
+			while (data && (data->tatto != 1))
 				data = data->next;
 			i++;
 		}
@@ -65,33 +60,31 @@ void	ft_exec2(t_list *data, t_store *store)
 
 //---------------------------------------------------------------------------//
 
-// void	ft_exec3(t_list *data, t_store *store)
-// {
-// 	int		i;
-// 	int		pid;
+void	ft_exec3(t_list *data, t_store *store)
+{
+	int		i;
+	int		pid;
 
-// 	i = 1;
-// 	if (open("/tmp/input", O_CREAT, 0644) < 0)
-// 		perror("Error Creating input file");
-// 	if (open("/tmp/output", O_CREAT, 0644) < 0)
-// 		perror("Error Creating output file");
-// 	while(i <= store->count)
-// 	{
-// 		pid = fork();
-// 		if (pid == 0)
-//         {
-//             ft_redirect(data, store, i);
-//         }
-// 		else
-// 		{
-// 			waitpid(pid, NULL, 0);
-// 			data = data->next;
-// 			while (data && data->tatto != 1)
-// 				data = data->next;
-// 			i++;
-// 		}
-// 	}
-// }
+	i = 1;
+	if (open("/tmp/input", O_CREAT, 0644) < 0)
+		perror("Error Creating input file");
+	if (open("/tmp/output", O_CREAT, 0644) < 0)
+		perror("Error Creating output file");
+	while(i <= store->count)
+	{
+		pid = fork();
+		if (pid == 0)
+            ft_redirect(data, store, i);
+		else
+		{
+			waitpid(pid, NULL, 0);
+			data = data->next;
+			while (data && (data->tatto != 1) && (data->tatto != 5))
+				data = data->next;
+			i++;
+		}
+	}
+}
 
 //---------------------------------------------------------------------------//
 
@@ -103,6 +96,6 @@ void	ft_execution(t_list *data, t_store *store)
 		ft_exec2(data, store);
 	else if ((store->exec == 2) && (store->count == 1))
 		ft_redcmd(data, 1, 0);
-//     else if (store->exec == 2)
-// 		ft_exec3(data, store);
+    else if (store->exec == 2)
+		ft_exec3(data, store);
 }

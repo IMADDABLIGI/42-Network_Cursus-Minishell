@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:36:15 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/14 17:52:22 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/14 23:54:05 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,25 +50,26 @@ char	*ft_getpath(char *cmd)
 char	**ft_arg(t_list *data)
 {
 	int		i;
-	char	**n_arg;
 	t_list *ptr;
+	char	**n_arg;
 
-	ptr = data;
 	i = 0;
-	while ((data) && (data->tatto != 5) && (data->tatto != 6) && (data->tatto != 7) && (data->tatto != 8) && (data->tatto != 4))
+	ptr = data;
+	while ((data) && (data->tatto != 5) && (data->tatto != 6) &&
+			(data->tatto != 7) && (data->tatto != 8) && (data->tatto != 4))
 	{
 		i++;
 		data = data->next;
 	}
 	n_arg = malloc((i + 1) * sizeof(char *));
 	i = 0;
-	while ((ptr) && (ptr->tatto != 5) && (ptr->tatto != 6) && (ptr->tatto != 7) && (ptr->tatto != 8) && (ptr->tatto != 4))
+	while ((ptr) && (ptr->tatto != 5) && (ptr->tatto != 6) &&
+			(ptr->tatto != 7) && (ptr->tatto != 8) && (ptr->tatto != 4))
 	{
 		n_arg[i] = ptr->arg;
 		ptr = ptr->next;
 		i++;
 	}
 	n_arg[i + 1] = NULL;
-	i = 0;
 	return (n_arg);
 }

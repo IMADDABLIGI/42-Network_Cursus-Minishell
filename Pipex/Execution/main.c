@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:00:58 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/14 02:17:32 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/15 02:07:40 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void    ft_check_arg(t_list *data, t_store *store)
 	{
 		if (ptr->tatto == 1)
 			store->count++;
-		if ((ptr->tatto == 4)  && (store->exec != 1))
+		if ((ptr->tatto == 4)  && (store->exec == 0))
 			store->exec = 1;
 		if (ptr->tatto == 5 || ptr->tatto == 6  ||
 			ptr->tatto == 7  || ptr->tatto == 8)

@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:03:42 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/14 17:28:21 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/15 01:43:34 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	ft_pipelastcmd(t_list *data, int i);
 void	ft_exec2(t_list *data, t_store *store);
 void	ft_printerror(char *str, char *cmd);
 void	ft_redcmd(t_list *data, int pid, int file);
+void	ft_redirect(t_list *data, t_store *store, int i);
 
 t_list	*ft_lstnew(char *arg, char *tatto);
 t_list	*ft_lstlast(t_list *lst);

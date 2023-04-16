@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 01:36:49 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/16 00:41:52 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/16 16:59:12 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_getfile(t_list *data, t_store *store, int i)
 {
 	int	output;
 
-	output = -5;
+	output = 0;
 	while ((data) && (data->tatto != 4))
 	{
 		if (data->tatto == 6)
@@ -27,23 +27,21 @@ int	ft_getfile(t_list *data, t_store *store, int i)
 			output = open(data->next->arg, O_WRONLY | O_APPEND | O_CREAT, 0644);
 		data = data->next;
 	}
-	if ((output == -5) && (i == store->count))
+	if ((output == 0) && (i == store->count))
 		return (0);
-	if ((output == -5) && (i == 1))
+	else if ((output == 0) && (i == 1))
 		output = open("/tmp/input", O_WRONLY | O_TRUNC);
-	else if ((output == -5) && ((i % 2) == 0))
+	else if ((output == 0) && ((i % 2) == 0))
 		output = open("/tmp/output", O_WRONLY | O_TRUNC);
-	else if ((output == -5) && ((i % 2) != 0))
+	else if ((output == 0) && ((i % 2) != 0))
 		output = open("/tmp/input", O_WRONLY | O_TRUNC);
 	return (output);
 }
 
 //---------------------------------------------------------------------------//
 
-void	ft_checkinput(t_list *data, int i)
+void	ft_checkinput(t_list *data, int input, int i)
 {
-	int	input;
-
 	if ((i == 1) && (data->tatto != 5))
 		return ;
 	if (data->tatto == 5)
@@ -57,20 +55,14 @@ void	ft_checkinput(t_list *data, int i)
 		close (input);
 		return ;
 	}
-	else 
+	else
 	{
 		if ((i % 2) == 0)
-		{
 			input = open("/tmp/input", O_RDONLY);
-			dup2(input, STDIN_FILENO);
-			close (input);
-		}
 		else if ((i % 2) != 0)
-		{
 			input = open("/tmp/output", O_RDONLY);
-			dup2(input, STDIN_FILENO);
-			close (input);
-		}
+		dup2(input, STDIN_FILENO);
+		close (input);
 	}
 }
 
@@ -80,7 +72,7 @@ void	ft_redirect(t_list *data, t_store *store, int i)
 {
 	int	output;
 
-	ft_checkinput(data, i);
+	ft_checkinput(data, 0, i);
 	store->exec = 2;
 	if ((output = ft_getfile(data, store, i)))
 	{
@@ -97,47 +89,3 @@ void	ft_redirect(t_list *data, t_store *store, int i)
 }
 
 //---------------------------------------------------------------------------//
-
-void	ft_redcmd(t_list *data, int pid, int file)
-{
-	if (data->tatto == 5)
-	{
-		pid = fork();
-		if (pid == 0)
-		{
-			if ((file = open(data->next->arg, O_RDONLY)) < 0)
-			{
-				ft_printerror(": No such file or directory", data->next->arg);
-				return ;
-			}
-			dup2(file, STDIN_FILENO);
-			file = ft_getfile(data, NULL, 0);
-			dup2(file, STDOUT_FILENO);
-			close(file);
-			execve(ft_getpath(data->next->next->arg), ft_arg(data->next->next), NULL);
-		}
-		else
-			waitpid(pid, NULL, 0);
-	}
-	else
-	{
-		pid = fork();
-		if (pid == 0)
-		{
-			file = ft_getfile(data, NULL, 0);
-			if ((file != STDOUT_FILENO))
-			{
-				if (data->tatto == 1)
-				{
-					if(!(ft_getpath(data->arg)))
-					return ;
-				}
-			}
-			dup2(file, STDOUT_FILENO);
-			close(file);
-			execve(ft_getpath(data->arg), ft_arg(data), NULL);
-		}
-		else
-			waitpid(pid, NULL, 0);
-	}
-}

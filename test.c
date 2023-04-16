@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/31 13:24:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/04/10 17:11:51 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/04/15 17:28:52 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 
-int main(int argc,char **argv)
+int main(int argc,char **argv,char **env)
 {
-    int i = 1;
-    while (argv[i])
+    int i = 0;
+    while (env[i])
     {
-       printf("%s\n",argv[i]);
+       printf("%s\n",env[i]);
        i++;
     }
     return 0;

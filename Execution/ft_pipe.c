@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 01:12:17 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/14 17:48:47 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/15 23:23:20 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ void	ft_pipefirstcmd(t_list *data)
 	int	output;
 
 	output = open("/tmp/input", O_WRONLY | O_TRUNC);
-	dup2(output, STDOUT_FILENO);
-	close (output);
+		dup2(output, STDOUT_FILENO);
+		close (output);
 	execve(ft_getpath(data->arg), ft_arg(data), NULL);
 }
 

@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/04/15 13:03:37 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/04/16 17:29:44 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,57 @@ int	ft_strcmp(char *s1,char *s2)
 	}
 	return (0);
 }
-void tato(char *k,int *tatto)
+int parse_check(t_data *a)
 {
-    if (*tatto == 0 && ft_check_cmd(k))
-        *tatto = 1;
-    else if (*tatto == 0 && ft_check_path(k))
-        *tatto = 2;
+    a->tmp = a->p;
+    if (a->tmp->tatto == 4)
+        {
+                printf("parse error \n");
+                return(1);
+        }
+    while (a->tmp)
+    {
+        if (a->tmp->tatto != 0 && !a->tmp->next)
+        {
+                printf("parse error \n");
+                return(1);
+        }
+        if (a->tmp->tatto != 0 && a->tmp->tatto != 4 && a->tmp->next->tatto != 0)
+            {
+                printf("parse error \n");
+                return(1);
+            }
+        a->tmp = a->tmp->next;
+    }
+    return(0);
 }
+void tato(t_data *a)
+{
+    a->tmp = a->p;
+    while (a->tmp)
+    {
+        if (a->tmp->tatto == 0)
+        {
+            a->tmp->tatto = 1;
+            a->tmp = a->tmp->next;
+            while (a->tmp && a->tmp->tatto == 0)
+            {
+                a->tmp->tatto = 2;
+                a->tmp = a->tmp->next;
+            }
+        }
+        else if (a->tmp->tatto != 4)
+        {
+            a->tmp = a->tmp->next;
+            if (a->tmp->tatto == 0)
+                a->tmp->tatto = 2;
+            a->tmp = a->tmp->next;
+        }
+        else
+            a->tmp = a->tmp->next;
+    }
+}
+
 void check_tato(t_data *a,int *tatto)
 {
     if (!ft_strcmp(a->tab[a->i],">>"))
@@ -65,8 +109,8 @@ size_t ft_length(t_data *a,int *tatto)
         }
         else if (a->t == a->tab[a->i][x] && lock)
         {
-             lock = 0;
-             a->t = '\0';
+            lock = 0;
+            a->t = '\0';
         }
         else
             len++;
@@ -120,12 +164,17 @@ void create_linked(t_data *a)
         ft_lstadd_back(&a->p,o);
         a->i++;
     }
-    // o = a->p;
-    // while (o)
-    // {
-    //     printf("%s\n",o->arg);
-    //    o = o->next;
-    // }
+    if (parse_check(a))
+        return;
+    tato(a);
+    
+    o = a->p;
+    while (o)
+    {
+        printf("%d\t",o->tatto);
+       o = o->next;
+    }
+    printf("\n");
 }
 int ft_separit(t_data *a)
 {
@@ -165,7 +214,6 @@ void open_quote(t_data *a)
     {
         if(!ft_separit(a))
             free_all(a->tab,a->length);
-        //
         ft_lstclear(&a->p);
     }
 }

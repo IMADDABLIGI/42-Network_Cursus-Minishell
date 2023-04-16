@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 01:36:49 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/15 20:51:24 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/16 00:41:52 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,9 @@ void	ft_redcmd(t_list *data, int pid, int file)
 				return ;
 			}
 			dup2(file, STDIN_FILENO);
-			close (file);
+			file = ft_getfile(data, NULL, 0);
+			dup2(file, STDOUT_FILENO);
+			close(file);
 			execve(ft_getpath(data->next->next->arg), ft_arg(data->next->next), NULL);
 		}
 		else
@@ -123,6 +125,14 @@ void	ft_redcmd(t_list *data, int pid, int file)
 		if (pid == 0)
 		{
 			file = ft_getfile(data, NULL, 0);
+			if ((file != STDOUT_FILENO))
+			{
+				if (data->tatto == 1)
+				{
+					if(!(ft_getpath(data->arg)))
+					return ;
+				}
+			}
 			dup2(file, STDOUT_FILENO);
 			close(file);
 			execve(ft_getpath(data->arg), ft_arg(data), NULL);

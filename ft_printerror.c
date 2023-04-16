@@ -1,16 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_get_path.c                                      :+:      :+:    :+:   */
+/*   ft_printerror.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/07 02:36:15 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/14 23:54:05 by idabligi         ###   ########.fr       */
+/*   Created: 2023/04/11 23:29:30 by idabligi          #+#    #+#             */
+/*   Updated: 2023/04/16 18:32:45 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	ft_printerror(char *str, char *cmd)
+{
+	write(1, cmd, ft_strlen(cmd));
+	write(1, str, ft_strlen(str));
+	write(1, "\n", 1);
+}
+/*----------------------------------------------------------------*/
+
+void	ft_check_arg(t_list *data, t_store *store)
+{
+	t_list	*ptr;
+
+	ptr = data;
+	store->exec = 0;
+	store->count = 0;
+	while (ptr)
+	{
+		if (ptr->tatto == 1)
+			store->count++;
+		if ((ptr->tatto == 4) && (store->exec == 0))
+			store->exec = 1;
+		if (ptr->tatto == 5 || ptr->tatto == 6 ||
+			ptr->tatto == 7 || ptr->tatto == 8)
+			store->exec = 2;
+		ptr = ptr->next;
+	}
+}
+/*----------------------------------------------------------------*/
 
 char	*ft_getpath(char *cmd)
 {
@@ -25,7 +54,8 @@ char	*ft_getpath(char *cmd)
 			return (ft_split(cmd, ' ')[0]);
 		ft_printerror(": No such file or directory", cmd);
 	}
-	if (((cmd[0] == '.') && (cmd[1] == '/')) || ((cmd[0] == '.') && (cmd[1] == '.')))
+	if (((cmd[0] == '.') && (cmd[1] == '/')) || ((cmd[0] == '.')
+			&& (cmd[1] == '.')))
 	{
 		if (access((ft_split(cmd, ' ')[0]), X_OK) == 0)
 			return (ft_split(cmd, ' ')[0]);
@@ -34,8 +64,8 @@ char	*ft_getpath(char *cmd)
 		else
 			ft_printerror(": No such file or directory", cmd);
 	}
-	else 
-	{	
+	else
+	{
 		while (p_cmd[i])
 		{
 			if (access(ft_strjoin(p_cmd[i], cmd), F_OK) == 0)
@@ -46,11 +76,12 @@ char	*ft_getpath(char *cmd)
 	}
 	return (NULL);
 }
+/*----------------------------------------------------------------*/
 
 char	**ft_arg(t_list *data)
 {
 	int		i;
-	t_list *ptr;
+	t_list	*ptr;
 	char	**n_arg;
 
 	i = 0;
@@ -72,4 +103,19 @@ char	**ft_arg(t_list *data)
 	}
 	n_arg[i + 1] = NULL;
 	return (n_arg);
+}
+//---------------------------------------------------------------------------//
+
+int	ft_check_cmd(t_list *data)
+{
+	while (data && (data->tatto != 4))
+	{
+		if (data->tatto == 1)
+		{
+			if (!ft_getpath((data->arg)))
+				return (0);
+		}
+		data = data->next;
+	}
+	return (1);
 }

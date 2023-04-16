@@ -3,48 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   mininshell_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:05:47 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/06 23:21:38 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/16 18:35:55 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_atoi(char *str)
-{
-	int				i;
-	int				sign;
-	int				rst;
-
-	i = 0;
-	rst = 0;
-	sign = 1;
-	while (str[i] == 32 || (str[i] >= 9 && str[i] <= 13))
-		i++;
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			sign *= -1;
-		i++;
-	}
-	while (str[i] != '\0' && str[i] >= '0' && str[i] <= '9')
-		rst = rst * 10 + str[i++] - '0';
-	return ((int)rst * sign);
-}
-
-int	ft_strlen(const char *s)
-{
-	int	i;
-
-	i = 0;
-	while (s[i] != '\0')
-		i++;
-	return (i);
-}
-
-void	*ft_memcpy(void *dst, const void *src, int n)
+void	*ft_memcpy(void *dst, void *src, int n)
 {
 	int	i;
 
@@ -61,12 +29,12 @@ void	*ft_memcpy(void *dst, const void *src, int n)
 	return (dst);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*string;
-	int	lens1;
-	int	lens2;
-	int	mix;
+	int		lens1;
+	int		lens2;
+	int		mix;
 
 	if (!s1 && !s2)
 		return (0);

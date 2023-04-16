@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 00:00:44 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/15 16:10:11 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/04/16 18:36:32 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static char	*wrt_stg(char *s, char c)
 	return (pptr);
 }
 
-char	**free_all(char **ptr, size_t i)
+static char	**free_all(char **ptr, size_t i)
 {
 	while (i--)
 		free(ptr[i]);
@@ -76,7 +76,7 @@ char	**free_all(char **ptr, size_t i)
 	return (0);
 }
 
-char	**ft_split(char*s, char c)
+char	**ft_split(char *s, char c)
 {
 	char	**ptr;
 	size_t	i;

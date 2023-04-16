@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_redirection.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 01:36:49 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/16 16:59:12 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/16 18:32:50 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_checkinput(t_list *data, int input, int i)
 			return ;
 		}
 		dup2(input, STDIN_FILENO);
-		close (input);
+		close(input);
 		return ;
 	}
 	else
@@ -62,7 +62,7 @@ void	ft_checkinput(t_list *data, int input, int i)
 		else if ((i % 2) != 0)
 			input = open("/tmp/output", O_RDONLY);
 		dup2(input, STDIN_FILENO);
-		close (input);
+		close(input);
 	}
 }
 
@@ -78,7 +78,7 @@ void	ft_redirect(t_list *data, t_store *store, int i)
 	{
 		if (dup2(output, STDOUT_FILENO) < 0)
 			perror("dup2\n");
-		close (output);
+		close(output);
 	}
 	if (!(data->tatto == 1))
 	{

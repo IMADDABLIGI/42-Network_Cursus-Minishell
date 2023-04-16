@@ -6,17 +6,17 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 17:42:15 by hznagui           #+#    #+#             */
-/*   Updated: 2023/04/16 14:46:39 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/04/16 18:11:23 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_arg	*ft_lstnew(t_data *a)
+t_list	*ft_lstnew(t_data *a)
 {
-	t_arg	*p;
+	t_list	*p;
 
-	p = malloc (sizeof(t_arg));
+	p = malloc (sizeof(t_list));
 	if (!p)
 		return (0);
 	p -> next = NULL;
@@ -26,9 +26,9 @@ t_arg	*ft_lstnew(t_data *a)
 }
 /*----------------------------------------------------------------*/
 
-void	ft_lstadd_back(t_arg **lst, t_arg *new)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	t_arg	*p;
+	t_list	*p;
 
 	if (!lst || !new)
 		return ;
@@ -46,9 +46,9 @@ void	ft_lstadd_back(t_arg **lst, t_arg *new)
 }
 /*----------------------------------------------------------------*/
 
-t_arg	*ft_lstclear(t_arg **lst)
+t_list	*ft_lstclear(t_list **lst)
 {
-	t_arg	*p;
+	t_list	*p;
 
 	if (!lst)
 		return (0);

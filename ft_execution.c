@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execution.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/16 17:52:20 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/16 18:32:26 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //---------------------------------------------------------------------------//
 
-int	ft_creatfile()
+int	ft_creatfile(void)
 {
 	unlink("/tmp/input");
 	unlink("/tmp/output");
@@ -51,11 +51,11 @@ void	ft_exec1(t_list *data)
 
 void	ft_exec2(t_list *data, t_store *store, int i)
 {
-	int		pid;
+	int	pid;
 
 	if (!ft_creatfile())
 		return ;
-	while(i <= store->count)
+	while (i <= store->count)
 	{
 		if (!ft_getpath((data->arg)))
 			return ;
@@ -77,32 +77,15 @@ void	ft_exec2(t_list *data, t_store *store, int i)
 	}
 }
 
-
-//---------------------------------------------------------------------------//
-
-int	ft_check_cmd(t_list *data)
-{
-	while (data && (data->tatto != 4))
-	{
-		if (data->tatto == 1)
-		{
-			if (!ft_getpath((data->arg)))
-				return (0);
-		}
-		data = data->next;
-	}
-	return (1);
-}
-
 //---------------------------------------------------------------------------//
 
 void	ft_exec3(t_list *data, t_store *store, int i)
 {
-	int		pid;
+	int	pid;
 
 	if (!ft_creatfile())
 		return ;
-	while(i <= store->count)
+	while (i <= store->count)
 	{
 		if (!ft_check_cmd(data))
 			return ;
@@ -117,7 +100,8 @@ void	ft_exec3(t_list *data, t_store *store, int i)
 			data = data->next;
 			while (data && (data->tatto != 1) && (data->tatto != 5))
 			{
-				if ((data->tatto == 6) || (data->tatto == 8) || (data->tatto == 5))
+				if ((data->tatto == 6) || (data->tatto == 8)
+					|| (data->tatto == 5))
 					ft_creatfile();
 				data = data->next;
 			}

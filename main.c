@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/04/16 17:29:44 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/04/16 18:23:35 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,29 +152,31 @@ char *str(t_data *a,int *tatto)
 }
 void create_linked(t_data *a)
 {
-    t_arg *o;
+	t_store store;
     
     a->i=0;
     a->p=NULL;
     while (a->tab[a->i])
     {
-        o = ft_lstnew(a);
-        if (!o)
+        a->tmp = ft_lstnew(a);
+        if (!a->tmp)
             ft_lstclear(&a->p); 
-        ft_lstadd_back(&a->p,o);
+        ft_lstadd_back(&a->p,a->tmp);
         a->i++;
     }
     if (parse_check(a))
         return;
     tato(a);
-    
-    o = a->p;
-    while (o)
-    {
-        printf("%d\t",o->tatto);
-       o = o->next;
-    }
-    printf("\n");
+    a->tmp=a->p;
+    ft_check_arg(a->tmp, &store);
+	ft_execution(a->tmp, &store);
+    // o = a->p;
+    // while (o)
+    // {
+    //     printf("%d\t",o->tatto);
+    //    o = o->next;
+    // }
+    // printf("\n");
 }
 int ft_separit(t_data *a)
 {
@@ -213,7 +215,7 @@ void open_quote(t_data *a)
     else
     {
         if(!ft_separit(a))
-            free_all(a->tab,a->length);
+            free_all22(a->tab,a->length);
         ft_lstclear(&a->p);
     }
 }

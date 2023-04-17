@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+         #
+#    By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/16 18:27:52 by hznagui           #+#    #+#              #
-#    Updated: 2023/04/16 18:34:46 by hznagui          ###   ########.fr        #
+#    Updated: 2023/04/16 23:09:10 by idabligi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,10 @@ SRC_FILE = 	main.c \
 			tolls2.c\
 			ft_pipe.c\
 			ft_execution.c\
-			ft_printerror.c\
 			ft_redirection.c\
 			ft_split.c\
 			mininshell_utils.c\
+			mininshell_utils2.c\
 
 COLOUR_GREEN=\033[1;32m
 

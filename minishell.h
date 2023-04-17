@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/04/16 18:37:40 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/04/16 23:02:19 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void				ft_pipemidllecmd(t_list *data, int i);
 void				ft_pipelastcmd(t_list *data, int i);
 void				ft_printerror(char *str, char *cmd);
 void				ft_redirect(t_list *data, t_store *store, int i);
-void	ft_check_arg(t_list *data, t_store *store);
+void				ft_check_arg(t_list *data, t_store *store);
 int					ft_check_cmd(t_list *data);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execution.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/16 18:32:26 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/04/17 01:36:47 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,34 @@ int	ft_creatfile(void)
 
 void	ft_exec1(t_list *data)
 {
-	int	pid;
+	int pid;
+	char *path;
+	char **arg;
+	int	i = 0;
 
 	pid = fork();
 	if (pid == 0)
-		execve(ft_getpath(data->arg), ft_arg(data), NULL);
+	{
+		path = ft_getpath(data->arg);
+		arg = ft_arg(data);
+		
+		// printf("path : %s\n", path);
+		// printf("arg : %s\n", arg[0]);
+		// printf("arg : %s\n", arg[1]);
+		
+		execve(path, arg, NULL);
+		perror("execve"); // add error handling in case execve() fails
+		// for (int i = 0; arg[i] != NULL; i++) {
+		// 	free(arg[i]);
+		// }
+		// free(arg);
+		free(path);
+		_exit(EXIT_FAILURE);
+	}
 	else
 	{
 		waitpid(pid, NULL, 0);
-		return ;
+		return;
 	}
 }
 

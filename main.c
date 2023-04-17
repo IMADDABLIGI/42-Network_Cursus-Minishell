@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/04/16 18:23:35 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/04/17 00:59:33 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,7 +214,7 @@ void open_quote(t_data *a)
         printf("\e[1;31m open quotes!\n\e[0m");
     else
     {
-        if(!ft_separit(a))
+        if (!ft_separit(a))
             free_all22(a->tab,a->length);
         ft_lstclear(&a->p);
     }
@@ -232,6 +232,7 @@ int main() {
         if (*(a.input))
             add_history(a.input);
         open_quote(&a);
+        usleep(1000);
         free(a.input);
     }
     return 0;

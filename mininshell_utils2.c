@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printerror.c                                    :+:      :+:    :+:   */
+/*   mininshell_utils2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/11 23:29:30 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/16 18:32:45 by hznagui          ###   ########.fr       */
+/*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
+/*   Updated: 2023/04/17 01:24:54 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,17 @@ void	ft_check_arg(t_list *data, t_store *store)
 		ptr = ptr->next;
 	}
 }
+
 /*----------------------------------------------------------------*/
 
 char	*ft_getpath(char *cmd)
 {
 	int		i;
 	char	**p_cmd;
+	char    *path;
 
 	i = 0;
+	path = NULL;
 	p_cmd = ft_split(getenv("PATH"), ':');
 	if (cmd[0] == '/')
 	{
@@ -68,14 +71,17 @@ char	*ft_getpath(char *cmd)
 	{
 		while (p_cmd[i])
 		{
-			if (access(ft_strjoin(p_cmd[i], cmd), F_OK) == 0)
-				return (ft_strjoin(p_cmd[i], cmd));
+			path = ft_strjoin(p_cmd[i], cmd);
+			if (access(path, F_OK) == 0)
+				return (path);
+			// free(path);
 			i++;
 		}
 		ft_printerror(": command not found", cmd);
 	}
 	return (NULL);
 }
+
 /*----------------------------------------------------------------*/
 
 char	**ft_arg(t_list *data)
@@ -104,6 +110,7 @@ char	**ft_arg(t_list *data)
 	n_arg[i + 1] = NULL;
 	return (n_arg);
 }
+
 //---------------------------------------------------------------------------//
 
 int	ft_check_cmd(t_list *data)

@@ -29,6 +29,8 @@ void	*ft_memcpy(void *dst, void *src, int n)
 	return (dst);
 }
 
+//---------------------------------------------------------------//
+
 char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*string;
@@ -50,3 +52,21 @@ char	*ft_strjoin(char *s1, char *s2)
 	string[mix] = '\0';
 	return (string);
 }
+
+//---------------------------------------------------------------//
+
+// char	*ft_strdup(const char *s1)
+// {
+// 	size_t	i;
+// 	size_t	size;
+// 	char	*ptr;
+
+// 	i = 0;
+// 	size = ft_strlen(s1);
+// 	ptr = (char *)malloc((size + 1) * sizeof(char));
+// 	if (!ptr)
+// 		return (0);
+// 	ft_memcpy(ptr, s1, size);
+// 	ptr[size] = '\0';
+// 	return (ptr);
+// }

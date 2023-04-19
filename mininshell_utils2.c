@@ -46,23 +46,21 @@ char	*ft_getpath(char *cmd)
 {
 	int		i;
 	char	**p_cmd;
-	char    *path;
 
 	i = 0;
-	path = NULL;
-	p_cmd = ft_split(getenv("PATH"), ':');
+	p_cmd = ft_split(getenv("PATH"), ':', cmd);
 	if (cmd[0] == '/')
 	{
-		if (access((ft_split(cmd, ' ')[0]), X_OK) == 0)
-			return (ft_split(cmd, ' ')[0]);
+		if (access((ft_split(cmd, ' ', NULL)[0]), X_OK) == 0)
+			return (ft_split(cmd, ' ', NULL)[0]);
 		ft_printerror(": No such file or directory", cmd);
 	}
 	if (((cmd[0] == '.') && (cmd[1] == '/')) || ((cmd[0] == '.')
 			&& (cmd[1] == '.')))
 	{
-		if (access((ft_split(cmd, ' ')[0]), X_OK) == 0)
-			return (ft_split(cmd, ' ')[0]);
-		else if (access((ft_split(cmd, ' ')[0]), F_OK) == 0)
+		if (access((ft_split(cmd, ' ', NULL)[0]), X_OK) == 0)
+			return (ft_split(cmd, ' ', NULL)[0]);
+		else if (access((ft_split(cmd, ' ', NULL)[0]), F_OK) == 0)
 			ft_printerror(": Permission denied", cmd);
 		else
 			ft_printerror(": No such file or directory", cmd);
@@ -71,10 +69,8 @@ char	*ft_getpath(char *cmd)
 	{
 		while (p_cmd[i])
 		{
-			path = ft_strjoin(p_cmd[i], cmd);
-			if (access(path, F_OK) == 0)
-				return (path);
-			// free(path);
+			if (access(p_cmd[i], X_OK) == 0)
+				return (p_cmd[i]);
 			i++;
 		}
 		ft_printerror(": command not found", cmd);
@@ -88,27 +84,28 @@ char	**ft_arg(t_list *data)
 {
 	int		i;
 	t_list	*ptr;
-	char	**n_arg;
+	char	**arg;
 
 	i = 0;
 	ptr = data;
-	while ((data) && (data->tatto != 5) && (data->tatto != 6) &&
-			(data->tatto != 7) && (data->tatto != 8) && (data->tatto != 4))
+	while ((ptr) && (ptr->tatto != 4) && (ptr->tatto != 5) &&
+			(ptr->tatto != 6) && (ptr->tatto != 7) && (ptr->tatto != 8))
 	{
-		i++;
-		data = data->next;
-	}
-	n_arg = malloc((i + 1) * sizeof(char *));
-	i = 0;
-	while ((ptr) && (ptr->tatto != 5) && (ptr->tatto != 6) &&
-			(ptr->tatto != 7) && (ptr->tatto != 8) && (ptr->tatto != 4))
-	{
-		n_arg[i] = ptr->arg;
 		ptr = ptr->next;
 		i++;
 	}
-	n_arg[i + 1] = NULL;
-	return (n_arg);
+	arg = malloc((i + 1) * sizeof(char *));
+	if (!arg)
+		exit (1);
+	i = 0;
+	while ((data) && (data->tatto != 4) && (data->tatto != 5) &&
+			(data->tatto != 6) && (data->tatto != 7) && (data->tatto != 8))
+	{
+		arg[i++] = ft_strdup(data->arg);
+		data = data->next;
+	}
+	arg[i] = NULL;
+	return (arg);
 }
 
 //---------------------------------------------------------------------------//

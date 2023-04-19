@@ -43,20 +43,21 @@ void	ft_exec1(t_list *data)
 	pid = fork();
 	if (pid == 0)
 	{
-		path = ft_getpath(data->arg);
 		arg = ft_arg(data);
-		
+		if (!(path = ft_getpath(data->arg)))
+			exit (1);
 		// printf("path : %s\n", path);
 		// printf("arg : %s\n", arg[0]);
 		// printf("arg : %s\n", arg[1]);
 		
 		execve(path, arg, NULL);
-		perror("execve"); // add error handling in case execve() fails
+		perror("error execve"); // add error handling in case execve() fails
 		// for (int i = 0; arg[i] != NULL; i++) {
 		// 	free(arg[i]);
 		// }
 		// free(arg);
 		free(path);
+		exit (0);
 		_exit(EXIT_FAILURE);
 	}
 	else

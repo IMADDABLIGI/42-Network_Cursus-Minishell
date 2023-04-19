@@ -67,7 +67,7 @@ size_t				ft_strlen(char *s);
 char				*ft_substr(char *s, unsigned int start, size_t len);
 /*new*/
 void				*ft_memcpy(void *dst, void *src, int n);
-char				**ft_split(char *s, char c);
+char				**ft_split(char *s, char c, char *cmd);
 char				*ft_strjoin(char *s1, char *s2);
 char				*ft_getpath(char *cmd);
 void				ft_execution(t_list *data, t_store *store);
@@ -79,5 +79,6 @@ void				ft_printerror(char *str, char *cmd);
 void				ft_redirect(t_list *data, t_store *store, int i);
 void				ft_check_arg(t_list *data, t_store *store);
 int					ft_check_cmd(t_list *data);
+// char				*ft_strdup(const char *s1);
 
 #endif

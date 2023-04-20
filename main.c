@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: houdayfa <houdayfa@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/04/17 00:59:33 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/04/20 18:41:52 by houdayfa         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int parse_check(t_data *a)
                 printf("parse error \n");
                 return(1);
         }
-        if (a->tmp->tatto != 0 && a->tmp->tatto != 4 && a->tmp->next->tatto != 0)
+        if (a->tmp->tatto != 0  && a->tmp->next->tatto != 0)
             {
                 printf("parse error \n");
                 return(1);
@@ -232,7 +232,7 @@ int main() {
         if (*(a.input))
             add_history(a.input);
         open_quote(&a);
-        usleep(1000);
+
         free(a.input);
     }
     return 0;

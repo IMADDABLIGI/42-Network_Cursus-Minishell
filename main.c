@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houdayfa <houdayfa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/04/20 18:41:52 by houdayfa         ###   ########.fr       */
+/*   Updated: 2023/04/27 14:43:26 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,19 +31,19 @@ int parse_check(t_data *a)
     a->tmp = a->p;
     if (a->tmp->tatto == 4)
         {
-                printf("parse error \n");
+                printf("\e[1;31m parse error!\n\e[0m");
                 return(1);
         }
     while (a->tmp)
     {
         if (a->tmp->tatto != 0 && !a->tmp->next)
         {
-                printf("parse error \n");
+                printf("\e[1;31m parse error!\n\e[0m");
                 return(1);
         }
         if (a->tmp->tatto != 0  && a->tmp->next->tatto != 0)
             {
-                printf("parse error \n");
+                printf("\e[1;31m parse error!\n\e[0m");
                 return(1);
             }
         a->tmp = a->tmp->next;
@@ -224,15 +224,21 @@ void open_quote(t_data *a)
 //     (void)y;
 //     printf("salam\n");
 // }
-int main() {
+int main(int argc,char **argv,char **env) {
     t_data a;
+    if (argc != 1)
+    {
+        printf("\e[1;31mno argument please!\n\e[0m");
+        exit(1);
+    }
     while (1)
     {
         a.input = readline("MINISHELL>> ");
         if (*(a.input))
+        {
             add_history(a.input);
-        open_quote(&a);
-
+            open_quote(&a);
+        }
         free(a.input);
     }
     return 0;

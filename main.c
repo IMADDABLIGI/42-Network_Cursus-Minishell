@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/04/29 14:04:09 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/04/29 17:28:59 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,12 +254,12 @@ int main(int argc,char **argv,char **env){
     if (argc != 1)
         ft_abort(2);
     ft_create_env(&a,env);
-    a.tmp=a.e;
-    while (a.tmp)
-    {
-        printf("%s\n",a.tmp->arg);
-        a.tmp=a.tmp->next;
-    }
+    // a.tmp=a.e;
+    // while (a.tmp)
+    // {
+    //     printf("%s\n",a.tmp->arg);
+    //     a.tmp=a.tmp->next;
+    // }
     while (1)
     {
         a.input = readline("MINISHELL>> ");

@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 15:52:56 by hznagui           #+#    #+#             */
-/*   Updated: 2023/04/16 18:05:36 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/04/29 13:23:02 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,7 @@ char	**ft_split22(t_data *a)
 	// return(0);
 	a->tab = malloc((nbr_of_words22(a) + 1) * (sizeof(char *)));
 	if (!a->tab)
-		return (0);
+		ft_abort(1);
 	return (ft_return22(a));
 }
 /*----------------------------------------------------------------*/
@@ -145,7 +145,7 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 		return (ft_strdup(""));
 	p = malloc((leakskiller(s, start, len) + 1) * sizeof(char));
 	if (!p)
-		return (0);
+		ft_abort(1);
 	o = 0;
 	while (o < len && s[start + o])
 	{
@@ -166,7 +166,7 @@ char	*ft_strdup(char *s1)
 	i = ft_strlen(s1);
 	f = malloc((i + 1) * sizeof(char));
 	if (!f)
-		return (0);
+		ft_abort(1);
 	while (y < i)
 	{
 		f[y] = s1[y];

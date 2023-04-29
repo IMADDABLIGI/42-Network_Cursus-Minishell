@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/04/27 17:53:15 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/04/29 13:24:06 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ typedef struct t_data
 	int				count;
 }					t_store;
 
+typedef struct env
+{
+	char *			arg;
+	struct env		*next;
+}		t_env;
+
 typedef struct data
 {
 	char			*input;
@@ -50,7 +56,9 @@ typedef struct data
 	char			t;
 	size_t			i;
 	t_list			*p;
-	t_list			*tmp;
+	t_list			*tmp1;
+	t_env *e;
+	t_env *tmp;
 }					t_data;
 
 /*parsing function*/
@@ -64,6 +72,9 @@ char				**free_all22(char **str, int max);
 char				*ft_strdup(char *s1);
 size_t				ft_strlen(char *s);
 char				*ft_substr(char *s, unsigned int start, size_t len);
+void	ft_lstadd_back_env(t_env **lst, t_env *new);
+t_env	*ft_lstnew_env(char *table);
+void ft_abort(int id);
 /*new*/
 void				*ft_memcpy(void *dst, void *src, int n);
 char				**ft_split(char *s, char c, char *cmd);

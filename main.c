@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/04/29 12:44:49 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/04/29 14:04:09 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,57 +29,57 @@ int	ft_strcmp(char *s1,char *s2)
 int parse_check(t_data *a)
 {
     
-    a->tmp = a->p;
-    if (a->tmp->tatto == 4)
+    a->tmp1 = a->p;
+    if (a->tmp1->tatto == 4)
         {
                 printf("\e[1;31m parse error!\n\e[0m");
                 return(1);
         }
-    while (a->tmp)
+    while (a->tmp1)
     {
-        if (a->tmp->tatto != 0 && !a->tmp->next)
+        if (a->tmp1->tatto != 0 && !a->tmp1->next)
         {
                 printf("\e[1;31m parse error!\n\e[0m");
                 return(1);
         }
-        else if (a->tmp->tatto == 4 && (a->tmp->next->tatto == 4))
+        else if (a->tmp1->tatto == 4 && (a->tmp1->next->tatto == 4))
         {
                 printf("\e[1;31m parse error!\n\e[0m");
                 return(1);
         }
-        else if ((a->tmp->tatto != 0 && a->tmp->tatto != 4) && a->tmp->next->tatto != 0)
+        else if ((a->tmp1->tatto != 0 && a->tmp1->tatto != 4) && a->tmp1->next->tatto != 0)
         {
                 printf("\e[1;31m parse error!\n\e[0m");
                 return(1);
         }
-        a->tmp = a->tmp->next;
+        a->tmp1 = a->tmp1->next;
     }
     return(0);
 }
 void tato(t_data *a)
 {
-    a->tmp = a->p;
-    while (a->tmp)
+    a->tmp1 = a->p;
+    while (a->tmp1)
     {
-        if (a->tmp->tatto == 0)
+        if (a->tmp1->tatto == 0)
         {
-            a->tmp->tatto = 1;
-            a->tmp = a->tmp->next;
-            while (a->tmp && a->tmp->tatto == 0)
+            a->tmp1->tatto = 1;
+            a->tmp1 = a->tmp1->next;
+            while (a->tmp1 && a->tmp1->tatto == 0)
             {
-                a->tmp->tatto = 2;
-                a->tmp = a->tmp->next;
+                a->tmp1->tatto = 2;
+                a->tmp1 = a->tmp1->next;
             }
         }
-        else if (a->tmp->tatto != 4)
+        else if (a->tmp1->tatto != 4)
         {
-            a->tmp = a->tmp->next;
-            if (a->tmp->tatto == 0)
-                a->tmp->tatto = 2;
-            a->tmp = a->tmp->next;
+            a->tmp1 = a->tmp1->next;
+            if (a->tmp1->tatto == 0)
+                a->tmp1->tatto = 2;
+            a->tmp1 = a->tmp1->next;
         }
         else
-            a->tmp = a->tmp->next;
+            a->tmp1 = a->tmp1->next;
     }
 }
 
@@ -131,6 +131,8 @@ char *str(t_data *a,int *tatto)
     int lock;
     
     p = malloc(sizeof(char)*ft_length(a,tatto));
+    if (!p)
+        ft_abort(1);
     a->k=0;
     lock = 0;
     x = 0;
@@ -164,18 +166,18 @@ void create_linked(t_data *a)
     a->p=NULL;
     while (a->tab[a->i])
     {
-        a->tmp = ft_lstnew(a);
-        if (!a->tmp)
+        a->tmp1 = ft_lstnew(a);
+        if (!a->tmp1)
             ft_lstclear(&a->p); 
-        ft_lstadd_back(&a->p,a->tmp);
+        ft_lstadd_back(&a->p,a->tmp1);
         a->i++;
     }
     if (parse_check(a))
         return;
     tato(a);
-    a->tmp=a->p;
-    ft_check_arg(a->tmp, &store);
-	ft_execution(a->tmp, &store);
+    a->tmp1=a->p;
+    ft_check_arg(a->tmp1, &store);
+	ft_execution(a->tmp1, &store);
     // o = a->p;
     // while (o)
     // {
@@ -226,19 +228,38 @@ void open_quote(t_data *a)
     }
 }
 
-// int ft_create_env(t_data *a,char **env)
-// {
-    
-// }
+void  ft_create_env(t_data *a,char **env)
+{
+    a->i=0;
+    while (env[a->i])
+    {
+        a->tmp = ft_lstnew_env(env[a->i]);
+        if (!a->tmp)
+            ft_abort(1);
+        ft_lstadd_back_env(&a->e,a->tmp);
+        a->i++;
+    }
+}
 
+void ft_abort(int id)
+{
+    if (id == 1)
+        printf("\e[1;31mmalloc problem\n\e[0m");
+    else if (id == 2)
+        printf("\e[1;31mno argument please!\n\e[0m");
+    exit(1);
+}
 int main(int argc,char **argv,char **env){
     t_data a;
     if (argc != 1)
+        ft_abort(2);
+    ft_create_env(&a,env);
+    a.tmp=a.e;
+    while (a.tmp)
     {
-        printf("\e[1;31mno argument please!\n\e[0m");
-        exit(1);
+        printf("%s\n",a.tmp->arg);
+        a.tmp=a.tmp->next;
     }
-    // ft_create_env(&a,env);
     while (1)
     {
         a.input = readline("MINISHELL>> ");

@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/04/27 14:43:26 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/04/29 12:44:49 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	ft_strcmp(char *s1,char *s2)
 }
 int parse_check(t_data *a)
 {
+    
     a->tmp = a->p;
     if (a->tmp->tatto == 4)
         {
@@ -41,11 +42,16 @@ int parse_check(t_data *a)
                 printf("\e[1;31m parse error!\n\e[0m");
                 return(1);
         }
-        if (a->tmp->tatto != 0  && a->tmp->next->tatto != 0)
-            {
+        else if (a->tmp->tatto == 4 && (a->tmp->next->tatto == 4))
+        {
                 printf("\e[1;31m parse error!\n\e[0m");
                 return(1);
-            }
+        }
+        else if ((a->tmp->tatto != 0 && a->tmp->tatto != 4) && a->tmp->next->tatto != 0)
+        {
+                printf("\e[1;31m parse error!\n\e[0m");
+                return(1);
+        }
         a->tmp = a->tmp->next;
     }
     return(0);
@@ -219,18 +225,20 @@ void open_quote(t_data *a)
         ft_lstclear(&a->p);
     }
 }
-// void test(int y)
+
+// int ft_create_env(t_data *a,char **env)
 // {
-//     (void)y;
-//     printf("salam\n");
+    
 // }
-int main(int argc,char **argv,char **env) {
+
+int main(int argc,char **argv,char **env){
     t_data a;
     if (argc != 1)
     {
         printf("\e[1;31mno argument please!\n\e[0m");
         exit(1);
     }
+    // ft_create_env(&a,env);
     while (1)
     {
         a.input = readline("MINISHELL>> ");

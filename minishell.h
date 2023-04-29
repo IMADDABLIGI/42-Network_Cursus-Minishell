@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: houdayfa <houdayfa@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/04/19 16:20:42 by houdayfa         ###   ########.fr       */
+/*   Updated: 2023/04/27 17:53:15 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
+# include <sys/wait.h>
 # include <unistd.h>
-#include <sys/wait.h>
 
 typedef struct t_shell
 {
@@ -41,6 +41,7 @@ typedef struct data
 {
 	char			*input;
 	char			**tab;
+	char			**env1;
 	int				z;
 	int				lock;
 	size_t			length;
@@ -51,9 +52,6 @@ typedef struct data
 	t_list			*p;
 	t_list			*tmp;
 }					t_data;
-/*
-command 1
-path_to_file */
 
 /*parsing function*/
 t_list				*ft_lstnew(t_data *a);
@@ -80,6 +78,5 @@ void				ft_printerror(char *str, char *cmd);
 void				ft_redirect(t_list *data, t_store *store, int i);
 void				ft_check_arg(t_list *data, t_store *store);
 int					ft_check_cmd(t_list *data);
-// char				*ft_strdup(const char *s1);
 
 #endif

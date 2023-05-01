@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/01 19:53:15 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/01 20:57:40 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void				ft_pipemidllecmd(t_list *data, int i);
 void				ft_pipelastcmd(t_list *data, int i);
 void				ft_printerror(char *str, char *cmd);
 void				ft_redirect(t_list *data, t_store *store, int i);
-void				ft_check_arg(t_list *data, t_store *store);
-int					ft_check_cmd(t_list *data);
+int					ft_check_arg(t_list *data, t_store *store);
+int					ft_checkpr(t_list *data);
 
 #endif

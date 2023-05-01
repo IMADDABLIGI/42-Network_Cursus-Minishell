@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/01 18:57:15 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/01 21:18:36 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_printerror(char *str, char *cmd)
 
 /*----------------------------------------------------------------*/
 
-void	ft_check_arg(t_list *data, t_store *store)
+int	ft_check_arg(t_list *data, t_store *store)
 {
 	t_list	*ptr;
 
@@ -37,6 +37,28 @@ void	ft_check_arg(t_list *data, t_store *store)
 			store->exec = 1;
 		ptr = ptr->next;
 	}
+	return (1);
+}
+
+/*----------------------------------------------------------------*/
+
+int	ft_checkpr(t_list *data)
+{
+	while (data)
+	{
+		if (data->tatto == 4)
+		{
+			if ((data->next->tatto == 6) || (data->next->tatto == 8))
+			{
+				open(data->next->next->arg, O_WRONLY | O_TRUNC | O_CREAT, 0644);
+				return (0);
+			}
+			else
+				return (1);
+		}
+		data = data->next;
+	}
+	return (1);
 }
 
 /*----------------------------------------------------------------*/

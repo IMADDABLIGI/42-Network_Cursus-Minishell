@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split.c                                         :+:      :+:    :+:   */
+/*   ft_split_cmd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/01 12:20:51 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/01 12:26:52 by idabligi         ###   ########.fr       */
+/*   Created: 2023/05/01 12:20:00 by idabligi          #+#    #+#             */
+/*   Updated: 2023/05/01 12:28:02 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	**ft_callstg(char **ptr, char const *s, char c)
+static char	**ft_callstg(char **ptr, char *s, char c)
 {
 	size_t	i;
 	size_t	count;
@@ -41,7 +41,7 @@ static char	**ft_callstg(char **ptr, char const *s, char c)
 	return (ptr);
 }
 
-static size_t	len_string(char const *s, char c)
+static size_t	len_string(char *s, char c)
 {
 	size_t	i;
 
@@ -51,19 +51,28 @@ static size_t	len_string(char const *s, char c)
 	return (i);
 }
 
-static char	*wrt_stg(char const *s, char c)
+static char	*wrt_stg(char *s, char c, char *cmd)
 {
 	size_t	len_s;
 	char	*pptr;
+	int		cd;
+	int		i;
 
+	i = 0;
 	len_s = len_string(s, c);
-	pptr = malloc((len_s + 1) * sizeof(char));
+	cd = ft_strlen(cmd) + 1;
+	pptr = malloc((len_s + cd + 1) * sizeof(char));
 	if (!pptr)
-	{
-		free(pptr);
-		return (0);
-	}
+		return (free(pptr), NULL);
 	ft_memcpy(pptr, s, len_s);
+	pptr[len_s] = '/';
+	len_s++;
+	while (i != cd)
+	{
+		pptr[len_s] = cmd[i];
+		i++;
+		len_s++;
+	}
 	pptr[len_s] = '\0';
 	return (pptr);
 }
@@ -76,7 +85,7 @@ static char	**free_all(char **ptr, size_t i)
 	return (0);
 }
 
-char	**ft_split(char *s, char c)
+char	**ft_split_cmd(char *s, char c, char *cmd)
 {
 	char	**ptr;
 	size_t	i;
@@ -92,7 +101,7 @@ char	**ft_split(char *s, char c)
 	{
 		if (*s != c)
 		{
-			ptr[i++] = wrt_stg(s, c);
+			ptr[i++] = wrt_stg(s, c, cmd);
 			if (!ptr[i - 1])
 				return (free_all(ptr, i));
 		}

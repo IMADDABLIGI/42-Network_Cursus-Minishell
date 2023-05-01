@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/17 01:24:54 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/01 12:25:40 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	ft_printerror(char *str, char *cmd)
 	write(1, str, ft_strlen(str));
 	write(1, "\n", 1);
 }
+
 /*----------------------------------------------------------------*/
 
 void	ft_check_arg(t_list *data, t_store *store)
@@ -48,19 +49,19 @@ char	*ft_getpath(char *cmd)
 	char	**p_cmd;
 
 	i = 0;
-	p_cmd = ft_split(getenv("PATH"), ':', cmd);
+	p_cmd = ft_split_cmd(getenv("PATH"), ':', cmd);
 	if (cmd[0] == '/')
 	{
-		if (access((ft_split(cmd, ' ', NULL)[0]), X_OK) == 0)
-			return (ft_split(cmd, ' ', NULL)[0]);
+		if (access((ft_split(cmd, ' ')[0]), X_OK) == 0)
+			return (ft_split(cmd, ' ')[0]);
 		ft_printerror(": No such file or directory", cmd);
 	}
 	if (((cmd[0] == '.') && (cmd[1] == '/')) || ((cmd[0] == '.')
 			&& (cmd[1] == '.')))
 	{
-		if (access((ft_split(cmd, ' ', NULL)[0]), X_OK) == 0)
-			return (ft_split(cmd, ' ', NULL)[0]);
-		else if (access((ft_split(cmd, ' ', NULL)[0]), F_OK) == 0)
+		if (access((ft_split(cmd, ' ')[0]), X_OK) == 0)
+			return (ft_split(cmd, ' ')[0]);
+		else if (access((ft_split(cmd, ' ')[0]), F_OK) == 0)
 			ft_printerror(": Permission denied", cmd);
 		else
 			ft_printerror(": No such file or directory", cmd);

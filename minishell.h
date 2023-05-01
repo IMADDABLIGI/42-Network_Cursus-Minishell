@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/04/29 13:24:06 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/01 12:20:35 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,8 @@ t_env	*ft_lstnew_env(char *table);
 void ft_abort(int id);
 /*new*/
 void				*ft_memcpy(void *dst, void *src, int n);
-char				**ft_split(char *s, char c, char *cmd);
+char				**ft_split(char *s, char c);
+char				**ft_split_cmd(char *s, char c, char *cmd);
 char				*ft_strjoin(char *s1, char *s2);
 char				*ft_getpath(char *cmd);
 void				ft_execution(t_list *data, t_store *store);

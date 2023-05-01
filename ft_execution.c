@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/17 01:36:47 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/01 12:17:07 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,9 @@ void	ft_exec1(t_list *data)
 	pid = fork();
 	if (pid == 0)
 	{
-		arg = ft_arg(data);
 		if (!(path = ft_getpath(data->arg)))
 			exit (1);
-		// printf("path : %s\n", path);
-		// printf("arg : %s\n", arg[0]);
-		// printf("arg : %s\n", arg[1]);
-		
+		arg = ft_arg(data);
 		execve(path, arg, NULL);
 		perror("error execve"); // add error handling in case execve() fails
 		// for (int i = 0; arg[i] != NULL; i++) {

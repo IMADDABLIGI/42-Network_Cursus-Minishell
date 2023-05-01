@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/01 15:34:26 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/01 19:53:08 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,67 +96,171 @@ void check_tato(t_data *a,int *tatto)
     else if (!ft_strcmp(a->tab[a->i],"|"))
         *tatto = 4;     
 }
+
+int	ft_isdigit(int c)
+{
+	if (c >= 48 && c <= 57)
+		return (1);
+	else
+		return (0);
+}
+
+int	ft_isalnum(int c)
+{
+	if ((c >= 48 && c <= 57) || (c >= 65 && c <= 90) || (c >= 97 && c <= 122))
+		return (1);
+	else
+		return (0);
+}
+
+char	*ft_strnstr(char *haystack,char *needle)
+{
+	size_t		i;
+	size_t		j;
+	char		*p;
+
+	p = haystack;
+	j = 0;
+	i = 0;
+	
+	while (p[i + j] && needle[j])
+	{
+		if (p[i + j] == needle[j])
+			j++;
+		else
+		{
+			i++;
+			j = 0;
+		}
+	}
+	if (needle[j] == '\0')
+		return (p + j);
+	else
+		return (0);
+}
+
+size_t ft_expand(t_data *a)
+{
+    a->x++;
+    a->strenv = NULL;
+    char *tmp;
+    while (a->tab[a->i][a->x] && (ft_isalnum(a->tab[a->i][a->x]) || a->tab[a->i][a->x] == '_'))
+    {
+    // printf("%s\n",a->strenv);
+        a->strenv=ft_strjoin22(a->strenv,a->tab[a->i][a->x]);
+        a->x++;
+    }
+    a->x--;
+    a->strenv=ft_strjoin22(a->strenv,'=');
+    a->tmp = a->e;
+    while (a->tmp)
+    {
+        tmp = ft_strnstr(a->tmp->arg,a->strenv);
+        if (tmp)
+            return(free(a->strenv),ft_strlen(tmp));
+        a->tmp = a->tmp->next;
+    }
+    return(free(a->strenv),0);
+}
+void change1(t_data *a)
+{
+    int i;
+    i=0;
+    while (a->strtmp[i])
+    {
+        a->ret[a->k]=a->strtmp[i];
+        a->k++;
+        i++;
+    }
+ 
+}
+void ft_change(t_data *a)
+{
+    a->x++;
+    a->strenv = NULL;
+    // printf("salam\n");
+    
+    while (a->tab[a->i][a->x] && (ft_isalnum(a->tab[a->i][a->x]) || a->tab[a->i][a->x] == '_'))
+    {
+        a->strenv=ft_strjoin22(a->strenv,a->tab[a->i][a->x]);
+        a->x++;
+    }
+    a->x--;
+    a->strenv=ft_strjoin22(a->strenv,'=');
+    a->tmp = a->e;
+    while (a->tmp)
+    {
+        a->strtmp = ft_strnstr(a->tmp->arg,a->strenv);
+        if (a->strtmp)
+            change1(a);
+        a->tmp = a->tmp->next;
+    }
+    free(a->strenv);
+    return ;
+}
 size_t ft_length(t_data *a,int *tatto)
 {
-    size_t x;
     size_t len;
-    int lock;
     
-    lock = 0;
-    x = 0;
+    a->lock = 0;
+    a->x = 0;
     len = 0;
     check_tato(a,tatto);
-    while (a->tab[a->i][x])
+    while (a->tab[a->i][a->x])
     {
-        if ((a->tab[a->i][x] == 39 || a->tab[a->i][x] == 34) && !lock)
+        if ((a->tab[a->i][a->x] == 39 || a->tab[a->i][a->x] == 34) && !a->lock)
         {
-            lock = 1;
-            a->t = a->tab[a->i][x];
+            a->lock = 1;
+            a->t = a->tab[a->i][a->x];
         }
-        else if (a->t == a->tab[a->i][x] && lock)
+        else if (a->t == a->tab[a->i][a->x] && a->lock)
         {
-            lock = 0;
+            a->lock = 0;
             a->t = '\0';
         }
+        else if (((a->t == '"' || !a->t) && a->tab[a->i][a->x] == '$' && ft_isdigit(a->tab[a->i][a->x + 1]))||(a->tab[a->i][a->x] == '$' && (a->tab[a->i][a->x+1] == 39 || a->tab[a->i][a->x+1] == 34) && !a->lock))
+            a->x++;
+        else if ((a->t == '"' || !a->t) && a->tab[a->i][a->x] == '$' && a->tab[a->i][a->x + 1] && (ft_isalnum(a->tab[a->i][a->x+1]) || a->tab[a->i][a->x+1] == '_'))
+            len += ft_expand(a);
         else
             len++;
-        x++;
+        a->x++;
     }
-    return(len);
+    return (len);
 }
 char *str(t_data *a,int *tatto)
 {
-    char *p;
-    size_t x;
-    int lock;
-    
-    p = malloc(sizeof(char)*ft_length(a,tatto));
-    if (!p)
+    a->ret = malloc(sizeof(char)*ft_length(a,tatto));
+    if (!a->ret)
         ft_abort(1);
     a->k=0;
-    lock = 0;
-    x = 0;
-    while (a->tab[a->i][x])
+    a->lock = 0;
+    a->x = 0;
+    while (a->tab[a->i][a->x])
     {
-        if ((a->tab[a->i][x] == 39 || a->tab[a->i][x] == 34) && !lock)
+        if ((a->tab[a->i][a->x] == 39 || a->tab[a->i][a->x] == 34) && !a->lock)
         {
-            lock = 1;
-            a->t = a->tab[a->i][x];
+            a->lock = 1;
+            a->t = a->tab[a->i][a->x];
         }
-        else if (a->t == a->tab[a->i][x] && lock)
+        else if (a->t == a->tab[a->i][a->x] && a->lock)
         {
-             lock = 0;
+             a->lock = 0;
              a->t = '\0';
         }
+        else if (((a->t == '"' || !a->t) && a->tab[a->i][a->x] == '$' && ft_isdigit(a->tab[a->i][a->x + 1]))||(a->tab[a->i][a->x] == '$' && (a->tab[a->i][a->x+1] == 39 || a->tab[a->i][a->x+1] == 34) && !a->lock))
+            a->x++;
+        else if ((a->t == '"' || !a->t) && a->tab[a->i][a->x] == '$' && a->tab[a->i][a->x + 1]&& (ft_isalnum(a->tab[a->i][a->x+1]) || a->tab[a->i][a->x+1] == '_'))
+            ft_change(a);
         else
         {
-            p[a->k]=a->tab[a->i][x];
-        a->k++;
+            a->ret[a->k]=a->tab[a->i][a->x];
+            a->k++;
         }
-        x++;
+        a->x++;
     }
-    p[a->k]='\0';
-    return(p);
+    a->ret[a->k]='\0';
+    return(a->ret);
 }
 void create_linked(t_data *a)
 {
@@ -186,6 +290,7 @@ void create_linked(t_data *a)
     // }
     // printf("\n");
 }
+
 int ft_separit(t_data *a)
 {
     if (!ft_split22(a))
@@ -224,7 +329,7 @@ void open_quote(t_data *a)
     {
         if (!ft_separit(a))
             free_all22(a->tab,a->length);
-        ft_lstclear(&a->p);
+        ft_lstclear(&a->p); 
     }
 }
 
@@ -255,12 +360,16 @@ int main(int argc,char **argv,char **env){
     if (argc != 1)
         ft_abort(2);
     ft_create_env(&a,env);
+    
+    
     // a.tmp=a.e;
     // while (a.tmp)
     // {
     //     printf("%s\n",a.tmp->arg);
     //     a.tmp=a.tmp->next;
     // }
+    
+
     while (1)
     {
         a.input = readline("MINISHELL>> ");

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_redirection.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 01:36:49 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/16 18:32:50 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/01 11:50:28 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	ft_checkinput(t_list *data, int input, int i)
 		if ((input = open(data->next->arg, O_RDONLY)) < 0)
 		{
 			ft_printerror(": No such file or directory", data->next->arg);
-			return ;
+			exit (0) ;
 		}
 		dup2(input, STDIN_FILENO);
 		close(input);

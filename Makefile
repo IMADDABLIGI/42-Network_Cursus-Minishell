@@ -3,10 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
+<<<<<<< HEAD
 #    By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/16 18:27:52 by hznagui           #+#    #+#              #
 #    Updated: 2023/05/01 16:33:50 by hznagui          ###   ########.fr        #
+=======
+#    By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/04/16 18:27:52 by hznagui           #+#    #+#              #
+#    Updated: 2023/05/01 12:21:47 by idabligi         ###   ########.fr        #
+>>>>>>> 91cb5194988d4c702127337f390ef676b0c0019f
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +28,7 @@ SRC_FILE = 	main.c \
 			ft_execution.c\
 			ft_redirection.c\
 			ft_split.c\
+			ft_split_cmd.c\
 			mininshell_utils.c\
 			mininshell_utils2.c\
 

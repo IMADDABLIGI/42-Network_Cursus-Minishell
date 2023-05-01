@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/04/29 13:24:06 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/01 17:14:34 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,19 @@ typedef struct env
 typedef struct data
 {
 	char			*input;
+	char *strenv;
+	char *ret;
+	char *strtmp;
 	char			**tab;
 	char			**env1;
+	char			t;
 	int				z;
 	int				lock;
-	size_t			length;
 	int				lock1;
 	size_t			k;
-	char			t;
-	size_t			i;
+	size_t			length;
+	 size_t			i;
+	  size_t x;
 	t_list			*p;
 	t_list			*tmp1;
 	t_env *e;
@@ -74,6 +78,7 @@ size_t				ft_strlen(char *s);
 char				*ft_substr(char *s, unsigned int start, size_t len);
 void	ft_lstadd_back_env(t_env **lst, t_env *new);
 t_env	*ft_lstnew_env(char *table);
+char	*ft_strjoin22(char *s1, char s2);
 void ft_abort(int id);
 /*new*/
 void				*ft_memcpy(void *dst, void *src, int n);

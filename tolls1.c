@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/03 15:52:56 by hznagui           #+#    #+#             */
-/*   Updated: 2023/04/29 13:23:02 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/01 17:15:01 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,3 +186,28 @@ size_t	ft_strlen(char *s)
 	return (i);
 }
 /*----------------------------------------------------------------*/
+char	*ft_strjoin22(char *s1, char s2)
+{
+	size_t	i;
+	char	*str;
+
+	if (!s1)
+	{
+		s1 = (char *)malloc(1 * sizeof(char));
+		s1[0] = '\0';
+	}
+	// printf("%s\n",s2);
+	if (!s1 || !s2)
+		return (NULL);
+	str = malloc((ft_strlen(s1) + 2));
+	if (str == NULL)
+		ft_abort(1);
+	i = -1;
+	if (s1)
+		while (s1[++i] != '\0')
+			str[i] = s1[i];
+	free(s1);
+		str[i++] = s2;
+	str[i] = '\0';
+	return (str);
+}

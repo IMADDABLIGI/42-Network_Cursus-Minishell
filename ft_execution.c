@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/01 12:17:07 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/01 19:47:55 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,28 +38,20 @@ void	ft_exec1(t_list *data)
 	int pid;
 	char *path;
 	char **arg;
-	int	i = 0;
 
 	pid = fork();
 	if (pid == 0)
 	{
-		if (!(path = ft_getpath(data->arg)))
-			exit (1);
+		path = ft_getpath(data->arg);
 		arg = ft_arg(data);
 		execve(path, arg, NULL);
-		perror("error execve"); // add error handling in case execve() fails
-		// for (int i = 0; arg[i] != NULL; i++) {
-		// 	free(arg[i]);
-		// }
-		// free(arg);
-		free(path);
-		exit (0);
-		_exit(EXIT_FAILURE);
+		perror("execve");
+		exit(EXIT_FAILURE);
 	}
 	else
 	{
 		waitpid(pid, NULL, 0);
-		return;
+		return ;
 	}
 }
 
@@ -73,8 +65,6 @@ void	ft_exec2(t_list *data, t_store *store, int i)
 		return ;
 	while (i <= store->count)
 	{
-		if (!ft_getpath((data->arg)))
-			return ;
 		pid = fork();
 		if ((pid == 0) && (i == 1))
 			ft_pipefirstcmd(data);
@@ -103,8 +93,6 @@ void	ft_exec3(t_list *data, t_store *store, int i)
 		return ;
 	while (i <= store->count)
 	{
-		if (!ft_check_cmd(data))
-			return ;
 		pid = fork();
 		if (pid == 0)
 			ft_redirect(data, store, i);
@@ -128,12 +116,10 @@ void	ft_exec3(t_list *data, t_store *store, int i)
 
 //---------------------------------------------------------------------------//
 
+
 void	ft_execution(t_list *data, t_store *store)
 {
 	if (store->exec == 0)
 		ft_exec1(data);
 	else if (store->exec == 1)
-		ft_exec2(data, store, 1);
-	else if (store->exec == 2)
 		ft_exec3(data, store, 1);
-}

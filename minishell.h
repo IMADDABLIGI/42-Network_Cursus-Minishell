@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/01 12:20:35 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/01 18:22:15 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ typedef struct t_data
 {
 	int				exec;
 	int				count;
+	char			*path;
+	char			**arg;
 }					t_store;
 
 typedef struct env

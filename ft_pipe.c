@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pipe.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 01:12:17 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/16 18:32:40 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/01 16:43:37 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	ft_pipefirstcmd(t_list *data)
 	dup2(output, STDOUT_FILENO);
 	close(output);
 	execve(ft_getpath(data->arg), ft_arg(data), NULL);
+    perror("execve");
+    exit(EXIT_FAILURE);
 }
 
 //---------------------------------------------------------------------------//
@@ -48,9 +50,12 @@ void	ft_pipemidllecmd(t_list *data, int i)
 		close(output);
 	}
 	execve(ft_getpath(data->arg), ft_arg(data), NULL);
+    perror("execve");
+    exit(EXIT_FAILURE);
 }
 
 //---------------------------------------------------------------------------//
+
 void	ft_pipelastcmd(t_list *data, int i)
 {
 	int	input;
@@ -68,6 +73,8 @@ void	ft_pipelastcmd(t_list *data, int i)
 		close(input);
 	}
 	execve(ft_getpath(data->arg), ft_arg(data), NULL);
+    perror("execve");
+    exit(EXIT_FAILURE);
 }
 
 //---------------------------------------------------------------------------//

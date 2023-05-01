@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/01 11:52:45 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/01 15:34:26 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,6 +249,7 @@ void ft_abort(int id)
         printf("\e[1;31mno argument please!\n\e[0m");
     exit(1);
 }
+
 int main(int argc,char **argv,char **env){
     t_data a;
     if (argc != 1)

@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 01:36:49 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/01 11:50:28 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/01 18:30:07 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,22 +70,26 @@ void	ft_checkinput(t_list *data, int input, int i)
 
 void	ft_redirect(t_list *data, t_store *store, int i)
 {
-	int	output;
+	int     output;
+    t_list  *ptr;
 
+    ptr = data;
+	if (!(ptr->tatto == 1))
+	{
+		while (ptr && (ptr->tatto != 1))
+			ptr = ptr->next;
+	}
+    store->path = ft_getpath(ptr->arg);
+    store->arg = ft_arg(ptr);
 	ft_checkinput(data, 0, i);
-	store->exec = 2;
 	if ((output = ft_getfile(data, store, i)))
 	{
-		if (dup2(output, STDOUT_FILENO) < 0)
-			perror("dup2\n");
+		dup2(output, STDOUT_FILENO);
 		close(output);
 	}
-	if (!(data->tatto == 1))
-	{
-		while (data && (data->tatto != 1))
-			data = data->next;
-	}
-	execve(ft_getpath(data->arg), ft_arg(data), NULL);
+	execve(store->path, store->arg, NULL);
+    perror("execve");
+	exit(EXIT_FAILURE);
 }
 
 //---------------------------------------------------------------------------//

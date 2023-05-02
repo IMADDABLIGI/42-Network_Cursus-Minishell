@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   mininshell_utils.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:05:47 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/16 18:35:55 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/02 16:08:11 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+//----------------------------------------------------------------------------//
+
+void	ft_nocmd(t_list *data)
+{
+	if (data->tatto == 5)
+	{
+		if ((open(data->next->arg, O_RDONLY)) < 0)		
+			ft_printerror(": No such file or directory", data->next->arg);
+	}
+	else if (data->tatto == 6 || data->tatto == 8)
+		open(data->next->arg, O_WRONLY | O_TRUNC | O_CREAT, 0644);
+}
+
+//----------------------------------------------------------------------------//
 
 void	*ft_memcpy(void *dst, void *src, int n)
 {

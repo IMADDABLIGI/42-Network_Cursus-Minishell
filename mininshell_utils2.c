@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/01 21:18:36 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/02 21:45:39 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,46 @@ void	ft_printerror(char *str, char *cmd)
 
 /*----------------------------------------------------------------*/
 
+void	ft_check_red(t_list *data, t_store *store)
+{
+	if (data->tatto == 4)
+		store->check = 0;
+	else if ((data->tatto == 5) && (store->check == 0))
+	{
+		if (!(data->next->next))
+		{
+			if ((open(data->next->arg, O_RDONLY)) < 0)
+			{
+				ft_printerror(": No such file or directory", data->next->arg);
+				store->check = 1;
+			}
+		}
+		else if (store->check == 0)
+		{
+			if ((open(data->next->arg, O_RDONLY)) < 0)
+			{
+				ft_printerror(": No such file or directory", data->next->arg);
+				store->check = 1;
+				store->count++;
+			}
+			return ;
+		}
+		else if ((data->next->next->tatto) == 4)
+			store->count++;
+		return ;
+	}
+	if ((data->tatto == 6) || ((data->tatto == 8)))
+	{
+		if (store->check == 0)
+		{
+			open(data->next->arg, O_WRONLY | O_TRUNC | O_CREAT, 0644);
+			store->count++;
+		}
+	}
+}
+
+/*----------------------------------------------------------------*/
+
 int	ft_check_arg(t_list *data, t_store *store)
 {
 	t_list	*ptr;
@@ -28,13 +68,17 @@ int	ft_check_arg(t_list *data, t_store *store)
 	ptr = data;
 	store->exec = 0;
 	store->count = 0;
+	store->check = 0;
 	while (ptr)
 	{
 		if (ptr->tatto == 1)
 			store->count++;
 		if (ptr->tatto == 4 || ptr->tatto == 5 || ptr->tatto == 6 ||
 			ptr->tatto == 7 || ptr->tatto == 8)
-			store->exec = 1;
+			{
+				ft_check_red(ptr, store);
+				store->exec = 1;
+			}
 		ptr = ptr->next;
 	}
 	return (1);
@@ -42,26 +86,29 @@ int	ft_check_arg(t_list *data, t_store *store)
 
 /*----------------------------------------------------------------*/
 
-int	ft_checkpr(t_list *data)
-{
-	while (data)
-	{
-		if (data->tatto == 4)
-		{
-			if ((data->next->tatto == 6) || (data->next->tatto == 8))
-			{
-				open(data->next->next->arg, O_WRONLY | O_TRUNC | O_CREAT, 0644);
-				return (0);
-			}
-			else
-				return (1);
-		}
-		data = data->next;
-	}
-	return (1);
-}
 
-/*----------------------------------------------------------------*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 char	*ft_getpath(char *cmd)
 {

@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 01:36:49 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/01 21:51:10 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/02 21:24:14 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,37 @@
 
 //---------------------------------------------------------------------------//
 
-int	ft_check_end(t_list *data, int output, int i)
+int	ft_return_out(int i, int output)
+{
+	if (((i % 2) == 0))
+		output = open("/tmp/output", O_WRONLY | O_TRUNC);
+	else if (((i % 2) != 0))
+		output = open("/tmp/input", O_WRONLY | O_TRUNC);
+	return (output);
+}
+
+//---------------------------------------------------------------------------//
+
+int	ft_check_end(t_list *data, int output, int i, int count)
 {
 	while (data)
 	{
+		if ((data->tatto == 6) || (data->tatto == 8))
+			return (0);
+		if (data->tatto == 5)
+		{
+			if (!(data->next->next))
+				return (ft_return_out(i, 0));
+		}
 		if (data->tatto == 4)
 		{
-			if ((data->next->tatto == 6) || (data->next->tatto == 8))
+			if (data->next->tatto == 5)
 			{
-				if ((output == 0) && ((i % 2) == 0))
-					output = open("/tmp/output", O_WRONLY | O_TRUNC);
-				else if ((output == 0) && ((i % 2) != 0))
-					output = open("/tmp/input", O_WRONLY | O_TRUNC);
-				return (output);
+				if (!(data->next->next->next))
+					return (ft_return_out(i, 0));
 			}
+			if ((data->next->tatto == 6) || (data->next->tatto == 8))
+				return (ft_return_out(i, 0));
 		}
 		data = data->next;
 	}
@@ -36,9 +53,11 @@ int	ft_check_end(t_list *data, int output, int i)
 
 //---------------------------------------------------------------------------//
 
-int	ft_getfile(t_list *data, t_store *store, int i)
+
+
+int	ft_getfile(t_list *data, t_store *store, int i, t_list *ptr)
 {
-	int	output;
+	int		output;
 
 	output = 0;
 	while ((data) && (data->tatto != 4))
@@ -49,18 +68,42 @@ int	ft_getfile(t_list *data, t_store *store, int i)
 			output = open(data->next->arg, O_WRONLY | O_APPEND | O_CREAT, 0644);
 		data = data->next;
 	}
-	if ((output == 0) && (i == store->count))
-		output = ft_check_end(data, 0, i);
-	else if ((output == 0) && (i == 1))
+	if (output != 0)
+		return (output);
+
+	if ((output = ft_check_end(ptr, 0, i, store->count)))
+		return (output);
+		
+	if (i == store->count)
+		return (0);
+	else if (i == 1)
 		output = open("/tmp/input", O_WRONLY | O_TRUNC);
-	else if ((output == 0) && ((i % 2) == 0))
+	else if ((i % 2) == 0)
 		output = open("/tmp/output", O_WRONLY | O_TRUNC);
-	else if ((output == 0) && ((i % 2) != 0))
+	else if ((i % 2) != 0)
 		output = open("/tmp/input", O_WRONLY | O_TRUNC);
 	return (output);
 }
 
 //---------------------------------------------------------------------------//
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 void	ft_checkinput(t_list *data, int input, int i)
 {
@@ -70,7 +113,7 @@ void	ft_checkinput(t_list *data, int input, int i)
 	{
 		if ((input = open(data->next->arg, O_RDONLY)) < 0)
 		{
-			ft_printerror(": No such file or directory", data->next->arg);
+			// ft_printerror(": No such file or directory", data->next->arg);
 			exit (0) ;
 		}
 		dup2(input, STDIN_FILENO);
@@ -90,39 +133,21 @@ void	ft_checkinput(t_list *data, int input, int i)
 
 //----------------------------------------------------------------------------//
 
-void	ft_nocmd(t_list *data)
-{
-	if (data->tatto == 5)
-	{
-		if ((open(data->next->arg, O_RDONLY)) < 0)		
-			ft_printerror(": No such file or directory", data->next->arg);
-	}
-	else if (data->tatto == 6 || data->tatto == 8)
-		open(data->next->arg, O_WRONLY | O_TRUNC | O_CREAT, 0644);
-}
-
-//----------------------------------------------------------------------------//
-
 void	ft_redirect(t_list *data, t_store *store, int i)
 {
 	int     output;
 	t_list  *ptr;
 
 	ptr = data;
-	if (!store->count)
-	{
-		ft_nocmd(data);
-		exit (0);
-	}
 	if (!(ptr->tatto == 1))
 	{
 		while (ptr && (ptr->tatto != 1))
 			ptr = ptr->next;
 	}
+	ft_checkinput(data, 0, i);
 	store->path = ft_getpath(ptr->arg);
 	store->arg = ft_arg(ptr);
-	ft_checkinput(data, 0, i);
-	if ((output = ft_getfile(data, store, i)))
+	if ((output = ft_getfile(data, store, i, data)))
 	{
 		dup2(output, STDOUT_FILENO);
 		close(output);

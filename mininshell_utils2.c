@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/02 21:45:39 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/02 22:25:54 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,23 @@ void	ft_printerror(char *str, char *cmd)
 
 /*----------------------------------------------------------------*/
 
-void	ft_check_red(t_list *data, t_store *store)
+
+
+
+
+void	ft_check_red(t_list *data, t_store *store, int num)
 {
 	if (data->tatto == 4)
+	{
+		store->num = 0;
+		store->num2 = 1;
 		store->check = 0;
+	}
 	else if ((data->tatto == 5) && (store->check == 0))
 	{
 		if (!(data->next->next))
 		{
-			if ((open(data->next->arg, O_RDONLY)) < 0)
+			if (((num = open(data->next->arg, O_RDONLY)) < 0))
 			{
 				ft_printerror(": No such file or directory", data->next->arg);
 				store->check = 1;
@@ -37,16 +45,19 @@ void	ft_check_red(t_list *data, t_store *store)
 		}
 		else if (store->check == 0)
 		{
-			if ((open(data->next->arg, O_RDONLY)) < 0)
+			if (((num = open(data->next->arg, O_RDONLY)) < 0))
 			{
 				ft_printerror(": No such file or directory", data->next->arg);
 				store->check = 1;
-				store->count++;
+				if (store->num2 == 1)
+					store->count++;
 			}
 			return ;
 		}
 		else if ((data->next->next->tatto) == 4)
 			store->count++;
+		if (num > 0)
+			store->num = 1; 
 		return ;
 	}
 	if ((data->tatto == 6) || ((data->tatto == 8)))
@@ -54,10 +65,19 @@ void	ft_check_red(t_list *data, t_store *store)
 		if (store->check == 0)
 		{
 			open(data->next->arg, O_WRONLY | O_TRUNC | O_CREAT, 0644);
-			store->count++;
+			if (store->num == 1)
+				store->count++;
 		}
 	}
 }
+
+
+
+
+
+
+
+
 
 /*----------------------------------------------------------------*/
 
@@ -66,6 +86,8 @@ int	ft_check_arg(t_list *data, t_store *store)
 	t_list	*ptr;
 
 	ptr = data;
+	store->num = 0;
+	store->num2 = 0;
 	store->exec = 0;
 	store->count = 0;
 	store->check = 0;
@@ -76,7 +98,7 @@ int	ft_check_arg(t_list *data, t_store *store)
 		if (ptr->tatto == 4 || ptr->tatto == 5 || ptr->tatto == 6 ||
 			ptr->tatto == 7 || ptr->tatto == 8)
 			{
-				ft_check_red(ptr, store);
+				ft_check_red(ptr, store, 0);
 				store->exec = 1;
 			}
 		ptr = ptr->next;

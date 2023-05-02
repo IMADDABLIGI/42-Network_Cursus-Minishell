@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/02 22:25:54 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/02 22:35:33 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,7 @@ void	ft_check_red(t_list *data, t_store *store, int num)
 				if (store->num2 == 1)
 					store->count++;
 			}
-			return ;
 		}
-		else if ((data->next->next->tatto) == 4)
-			store->count++;
 		if (num > 0)
 			store->num = 1; 
 		return ;

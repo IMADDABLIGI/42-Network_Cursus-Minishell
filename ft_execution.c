@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/02 22:03:15 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/02 22:41:28 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ void	ft_exec3(t_list *data, t_store *store, int i, int pid)
 		return ;
 	while ((i <= store->count) || !(store->count))
 	{
+        if (!data)
+            return ;
 		pid = fork();
 		if (pid == 0)
 			ft_redirect(data, store, i);

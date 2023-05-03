@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/02 22:35:33 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/03 11:46:14 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_check_red(t_list *data, t_store *store, int num)
 		store->num2 = 1;
 		store->check = 0;
 	}
-	else if ((data->tatto == 5) && (store->check == 0))
+	if ((data->tatto == 5) && (store->check == 0))
 	{
 		if (!(data->next->next))
 		{
@@ -61,7 +61,10 @@ void	ft_check_red(t_list *data, t_store *store, int num)
 	{
 		if (store->check == 0)
 		{
+			if (data->tatto == 6)
 			open(data->next->arg, O_WRONLY | O_TRUNC | O_CREAT, 0644);
+			else if (data->tatto == 8)
+			open(data->next->arg, O_WRONLY | O_APPEND | O_CREAT, 0644);
 			if (store->num == 1)
 				store->count++;
 		}
@@ -104,25 +107,6 @@ int	ft_check_arg(t_list *data, t_store *store)
 }
 
 /*----------------------------------------------------------------*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

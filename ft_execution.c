@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/02 22:41:28 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/03 16:38:39 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	ft_exec1(t_list *data)
 	pid = fork();
 	if (pid == 0)
 	{
+		if (!data)
+			return ;
 		path = ft_getpath(data->arg);
 		arg = ft_arg(data);
 		execve(path, arg, NULL);
@@ -63,8 +65,8 @@ void	ft_exec3(t_list *data, t_store *store, int i, int pid)
 		return ;
 	while ((i <= store->count) || !(store->count))
 	{
-        if (!data)
-            return ;
+		if (!data)
+			return ;
 		pid = fork();
 		if (pid == 0)
 			ft_redirect(data, store, i);
@@ -90,8 +92,8 @@ void	ft_exec3(t_list *data, t_store *store, int i, int pid)
 
 void	ft_execution(t_list *data, t_store *store)
 {
-    if (!(store->count))
-        return ;
+	if (!(store->count))
+		return ;
 	if (store->exec == 0)
 		ft_exec1(data);
 	else if (store->exec == 1)

@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/03 16:38:39 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/03 20:19:30 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,10 +78,14 @@ void	ft_exec3(t_list *data, t_store *store, int i, int pid)
 			data = data->next;
 			while (data && (data->tatto != 1) && (data->tatto != 5))
 			{
-				if ((data->tatto == 6) || (data->tatto == 8)
-					|| (data->tatto == 5))
+				if ((data->tatto == 6) || (data->tatto == 8))
 					ft_creatfile();
 				data = data->next;
+			}
+			if (data)
+			{
+				if (data->tatto == 5)
+					ft_creatfile();
 			}
 			i++;
 		}

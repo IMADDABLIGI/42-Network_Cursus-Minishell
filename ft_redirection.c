@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 01:36:49 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/03 16:56:55 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/03 21:24:35 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_return_out(int i, int output)
 
 //---------------------------------------------------------------------------//
 
-int	ft_check_end(t_list *data, int output, int i, int count)
+int	ft_check_end(t_list *data, int output, int i)
 {
 	while (data)
 	{
@@ -45,6 +45,7 @@ int	ft_check_end(t_list *data, int output, int i, int count)
 			}
 			if ((data->next->tatto == 6) || (data->next->tatto == 8))
 				return (ft_return_out(i, 0));
+			return (0);
 		}
 		data = data->next;
 	}
@@ -54,10 +55,9 @@ int	ft_check_end(t_list *data, int output, int i, int count)
 //---------------------------------------------------------------------------//
 
 
-
 int	ft_getfile(t_list *data, t_store *store, int i, t_list *ptr)
 {
-	int		output;
+	int	output;
 
 	output = 0;
 	while ((data) && (data->tatto != 4))
@@ -71,9 +71,9 @@ int	ft_getfile(t_list *data, t_store *store, int i, t_list *ptr)
 	if (output != 0)
 		return (output);
 
-	if ((output = ft_check_end(ptr, 0, i, store->count)))
+	if ((output = ft_check_end(ptr, 0, i)))
 		return (output);
-		
+
 	if (i == store->count)
 		return (0);
 	else if (i == 1)
@@ -87,24 +87,6 @@ int	ft_getfile(t_list *data, t_store *store, int i, t_list *ptr)
 
 //---------------------------------------------------------------------------//
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 void	ft_checkinput(t_list *data, int input, int i)
 {
 	if ((i == 1) && (data->tatto != 5))
@@ -112,7 +94,7 @@ void	ft_checkinput(t_list *data, int input, int i)
 	if (data->tatto == 5)
 	{
 		if ((input = open(data->next->arg, O_RDONLY)) < 0)
-            exit (0);
+			exit (0);
 		dup2(input, STDIN_FILENO);
 		close(input);
 		return ;

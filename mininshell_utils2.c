@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/03 16:58:24 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/03 21:41:38 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,6 @@ void	ft_printerror(char *str, char *cmd)
 }
 
 /*----------------------------------------------------------------*/
-
-
-
-
 
 void	ft_check_red(t_list *data, t_store *store, int num)
 {
@@ -71,8 +67,6 @@ void	ft_check_red(t_list *data, t_store *store, int num)
 	}
 }
 
-
-
 /*----------------------------------------------------------------*/
 
 int	ft_check_arg(t_list *data, t_store *store)
@@ -101,7 +95,6 @@ int	ft_check_arg(t_list *data, t_store *store)
 }
 
 /*----------------------------------------------------------------*/
-
 
 char	*ft_getpath(char *cmd)
 {
@@ -157,7 +150,7 @@ char	**ft_arg(t_list *data)
 	}
 	arg = malloc((i + 1) * sizeof(char *));
 	if (!arg)
-		exit (1);
+		ft_abort(1);
 	i = 0;
 	while ((data) && (data->tatto != 4) && (data->tatto != 5) &&
 			(data->tatto != 6) && (data->tatto != 7) && (data->tatto != 8))

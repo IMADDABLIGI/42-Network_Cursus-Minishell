@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/01 18:14:55 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/03 10:13:22 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ t_env	*ft_lstnew_env(char *table);
 char	*ft_strjoin22(char *s1, char s2);
 void ft_abort(int id);
 /*new*/
-void				*ft_memcpy(void *dst, void *src, int n);
+void				*ft_memcpy(void *dst,const  char *src, int n);
 char				**ft_split(char *s, char c);
 char				**ft_split_cmd(char *s, char c, char *cmd);
 char				*ft_strjoin(char *s1, char *s2);

@@ -6,13 +6,13 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:05:47 by idabligi          #+#    #+#             */
-/*   Updated: 2023/04/16 18:35:55 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/03 10:13:08 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	*ft_memcpy(void *dst, void *src, int n)
+void	*ft_memcpy(void *dst, const char *src, int n)
 {
 	int	i;
 

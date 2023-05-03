@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/01 12:25:40 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/02 22:35:33 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,27 +21,113 @@ void	ft_printerror(char *str, char *cmd)
 
 /*----------------------------------------------------------------*/
 
-void	ft_check_arg(t_list *data, t_store *store)
+
+
+
+
+void	ft_check_red(t_list *data, t_store *store, int num)
+{
+	if (data->tatto == 4)
+	{
+		store->num = 0;
+		store->num2 = 1;
+		store->check = 0;
+	}
+	else if ((data->tatto == 5) && (store->check == 0))
+	{
+		if (!(data->next->next))
+		{
+			if (((num = open(data->next->arg, O_RDONLY)) < 0))
+			{
+				ft_printerror(": No such file or directory", data->next->arg);
+				store->check = 1;
+			}
+		}
+		else if (store->check == 0)
+		{
+			if (((num = open(data->next->arg, O_RDONLY)) < 0))
+			{
+				ft_printerror(": No such file or directory", data->next->arg);
+				store->check = 1;
+				if (store->num2 == 1)
+					store->count++;
+			}
+		}
+		if (num > 0)
+			store->num = 1; 
+		return ;
+	}
+	if ((data->tatto == 6) || ((data->tatto == 8)))
+	{
+		if (store->check == 0)
+		{
+			open(data->next->arg, O_WRONLY | O_TRUNC | O_CREAT, 0644);
+			if (store->num == 1)
+				store->count++;
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+/*----------------------------------------------------------------*/
+
+int	ft_check_arg(t_list *data, t_store *store)
 {
 	t_list	*ptr;
 
 	ptr = data;
+	store->num = 0;
+	store->num2 = 0;
 	store->exec = 0;
 	store->count = 0;
+	store->check = 0;
 	while (ptr)
 	{
 		if (ptr->tatto == 1)
 			store->count++;
-		if ((ptr->tatto == 4) && (store->exec == 0))
-			store->exec = 1;
-		if (ptr->tatto == 5 || ptr->tatto == 6 ||
+		if (ptr->tatto == 4 || ptr->tatto == 5 || ptr->tatto == 6 ||
 			ptr->tatto == 7 || ptr->tatto == 8)
-			store->exec = 2;
+			{
+				ft_check_red(ptr, store, 0);
+				store->exec = 1;
+			}
 		ptr = ptr->next;
 	}
+	return (1);
 }
 
 /*----------------------------------------------------------------*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 char	*ft_getpath(char *cmd)
 {
@@ -49,25 +135,25 @@ char	*ft_getpath(char *cmd)
 	char	**p_cmd;
 
 	i = 0;
-	p_cmd = ft_split_cmd(getenv("PATH"), ':', cmd);
 	if (cmd[0] == '/')
 	{
-		if (access((ft_split(cmd, ' ')[0]), X_OK) == 0)
-			return (ft_split(cmd, ' ')[0]);
+		if (access((cmd), X_OK) == 0)
+			return (cmd);
 		ft_printerror(": No such file or directory", cmd);
 	}
-	if (((cmd[0] == '.') && (cmd[1] == '/')) || ((cmd[0] == '.')
+	else if (((cmd[0] == '.') && (cmd[1] == '/')) || ((cmd[0] == '.')
 			&& (cmd[1] == '.')))
 	{
-		if (access((ft_split(cmd, ' ')[0]), X_OK) == 0)
-			return (ft_split(cmd, ' ')[0]);
-		else if (access((ft_split(cmd, ' ')[0]), F_OK) == 0)
+		if (access((cmd), X_OK) == 0)
+			return (cmd);
+		else if (access((cmd), F_OK) == 0)
 			ft_printerror(": Permission denied", cmd);
 		else
 			ft_printerror(": No such file or directory", cmd);
 	}
 	else
 	{
+		p_cmd = ft_split_cmd(getenv("PATH"), ':', cmd);
 		while (p_cmd[i])
 		{
 			if (access(p_cmd[i], X_OK) == 0)
@@ -76,7 +162,7 @@ char	*ft_getpath(char *cmd)
 		}
 		ft_printerror(": command not found", cmd);
 	}
-	return (NULL);
+	exit (1);
 }
 
 /*----------------------------------------------------------------*/
@@ -109,18 +195,3 @@ char	**ft_arg(t_list *data)
 	return (arg);
 }
 
-//---------------------------------------------------------------------------//
-
-int	ft_check_cmd(t_list *data)
-{
-	while (data && (data->tatto != 4))
-	{
-		if (data->tatto == 1)
-		{
-			if (!ft_getpath((data->arg)))
-				return (0);
-		}
-		data = data->next;
-	}
-	return (1);
-}

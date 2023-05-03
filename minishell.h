@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/03 10:13:22 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/03 11:46:45 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,13 @@ typedef struct t_shell
 
 typedef struct t_data
 {
+	int				num;
+	int				num2;
 	int				exec;
 	int				count;
+	int				check;
+	char			*path;
+	char			**arg;
 }					t_store;
 
 typedef struct env
@@ -93,7 +98,8 @@ void				ft_pipemidllecmd(t_list *data, int i);
 void				ft_pipelastcmd(t_list *data, int i);
 void				ft_printerror(char *str, char *cmd);
 void				ft_redirect(t_list *data, t_store *store, int i);
-void				ft_check_arg(t_list *data, t_store *store);
-int					ft_check_cmd(t_list *data);
+int					ft_check_arg(t_list *data, t_store *store);
+int					ft_checkpr(t_list *data);
+void				ft_nocmd(t_list *data);
 
 #endif

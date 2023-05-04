@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/04 14:03:57 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/04 16:16:24 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,9 @@ int	ft_creatfile(void)
 
 //---------------------------------------------------------------------------//
 
-void	ft_exec1(t_list *data)
+void	ft_exec1(t_list *data, t_store *store)
 {
 	int pid;
-	char *path;
-	char **arg;
 
 	pid = fork();
 	if (pid == 0)
@@ -100,7 +98,7 @@ void	ft_execution(t_list *data, t_store *store)
 	if (!(store->count))
 		return ;
 	if (store->exec == 0)
-		ft_exec1(data);
+		ft_exec1(data, store);
 	else if (store->exec == 1)
 		ft_exec3(data, store, 1, 1);
 }

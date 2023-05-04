@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 01:36:49 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/04 16:09:55 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/04 16:16:19 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ void	ft_checkinput(t_list *data, int input, int i)
 		return ;
 	if (data->tatto == 5)
 	{
+        if (data->next->next && (data->next->next->tatto == 4))
+            exit (0);
 		if ((input = open(data->next->arg, O_RDONLY)) < 0)
 			exit (0);
 		dup2(input, STDIN_FILENO);

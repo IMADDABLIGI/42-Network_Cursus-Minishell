@@ -6,7 +6,11 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/05/04 20:33:34 by idabligi         ###   ########.fr       */
+=======
+/*   Updated: 2023/05/04 19:43:38 by hznagui          ###   ########.fr       */
+>>>>>>> 06e1c2f861423e27fd2500bdc04e02c10b91408e
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +37,7 @@ int	ft_creatfile(void)
 
 //---------------------------------------------------------------------------//
 
-void	ft_exec1(t_list *data, t_store *store)
+void	ft_exec1(t_list *data, t_store *store,t_data *a)
 {
 	int pid;
 
@@ -52,7 +56,7 @@ void	ft_exec1(t_list *data, t_store *store)
 		}
 		else 
 		{
-			ft_execute_builtins(data);
+			ft_execute_builtins(data,a);
 			exit(0);
 		}
 	}
@@ -65,7 +69,7 @@ void	ft_exec1(t_list *data, t_store *store)
 
 //---------------------------------------------------------------------------//
 
-void	ft_exec3(t_list *data, t_store *store, int i, int pid)
+void	ft_exec3(t_list *data, t_store *store, int i, int pid,t_data *a)
 {
 	if (!ft_creatfile())
 		return ;
@@ -75,7 +79,7 @@ void	ft_exec3(t_list *data, t_store *store, int i, int pid)
 			return ;
 		pid = fork();
 		if (pid == 0)
-			ft_redirect(data, store, i);
+			ft_redirect(data, store, i,a);
 		else
 		{
 			waitpid(pid, NULL, 0);
@@ -100,12 +104,12 @@ void	ft_exec3(t_list *data, t_store *store, int i, int pid)
 
 //---------------------------------------------------------------------------//
 
-void	ft_execution(t_list *data, t_store *store)
+void	ft_execution(t_list *data, t_store *store,t_data *a)
 {
 	if (!(store->count))
 		return ;
 	if (store->exec == 0)
-		ft_exec1(data, store);
+		ft_exec1(data, store,a);
 	else if (store->exec == 1)
-		ft_exec3(data, store, 1, 1);
+		ft_exec3(data, store, 1, 1,a);
 }

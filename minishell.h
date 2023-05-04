@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/04 20:33:16 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/04 20:36:59 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ typedef struct data
 	int				lock1;
 	size_t			k;
 	size_t			length;
-	 size_t			i;
-	  size_t x;
+	size_t			i;
+	size_t x;
 	t_list			*p;
 	t_list			*tmp1;
 	t_env *e;
@@ -87,20 +87,20 @@ t_env	*ft_lstnew_env(char *table);
 char	*ft_strjoin22(char *s1, char s2);
 void ft_abort(int id);
 int ft_check_builtins(t_list *data);
-void ft_execute_builtins(t_list *data);
+void ft_execute_builtins(t_list *data,t_data *a);
 /*new*/
 void				*ft_memcpy(void *dst,const  char *src, int n);
 char				**ft_split(char *s, char c);
 char				**ft_split_cmd(char *s, char c, char *cmd);
 char				*ft_strjoin(char *s1, char *s2);
 char				*ft_getpath(char *cmd);
-void				ft_execution(t_list *data, t_store *store);
+void				ft_execution(t_list *data, t_store *store,t_data *a);
 char				**ft_arg(t_list *data);
 void				ft_pipefirstcmd(t_list *data);
 void				ft_pipemidllecmd(t_list *data, int i);
 void				ft_pipelastcmd(t_list *data, int i);
 void				ft_printerror(char *str, char *cmd);
-void				ft_redirect(t_list *data, t_store *store, int i);
+void				ft_redirect(t_list *data, t_store *store, int i,t_data *a);
 void				ft_check_arg(t_list *data, t_store *store);
 int					ft_checkpr(t_list *data);
 void				ft_nocmd(t_list *data);

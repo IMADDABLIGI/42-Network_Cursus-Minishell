@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 01:36:49 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/04 19:48:21 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/04 20:37:11 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ void	ft_checkinput(t_list *data, int input, int i)
 
 //----------------------------------------------------------------------------//
 
-void	ft_redirect(t_list *data, t_store *store, int i)
+void	ft_redirect(t_list *data, t_store *store, int i,t_data *a)
 {
 	int     output;
 	t_list  *ptr;
@@ -140,7 +140,7 @@ void	ft_redirect(t_list *data, t_store *store, int i)
 	}
 	if (ft_check_builtins(ptr) == 1)
 	{
-		ft_execute_builtins(ptr);
+		ft_execute_builtins(ptr,a);
 		exit(0);
 	}
 	execve(store->path, store->arg, NULL);

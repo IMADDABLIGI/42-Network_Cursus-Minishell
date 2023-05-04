@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mininshell_utils2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/04 16:16:34 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/04 18:56:54 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,17 @@ void	ft_count(t_list *data, t_store *store)
 	}
 }
 
+/*----------------------------------------------------------------*/
+
+void	ft_check_red1(t_list *data, t_store *store)
+{
+	data = data->next;
+	if (data->next->next)
+	{
+		if (data->next->next->tatto == 4)
+			store->count ++;
+	}
+}
 
 /*----------------------------------------------------------------*/
 
@@ -44,6 +55,8 @@ void	ft_check_red(t_list *data, t_store *store, int num)
 {
 	if (data->tatto == 4)
 	{
+		if (data->next->tatto == 5)
+			ft_check_red1(data, store);
 		store->red = 0;
 		store->num = 0;
 		store->num2 = 1;
@@ -53,15 +66,14 @@ void	ft_check_red(t_list *data, t_store *store, int num)
 		store->red++;
 	if ((data->tatto == 5) && (store->red >= 3))
 		store->count++;
+
+	
 	if ((data->tatto == 5) && (store->check == 0))
 	{
 		if (!(data->next->next))
 		{
 			if (((num = open(data->next->arg, O_RDONLY)) < 0))
-			{
 				ft_printerror(": No such file or directory", data->next->arg);
-				store->check = 1;
-			}
 		}
 		else if (store->check == 0)
 		{
@@ -69,7 +81,7 @@ void	ft_check_red(t_list *data, t_store *store, int num)
 			{
 				ft_printerror(": No such file or directory", data->next->arg);
 				store->check = 1;
-				if (store->num2 == 1)
+				if (data->next->next && (data->next->next->tatto != 1) && store->num2 && ((data->next->next->tatto != 4)))
 					store->count++;
 			}
 		}
@@ -77,6 +89,9 @@ void	ft_check_red(t_list *data, t_store *store, int num)
 			store->num = 1;
 		return ;
 	}
+
+
+	
 	else if ((data->tatto == 6) || ((data->tatto == 8)))
 	{
 		if (store->check == 0)
@@ -86,6 +101,8 @@ void	ft_check_red(t_list *data, t_store *store, int num)
 			else if (data->tatto == 8)
 			open(data->next->arg, O_WRONLY | O_APPEND | O_CREAT, 0644);
 			if (store->num == 1)
+				store->count++;
+			else if ((store->num2 == 0) && ((data->next->next) && (data->next->next->tatto == 4)))
 				store->count++;
 		}
 	}

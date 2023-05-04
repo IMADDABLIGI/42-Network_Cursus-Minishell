@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execution.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/04 16:16:24 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/04 16:37:38 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,9 @@ void	ft_exec1(t_list *data, t_store *store)
 	{
 		if (!data)
 			return ;
-		path = ft_getpath(data->arg);
-		arg = ft_arg(data);
-		if (execve(path, arg, NULL)== -1)
-			printf("waaa nod\n");
+		store->path = ft_getpath(data->arg);
+		store->arg = ft_arg(data);
+        execve(store->path, store->arg, NULL);
 		perror("execve");
 		exit(EXIT_FAILURE);
 	}

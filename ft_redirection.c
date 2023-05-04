@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_redirection.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 01:36:49 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/04 16:16:19 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/04 16:37:55 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ void	ft_checkinput(t_list *data, int input, int i)
 		return ;
 	if (data->tatto == 5)
 	{
-        if (data->next->next && (data->next->next->tatto == 4))
-            exit (0);
+		if (data->next->next && (data->next->next->tatto == 4))
+			exit (0);
 		if ((input = open(data->next->arg, O_RDONLY)) < 0)
 			exit (0);
 		dup2(input, STDIN_FILENO);
@@ -133,18 +133,17 @@ void	ft_redirect(t_list *data, t_store *store, int i)
 		store->path = ft_getpath(ptr->arg);
 		store->arg = ft_arg(ptr);
 	}
-	if ((output = ft_getfile(data, store, i, data))) //find output
+	if ((output = ft_getfile(data, store, i, data)))
 	{
 		dup2(output, STDOUT_FILENO);
 		close(output);
 	}
 	if (ft_check_builtins(ptr) == 1)
-		{
-			ft_execute_builtins(ptr);
-			exit(0);
-		}
-	if  (execve(store->path, store->arg, NULL)== -1)
-		printf("waaa nod\n");
+	{
+		ft_execute_builtins(ptr);
+		exit(0);
+	}
+	execve(store->path, store->arg, NULL);
 	perror("execve");
 	exit(EXIT_FAILURE);
 }

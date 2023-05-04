@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/04 16:10:44 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/04 17:09:05 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void ft_echo(t_list *data)
 	{
 		printf("%s",k->arg);
 		k = k->next;
+		if (k && k->tatto == 2)
+			printf(" ");
 	}
 	if (!a)
 		printf("\n");

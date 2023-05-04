@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 01:36:49 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/04 18:28:54 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/04 19:43:50 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,11 @@ int	ft_getfile(t_list *data, t_store *store, int i, t_list *ptr)
 	int	output;
 
 	output = 0;
+	// if (data->tatto == 5)
+	// {
+	// 	if (data->next->next && (data->next->next->tatto == 4))
+	// 		return (ft_return_out(i, 0));
+	// }
 	while ((data) && (data->tatto != 4))
 	{
 		if (data->tatto == 6)

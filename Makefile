@@ -6,13 +6,14 @@
 #    By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/16 18:27:52 by hznagui           #+#    #+#              #
-#    Updated: 2023/05/04 10:14:21 by idabligi         ###   ########.fr        #
+#    Updated: 2023/05/04 10:17:17 by idabligi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-FLAGS = -Wall -Wextra -Werror 
+FLAGS = -Wall -Wextra -Werror
+
 SRC_FILE = 	main.c \
 			tolls1.c\
 			tolls2.c\
@@ -27,7 +28,7 @@ COLOUR_GREEN=\033[1;32m
 COLOUR_RED=\033[1;31m
 
 COLOUR_RESET= \033[1;0m
-	
+
 
 OBJ_FILE = $(SRC_FILE:.c=.o)
 

@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/04 10:13:00 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/04 11:47:24 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,39 @@ void	ft_printerror(char *str, char *cmd)
 
 /*----------------------------------------------------------------*/
 
+void	ft_count(t_list *data, t_store *store)
+{
+	while (data) 
+	{
+		if (data->tatto == 4)
+			return ;
+		if (((data->tatto == 6) || (data->tatto == 8)) && (store->red == 2))
+			store->count++;
+		else if (data->tatto == 5)
+		{
+			store->count++;
+		}
+		data = data->next;
+	}
+}
+
+
+/*----------------------------------------------------------------*/
+
 void	ft_check_red(t_list *data, t_store *store, int num)
 {
 	if (data->tatto == 4)
 	{
+		store->red = 0;
 		store->num = 0;
 		store->num2 = 1;
 		store->check = 0;
 	}
-	else if ((data->tatto == 5) && (store->check == 0))
+	if (data->tatto == 5)
+		store->red++;
+	if ((data->tatto == 5) && (store->red >= 3))
+		store->count++;
+	if ((data->tatto == 5) && (store->check == 0))
 	{
 		if (!(data->next->next))
 		{
@@ -50,7 +74,7 @@ void	ft_check_red(t_list *data, t_store *store, int num)
 			}
 		}
 		if (num > 0)
-			store->num = 1; 
+			store->num = 1;
 		return ;
 	}
 	else if ((data->tatto == 6) || ((data->tatto == 8)))
@@ -98,6 +122,7 @@ void	ft_check_arg(t_list *data, t_store *store)
 	t_list	*ptr;
 
 	ptr = data;
+	store->red = 0;
 	store->num = 0;
 	store->num2 = 0;
 	store->exec = 0;
@@ -118,12 +143,6 @@ void	ft_check_arg(t_list *data, t_store *store)
 	}
 	return ;
 }
-
-
-
-
-
-
 
 /*----------------------------------------------------------------*/
 

@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/04 10:00:14 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/04 11:08:10 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct t_shell
 
 typedef struct t_data
 {
+	int				red;
 	int				num;
 	int				num2;
 	int				exec;

@@ -1,5 +1,6 @@
 Makefile
-a.out
+a
+a.outt
 ft_execution.c
 ft_redirection.c
 ft_split_cmd.c

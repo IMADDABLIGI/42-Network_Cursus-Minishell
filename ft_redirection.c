@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 01:36:49 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/04 10:15:02 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/04 10:17:27 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,10 @@ int	ft_getfile(t_list *data, t_store *store, int i, t_list *ptr)
 	}
 	if (output != 0)
 		return (output);
+
 	if ((output = ft_check_end(ptr, 0, i)))
 		return (output);
+
 	if (i == store->count)
 		return (0);
 	else if (i == 1)

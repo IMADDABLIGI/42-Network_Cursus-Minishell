@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/04 20:59:15 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/04 21:01:50 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ft_creatfile(void)
 
 //---------------------------------------------------------------------------//
 
-void	ft_exec1(t_list *data, t_store *store,t_data *a)
+void	ft_exec1(t_list *data, t_store *store, t_data *a)
 {
 	int pid;
 

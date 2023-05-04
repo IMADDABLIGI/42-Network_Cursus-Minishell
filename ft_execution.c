@@ -6,11 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/05/04 20:33:34 by idabligi         ###   ########.fr       */
-=======
-/*   Updated: 2023/05/04 19:43:38 by hznagui          ###   ########.fr       */
->>>>>>> 06e1c2f861423e27fd2500bdc04e02c10b91408e
+/*   Updated: 2023/05/04 20:54:37 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +33,7 @@ int	ft_creatfile(void)
 
 //---------------------------------------------------------------------------//
 
-void	ft_exec1(t_list *data, t_store *store,t_data *a)
+void	ft_exec1(t_list *data, t_store *store, t_data *a)
 {
 	int pid;
 

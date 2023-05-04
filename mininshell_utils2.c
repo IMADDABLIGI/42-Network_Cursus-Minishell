@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/04 20:29:45 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/04 20:40:02 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	ft_check_red(t_list *data, t_store *store, int num)
 		{
 			if (((num = open(data->next->arg, O_RDONLY)) < 0))
 				ft_printerror(": No such file or directory", data->next->arg);
-            store->num = 1;
+            // store->num = 1;
 		}
 		else if (store->check == 0)
 		{

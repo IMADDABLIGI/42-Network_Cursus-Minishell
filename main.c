@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/04 18:38:20 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/04 20:59:02 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void ft_env(t_data *a,t_list *data)
 	t_list *k;
 	k=data;
 	k=k->next;
-	if (  k && k->tatto == 2)
+	if ( k && k->tatto == 2)
 		printf("cd: %s :No such file or directory\n",k->arg);
 	else 
 	{	
@@ -438,13 +438,14 @@ int main(int argc,char **argv,char **env){
 	if (argc != 1)
 		ft_abort(2);
 	ft_create_env(&a,env);
-	
-	
+	a.env22=env;
+	// int i=0;
+	// =env;
 	// a.tmp=a.e;
-	// while (a.tmp)
+	// while (env1[i])
 	// {
-	//     printf("%s\n",a.tmp->arg);
-	//     a.tmp=a.tmp->next;
+	//     printf("%s\n",env1[i]);
+	//     i++;
 	// }
 	
 

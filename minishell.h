@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/04 18:29:59 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/04 20:59:37 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,12 +51,12 @@ typedef struct env
 
 typedef struct data
 {
+	char **env22;
 	char			*input;
 	char *strenv;
 	char *ret;
 	char *strtmp;
 	char			**tab;
-	char			**env1;
 	char			t;
 	int				z;
 	int				lock;

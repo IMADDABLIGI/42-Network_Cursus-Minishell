@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 01:36:49 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/04 19:43:50 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/04 20:59:20 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,7 +148,7 @@ void	ft_redirect(t_list *data, t_store *store, int i,t_data *a)
 		ft_execute_builtins(ptr,a);
 		exit(0);
 	}
-	execve(store->path, store->arg, NULL);
+	execve(store->path, store->arg, a->env22);
 	perror("execve");
 	exit(EXIT_FAILURE);
 }

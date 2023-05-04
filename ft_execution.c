@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/04 19:43:38 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/04 20:59:15 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_exec1(t_list *data, t_store *store,t_data *a)
 		{
 		store->path = ft_getpath(data->arg);
 		store->arg = ft_arg(data);
-        execve(store->path, store->arg, NULL);
+        execve(store->path, store->arg, a->env22);
 		perror("execve");
 		exit(EXIT_FAILURE);
 		}

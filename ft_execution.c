@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execution.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/04 16:37:38 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/04 17:08:38 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,19 @@ void	ft_exec1(t_list *data, t_store *store)
 	{
 		if (!data)
 			return ;
+		if (!ft_check_builtins(data))
+		{
 		store->path = ft_getpath(data->arg);
 		store->arg = ft_arg(data);
         execve(store->path, store->arg, NULL);
 		perror("execve");
 		exit(EXIT_FAILURE);
+		}
+		else 
+		{
+			ft_execute_builtins(data);
+			exit(0);
+		}
 	}
 	else
 	{

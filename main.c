@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/01 20:22:15 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/04 16:10:44 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,38 @@ int	ft_strcmp(char *s1,char *s2)
 			i++;
 	}
 	return (0);
+}
+void ft_echo(t_list *data)
+{
+	t_list *k;
+	int a;
+	a=0;
+	k=data;
+	k=k->next;
+	if (k && !ft_strcmp(k->arg,"-n"))
+	{
+		k=k->next;
+		a=1;
+	}
+	while (k && k->tatto == 2)
+	{
+		printf("%s",k->arg);
+		k = k->next;
+	}
+	if (!a)
+		printf("\n");
+}
+
+void ft_execute_builtins(t_list *data)
+{
+	if (!ft_strcmp(data->arg,"echo"))
+		ft_echo(data);
+}
+int ft_check_builtins(t_list *data)
+{
+	if (!ft_strcmp(data->arg,"echo") || !ft_strcmp(data->arg,"cd") || !ft_strcmp(data->arg,"pwd")|| !ft_strcmp(data->arg,"export") || !ft_strcmp(data->arg,"unset")  || !ft_strcmp(data->arg,"env") || !ft_strcmp(data->arg,"exit"))
+		return(1);
+	return(0);
 }
 int parse_check(t_data *a)
 {
@@ -280,8 +312,8 @@ void create_linked(t_data *a)
 		return;
 	tato(a);
 	a->tmp1=a->p;
-	if (ft_check_arg(a->tmp1, &store) == 1)
-		ft_execution(a->tmp1, &store);
+    ft_check_arg(a->tmp1, &store);
+	ft_execution(a->tmp1, &store);
 	// o = a->p;
 	// while (o)
 	// {

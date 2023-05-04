@@ -6,21 +6,19 @@
 #    By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/16 18:27:52 by hznagui           #+#    #+#              #
-#    Updated: 2023/05/03 21:14:12 by hznagui          ###   ########.fr        #
+#    Updated: 2023/05/04 13:43:47 by hznagui          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-FLAGS = -Wall -Wextra -Werror 
+FLAGS = -Wall -Wextra -Werror
 
 SRC_FILE = 	main.c \
 			tolls1.c\
 			tolls2.c\
-			ft_pipe.c\
 			ft_execution.c\
 			ft_redirection.c\
-			ft_split.c\
 			ft_split_cmd.c\
 			mininshell_utils.c\
 			mininshell_utils2.c\
@@ -30,7 +28,7 @@ COLOUR_GREEN=\033[1;32m
 COLOUR_RED=\033[1;31m
 
 COLOUR_RESET= \033[1;0m
-	
+
 
 OBJ_FILE = $(SRC_FILE:.c=.o)
 

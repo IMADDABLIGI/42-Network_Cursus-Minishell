@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_redirection.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 01:36:49 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/02 22:23:07 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/04 16:09:55 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	ft_return_out(int i, int output)
 
 //---------------------------------------------------------------------------//
 
-int	ft_check_end(t_list *data, int output, int i, int count)
+int	ft_check_end(t_list *data, int output, int i)
 {
 	while (data)
 	{
@@ -45,6 +45,7 @@ int	ft_check_end(t_list *data, int output, int i, int count)
 			}
 			if ((data->next->tatto == 6) || (data->next->tatto == 8))
 				return (ft_return_out(i, 0));
+			return (0);
 		}
 		data = data->next;
 	}
@@ -54,10 +55,9 @@ int	ft_check_end(t_list *data, int output, int i, int count)
 //---------------------------------------------------------------------------//
 
 
-
 int	ft_getfile(t_list *data, t_store *store, int i, t_list *ptr)
 {
-	int		output;
+	int	output;
 
 	output = 0;
 	while ((data) && (data->tatto != 4))
@@ -71,9 +71,9 @@ int	ft_getfile(t_list *data, t_store *store, int i, t_list *ptr)
 	if (output != 0)
 		return (output);
 
-	if ((output = ft_check_end(ptr, 0, i, store->count)))
+	if ((output = ft_check_end(ptr, 0, i)))
 		return (output);
-		
+
 	if (i == store->count)
 		return (0);
 	else if (i == 1)
@@ -87,24 +87,6 @@ int	ft_getfile(t_list *data, t_store *store, int i, t_list *ptr)
 
 //---------------------------------------------------------------------------//
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 void	ft_checkinput(t_list *data, int input, int i)
 {
 	if ((i == 1) && (data->tatto != 5))
@@ -112,10 +94,7 @@ void	ft_checkinput(t_list *data, int input, int i)
 	if (data->tatto == 5)
 	{
 		if ((input = open(data->next->arg, O_RDONLY)) < 0)
-		{
-			// ft_printerror(": No such file or directory", data->next->arg);
-			exit (0) ;
-		}
+			exit (0);
 		dup2(input, STDIN_FILENO);
 		close(input);
 		return ;
@@ -144,15 +123,26 @@ void	ft_redirect(t_list *data, t_store *store, int i)
 		while (ptr && (ptr->tatto != 1))
 			ptr = ptr->next;
 	}
+	
 	ft_checkinput(data, 0, i);
-	store->path = ft_getpath(ptr->arg);
-	store->arg = ft_arg(ptr);
-	if ((output = ft_getfile(data, store, i, data)))
+	
+	if (ft_check_builtins(ptr) == 0)
+	{
+		store->path = ft_getpath(ptr->arg);
+		store->arg = ft_arg(ptr);
+	}
+	if ((output = ft_getfile(data, store, i, data))) //find output
 	{
 		dup2(output, STDOUT_FILENO);
 		close(output);
 	}
-	execve(store->path, store->arg, NULL);
+	if (ft_check_builtins(ptr) == 1)
+		{
+			ft_execute_builtins(ptr);
+			exit(0);
+		}
+	if  (execve(store->path, store->arg, NULL)== -1)
+		printf("waaa nod\n");
 	perror("execve");
 	exit(EXIT_FAILURE);
 }

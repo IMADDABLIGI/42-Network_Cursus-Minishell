@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execution.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/02 22:41:28 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/04 14:03:57 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,12 @@ void	ft_exec1(t_list *data)
 	pid = fork();
 	if (pid == 0)
 	{
+		if (!data)
+			return ;
 		path = ft_getpath(data->arg);
 		arg = ft_arg(data);
-		execve(path, arg, NULL);
+		if (execve(path, arg, NULL)== -1)
+			printf("waaa nod\n");
 		perror("execve");
 		exit(EXIT_FAILURE);
 	}
@@ -63,8 +66,8 @@ void	ft_exec3(t_list *data, t_store *store, int i, int pid)
 		return ;
 	while ((i <= store->count) || !(store->count))
 	{
-        if (!data)
-            return ;
+		if (!data)
+			return ;
 		pid = fork();
 		if (pid == 0)
 			ft_redirect(data, store, i);
@@ -76,10 +79,14 @@ void	ft_exec3(t_list *data, t_store *store, int i, int pid)
 			data = data->next;
 			while (data && (data->tatto != 1) && (data->tatto != 5))
 			{
-				if ((data->tatto == 6) || (data->tatto == 8)
-					|| (data->tatto == 5))
+				if ((data->tatto == 6) || (data->tatto == 8))
 					ft_creatfile();
 				data = data->next;
+			}
+			if (data)
+			{
+				if (data->tatto == 5)
+					ft_creatfile();
 			}
 			i++;
 		}
@@ -90,8 +97,8 @@ void	ft_exec3(t_list *data, t_store *store, int i, int pid)
 
 void	ft_execution(t_list *data, t_store *store)
 {
-    if (!(store->count))
-        return ;
+	if (!(store->count))
+		return ;
 	if (store->exec == 0)
 		ft_exec1(data);
 	else if (store->exec == 1)

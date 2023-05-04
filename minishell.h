@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/03 11:46:45 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/04 16:03:01 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct t_shell
 
 typedef struct t_data
 {
+	int				red;
 	int				num;
 	int				num2;
 	int				exec;
@@ -85,6 +86,8 @@ void	ft_lstadd_back_env(t_env **lst, t_env *new);
 t_env	*ft_lstnew_env(char *table);
 char	*ft_strjoin22(char *s1, char s2);
 void ft_abort(int id);
+int ft_check_builtins(t_list *data);
+void ft_execute_builtins(t_list *data);
 /*new*/
 void				*ft_memcpy(void *dst,const  char *src, int n);
 char				**ft_split(char *s, char c);
@@ -98,7 +101,7 @@ void				ft_pipemidllecmd(t_list *data, int i);
 void				ft_pipelastcmd(t_list *data, int i);
 void				ft_printerror(char *str, char *cmd);
 void				ft_redirect(t_list *data, t_store *store, int i);
-int					ft_check_arg(t_list *data, t_store *store);
+void				ft_check_arg(t_list *data, t_store *store);
 int					ft_checkpr(t_list *data);
 void				ft_nocmd(t_list *data);
 

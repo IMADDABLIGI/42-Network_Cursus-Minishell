@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mininshell_utils2.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/03 11:46:14 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/04 13:57:58 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,18 +21,38 @@ void	ft_printerror(char *str, char *cmd)
 
 /*----------------------------------------------------------------*/
 
+void	ft_count(t_list *data, t_store *store)
+{
+	while (data) 
+	{
+		if (data->tatto == 4)
+			return ;
+		if (((data->tatto == 6) || (data->tatto == 8)) && (store->red == 2))
+			store->count++;
+		else if (data->tatto == 5)
+		{
+			store->count++;
+		}
+		data = data->next;
+	}
+}
 
 
-
+/*----------------------------------------------------------------*/
 
 void	ft_check_red(t_list *data, t_store *store, int num)
 {
 	if (data->tatto == 4)
 	{
+		store->red = 0;
 		store->num = 0;
 		store->num2 = 1;
 		store->check = 0;
 	}
+	if (data->tatto == 5)
+		store->red++;
+	if ((data->tatto == 5) && (store->red >= 3))
+		store->count++;
 	if ((data->tatto == 5) && (store->check == 0))
 	{
 		if (!(data->next->next))
@@ -54,10 +74,10 @@ void	ft_check_red(t_list *data, t_store *store, int num)
 			}
 		}
 		if (num > 0)
-			store->num = 1; 
+			store->num = 1;
 		return ;
 	}
-	if ((data->tatto == 6) || ((data->tatto == 8)))
+	else if ((data->tatto == 6) || ((data->tatto == 8)))
 	{
 		if (store->check == 0)
 		{
@@ -71,26 +91,44 @@ void	ft_check_red(t_list *data, t_store *store, int num)
 	}
 }
 
+/*----------------------------------------------------------------*/
 
-
-
-
-
-
-
+void	ft_check_fred(t_list *ptr, t_store *store)
+{
+	while (ptr)
+	{
+		if (ptr->tatto == 4)
+			return ;
+		if (ptr->tatto == 5)
+		{
+			if (ptr->next->next)
+			{
+				if (ptr->next->next->tatto == 4)
+				{
+					store->count++;
+					return ;
+				}
+			}
+		}
+		ptr = ptr->next;
+	}
+	return ;
+}
 
 /*----------------------------------------------------------------*/
 
-int	ft_check_arg(t_list *data, t_store *store)
+void	ft_check_arg(t_list *data, t_store *store)
 {
 	t_list	*ptr;
 
 	ptr = data;
+	store->red = 0;
 	store->num = 0;
 	store->num2 = 0;
 	store->exec = 0;
 	store->count = 0;
 	store->check = 0;
+	ft_check_fred(ptr, store);
 	while (ptr)
 	{
 		if (ptr->tatto == 1)
@@ -103,15 +141,10 @@ int	ft_check_arg(t_list *data, t_store *store)
 			}
 		ptr = ptr->next;
 	}
-	return (1);
+	return ;
 }
 
 /*----------------------------------------------------------------*/
-
-
-
-
-
 
 char	*ft_getpath(char *cmd)
 {
@@ -167,7 +200,7 @@ char	**ft_arg(t_list *data)
 	}
 	arg = malloc((i + 1) * sizeof(char *));
 	if (!arg)
-		exit (1);
+		ft_abort(1);
 	i = 0;
 	while ((data) && (data->tatto != 4) && (data->tatto != 5) &&
 			(data->tatto != 6) && (data->tatto != 7) && (data->tatto != 8))

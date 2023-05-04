@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/04 17:09:05 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/04 18:38:20 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,42 @@ void ft_echo(t_list *data)
 	if (!a)
 		printf("\n");
 }
-
-void ft_execute_builtins(t_list *data)
+// void ft_cd(t_list *data)
+// {
+// 	t_list *k;
+// 	printf("salam\n");
+// 	k=data;
+// 	k = k->next;
+// 	if (chdir(k->arg))
+// 	{
+// 		printf("cd: %s :No such file or directory\n",k->arg);
+// 	}
+// }
+void ft_env(t_data *a,t_list *data)
+{
+	t_list *k;
+	k=data;
+	k=k->next;
+	if (  k && k->tatto == 2)
+		printf("cd: %s :No such file or directory\n",k->arg);
+	else 
+	{	
+		a->tmp = a->e;
+		while (a->tmp)
+		{
+	 	   printf("%s\n",a->tmp->arg);
+		    a->tmp=a->tmp->next;
+		}
+	}
+}
+void ft_execute_builtins(t_list *data,t_data *a)
 {
 	if (!ft_strcmp(data->arg,"echo"))
 		ft_echo(data);
+	// else if (!ft_strcmp(data->arg,"cd"))
+	// 	ft_cd(data);
+	else if (!ft_strcmp(data->arg,"env"))
+		ft_env(a,data);
 }
 int ft_check_builtins(t_list *data)
 {
@@ -180,7 +211,6 @@ size_t ft_expand(t_data *a)
 	char *tmp;
 	while (a->tab[a->i][a->x] && (ft_isalnum(a->tab[a->i][a->x]) || a->tab[a->i][a->x] == '_'))
 	{
-	// printf("%s\n",a->strenv);
 		a->strenv=ft_strjoin22(a->strenv,a->tab[a->i][a->x]);
 		a->x++;
 	}
@@ -212,7 +242,6 @@ void ft_change(t_data *a)
 {
 	a->x++;
 	a->strenv = NULL;
-	// printf("salam\n");
 	
 	while (a->tab[a->i][a->x] && (ft_isalnum(a->tab[a->i][a->x]) || a->tab[a->i][a->x] == '_'))
 	{
@@ -314,8 +343,10 @@ void create_linked(t_data *a)
 		return;
 	tato(a);
 	a->tmp1=a->p;
+
     ft_check_arg(a->tmp1, &store);
-	ft_execution(a->tmp1, &store);
+	ft_execution(a->tmp1, &store,a);
+	
 	// o = a->p;
 	// while (o)
 	// {
@@ -323,6 +354,19 @@ void create_linked(t_data *a)
 	//    o = o->next;
 	// }
 	// printf("\n");
+}
+
+
+int ft_nothing(t_data *a)
+{
+	a->i=0;
+	while (a->input[a->i])
+	{
+		if (a->input[a->i] != 32)
+			return (0);
+		a->i++;
+	}
+	return(1);
 }
 
 int ft_separit(t_data *a)
@@ -410,7 +454,8 @@ int main(int argc,char **argv,char **env){
 		if (*(a.input))
 		{
 			add_history(a.input);
-			open_quote(&a);
+			if (!ft_nothing(&a))
+				open_quote(&a);
 		}
 		free(a.input);
 	}

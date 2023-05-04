@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/04 15:17:14 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/04 15:58:06 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,18 @@ int	ft_creatfile(void)
 
 //---------------------------------------------------------------------------//
 
-void	ft_exec1(t_list *data)
+void	ft_exec1(t_list *data, t_store *store)
 {
 	int pid;
-	char *path;
-	char **arg;
 
 	pid = fork();
 	if (pid == 0)
 	{
 		if (!data)
 			return ;
-		path = ft_getpath(data->arg);
-		arg = ft_arg(data);
-		execve(path, arg, NULL);
+		store->path = ft_getpath(data->arg);
+		store->arg = ft_arg(data);
+		execve(store->path, store->arg, NULL);
 		perror("execve");
 		exit(EXIT_FAILURE);
 	}
@@ -99,7 +97,7 @@ void	ft_execution(t_list *data, t_store *store)
 	if (!(store->count))
 		return ;
 	if (store->exec == 0)
-		ft_exec1(data);
+		ft_exec1(data, store);
 	else if (store->exec == 1)
 		ft_exec3(data, store, 1, 1);
 }

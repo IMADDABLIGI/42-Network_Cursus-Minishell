@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 01:36:49 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/04 10:17:27 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/04 14:15:08 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,7 +121,11 @@ void	ft_redirect(t_list *data, t_store *store, int i)
 	if (!(ptr->tatto == 1))
 	{
 		while (ptr && (ptr->tatto != 1))
+        {
+            if (ptr->tatto == 4)
+                exit (0);
 			ptr = ptr->next;
+        }
 	}
 	ft_checkinput(data, 0, i);
 	store->path = ft_getpath(ptr->arg);

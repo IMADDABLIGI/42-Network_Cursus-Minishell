@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 01:36:49 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/04 14:15:08 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/04 15:34:37 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ void	ft_checkinput(t_list *data, int input, int i)
 		return ;
 	if (data->tatto == 5)
 	{
+        if (data->next->next && (data->next->next->tatto == 4))
+            exit (0);
 		if ((input = open(data->next->arg, O_RDONLY)) < 0)
 			exit (0);
 		dup2(input, STDIN_FILENO);
@@ -121,11 +123,7 @@ void	ft_redirect(t_list *data, t_store *store, int i)
 	if (!(ptr->tatto == 1))
 	{
 		while (ptr && (ptr->tatto != 1))
-        {
-            if (ptr->tatto == 4)
-                exit (0);
 			ptr = ptr->next;
-        }
 	}
 	ft_checkinput(data, 0, i);
 	store->path = ft_getpath(ptr->arg);

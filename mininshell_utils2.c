@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/04 18:56:54 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/04 20:29:45 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,24 +74,23 @@ void	ft_check_red(t_list *data, t_store *store, int num)
 		{
 			if (((num = open(data->next->arg, O_RDONLY)) < 0))
 				ft_printerror(": No such file or directory", data->next->arg);
+            store->num = 1;
 		}
 		else if (store->check == 0)
 		{
 			if (((num = open(data->next->arg, O_RDONLY)) < 0))
 			{
 				ft_printerror(": No such file or directory", data->next->arg);
-				store->check = 1;
 				if (data->next->next && (data->next->next->tatto != 1) && store->num2 && ((data->next->next->tatto != 4)))
 					store->count++;
 			}
 		}
-		if (num > 0)
+		if (num > 0 && (data->next->next) && (data->next->next->tatto != 1))
 			store->num = 1;
 		return ;
 	}
 
 
-	
 	else if ((data->tatto == 6) || ((data->tatto == 8)))
 	{
 		if (store->check == 0)
@@ -102,7 +101,7 @@ void	ft_check_red(t_list *data, t_store *store, int num)
 			open(data->next->arg, O_WRONLY | O_APPEND | O_CREAT, 0644);
 			if (store->num == 1)
 				store->count++;
-			else if ((store->num2 == 0) && ((data->next->next) && (data->next->next->tatto == 4)))
+			else if ((store->num2 == 0) && ((data->next->next) && (data->next->next->tatto == 4)) && (store->count != 1))
 				store->count++;
 		}
 	}

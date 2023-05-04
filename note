@@ -1,1 +1,13 @@
-       3       3      47
+Makefile
+a.out
+ft_execution.c
+ft_redirection.c
+ft_split_cmd.c
+main.c
+mininshell_utils.c
+mininshell_utils2.c
+minishell
+minishell.h
+note
+tolls1.c
+tolls2.c

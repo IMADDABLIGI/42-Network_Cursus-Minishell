@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/03 21:41:55 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/04 09:59:48 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -280,8 +280,8 @@ void create_linked(t_data *a)
 		return;
 	tato(a);
 	a->tmp1=a->p;
-	if (ft_check_arg(a->tmp1, &store) == 1)
-		ft_execution(a->tmp1, &store);
+    ft_check_arg(a->tmp1, &store);
+	ft_execution(a->tmp1, &store);
 	// o = a->p;
 	// while (o)
 	// {

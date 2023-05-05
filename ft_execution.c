@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execution.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/04 21:01:50 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/05 09:46:07 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,9 @@ void	ft_exec3(t_list *data, t_store *store, int i, int pid,t_data *a)
 		{
 			waitpid(pid, NULL, 0);
 			if (data->tatto == 5)
-				data = data->next->next;
+				data = data->next;
 			data = data->next;
-			while (data && (data->tatto != 1) && (data->tatto != 5))
+			while (data && (data->tatto != 4))
 			{
 				if ((data->tatto == 6) || (data->tatto == 8))
 					ft_creatfile();
@@ -92,6 +92,8 @@ void	ft_exec3(t_list *data, t_store *store, int i, int pid,t_data *a)
 			{
 				if (data->tatto == 5)
 					ft_creatfile();
+				else if (data->tatto == 4)
+					data = data->next;
 			}
 			i++;
 		}

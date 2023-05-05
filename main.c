@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/04 20:59:02 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/05 11:18:45 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void ft_echo(t_list *data)
 	a=0;
 	k=data;
 	k=k->next;
-	if (k && !ft_strcmp(k->arg,"-n"))
+	while (k && !ft_strcmp(k->arg,"-n"))
 	{
 		k=k->next;
 		a=1;
@@ -188,15 +188,12 @@ char	*ft_strnstr(char *haystack,char *needle)
 	j = 0;
 	i = 0;
 	
-	while (p[i + j] && needle[j])
+	while (p[j] && needle[j])
 	{
-		if (p[i + j] == needle[j])
+		if (p[j] == needle[j])
 			j++;
 		else
-		{
-			i++;
-			j = 0;
-		}
+			return(0);
 	}
 	if (needle[j] == '\0')
 		return (p + j);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_redirection.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 01:36:49 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/05 10:17:10 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/05 10:34:11 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,8 @@ void	ft_checkinput(t_list *data, int input, int i)
 {
 	if ((i == 1) && (data->tatto != 5))
 		return ;
-    if (data->tatto == 1)
-        ft_check_next(data, i);
+    // if (data->tatto == 1)
+    //     ft_check_next(data, i);
 	if (data->tatto == 5)
 	{
 		if (data->next->next && (data->next->next->tatto == 4))

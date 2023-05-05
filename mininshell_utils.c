@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:05:47 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/05 10:38:54 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/05 14:12:21 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,23 +27,6 @@ void	*ft_memcpy(void *dst, const char *src, int n)
 		i++;
 	}
 	return (dst);
-}
-
-//---------------------------------------------------------------//
-
-void	ft_check_next(t_list *data)
-{
-	while (data)
-	{
-		if (data->tatto == 4)
-			return ;
-		if (data->tatto == 5)
-		{
-			if (open(data->next->arg, O_RDONLY) < 0)
-				exit (0);
-		}
-		data = data->next;
-	}
 }
 
 //---------------------------------------------------------------//

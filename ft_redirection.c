@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 01:36:49 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/05 10:40:00 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/05 14:28:42 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,23 +45,28 @@ int	ft_getfile(t_list *data, t_store *store, int i, t_list *ptr)
 
 void	ft_checkinput(t_list *data, int input, int i)
 {
-	if (data->tatto == 1)
-		ft_check_next(data);
-	if ((i == 1) && (data->tatto != 5))
-		return ;
-	if (data->tatto == 5)
-	{
-		if (data->next->next && (data->next->next->tatto == 4))
-			exit (0);
-		if ((input = open(data->next->arg, O_RDONLY)) < 0)
-			exit (0);
 
-		dup2(input, STDIN_FILENO);
-		close(input);
-		return ;
+	while (data && (data->tatto != 4))
+	{
+		if (data->tatto == 5)
+		{
+			if ((open(data->next->arg, O_RDONLY)) < 0)
+				exit (0);
+			if ((open(data->next->arg, O_RDONLY)) >= 0)
+			{
+				input = open(data->next->arg, O_RDONLY);
+				dup2(input, STDIN_FILENO);
+				close(input);
+			}
+		}
+		data = data->next;
 	}
+	if (input)
+		return ;
 	else
 	{
+		if (i == 1)
+		return ;
 		if ((i % 2) == 0)
 			input = open("/tmp/input", O_RDONLY);
 		else if ((i % 2) != 0)
@@ -70,6 +75,18 @@ void	ft_checkinput(t_list *data, int input, int i)
 		close(input);
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
 
 //----------------------------------------------------------------------------//
 

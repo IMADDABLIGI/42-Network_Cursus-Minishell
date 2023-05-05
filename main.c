@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/05 11:18:45 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/05 16:44:28 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,45 @@ void ft_env(t_data *a,t_list *data)
 		}
 	}
 }
+int	ft_isalpha(int c)
+{
+	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
+		return (1);
+	else
+		return (0);
+}
+// void ft_export(t_list *data, t_data *a)
+// {
+// 	t_list *k;
+// 	k=data;
+// 	a->i=0;
+// 	k=k->next;
+// 	a->tmp = a->e;
+// 	if (k && k->tatto == 2)
+// 		{
+// 			if (!ft_isalpha(k->arg[a->i]))
+// 					printf("export: `%s': not a valid identifier\n",k->arg);
+// 			while (k->arg[a->i] && k->arg[a->i] != '=' )
+// 				a->i++;
+// 			if (k->arg[a->i] != '=')
+// 					return;
+			
+// 		}
+// 	else
+// 	{
+// 		while (a->tmp)
+// 		{
+// 			printf("declare -x %s\n",a->tmp->arg);
+// 			a->tmp =a->tmp->next;
+// 		}
+// 	}
+// }
 void ft_execute_builtins(t_list *data,t_data *a)
 {
 	if (!ft_strcmp(data->arg,"echo"))
 		ft_echo(data);
-	// else if (!ft_strcmp(data->arg,"cd"))
-	// 	ft_cd(data);
+	// else if (!ft_strcmp(data->arg,"export"))
+	// 	ft_export(data,a);
 	else if (!ft_strcmp(data->arg,"env"))
 		ft_env(a,data);
 }
@@ -188,10 +221,12 @@ char	*ft_strnstr(char *haystack,char *needle)
 	j = 0;
 	i = 0;
 	
-	while (p[j] && needle[j])
+	while (p[i + j] && needle[j])
 	{
-		if (p[j] == needle[j])
+		if (p[i + j] == needle[j])
 			j++;
+		else if (p[i+j] == '=')
+			return (0);
 		else
 			return(0);
 	}

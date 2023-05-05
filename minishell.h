@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/05 09:49:38 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/05 10:38:29 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,19 +87,13 @@ int ft_check_builtins(t_list *data);
 void ft_execute_builtins(t_list *data,t_data *a);
 /*new*/
 void				*ft_memcpy(void *dst,const  char *src, int n);
-char				**ft_split(char *s, char c);
 char				**ft_split_cmd(char *s, char c, char *cmd);
-char				*ft_strjoin(char *s1, char *s2);
 char				*ft_getpath(char *cmd);
 void				ft_execution(t_list *data, t_store *store,t_data *a);
 char				**ft_arg(t_list *data);
-void				ft_pipefirstcmd(t_list *data);
-void				ft_pipemidllecmd(t_list *data, int i);
-void				ft_pipelastcmd(t_list *data, int i);
 void				ft_printerror(char *str, char *cmd);
-void				ft_redirect(t_list *data, t_store *store, int i,t_data *a);
+void				ft_redirect(t_list *data, t_store *store, int i, t_data *a);
 void				ft_check_arg(t_list *data, t_store *store);
-int					ft_checkpr(t_list *data);
-void				ft_nocmd(t_list *data);
+void				ft_check_next(t_list *data);
 
 #endif

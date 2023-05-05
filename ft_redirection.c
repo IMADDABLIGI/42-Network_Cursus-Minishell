@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 01:36:49 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/05 14:30:40 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/05 17:49:30 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,25 @@ void	ft_checkinput(t_list *data, int input, int i)
 			{
 				input = open(data->next->arg, O_RDONLY);
 				dup2(input, STDIN_FILENO);
-				close(input);
+				close(input); 
 			}
+		}
+		if (data->tatto == 7)
+		{
+			input = ft_here_doc(data, 0, NULL);
+			dup2(input, STDIN_FILENO);
+			close(input); 
 		}
 		data = data->next;
 	}
+
+
+
+
 	if (input)
 		return ;
+
+
 	else
 	{
 		if (i == 1)
@@ -75,17 +87,6 @@ void	ft_checkinput(t_list *data, int input, int i)
 		close(input);
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
 
 
 //----------------------------------------------------------------------------//

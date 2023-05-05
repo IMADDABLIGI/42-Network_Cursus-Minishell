@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/05 10:38:29 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/05 17:47:01 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,5 +95,15 @@ void				ft_printerror(char *str, char *cmd);
 void				ft_redirect(t_list *data, t_store *store, int i, t_data *a);
 void				ft_check_arg(t_list *data, t_store *store);
 void				ft_check_next(t_list *data);
+int					ft_here_doc(t_list *data, int num, char *line);
+int					ft_strcmp(char *s1, char *s2);
+
+/*GNL*/
+char	 			*get_next_line(int fd);
+void	 			ft_bzero(void *s, size_t n);
+char	 			*ft_strchr( char *s, int c);
+void	 			*ft_calloc(size_t count, size_t size);
+char	 			*ft_strjoin(char *s1, char *s2, int i, int j);
+
 
 #endif

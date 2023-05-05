@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+         #
+#    By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/16 18:27:52 by hznagui           #+#    #+#              #
-#    Updated: 2023/05/04 13:43:47 by hznagui          ###   ########.fr        #
+#    Updated: 2023/05/05 16:51:45 by idabligi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,14 +14,16 @@ NAME = minishell
 
 FLAGS = -Wall -Wextra -Werror
 
-SRC_FILE = 	main.c \
+SRC_FILE = 	main.c\
 			tolls1.c\
 			tolls2.c\
-			ft_execution.c\
-			ft_redirection.c\
 			ft_split_cmd.c\
+			ft_execution.c\
+			get_next_line.c\
+			ft_redirection.c\
 			mininshell_utils.c\
 			mininshell_utils2.c\
+			get_next_line_utils.c\
 
 COLOUR_GREEN=\033[1;32m
 

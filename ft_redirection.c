@@ -6,22 +6,11 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 01:36:49 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/05 10:17:10 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/05 10:40:00 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-//---------------------------------------------------------------------------//
-
-int	ft_return_out(int i, int output)
-{
-	if (((i % 2) == 0))
-		output = open("/tmp/output", O_WRONLY | O_TRUNC);
-	else if (((i % 2) != 0))
-		output = open("/tmp/input", O_WRONLY | O_TRUNC);
-	return (output);
-}
 
 //---------------------------------------------------------------------------//
 
@@ -56,17 +45,17 @@ int	ft_getfile(t_list *data, t_store *store, int i, t_list *ptr)
 
 void	ft_checkinput(t_list *data, int input, int i)
 {
+	if (data->tatto == 1)
+		ft_check_next(data);
 	if ((i == 1) && (data->tatto != 5))
 		return ;
-    if (data->tatto == 1)
-        ft_check_next(data, i);
 	if (data->tatto == 5)
 	{
 		if (data->next->next && (data->next->next->tatto == 4))
 			exit (0);
 		if ((input = open(data->next->arg, O_RDONLY)) < 0)
 			exit (0);
-            
+
 		dup2(input, STDIN_FILENO);
 		close(input);
 		return ;
@@ -95,13 +84,13 @@ void	ft_redirect(t_list *data, t_store *store, int i, t_data *a)
 	if (!(ptr->tatto == 1))
 	{
 		while (ptr && (ptr->tatto != 1))
-        {
-            if (ptr->tatto == 4)
-                exit (0);
+		{
+			if (ptr->tatto == 4)
+				exit (0);
 			ptr = ptr->next;
-        }
-        if (ptr && (ptr->tatto != 1))
-            exit (0);
+		}
+		if (ptr && (ptr->tatto != 1))
+			exit (0);
 	}
 
 	if (ft_check_builtins(ptr) == 0)

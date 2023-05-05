@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 01:36:49 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/05 09:51:07 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/05 10:17:10 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,36 +25,6 @@ int	ft_return_out(int i, int output)
 
 //---------------------------------------------------------------------------//
 
-int	ft_check_end(t_list *data, int output, int i)
-{
-	while (data)
-	{
-		if ((data->tatto == 6) || (data->tatto == 8))
-			return (0);
-		if (data->tatto == 5)
-		{
-			if (!(data->next->next))
-				return (ft_return_out(i, 0));
-		}
-		if (data->tatto == 4)
-		{
-			if (data->next->tatto == 5)
-			{
-				if (!(data->next->next->next))
-					return (ft_return_out(i, 0));
-			}
-			if ((data->next->tatto == 6) || (data->next->tatto == 8))
-				return (ft_return_out(i, 0));
-			return (0);
-		}
-		data = data->next;
-	}
-	return (0);
-}
-
-//---------------------------------------------------------------------------//
-
-
 int	ft_getfile(t_list *data, t_store *store, int i, t_list *ptr)
 {
 	int	output;
@@ -69,9 +39,6 @@ int	ft_getfile(t_list *data, t_store *store, int i, t_list *ptr)
 		data = data->next;
 	}
 	if (output != 0)
-		return (output);
-
-	if ((output = ft_check_end(ptr, 0, i)))
 		return (output);
 
 	if (i == store->count)
@@ -91,6 +58,8 @@ void	ft_checkinput(t_list *data, int input, int i)
 {
 	if ((i == 1) && (data->tatto != 5))
 		return ;
+    if (data->tatto == 1)
+        ft_check_next(data, i);
 	if (data->tatto == 5)
 	{
 		if (data->next->next && (data->next->next->tatto == 4))
@@ -131,6 +100,8 @@ void	ft_redirect(t_list *data, t_store *store, int i, t_data *a)
                 exit (0);
 			ptr = ptr->next;
         }
+        if (ptr && (ptr->tatto != 1))
+            exit (0);
 	}
 
 	if (ft_check_builtins(ptr) == 0)

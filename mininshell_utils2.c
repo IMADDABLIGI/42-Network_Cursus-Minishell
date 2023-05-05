@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/05 09:49:29 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/05 10:22:59 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ void	ft_check_red(t_list *data, t_store *store, int num)
 	if (data->tatto == 4)
 		store->check = 0;
 
-
-	if ((data->tatto == 5) && (store->check == 0))
+	else if ((data->tatto == 5) && (store->check == 0))
 	{
 		if (!(data->next->next))
 		{
@@ -43,10 +42,8 @@ void	ft_check_red(t_list *data, t_store *store, int num)
 				store->check = 1;
 			}
 		}
-		return ;
 	}
-
-
+	
 	else if ((data->tatto == 6) || ((data->tatto == 8)))
 	{
 		if (store->check == 0)
@@ -58,7 +55,6 @@ void	ft_check_red(t_list *data, t_store *store, int num)
 		}
 	}
 }
-
 
 
 /*----------------------------------------------------------------*/

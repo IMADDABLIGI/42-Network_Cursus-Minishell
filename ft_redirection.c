@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 01:36:49 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/05 18:30:16 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/05 20:51:07 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,17 +62,19 @@ void	ft_checkinput(t_list *data, int input, int i)
 		if (data->tatto == 7)
 		{
 			input = ft_here_doc(data, 0, NULL);
-			dup2(input, STDIN_FILENO);
+			open("heredoc", O_RDONLY);
+			if (dup2(input, STDIN_FILENO) < 0)
+				write(1, "error\n", 6);
 			close(input); 
 		}
-		data = data->next;
+		data = data->next; 
 	}
-
-
-
-
+	
 	if (input)
+	{
+		printf("%d\n", input);
 		return ;
+	}
 
 
 	else
@@ -87,15 +89,6 @@ void	ft_checkinput(t_list *data, int input, int i)
 		close(input);
 	}
 }
-
-
-
-
-
-
-
-
-
 
 
 
@@ -121,7 +114,6 @@ void	ft_redirect(t_list *data, t_store *store, int i, t_data *a)
 		if (ptr && (ptr->tatto != 1))
 			exit (0);
 	}
-
 	if (ft_check_builtins(ptr) == 0)
 	{
 		store->path = ft_getpath(ptr->arg);

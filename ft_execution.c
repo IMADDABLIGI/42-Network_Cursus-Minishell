@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/06 16:23:47 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/06 17:37:48 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,21 +109,19 @@ void	ft_execution(t_list *data, t_store *store,t_data *a , int fd)
     if ((store->built) && !(store->pipe))
     {
         ft_checkinput(data, 0, 1, store);
-        if ((fd = ft_getfile(data, store, 1, data)))
+        if ((fd = ft_checkoutput(data, store, 1, 0)))
         {
             save = dup(STDOUT_FILENO);
             dup2(fd, STDOUT_FILENO);
             close(fd);
         }
         ft_execute_builtins(data, a);
-        // close(STDOUT_FILENO);
         dup2(save, STDOUT_FILENO);
         close(save);
-        
     }
 
 	else if (store->exec == 0)
 		ft_exec1(data, store,a);
 	else if (store->exec == 1)
-		ft_exec3(data, store, 1, 1,a);
+		ft_exec3(data, store, 1, 1, a);
 }

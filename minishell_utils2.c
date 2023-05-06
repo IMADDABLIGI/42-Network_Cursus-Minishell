@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mininshell_utils2.c                                :+:      :+:    :+:   */
+/*   minishell_utils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/05 11:11:33 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/06 12:41:43 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,13 @@ void	ft_check_red(t_list *data, t_store *store, int num)
 			}
 		}
 	}
-	
+    
+	else if (data->tatto == 7)
+    {
+        store->doc++;
+        ft_here_doc(data, store->doc, 0, NULL);
+    }
+    
 	else if ((data->tatto == 6) || ((data->tatto == 8)))
 	{
 		if (store->check == 0)
@@ -64,6 +70,7 @@ void	ft_check_arg(t_list *data, t_store *store)
 	t_list	*ptr;
 
 	ptr = data;
+	store->doc = 0;
 	store->exec = 0;
 	store->count = 0;
 	store->check = 0;
@@ -88,6 +95,7 @@ void	ft_check_arg(t_list *data, t_store *store)
 			}
 		ptr = ptr->next;
 	}
+    store->doc = 0;
 	return ;
 }
 

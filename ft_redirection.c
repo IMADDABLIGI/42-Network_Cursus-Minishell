@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 01:36:49 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/06 09:54:26 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/06 12:50:16 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	ft_getfile(t_list *data, t_store *store, int i, t_list *ptr)
 
 //---------------------------------------------------------------------------//
 
-void	ft_checkinput(t_list *data, int input, int i)
+void	ft_checkinput(t_list *data, int input, int i, t_store *store)
 {
 
 	while (data && (data->tatto != 4))
@@ -61,7 +61,8 @@ void	ft_checkinput(t_list *data, int input, int i)
 		}
 		if (data->tatto == 7)
 		{
-			input = ft_here_doc(data, 0, NULL);
+            store->doc++;
+			input = ft_get_heredoc(data, store->doc, 0, 0);
 			open("heredoc", O_RDONLY);
 			if (dup2(input, STDIN_FILENO) < 0)
 				write(1, "error\n", 6);
@@ -98,7 +99,7 @@ void	ft_redirect(t_list *data, t_store *store, int i, t_data *a)
 	t_list  *ptr;
 
 	ptr = data;
-	ft_checkinput(data, 0, i);
+	ft_checkinput(data, 0, i, store);
 
 	if (!(ptr->tatto == 1))
 	{

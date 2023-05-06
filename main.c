@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/06 12:37:15 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/06 16:00:54 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,8 +133,25 @@ void ft_export(t_list *data, t_data *a)
 		}
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 void ft_execute_builtins(t_list *data,t_data *a)
 {
+
 	if (!ft_strcmp(data->arg,"echo"))
 		ft_echo(data);
 	else if (!ft_strcmp(data->arg,"export"))
@@ -142,6 +159,24 @@ void ft_execute_builtins(t_list *data,t_data *a)
 	else if (!ft_strcmp(data->arg,"env"))
 		ft_env(a,data);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 int ft_check_builtins(t_list *data)
 {
 	if (!ft_strcmp(data->arg,"echo") || !ft_strcmp(data->arg,"cd") || !ft_strcmp(data->arg,"pwd")|| !ft_strcmp(data->arg,"export") || !ft_strcmp(data->arg,"unset")  || !ft_strcmp(data->arg,"env") || !ft_strcmp(data->arg,"exit"))
@@ -401,7 +436,7 @@ void create_linked(t_data *a)
 	a->tmp1=a->p;
 
     ft_check_arg(a->tmp1, &store);
-	ft_execution(a->tmp1, &store,a);
+	ft_execution(a->tmp1, &store, a, 0);
 	
 	// o = a->p;
 	// while (o)

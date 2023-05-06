@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/06 12:41:43 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/06 15:48:28 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,32 @@ void	ft_printerror(char *str, char *cmd)
 /*----------------------------------------------------------------*/
 
 
-void	ft_check_red(t_list *data, t_store *store, int num)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void	ft_check_red(t_list *data, t_store *store, int num, int fd)
 {
+    if (data->tatto == 1)
+    {
+        if (ft_check_builtins(data))
+            store->built = 1;
+    }
 	if (data->tatto == 4)
+    {
+        store->pipe = 1;
 		store->check = 0;
+    }
 
 	else if ((data->tatto == 5) && (store->check == 0))
 	{
@@ -55,15 +77,19 @@ void	ft_check_red(t_list *data, t_store *store, int num)
 		if (store->check == 0)
 		{
 			if (data->tatto == 6)
-			open(data->next->arg, O_WRONLY | O_TRUNC | O_CREAT, 0644);
+			    fd = open(data->next->arg, O_WRONLY | O_TRUNC | O_CREAT, 0644);
 			else if (data->tatto == 8)
-			open(data->next->arg, O_WRONLY | O_APPEND | O_CREAT, 0644);
+			    fd = open(data->next->arg, O_WRONLY | O_APPEND | O_CREAT, 0644);
+            close (fd);
 		}
 	}
 }
 
 
 /*----------------------------------------------------------------*/
+
+
+
 
 void	ft_check_arg(t_list *data, t_store *store)
 {
@@ -72,6 +98,8 @@ void	ft_check_arg(t_list *data, t_store *store)
 	ptr = data;
 	store->doc = 0;
 	store->exec = 0;
+    store->pipe = 0;
+	store->built = 0;
 	store->count = 0;
 	store->check = 0;
 	while (ptr)
@@ -88,9 +116,9 @@ void	ft_check_arg(t_list *data, t_store *store)
 		}
 		
 		if (ptr->tatto == 4 || ptr->tatto == 5 || ptr->tatto == 6 ||
-			ptr->tatto == 7 || ptr->tatto == 8)
+			ptr->tatto == 7 || ptr->tatto == 8 || ptr->tatto == 1)
 			{
-				ft_check_red(ptr, store, 0);
+				ft_check_red(ptr, store, 0, 0);
 				store->exec = 1;
 			}
 		ptr = ptr->next;
@@ -100,6 +128,29 @@ void	ft_check_arg(t_list *data, t_store *store)
 }
 
 /*----------------------------------------------------------------*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 char	*ft_getpath(char *cmd)
 {

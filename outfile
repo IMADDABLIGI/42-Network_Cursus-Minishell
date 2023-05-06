@@ -1,0 +1,13 @@
+Makefile
+ft_execution.c
+ft_redirection.c
+ft_split_cmd.c
+main.c
+minishell
+minishell.h
+minishell_utils.c
+minishell_utils2.c
+minishell_utils3.c
+outfile
+tools1.c
+tools2.c

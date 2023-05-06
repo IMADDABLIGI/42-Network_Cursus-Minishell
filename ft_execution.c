@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/06 16:03:52 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/06 16:23:47 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void	ft_execution(t_list *data, t_store *store,t_data *a , int fd)
             close(fd);
         }
         ft_execute_builtins(data, a);
-        close(STDOUT_FILENO);
+        // close(STDOUT_FILENO);
         dup2(save, STDOUT_FILENO);
         close(save);
         

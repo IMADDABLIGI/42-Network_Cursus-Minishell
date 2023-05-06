@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/06 12:57:07 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/06 12:58:30 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ char	*ft_strjoin22(char *s1, char s2);
 void ft_abort(int id);
 int ft_check_builtins(t_list *data);
 void ft_execute_builtins(t_list *data,t_data *a);
+size_t ft_export2(t_data *a,t_list *data,int i);
 /*new*/
 void				*ft_memcpy(void *dst,const  char *src, int n);
 char				**ft_split_cmd(char *s, char c, char *cmd);

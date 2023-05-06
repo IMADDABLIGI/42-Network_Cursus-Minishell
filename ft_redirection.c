@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 01:36:49 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/06 17:39:01 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/06 18:41:16 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ int	ft_check_redirections(t_list *data, int output)
 		{
 			if (output)
 				close (output);
-			output = open(data->next->arg, O_WRONLY | O_TRUNC | O_CREAT, 0644);
+			if (!ft_strcmp(data->next->arg, "/dev/stdout"))
+				output = 0;
+			else
+				output = open(data->next->arg, O_WRONLY | O_TRUNC | O_CREAT, 0644);
 		}
 		else if (data->tatto == 8)
 		{

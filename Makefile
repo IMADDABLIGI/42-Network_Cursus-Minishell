@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+         #
+#    By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/16 18:27:52 by hznagui           #+#    #+#              #
-#    Updated: 2023/05/05 16:51:45 by idabligi         ###   ########.fr        #
+#    Updated: 2023/05/06 10:15:54 by hznagui          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,8 +15,8 @@ NAME = minishell
 FLAGS = -Wall -Wextra -Werror
 
 SRC_FILE = 	main.c\
-			tolls1.c\
-			tolls2.c\
+			tools1.c\
+			tools2.c\
 			ft_split_cmd.c\
 			ft_execution.c\
 			get_next_line.c\

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/05 18:31:03 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/06 12:37:15 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,11 @@ void ft_env(t_data *a,t_list *data)
 		while (a->tmp)
 		{
 	 	   printf("%s\n",a->tmp->arg);
-		    a->tmp=a->tmp->next;
+			a->tmp=a->tmp->next;
 		}
 	}
 }
+
 int	ft_isalpha(int c)
 {
 	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
@@ -83,38 +84,61 @@ int	ft_isalpha(int c)
 	else
 		return (0);
 }
-// void ft_export(t_list *data, t_data *a)
-// {
-// 	t_list *k;
-// 	k=data;
-// 	a->i=0;
-// 	k=k->next;
-// 	a->tmp = a->e;
-// 	if (k && k->tatto == 2)
-// 		{
-// 			if (!ft_isalpha(k->arg[a->i]))
-// 					printf("export: `%s': not a valid identifier\n",k->arg);
-// 			while (k->arg[a->i] && k->arg[a->i] != '=' )
-// 				a->i++;
-// 			if (k->arg[a->i] != '=')
-// 					return;
-			
-// 		}
-// 	else
-// 	{
-// 		while (a->tmp)
-// 		{
-// 			printf("declare -x %s\n",a->tmp->arg);
-// 			a->tmp =a->tmp->next;
-// 		}
-// 	}
-// }
+void ft_print(char *arg)
+{
+	int i;
+	i=0;
+	char p='"';
+	while (arg[i])
+	{
+		write(1,&arg[i],1);
+		if (arg[i]== '=')
+			write(1,&p,1);
+		i++;
+	}
+			write(1,&p,1);
+			write(1,"\n",1);
+}
+
+void ft_export(t_list *data, t_data *a)
+{
+	t_list *k;
+	k=data;
+	k=k->next;
+	a->i=0;
+	a->tmp = a->e;
+	if (k && k->tatto == 2)
+		{
+			if (!ft_isalpha(k->arg[a->i]))
+					printf("export: `%s': not a valid identifier\n",k->arg);
+			while (k->arg[a->i] && (k->arg[a->i] != '=' || k->arg[a->i] == '_'))
+				a->i++;
+			if (k->arg[a->i] != '=')
+					return;
+			if (!ft_export2(a,k,0))
+			{
+				a->tmp = ft_lstnew_env(k->arg);
+				if (!a->tmp)
+					ft_abort(1);
+				ft_lstadd_back_env(&a->e,a->tmp);
+			}
+		}
+	else
+	{
+		while (a->tmp)
+		{
+			write(1,"declare -x ",12);
+			ft_print(a->tmp->arg);
+			a->tmp =a->tmp->next;
+		}
+	}
+}
 void ft_execute_builtins(t_list *data,t_data *a)
 {
 	if (!ft_strcmp(data->arg,"echo"))
 		ft_echo(data);
-	// else if (!ft_strcmp(data->arg,"export"))
-	// 	ft_export(data,a);
+	else if (!ft_strcmp(data->arg,"export"))
+		ft_export(data,a);
 	else if (!ft_strcmp(data->arg,"env"))
 		ft_env(a,data);
 }
@@ -257,7 +281,7 @@ size_t ft_expand(t_data *a)
 		a->tmp = a->tmp->next;
 	}
 	return(free(a->strenv),0);
-}
+} 
 void change1(t_data *a)
 {
 	int i;
@@ -388,6 +412,31 @@ void create_linked(t_data *a)
 	// printf("\n");
 }
 
+size_t ft_export2(t_data *a,t_list *data,int i)
+{
+	a->strenv = NULL;
+	char *tmp;
+	while (data->arg[i] && (ft_isalnum(data->arg[i]) || data->arg[i] == '_'))
+	{
+		a->strenv=ft_strjoin22(a->strenv,data->arg[i]);
+		i++;
+	}
+	a->strenv=ft_strjoin22(a->strenv,'=');
+	a->tmp = a->e;
+	while (a->tmp)
+	{
+		tmp = ft_strnstr(a->tmp->arg,a->strenv);
+		if (tmp)
+		{
+			free(a->strenv);
+			free(a->tmp->arg);
+			a->tmp->arg = ft_strdup(data->arg);
+			return (1);
+		}
+		a->tmp = a->tmp->next;
+	}
+	return(free(a->strenv),0);
+}
 
 int ft_nothing(t_data *a)
 {

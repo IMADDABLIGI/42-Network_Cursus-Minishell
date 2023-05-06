@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_redirection.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 01:36:49 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/06 18:30:54 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/06 19:03:07 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,19 @@ int	ft_check_redirections(t_list *data, int output)
 		{
 			if (output)
 				close (output);
-			output = open(data->next->arg, O_WRONLY | O_TRUNC | O_CREAT, 0644);
+			if (!ft_strcmp(data->next->arg, "/dev/stdout"))
+				output = 0;
+			else
+				output = open(data->next->arg, O_WRONLY | O_TRUNC | O_CREAT, 0644);
 		}
 		else if (data->tatto == 8)
 		{
 			if (output)
 				close (output);
-			output = open(data->next->arg, O_WRONLY | O_APPEND | O_CREAT, 0644);
+			if (!ft_strcmp(data->next->arg, "/dev/stdout"))
+				output = 0;
+			else
+				output = open(data->next->arg, O_WRONLY | O_APPEND | O_CREAT, 0644);
 		}
 		data = data->next;
 	}
@@ -61,7 +67,7 @@ void	ft_checkinput(t_list *data, int input, int i, t_store *store)
 
 	while (data && (data->tatto != 4))
 	{
-		if (data->tatto == 5 && (store->built == 0 || store->pipe == 1))
+		if ((data->tatto == 5) && ((store->built == 0) || (store->pipe == 1)))
 		{
 			if ((open(data->next->arg, O_RDONLY)) < 0)
 				exit (0);

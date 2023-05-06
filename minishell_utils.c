@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:05:47 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/06 17:25:31 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/06 19:12:08 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,21 @@ void	*ft_memcpy(void *dst, const char *src, int n)
 
 //---------------------------------------------------------------//
 
+void	ft_run_doc(t_list *data, t_store *store)
+{
+	while (data)
+	{
+		if (data->tatto == 7)
+		{
+			store->doc++;
+			ft_here_doc(data, store->doc, 0, NULL);
+		}
+		data = data->next;
+	}
+}
+
+//---------------------------------------------------------------//
+
 int	ft_get_heredoc(t_list *data, int count, int fd, int check)
 {
 	char	*itoa;
@@ -38,20 +53,20 @@ int	ft_get_heredoc(t_list *data, int count, int fd, int check)
 
 	itoa = ft_itoa(count);
 	join = ft_strjoin("/tmp/", itoa);
-    free (itoa);
-    if (check)
-    {
-        unlink(join);
-        if ((fd = open(join, O_CREAT | O_APPEND | O_RDWR, 0644)) < 0)
-        {
-            perror("Error Creating heredoc file");
-            exit (1);
-	    }
-    }
-    else
-        fd = open(join, O_RDONLY);
-    free (join);
-    return (fd);
+	free (itoa);
+	if (check)
+	{
+		unlink(join);
+		if ((fd = open(join, O_CREAT | O_APPEND | O_WRONLY, 0644)) < 0)
+		{
+			perror("Error Creating heredoc file");
+			exit (1);
+		}
+	}
+	else
+		fd = open(join, O_RDONLY);
+	free (join);
+	return (fd);
 }
 
 //---------------------------------------------------------------//

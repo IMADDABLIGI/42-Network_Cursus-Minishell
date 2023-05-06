@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/06 18:31:25 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/06 19:11:53 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,6 @@ void	ft_check_red(t_list *data, t_store *store, int num, int fd)
 		}
 	}
     
-	else if (data->tatto == 7)
-    {
-        store->doc++;
-        ft_here_doc(data, store->doc, 0, NULL);
-    }
-    
 	else if ((data->tatto == 6) || ((data->tatto == 8)))
 	{
 		if (store->check == 0)
@@ -84,6 +78,7 @@ void	ft_check_arg(t_list *data, t_store *store)
 	store->built = 0;
 	store->count = 0;
 	store->check = 0;
+    ft_run_doc(data, store);
 	while (ptr)
 	{
 		if ((ptr->tatto == 1) && !(store->count))

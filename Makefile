@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+         #
+#    By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/16 18:27:52 by hznagui           #+#    #+#              #
-#    Updated: 2023/05/06 12:56:52 by idabligi         ###   ########.fr        #
+#    Updated: 2023/05/06 13:00:09 by hznagui          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,8 @@ SRC_FILE = 	main.c\
 			ft_split_cmd.c\
 			ft_execution.c\
 			ft_redirection.c\
-			minishell_utils.c\
-			minishell_utils2.c\
-			minishell_utils3.c\
+			mininshell_utils.c\
+			mininshell_utils2.c\
 
 COLOUR_GREEN=\033[1;32m
 

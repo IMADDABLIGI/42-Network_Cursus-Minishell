@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/06 18:29:44 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/06 20:48:39 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,13 @@ void ft_print(char *arg)
 			write(1,&p,1);
 			write(1,"\n",1);
 }
+int	ft_isalnum(int c)
+{
+	if ((c >= 48 && c <= 57) || (c >= 65 && c <= 90) || (c >= 97 && c <= 122))
+		return (1);
+	else
+		return (0);
+}
 
 void ft_export(t_list *data, t_data *a)
 {
@@ -110,16 +117,21 @@ void ft_export(t_list *data, t_data *a)
 		{
 			if (!ft_isalpha(k->arg[a->i]))
 					printf("export: `%s': not a valid identifier\n",k->arg);
-			while (k->arg[a->i] && (k->arg[a->i] != '=' || k->arg[a->i] == '_'))
+			while (k->arg[a->i] && (ft_isalnum(k->arg[a->i]) == 1 || k->arg[a->i] == '_'))
 				a->i++;
-			if (k->arg[a->i] != '=')
-					return;
-			if (!ft_export2(a,k,0))
-			{
-				a->tmp = ft_lstnew_env(k->arg);
-				if (!a->tmp)
-					ft_abort(1);
-				ft_lstadd_back_env(&a->e,a->tmp);
+			if (!k->arg[a->i])
+				return;
+			else if (k->arg[a->i] != '=')
+					printf("export: `%s': not a valid identifier\n",k->arg);
+			else 
+			{				
+				if (!ft_export2(a,k,0))
+				{
+					a->tmp = ft_lstnew_env(k->arg);
+					if (!a->tmp)
+						ft_abort(1);
+					ft_lstadd_back_env(&a->e,a->tmp);
+				}
 			}
 		}
 	else
@@ -230,13 +242,6 @@ int	ft_isdigit(int c)
 		return (0);
 }
 
-int	ft_isalnum(int c)
-{
-	if ((c >= 48 && c <= 57) || (c >= 65 && c <= 90) || (c >= 97 && c <= 122))
-		return (1);
-	else
-		return (0);
-}
 
 char	*ft_strnstr(char *haystack,char *needle)
 {
@@ -526,15 +531,6 @@ int main(int argc,char **argv,char **env){
 		ft_abort(2);
 	ft_create_env(&a,env);
 	a.env22=env;
-	// int i=0;
-	// =env;
-	// a.tmp=a.e;
-	// while (env1[i])
-	// {
-	//     printf("%s\n",env1[i]);
-	//     i++;
-	// }
-	
 
 	while (1)
 	{

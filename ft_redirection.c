@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 01:36:49 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/06 18:02:53 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/06 18:30:54 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,33 @@
 
 //---------------------------------------------------------------------------//
 
-int	ft_getfile(t_list *data, t_store *store, int i, t_list *ptr)
+int	ft_check_redirections(t_list *data, int output)
 {
-	int	output;
-
-	output = 0;
 	while ((data) && (data->tatto != 4))
 	{
 		if (data->tatto == 6)
+		{
+			if (output)
+				close (output);
 			output = open(data->next->arg, O_WRONLY | O_TRUNC | O_CREAT, 0644);
+		}
 		else if (data->tatto == 8)
+		{
+			if (output)
+				close (output);
 			output = open(data->next->arg, O_WRONLY | O_APPEND | O_CREAT, 0644);
+		}
 		data = data->next;
 	}
-	if (output != 0)
+	return (output);
+}
+
+//---------------------------------------------------------------------------//
+
+int	ft_checkoutput(t_list *data, t_store *store, int i, int output)
+{
+
+	if ((output = ft_check_redirections(data, 0)))
 		return (output);
 
 	if (i == store->count)
@@ -61,7 +74,7 @@ void	ft_checkinput(t_list *data, int input, int i, t_store *store)
 		}
 		if (data->tatto == 7)
 		{
-            store->doc++;
+			store->doc++;
 			input = ft_get_heredoc(data, store->doc, 0, 0);
 			open("heredoc", O_RDONLY);
 			if (dup2(input, STDIN_FILENO) < 0)
@@ -85,9 +98,6 @@ void	ft_checkinput(t_list *data, int input, int i, t_store *store)
 		close(input);
 	}
 }
-
-
-
 
 //----------------------------------------------------------------------------//
 
@@ -116,7 +126,7 @@ void	ft_redirect(t_list *data, t_store *store, int i, t_data *a)
 		store->arg = ft_arg(ptr);
 	}
 
-	if ((output = ft_getfile(data, store, i, data)))
+	if ((output = ft_checkoutput(data, store, i, 0)))
 	{
 		dup2(output, STDOUT_FILENO);
 		close(output);

@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/06 18:01:28 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/06 18:31:25 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,21 +20,6 @@ void	ft_printerror(char *str, char *cmd)
 }
 
 /*----------------------------------------------------------------*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 void	ft_check_red(t_list *data, t_store *store, int num, int fd)
 {
@@ -86,11 +71,7 @@ void	ft_check_red(t_list *data, t_store *store, int num, int fd)
 	}
 }
 
-
 /*----------------------------------------------------------------*/
-
-
-
 
 void	ft_check_arg(t_list *data, t_store *store)
 {
@@ -115,7 +96,7 @@ void	ft_check_arg(t_list *data, t_store *store)
 			else
 				store->count++;
 		}
-		
+
 		if (ptr->tatto == 4 || ptr->tatto == 5 || ptr->tatto == 6 ||
 			ptr->tatto == 7 || ptr->tatto == 8 || ptr->tatto == 1)
 			{
@@ -129,28 +110,6 @@ void	ft_check_arg(t_list *data, t_store *store)
 }
 
 /*----------------------------------------------------------------*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 char	*ft_getpath(char *cmd)

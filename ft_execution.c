@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/06 18:47:48 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/06 19:02:29 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,8 @@
 
 int	ft_creatfile(t_list *data)
 {
-
 	if ((data->tatto == 5 || data->tatto == 6) && !ft_strcmp(data->next->arg, "/dev/stdout"))
 		return (1);
-
 	unlink("/tmp/input");
 	unlink("/tmp/output");
 	if (open("/tmp/input", O_CREAT, 0644) < 0)
@@ -109,7 +107,6 @@ void	ft_execution(t_list *data, t_store *store,t_data *a , int fd)
 
 	if (!(store->count))
 		return ;
-
 	if ((store->built) && !(store->pipe))
 	{
 		ft_checkinput(data, 0, 1, store);
@@ -123,7 +120,6 @@ void	ft_execution(t_list *data, t_store *store,t_data *a , int fd)
 		dup2(save, STDOUT_FILENO);
 		close(save);
 	}
-
 	else if (store->exec == 0)
 		ft_exec1(data, store,a);
 	else if (store->exec == 1)

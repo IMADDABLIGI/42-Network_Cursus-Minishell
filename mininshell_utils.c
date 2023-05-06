@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:05:47 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/05 20:51:25 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/06 11:11:37 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,27 +50,25 @@ int	ft_strcmp2(char *s1, char *s2)
 
 int	ft_here_doc(t_list *data, int num, char *line)
 {
-	printf("HNA RAH KAYN HEREDOC\n");
 	unlink("heredoc");
 	if ((num = open("heredoc", O_CREAT | O_APPEND | O_RDWR, 0644)) < 0)
 	{
 		perror("Error Creating heredoc file");
 		return (0);
 	}
-	printf("%d\n", num);
+
 	while (1)
 	{
-		write(1, "> ", 2);
-		line = get_next_line(1);
-		write(num, line, ft_strlen(line));
+		line = readline("> ");
 		if (ft_strcmp2(line, data->next->arg) == 0)
         {
             free (line);
             close (num);
 			return (num);
         }
-
+		write(num, line, ft_strlen(line));
 		free(line);
 	}
 	return (0);
 }
+

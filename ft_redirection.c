@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 01:36:49 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/05 20:51:07 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/06 09:54:26 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,10 +71,7 @@ void	ft_checkinput(t_list *data, int input, int i)
 	}
 	
 	if (input)
-	{
-		printf("%d\n", input);
 		return ;
-	}
 
 
 	else

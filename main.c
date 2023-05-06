@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/06 16:00:54 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/06 18:29:44 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ void ft_env(t_data *a,t_list *data)
 		}
 	}
 }
-
 int	ft_isalpha(int c)
 {
 	if ((c >= 65 && c <= 90) || (c >= 97 && c <= 122))
@@ -134,24 +133,10 @@ void ft_export(t_list *data, t_data *a)
 	}
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 void ft_execute_builtins(t_list *data,t_data *a)
 {
-
+	while(data && (data->tatto != 1))
+		data = data->next;
 	if (!ft_strcmp(data->arg,"echo"))
 		ft_echo(data);
 	else if (!ft_strcmp(data->arg,"export"))
@@ -159,23 +144,6 @@ void ft_execute_builtins(t_list *data,t_data *a)
 	else if (!ft_strcmp(data->arg,"env"))
 		ft_env(a,data);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 int ft_check_builtins(t_list *data)
 {
@@ -416,6 +384,17 @@ char *str(t_data *a,int *tatto)
 	a->ret[a->k]='\0';
 	return(a->ret);
 }
+int ft_nothing(char *a)
+{
+	int i=0;
+	while (a[i])
+	{
+		if (a[i] != 32)
+			return (0);
+		i++;
+	}
+	return(1);
+}
 void create_linked(t_data *a)
 {
 	t_store store;
@@ -434,10 +413,13 @@ void create_linked(t_data *a)
 		return;
 	tato(a);
 	a->tmp1=a->p;
-
+	if (!ft_nothing(a->tmp1->arg))
+	{
     ft_check_arg(a->tmp1, &store);
 	ft_execution(a->tmp1, &store, a, 0);
-	
+	}
+	else 
+		printf(" %s: command not found\n",a->tmp1->arg);
 	// o = a->p;
 	// while (o)
 	// {
@@ -473,17 +455,6 @@ size_t ft_export2(t_data *a,t_list *data,int i)
 	return(free(a->strenv),0);
 }
 
-int ft_nothing(t_data *a)
-{
-	a->i=0;
-	while (a->input[a->i])
-	{
-		if (a->input[a->i] != 32)
-			return (0);
-		a->i++;
-	}
-	return(1);
-}
 
 int ft_separit(t_data *a)
 {
@@ -571,7 +542,7 @@ int main(int argc,char **argv,char **env){
 		if (*(a.input))
 		{
 			add_history(a.input);
-			if (!ft_nothing(&a))
+			if (!ft_nothing(a.input))
 				open_quote(&a);
 		}
 		free(a.input);

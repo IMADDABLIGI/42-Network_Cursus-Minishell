@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/06 17:19:14 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/06 17:57:37 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ void	ft_execution(t_list *data, t_store *store,t_data *a , int fd)
             close(fd);
         }
         ft_execute_builtins(data, a);
+		
         // close(STDOUT_FILENO);
         dup2(save, STDOUT_FILENO);
 	close(save);

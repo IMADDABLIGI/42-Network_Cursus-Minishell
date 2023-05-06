@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 01:36:49 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/06 18:41:16 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/06 18:48:12 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	ft_checkinput(t_list *data, int input, int i, t_store *store)
 
 	while (data && (data->tatto != 4))
 	{
-		if (data->tatto == 5)
+		if (data->tatto == 5 && (store->built == 0 || store->pipe == 1))
 		{
 			if ((open(data->next->arg, O_RDONLY)) < 0)
 				exit (0);
@@ -89,8 +89,6 @@ void	ft_checkinput(t_list *data, int input, int i, t_store *store)
 	
 	if (input)
 		return ;
-
-
 	else
 	{
 		if (i == 1)

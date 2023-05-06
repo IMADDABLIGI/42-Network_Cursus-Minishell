@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/05 19:27:48 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/06 12:49:19 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ typedef struct t_shell
 
 typedef struct t_data
 {
+	int				doc;
 	int				exec;
 	int				count;
 	int				check;
@@ -85,6 +86,7 @@ char	*ft_strjoin22(char *s1, char s2);
 void ft_abort(int id);
 int ft_check_builtins(t_list *data);
 void ft_execute_builtins(t_list *data,t_data *a);
+
 /*new*/
 void				*ft_memcpy(void *dst,const  char *src, int n);
 char				**ft_split_cmd(char *s, char c, char *cmd);
@@ -95,15 +97,12 @@ void				ft_printerror(char *str, char *cmd);
 void				ft_redirect(t_list *data, t_store *store, int i, t_data *a);
 void				ft_check_arg(t_list *data, t_store *store);
 void				ft_check_next(t_list *data);
-int					ft_here_doc(t_list *data, int num, char *line);
+int					ft_here_doc(t_list *data, int doc, int num, char *line);
+int					ft_get_heredoc(t_list *data, int count, int fd, int check);
 int					ft_strcmp2(char *s1, char *s2);
-
-/*GNL*/
-char	 			*get_next_line(int fd);
-void	 			ft_bzero(void *s, size_t n);
-char	 			*ft_strchr( char *s, int c);
-void	 			*ft_calloc(size_t count, size_t size);
-char	 			*ft_strjoin(char *s1, char *s2, int i, int j);
+char				*ft_itoa(int n);
+char				*ft_strjoin(char *s1, char *s2);
+int	                ft_get_heredoc(t_list *data, int count, int fd, int check);
 
 
 #endif

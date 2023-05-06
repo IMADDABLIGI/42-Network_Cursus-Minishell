@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mininshell_utils.c                                 :+:      :+:    :+:   */
+/*   minishell_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:05:47 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/06 11:14:17 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/06 12:38:18 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,25 +48,46 @@ int	ft_strcmp2(char *s1, char *s2)
 
 //---------------------------------------------------------------//
 
-int	ft_here_doc(t_list *data, int num, char *line)
+int	ft_get_heredoc(t_list *data, int count, int fd, int check)
 {
-	unlink("heredoc");
-	if ((num = open("heredoc", O_CREAT | O_APPEND | O_RDWR, 0644)) < 0)
-	{
-		perror("Error Creating heredoc file");
-		return (0);
-	}
+	char	*itoa;
+	char	*join;
 
+	itoa = ft_itoa(count);
+	join = ft_strjoin("/tmp/", itoa);
+    free (itoa);
+    if (check)
+    {
+        unlink(join);
+        if ((fd = open(join, O_CREAT | O_APPEND | O_RDWR, 0644)) < 0)
+        {
+            perror("Error Creating heredoc file");
+            exit (1);
+	    }
+    }
+    else
+        fd = open(join, O_RDONLY);
+    free (join);
+    return (fd);
+}
+
+//---------------------------------------------------------------//
+
+int	ft_here_doc(t_list *data, int doc, int num, char *line)
+{
+	num = ft_get_heredoc(data, doc, 0, 1);
+	
 	while (1)
 	{
 		line = readline("> ");
 		if (ft_strcmp2(line, data->next->arg) == 0)
-        {
-            free (line);
-            close (num);
+		{
+			free (line);
+			close (num);
 			return (num);
-        }
+		}
 		write(num, line, ft_strlen(line));
+		write(num, "\n", 1);
 		free(line);
 	}
 	return (0);

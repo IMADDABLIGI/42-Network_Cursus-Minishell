@@ -6,7 +6,7 @@
 #    By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/16 18:27:52 by hznagui           #+#    #+#              #
-#    Updated: 2023/05/05 16:51:45 by idabligi         ###   ########.fr        #
+#    Updated: 2023/05/06 12:20:38 by idabligi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,11 +19,10 @@ SRC_FILE = 	main.c\
 			tolls2.c\
 			ft_split_cmd.c\
 			ft_execution.c\
-			get_next_line.c\
 			ft_redirection.c\
-			mininshell_utils.c\
-			mininshell_utils2.c\
-			get_next_line_utils.c\
+			minishell_utils.c\
+			minishell_utils2.c\
+			minishell_utils3.c\
 
 COLOUR_GREEN=\033[1;32m
 

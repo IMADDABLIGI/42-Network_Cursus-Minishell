@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:05:47 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/06 19:12:08 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/07 12:13:10 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ int	ft_get_heredoc(t_list *data, int count, int fd, int check)
 int	ft_here_doc(t_list *data, int doc, int num, char *line)
 {
 	num = ft_get_heredoc(data, doc, 0, 1);
-	
 	while (1)
 	{
 		line = readline("> ");

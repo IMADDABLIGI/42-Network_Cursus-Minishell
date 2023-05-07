@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/07 10:30:39 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/07 12:12:33 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,53 +19,36 @@ void	ft_printerror(char *str, char *cmd)
 	write(1, "\n", 1);
 }
 
-/*----------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------*/
 
 void	ft_check_red(t_list *data, t_store *store, int num, int fd)
 {
-    if (data->tatto == 1)
-    {
-        if (ft_check_builtins(data))
-            store->built = 1;
-    }
-	if (data->tatto == 4)
-    {
-		
-        store->pipe = 1;
+	if ((data->tatto == 1) && (ft_check_builtins(data)))
+		store->built = 1;
+	else if (data->tatto == 4)
+	{
+		store->pipe = 1;
 		store->check = 0;
-    }
-
+	}
 	else if ((data->tatto == 5) && (store->check == 0))
 	{
-		if (!(data->next->next))
+		if (((num = open(data->next->arg, O_RDONLY)) < 0))
 		{
-			if (((num = open(data->next->arg, O_RDONLY)) < 0))
-				ft_printerror(": No such file or directory", data->next->arg);
-		}
-		else if (store->check == 0)
-		{
-			if (((num = open(data->next->arg, O_RDONLY)) < 0))
-			{
-				ft_printerror(": No such file or directory", data->next->arg);
-				store->check = 1;
-			}
+			ft_printerror(": No such file or directory", data->next->arg);
+			store->check = 1;
 		}
 	}
-    
-	else if ((data->tatto == 6) || ((data->tatto == 8)))
+	else if (((data->tatto == 6) || (data->tatto == 8)) && (store->check == 0))
 	{
-		if (store->check == 0)
-		{
-			if (data->tatto == 6)
-			    fd = open(data->next->arg, O_WRONLY | O_TRUNC | O_CREAT, 0644);
-			else if (data->tatto == 8)
-			    fd = open(data->next->arg, O_WRONLY | O_APPEND | O_CREAT, 0644);
-            close (fd);
-		}
+		if (data->tatto == 6)
+			fd = open(data->next->arg, O_WRONLY | O_TRUNC | O_CREAT, 0644);
+		else if (data->tatto == 8)
+			fd = open(data->next->arg, O_WRONLY | O_APPEND | O_CREAT, 0644);
+		close (fd);
 	}
 }
 
-/*----------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------*/
 
 void	ft_check_arg(t_list *data, t_store *store)
 {
@@ -74,11 +57,11 @@ void	ft_check_arg(t_list *data, t_store *store)
 	ptr = data;
 	store->doc = 0;
 	store->exec = 0;
-    store->pipe = 0;
+	store->pipe = 0;
 	store->built = 0;
 	store->count = 0;
 	store->check = 0;
-    ft_run_doc(data, store);
+	ft_run_doc(data, store);
 	while (ptr)
 	{
 		if ((ptr->tatto == 1) && !(store->count))
@@ -92,19 +75,19 @@ void	ft_check_arg(t_list *data, t_store *store)
 				store->count++;
 		}
 
-		if (ptr->tatto == 4 || ptr->tatto == 5 || ptr->tatto == 6 ||
-			ptr->tatto == 7 || ptr->tatto == 8 || ptr->tatto == 1)
+		if (ptr->tatto == 4 || ptr->tatto == 5 || ptr->tatto == 6
+			|| ptr->tatto == 8 || ptr->tatto == 1)
 			{
 				ft_check_red(ptr, store, 0, 0);
 				store->exec = 1;
 			}
 		ptr = ptr->next;
 	}
-    store->doc = 0;
+	store->doc = 0;
 	return ;
 }
 
-/*----------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------*/
 
 
 char	*ft_getpath(char *cmd)

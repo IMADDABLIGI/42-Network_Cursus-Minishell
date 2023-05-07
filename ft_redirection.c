@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 01:36:49 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/07 10:41:25 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/07 12:34:36 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	ft_checkinput(t_list *data, int input, int i, t_store *store)
 	else
 	{
 		if (i == 1)
-		return ;
+		    return ;
 		if ((i % 2) == 0)
 			input = open("/tmp/input", O_RDONLY);
 		else if ((i % 2) != 0)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/07 11:37:31 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/07 12:24:28 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -585,7 +585,6 @@ int main(int argc,char **argv,char **env){
 		ft_abort(2);
 	ft_create_env(&a,env);
 	a.env22=env;
-
 	while (1)
 	{
 		a.input = readline("MINISHELL>> ");

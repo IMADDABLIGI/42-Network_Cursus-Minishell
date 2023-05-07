@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/07 11:55:44 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/07 16:56:20 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 # define MINISHELL_H
 
 # include <fcntl.h>
+# include <stdlib.h>
+# include <stdio.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <signal.h>
 # include <stdbool.h>
-# include <stdio.h>
-# include <stdlib.h>
 # include <sys/wait.h>
 # include <unistd.h>
 
@@ -104,11 +104,10 @@ void				ft_check_arg(t_list *data, t_store *store);
 void				ft_check_next(t_list *data);
 void				ft_run_doc(t_list *data, t_store *store);
 int					ft_here_doc(t_list *data, int doc, int num, char *line);
-int					ft_get_heredoc(t_list *data, int count, int fd, int check);
 int					ft_strcmp(char *s1, char *s2);
 char				*ft_itoa(int n);
 char				*ft_strjoin(char *s1, char *s2);
-int	                ft_get_heredoc(t_list *data, int count, int fd, int check);
+int	                ft_get_heredoc(int count, int fd, int check);
 int	                ft_creatfile(t_list *data);
 
 

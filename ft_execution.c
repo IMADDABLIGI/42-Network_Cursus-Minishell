@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execution.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/07 12:31:15 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/07 16:55:27 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ void	ft_execution(t_list *data, t_store *store,t_data *a , int fd)
 
 	if (!(store->count))
 		return ;
+	save=0;
 	if ((store->built) && !(store->pipe))
 	{
 		ft_checkinput(data, 0, 1, store);

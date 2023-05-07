@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_redirection.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 01:36:49 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/07 12:34:36 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/07 16:56:33 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void	ft_checkinput(t_list *data, int input, int i, t_store *store)
 		if (data->tatto == 7)
 		{
 			store->doc++;
-			input = ft_get_heredoc(data, store->doc, 0, 0);
+			input = ft_get_heredoc( store->doc, 0, 0);
 			open("heredoc", O_RDONLY);
 			if (dup2(input, STDIN_FILENO) < 0)
 				write(1, "error\n", 6);

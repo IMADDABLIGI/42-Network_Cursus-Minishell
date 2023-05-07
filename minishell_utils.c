@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:05:47 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/07 12:13:10 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/07 16:57:25 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ft_run_doc(t_list *data, t_store *store)
 
 //---------------------------------------------------------------//
 
-int	ft_get_heredoc(t_list *data, int count, int fd, int check)
+int	ft_get_heredoc( int count, int fd, int check)
 {
 	char	*itoa;
 	char	*join;
@@ -73,7 +73,7 @@ int	ft_get_heredoc(t_list *data, int count, int fd, int check)
 
 int	ft_here_doc(t_list *data, int doc, int num, char *line)
 {
-	num = ft_get_heredoc(data, doc, 0, 1);
+	num = ft_get_heredoc(doc, 0, 1);
 	while (1)
 	{
 		line = readline("> ");

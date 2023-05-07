@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/07 15:02:25 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/07 16:54:40 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -591,9 +591,10 @@ void ft_abort(int id)
 	exit(1);
 }
 void int_handler(int status) {
+	(void)status;
     printf("\n"); // Move to a new line
     rl_on_new_line(); // Regenerate the prompt on a newline
-    rl_replace_line("", 0); // Clear the previous text
+    rl_replace_line("", 0);
     rl_redisplay();
 }
 
@@ -601,17 +602,18 @@ int main(int argc,char **argv,char **env){
     t_data a;
     if (argc != 1)
         ft_abort(2);
+	(void)argv;
     ft_create_env(&a,env);
     signal(SIGINT, int_handler);
     signal(SIGQUIT, (void*)sigignore);
-
+	rl_catch_signals = 0;
     a.env22=env;
     while (1)
     {
         a.input = readline("MINISHELL>> ");
         if (a.input==NULL)
         {
-            printf(" exit\n");
+            printf("exit\n");
             exit(0);
         }
         if (*(a.input))

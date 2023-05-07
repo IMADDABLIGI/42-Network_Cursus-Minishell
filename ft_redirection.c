@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 01:36:49 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/06 19:03:07 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/07 12:34:36 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int	ft_check_redirections(t_list *data, int output)
 
 int	ft_checkoutput(t_list *data, t_store *store, int i, int output)
 {
-
 	if ((output = ft_check_redirections(data, 0)))
 		return (output);
 
@@ -69,6 +68,7 @@ void	ft_checkinput(t_list *data, int input, int i, t_store *store)
 	{
 		if ((data->tatto == 5) && ((store->built == 0) || (store->pipe == 1)))
 		{
+            ft_creatfile(data);
 			if ((open(data->next->arg, O_RDONLY)) < 0)
 				exit (0);
 			if ((open(data->next->arg, O_RDONLY)) >= 0)
@@ -95,7 +95,7 @@ void	ft_checkinput(t_list *data, int input, int i, t_store *store)
 	else
 	{
 		if (i == 1)
-		return ;
+		    return ;
 		if ((i % 2) == 0)
 			input = open("/tmp/input", O_RDONLY);
 		else if ((i % 2) != 0)

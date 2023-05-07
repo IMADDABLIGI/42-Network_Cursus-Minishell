@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/07 12:42:57 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/07 12:50:41 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -597,7 +597,6 @@ int main(int argc,char **argv,char **env){
 		ft_abort(2);
 	ft_create_env(&a,env);
 	a.env22=env;
-
 	while (1)
 	{
 		a.input = readline("MINISHELL>> ");

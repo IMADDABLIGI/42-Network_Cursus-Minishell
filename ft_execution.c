@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/06 19:02:29 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/07 12:31:15 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ int	ft_creatfile(t_list *data)
 	if (open("/tmp/input", O_CREAT, 0644) < 0)
 	{
 		perror("Error Creating input file");
-		return (0);
+		exit (1);
 	}
 	if (open("/tmp/output", O_CREAT, 0644) < 0)
 	{
 		perror("Error Creating output file");
-		return (0);
+		exit (1);
 	}
 	return (1);
 }
@@ -39,11 +39,15 @@ void	ft_exec1(t_list *data, t_store *store, t_data *a)
 {
 	int pid;
 
-	pid = fork();
+	if (!data)
+		return ;
+	if ((pid = fork()) == -1)
+	{
+		perror("fork");
+		return ;	
+	}	
 	if (pid == 0)
 	{
-		if (!data)
-			return ;
 		if (!ft_check_builtins(data))
 		{
 		store->path = ft_getpath(data->arg);
@@ -67,15 +71,16 @@ void	ft_exec1(t_list *data, t_store *store, t_data *a)
 
 //---------------------------------------------------------------------------//
 
-void	ft_exec3(t_list *data, t_store *store, int i, int pid,t_data *a)
+void	ft_exec3(t_list *data, t_store *store, int i, int pid, t_data *a)
 {
-	if (!ft_creatfile(data))
-		return ;
-	while ((i <= store->count))
+	ft_creatfile(data);
+	while ((i <= store->count) && (data))
 	{
-		if (!data)
-			return ;
-		pid = fork();
+		if ((pid = fork()) == -1)
+		{
+			perror("fork");
+			return ;	
+		}
 		if (pid == 0)
 			ft_redirect(data, store, i,a);
 		else
@@ -92,8 +97,6 @@ void	ft_exec3(t_list *data, t_store *store, int i, int pid,t_data *a)
 			}
 			if ((data) && (data->tatto == 4))
 				data = data->next;
-			if ((data) && (data->tatto == 5))
-				ft_creatfile(data);
 			i++;
 		}
 	}

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/06 19:12:45 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/07 10:55:14 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ char				**ft_split22(t_data *a);
 char				**free_all22(char **str, int max);
 char				*ft_strdup(char *s1);
 size_t				ft_strlen(char *s);
+char	*ft_strnstr(char *haystack,char *needle);
 char				*ft_substr(char *s, unsigned int start, size_t len);
 void	ft_lstadd_back_env(t_env **lst, t_env *new);
 t_env	*ft_lstnew_env(char *table);

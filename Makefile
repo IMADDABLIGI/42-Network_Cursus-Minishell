@@ -6,7 +6,7 @@
 #    By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/16 18:27:52 by hznagui           #+#    #+#              #
-#    Updated: 2023/05/07 14:23:31 by hznagui          ###   ########.fr        #
+#    Updated: 2023/05/07 15:09:29 by hznagui          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,11 +37,11 @@ OBJ_FILE = $(SRC_FILE:.c=.o)
 all : $(NAME)
 
 $(NAME) : $(OBJ_FILE) minishell.h 
-	@cc  -lreadline -L /Users/hznagui/.brew/opt/readline/lib  $(OBJ_FILE)   -o $(NAME) 
+	@cc   -L$(shell brew --prefix readline)/lib -lreadline $(OBJ_FILE)   -o $(NAME) 
 	@echo  "$(COLOUR_GREEN)--->[mandatory part successfully created ✅]<---$(COLOUR_RESET)"
 
 %.o: %.c minishell.h 
-	@$(CC)   -c $< -o $@
+	@cc  -I$(shell brew --prefix readline)/include  -c $< -o $@
 
 clean :
 	@rm -rf $(OBJ_FILE)

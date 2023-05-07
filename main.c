@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/07 14:29:07 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/07 15:02:25 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -593,7 +593,7 @@ void ft_abort(int id)
 void int_handler(int status) {
     printf("\n"); // Move to a new line
     rl_on_new_line(); // Regenerate the prompt on a newline
-    // rl_replace_line("", 0); // Clear the previous text
+    rl_replace_line("", 0); // Clear the previous text
     rl_redisplay();
 }
 

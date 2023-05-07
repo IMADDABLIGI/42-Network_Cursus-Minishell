@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/07 16:54:40 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/07 17:08:37 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -611,7 +611,7 @@ int main(int argc,char **argv,char **env){
     while (1)
     {
         a.input = readline("MINISHELL>> ");
-        if (a.input==NULL)
+        if (a.input == NULL)
         {
             printf("exit\n");
             exit(0);

@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/07 16:56:20 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/07 17:15:39 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct t_data
 	int				doc;
 	int				exec;
 	int				pipe;
+	int				save;
 	int				built;
 	int				count;
 	int				check;

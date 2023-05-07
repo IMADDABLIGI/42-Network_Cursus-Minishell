@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/07 11:37:31 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/07 12:42:57 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,7 +194,17 @@ void ft_export(t_list *data, t_data *a)
 		}
 	}
 }
+void ft_pwd(t_list *data)
+{
+	char *cwd;
+	t_list *k;
+	k = data;
+	k=k->next;
 
+    	cwd = getcwd(NULL,0);
+		printf("%s\n",cwd);
+		free(cwd);
+}
 void ft_execute_builtins(t_list *data,t_data *a)
 {
 	while(data && (data->tatto != 1))
@@ -207,6 +217,8 @@ void ft_execute_builtins(t_list *data,t_data *a)
 		exit(0);
 	else if (!ft_strcmp(data->arg,"env"))
 		ft_env(a,data);
+	else if (!ft_strcmp(data->arg,"pwd"))
+		ft_pwd(data);
 	else if (!ft_strcmp(data->arg,"unset"))
 		ft_unset(data,a);
 }

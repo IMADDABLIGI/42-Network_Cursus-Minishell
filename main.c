@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/06 20:48:39 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/07 11:37:31 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,56 @@ int	ft_isalnum(int c)
 	else
 		return (0);
 }
+size_t ft_unset2(t_data *a,t_list *data,int i)
+{
+	t_env *before;
+	a->strenv = NULL;
+	char *tmp;
+	before=NULL;
+	while (data->arg[i] && (ft_isalnum(data->arg[i]) || data->arg[i] == '_'))
+	{
+		a->strenv=ft_strjoin22(a->strenv,data->arg[i]);
+		i++;
+	}
+	a->strenv=ft_strjoin22(a->strenv,'=');
+	a->tmp = a->e;
+	while (a->tmp)
+	{
+		tmp = ft_strnstr(a->tmp->arg,a->strenv);
+		if (tmp)
+		{
+			free(a->strenv);
+			free(a->tmp->arg);
+			if (before)
+				before->next = a->tmp->next;
+			a->tmp->next = NULL;
+			free(a->tmp);
+			return (1);
+		}
+		before = a->tmp;
+		a->tmp = a->tmp->next;
+	}
+	return(free(a->strenv),0);
+}
+void ft_unset(t_list *data, t_data *a)
+{
+	t_list *k;
+	k=data;
+	k=k->next;
+	a->i=0;
+	a->tmp = a->e;
+	if (k && k->tatto == 2)
+		{
+			if (!ft_isalpha(k->arg[a->i]))
+					printf("export: `%s': not a valid identifier\n",k->arg);
+			while (k->arg[a->i] && (ft_isalnum(k->arg[a->i]) == 1 || k->arg[a->i] == '_'))
+				a->i++;
+			if (!k->arg[a->i])
+				ft_unset2(a,k,0);
+			else
+					printf("export: `%s': not a valid identifier\n",k->arg);
+		}
+}
 
 void ft_export(t_list *data, t_data *a)
 {
@@ -152,9 +202,13 @@ void ft_execute_builtins(t_list *data,t_data *a)
 	if (!ft_strcmp(data->arg,"echo"))
 		ft_echo(data);
 	else if (!ft_strcmp(data->arg,"export"))
-		ft_export(data,a);
+		ft_export(data,a);	
+	else if (!ft_strcmp(data->arg,"exit"))
+		exit(0);
 	else if (!ft_strcmp(data->arg,"env"))
 		ft_env(a,data);
+	else if (!ft_strcmp(data->arg,"unset"))
+		ft_unset(data,a);
 }
 
 int ft_check_builtins(t_list *data)

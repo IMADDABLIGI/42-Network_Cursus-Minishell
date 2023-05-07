@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/07 17:08:37 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/07 18:44:30 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,19 +59,32 @@ void ft_echo(t_list *data)
 // 		printf("cd: %s :No such file or directory\n",k->arg);
 // 	}
 // }
+int find_(char *a)
+{
+	int p;
+	p=0;
+	while (a[p])
+	{
+		if (a[p]=='=')
+			return(1);
+		p++;
+	}
+	return(0);
+}
 void ft_env(t_data *a,t_list *data)
 {
 	t_list *k;
 	k=data;
 	k=k->next;
 	if ( k && k->tatto == 2)
-		printf("cd: %s :No such file or directory\n",k->arg);
+		printf("env: %s :No such file or directory\n",k->arg);
 	else 
 	{	
 		a->tmp = a->e;
 		while (a->tmp)
 		{
-	 	   printf("%s\n",a->tmp->arg);
+			if (find_(a->tmp->arg))
+	 	   		printf("%s\n",a->tmp->arg);
 			a->tmp=a->tmp->next;
 		}
 	}
@@ -86,17 +99,23 @@ int	ft_isalpha(int c)
 void ft_print(char *arg)
 {
 	int i;
+	int z;
+	z=0;
 	i=0;
 	char p='"';
 	while (arg[i])
 	{
 		write(1,&arg[i],1);
 		if (arg[i]== '=')
+		{
 			write(1,&p,1);
+			z=1;
+		}
 		i++;
 	}
-			write(1,&p,1);
-			write(1,"\n",1);
+	if (z==1)
+		write(1,&p,1);
+	write(1,"\n",1);
 }
 int	ft_isalnum(int c)
 {
@@ -105,54 +124,50 @@ int	ft_isalnum(int c)
 	else
 		return (0);
 }
-size_t ft_unset2(t_data *a,t_list *data,int i)
+size_t ft_unset2(t_data *a,t_list *data)
 {
 	t_env *before;
-	a->strenv = NULL;
 	char *tmp;
+	char *c;
 	before=NULL;
-	while (data->arg[i] && (ft_isalnum(data->arg[i]) || data->arg[i] == '_'))
-	{
-		a->strenv=ft_strjoin22(a->strenv,data->arg[i]);
-		i++;
-	}
+	a->strenv=ft_strdup(data->arg);
+	c =ft_strdup(data->arg);
 	a->strenv=ft_strjoin22(a->strenv,'=');
 	a->tmp = a->e;
 	while (a->tmp)
 	{
 		tmp = ft_strnstr(a->tmp->arg,a->strenv);
-		if (tmp)
+		
+		if (tmp || !(ft_strcmp(c,a->tmp->arg)))
 		{
-			free(a->strenv);
-			free(a->tmp->arg);
 			if (before)
 				before->next = a->tmp->next;
 			a->tmp->next = NULL;
-			free(a->tmp);
-			return (1);
+			return (free(a->strenv),free(c),free(a->tmp->arg),free(a->tmp),1);
 		}
 		before = a->tmp;
 		a->tmp = a->tmp->next;
 	}
-	return(free(a->strenv),0);
+	return(free(a->strenv),free(c),0);
 }
 void ft_unset(t_list *data, t_data *a)
 {
 	t_list *k;
 	k=data;
 	k=k->next;
-	a->i=0;
 	a->tmp = a->e;
-	if (k && k->tatto == 2)
+	while (k && k->tatto == 2)
 		{
+	a->i=0;
 			if (!ft_isalpha(k->arg[a->i]))
 					printf("export: `%s': not a valid identifier\n",k->arg);
 			while (k->arg[a->i] && (ft_isalnum(k->arg[a->i]) == 1 || k->arg[a->i] == '_'))
 				a->i++;
 			if (!k->arg[a->i])
-				ft_unset2(a,k,0);
+				ft_unset2(a,k);
 			else
 					printf("export: `%s': not a valid identifier\n",k->arg);
+			k=k->next;
 		}
 }
 
@@ -161,21 +176,33 @@ void ft_export(t_list *data, t_data *a)
 	t_list *k;
 	k=data;
 	k=k->next;
-	a->i=0;
 	a->tmp = a->e;
 	if (k && k->tatto == 2)
+	{
+		while (k && k->tatto == 2)
 		{
+	a->i=0;
 			if (!ft_isalpha(k->arg[a->i]))
 					printf("export: `%s': not a valid identifier\n",k->arg);
+			else
+			{
 			while (k->arg[a->i] && (ft_isalnum(k->arg[a->i]) == 1 || k->arg[a->i] == '_'))
 				a->i++;
 			if (!k->arg[a->i])
-				return;
+			{
+				if (!ft_export2(a,k,0,0))
+				{
+					a->tmp = ft_lstnew_env(k->arg);
+					if (!a->tmp)
+						ft_abort(1);
+					ft_lstadd_back_env(&a->e,a->tmp);
+				}
+				}
 			else if (k->arg[a->i] != '=')
 					printf("export: `%s': not a valid identifier\n",k->arg);
 			else 
 			{				
-				if (!ft_export2(a,k,0))
+				if (!ft_export2(a,k,0,1))
 				{
 					a->tmp = ft_lstnew_env(k->arg);
 					if (!a->tmp)
@@ -183,7 +210,10 @@ void ft_export(t_list *data, t_data *a)
 					ft_lstadd_back_env(&a->e,a->tmp);
 				}
 			}
+			} 
+		k=k->next;
 		}
+	}
 	else
 	{
 		while (a->tmp)
@@ -500,7 +530,7 @@ void create_linked(t_data *a)
 	// printf("\n");
 }
 
-size_t ft_export2(t_data *a,t_list *data,int i)
+size_t ft_export2(t_data *a,t_list *data,int i,int index)
 {
 	a->strenv = NULL;
 	char *tmp;
@@ -509,7 +539,8 @@ size_t ft_export2(t_data *a,t_list *data,int i)
 		a->strenv=ft_strjoin22(a->strenv,data->arg[i]);
 		i++;
 	}
-	a->strenv=ft_strjoin22(a->strenv,'=');
+	if (index == 1)
+		a->strenv=ft_strjoin22(a->strenv,'=');
 	a->tmp = a->e;
 	while (a->tmp)
 	{

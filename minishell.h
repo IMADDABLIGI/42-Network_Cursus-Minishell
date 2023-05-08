@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/07 17:15:39 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/08 12:02:09 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,12 @@
 # include <sys/wait.h>
 # include <unistd.h>
 
+typedef struct t_global
+{
+	int			gbl_doc;
+	int			gbl_check_doc;
+}				t_glb;
+					
 typedef struct t_shell
 {
 	char			*arg;
@@ -98,7 +104,7 @@ void				*ft_memcpy(void *dst,const  char *src, int n);
 char				**ft_split_cmd(char *s, char c, char *cmd);
 char				*ft_getpath(char *cmd);
 void				ft_execution(t_list *data, t_store *store,t_data *a , int fd);
-char				**ft_arg(t_list *data);
+char				**ft_arg(t_list *data, t_list *ptr, char **arg, int i);
 void				ft_printerror(char *str, char *cmd);
 void				ft_redirect(t_list *data, t_store *store, int i, t_data *a);
 void				ft_check_arg(t_list *data, t_store *store);

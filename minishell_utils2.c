@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/07 17:18:29 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/08 12:01:48 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,29 +128,31 @@ char	*ft_getpath(char *cmd)
 
 /*----------------------------------------------------------------*/
 
-char	**ft_arg(t_list *data)
+char	**ft_arg(t_list *data, t_list *ptr, char **arg, int i)
 {
-	int		i;
-	t_list	*ptr;
-	char	**arg;
-
-	i = 0;
-	ptr = data;
-	while ((ptr) && (ptr->tatto != 4) && (ptr->tatto != 5) &&
-			(ptr->tatto != 6) && (ptr->tatto != 7) && (ptr->tatto != 8))
+	while ((ptr) && (ptr->tatto != 4))
 	{
-		ptr = ptr->next;
-		i++;
+		if ((ptr->tatto == 5) || (ptr->tatto == 6) || (ptr->tatto == 7) || (ptr->tatto == 8))
+			ptr=ptr->next->next;
+		else
+		{	
+			ptr = ptr->next;
+			i++;
+		}
 	}
 	arg = malloc((i + 1) * sizeof(char *));
 	if (!arg)
 		ft_abort(1);
 	i = 0;
-	while ((data) && (data->tatto != 4) && (data->tatto != 5) &&
-			(data->tatto != 6) && (data->tatto != 7) && (data->tatto != 8))
+	while ((data) && (data->tatto != 4))
 	{
-		arg[i++] = ft_strdup(data->arg);
-		data = data->next;
+		if ((data->tatto == 5) || (data->tatto == 6) || (data->tatto == 7) || (data->tatto == 8))
+			data = data->next->next;
+		else 
+		{
+			arg[i++] = ft_strdup(data->arg);
+			data = data->next;
+		}
 	}
 	arg[i] = NULL;
 	return (arg);

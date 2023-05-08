@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:05:47 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/07 17:00:33 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/08 10:28:15 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_glb global;
 
 void	*ft_memcpy(void *dst, const char *src, int n)
 {
@@ -33,6 +35,8 @@ void	*ft_memcpy(void *dst, const char *src, int n)
 
 void	ft_run_doc(t_list *data, t_store *store)
 {
+    global.gbl_doc = 1;
+    global.gbl_check_doc = 1;
 	while (data)
 	{
 		if (data->tatto == 7)
@@ -42,6 +46,7 @@ void	ft_run_doc(t_list *data, t_store *store)
 		}
 		data = data->next;
 	}
+    global.gbl_check_doc = 0;
 }
 
 //---------------------------------------------------------------//
@@ -74,9 +79,11 @@ int	ft_get_heredoc( int count, int fd, int check)
 int	ft_here_doc(t_list *data, int doc, int num, char *line)
 {
 	num = ft_get_heredoc(doc, 0, 1);
-	while (1)
+	while (global.gbl_doc)
 	{
 		line = readline("> ");
+        if (line == NULL)
+            return (1);
 		if (!ft_strcmp(line, data->next->arg))
 		{
 			free (line);

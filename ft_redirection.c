@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_redirection.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 01:36:49 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/07 16:56:33 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/08 12:02:00 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ void	ft_redirect(t_list *data, t_store *store, int i, t_data *a)
 	if (ft_check_builtins(ptr) == 0)
 	{
 		store->path = ft_getpath(ptr->arg);
-		store->arg = ft_arg(ptr);
+		store->arg = ft_arg(ptr, ptr, NULL, 0);
 	}
 
 	if ((output = ft_checkoutput(data, store, i, 0)))

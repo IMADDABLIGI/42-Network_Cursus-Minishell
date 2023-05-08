@@ -3,14 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/07 17:08:37 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/08 11:16:52 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_glb	global;
 
 int	ft_strcmp(char *s1, char *s2)
 {
@@ -201,7 +203,7 @@ void ft_pwd(t_list *data)
 	k = data;
 	k=k->next;
 
-    	cwd = getcwd(NULL,0);
+		cwd = getcwd(NULL,0);
 		printf("%s\n",cwd);
 		free(cwd);
 }
@@ -486,7 +488,7 @@ void create_linked(t_data *a)
 	a->tmp1=a->p;
 	if (!ft_nothing(a->tmp1->arg))
 	{
-    ft_check_arg(a->tmp1, &store);
+	ft_check_arg(a->tmp1, &store);
 	ft_execution(a->tmp1, &store, a, 0);
 	}
 	else 
@@ -590,8 +592,10 @@ void ft_abort(int id)
 		printf("\e[1;31mno argument please!\n\e[0m");
 	exit(1);
 }
-void int_handler(int status) {
+void handler(int status) {
 	(void)status;
+	global.gbl_doc = 0;
+    // write(1, "here\n", 5);
     printf("\n"); // Move to a new line
     rl_on_new_line(); // Regenerate the prompt on a newline
     rl_replace_line("", 0);
@@ -599,31 +603,32 @@ void int_handler(int status) {
 }
 
 int main(int argc,char **argv,char **env){
-    t_data a;
-    if (argc != 1)
-        ft_abort(2);
+	t_data a;
+    global.gbl_check_doc = 0;
+	if (argc != 1)
+		ft_abort(2);
 	(void)argv;
-    ft_create_env(&a,env);
-    signal(SIGINT, int_handler);
-    signal(SIGQUIT, (void*)sigignore);
-	rl_catch_signals = 0;
-    a.env22=env;
-    while (1)
-    {
-        a.input = readline("MINISHELL>> ");
-        if (a.input == NULL)
-        {
-            printf("exit\n");
-            exit(0);
-        }
-        if (*(a.input))
-        {
-            add_history(a.input);
-            if (!ft_nothing(a.input))
-                open_quote(&a);
-        }
-        free(a.input);
-        
-    }
-    return 0;
+	ft_create_env(&a,env);
+	signal(SIGINT, handler);
+	signal(SIGQUIT, (void*)sigignore);
+	a.env22=env;
+	while (1)
+	{
+		rl_catch_signals = 0;
+		a.input = readline("MINISHELL>> ");
+		if (a.input == NULL)
+		{
+			printf("exit\n");
+			exit(0);
+		}
+		if (*(a.input))
+		{
+			add_history(a.input);
+			if (!ft_nothing(a.input))
+				open_quote(&a);
+		}
+		free(a.input);
+		
+	}
+	return 0;
 }

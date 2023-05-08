@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:05:47 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/08 15:58:13 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/08 16:03:38 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_glb global;
 
 //---------------------------------------------------------------//
 
-void	ft_cd(t_list *data,t_data *a)
+void	ft_cd(t_list *data)
 {
 	int		check;
 	char	*pwd;

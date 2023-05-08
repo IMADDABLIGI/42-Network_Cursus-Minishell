@@ -6,13 +6,40 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:05:47 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/08 12:07:12 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/08 15:58:13 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 t_glb global;
+
+//---------------------------------------------------------------//
+
+void	ft_cd(t_list *data,t_data *a)
+{
+	int		check;
+	char	*pwd;
+	char	*path;
+
+	path = NULL;
+	pwd = getcwd(NULL,0);
+	if (data->next)
+	{
+		path = ft_strjoin2(pwd, data->next->arg);
+		check = chdir(path);
+	}
+	else
+		check = chdir("/Users/idabligi");
+	if (check == -1)
+	{
+		perror("cd");
+		return ;
+	}
+	return ;
+}
+
+//---------------------------------------------------------------//
 
 void	*ft_memcpy(void *dst, const char *src, int n)
 {
@@ -35,8 +62,8 @@ void	*ft_memcpy(void *dst, const char *src, int n)
 
 void	ft_run_doc(t_list *data, t_store *store)
 {
-    global.gbl_doc = 1;
-    global.gbl_check_doc = 1;
+	global.gbl_doc = 1;
+	global.gbl_check_doc = 1;
 	while (data)
 	{
 		if (data->tatto == 7)
@@ -46,7 +73,7 @@ void	ft_run_doc(t_list *data, t_store *store)
 		}
 		data = data->next;
 	}
-    global.gbl_check_doc = 0;
+	global.gbl_check_doc = 0;
 }
 
 //---------------------------------------------------------------//
@@ -82,8 +109,8 @@ int	ft_here_doc(t_list *data, int doc, int num, char *line)
 	while (global.gbl_doc)
 	{
 		line = readline("> ");
-        if (line == NULL)
-            return (1);
+		if (line == NULL)
+			return (1);
 		if (!ft_strcmp(line, data->next->arg))
 		{
 			free (line);

@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/08 12:06:45 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/08 15:39:13 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ char				*ft_itoa(int n);
 char				*ft_strjoin(char *s1, char *s2);
 int	                ft_get_heredoc(int count, int fd, int check);
 int	                ft_creatfile(t_list *data);
-
+void				ft_cd(t_list *data);
+char				*ft_strjoin2(char *s1, char *s2);
 
 #endif

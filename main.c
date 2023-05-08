@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/08 12:05:55 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/08 15:53:26 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -226,6 +226,7 @@ void ft_export(t_list *data, t_data *a)
 		}
 	}
 }
+
 void ft_pwd(t_list *data)
 {
 	char *cwd;
@@ -237,11 +238,14 @@ void ft_pwd(t_list *data)
 		printf("%s\n",cwd);
 		free(cwd);
 }
+
 void ft_execute_builtins(t_list *data,t_data *a)
 {
 	while(data && (data->tatto != 1))
 		data = data->next;
-	if (!ft_strcmp(data->arg,"echo"))
+	if (!ft_strcmp(data->arg,"cd"))
+		ft_cd(data,a);
+	else if (!ft_strcmp(data->arg,"echo"))
 		ft_echo(data);
 	else if (!ft_strcmp(data->arg,"export"))
 		ft_export(data,a);	
@@ -626,16 +630,26 @@ void ft_abort(int id)
 void handler(int status) {
 	(void)status;
 	global.gbl_doc = 0;
-    // write(1, "here\n", 5);
-    printf("\n"); // Move to a new line
-    rl_on_new_line(); // Regenerate the prompt on a newline
-    rl_replace_line("", 0);
-    rl_redisplay();
+    if (!global.gbl_check_doc)
+    {
+        printf("\n"); // Move to a new line
+        rl_replace_line("", 0);
+        rl_on_new_line(); // Regenerate the prompt on a newline
+        rl_redisplay();
+    }
+    else
+    {
+        printf("\n"); // Move to a new line
+        rl_redisplay();
+        rl_on_new_line(); // Regenerate the prompt on a newline
+        rl_replace_line("MINISHELL>> ", 0);
+    }
 }
 
 int main(int argc,char **argv,char **env){
 	t_data a;
     global.gbl_check_doc = 0;
+    
 	if (argc != 1)
 		ft_abort(2);
 	(void)argv;

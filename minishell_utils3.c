@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 12:08:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/06 12:29:01 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/08 15:39:52 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,3 +104,28 @@ char	*ft_strjoin(char *s1, char *s2)
 		ft_abort(1);
 	return (ft_return(p, s1, s2));
 }
+
+//---------------------------------------------------------------------------//
+
+char	*ft_strjoin2(char *s1, char *s2)
+{
+	char	*string;
+	int		lens1;
+	int		lens2;
+	int		mix;
+
+	if (!s1 && !s2)
+		return (0);
+	lens1 = ft_strlen(s1);
+	lens2 = ft_strlen(s2);
+	mix = ft_strlen(s1) + ft_strlen(s2) + 1;
+	string = malloc((mix + 1) * sizeof(char));
+	if (!string)
+		ft_abort(1);
+	ft_memcpy(string, s1, lens1);
+	string[lens1] = '/';
+	ft_memcpy(string + lens1 + 1, s2, lens2);
+	string[mix] = '\0';
+	return (string);
+}
+

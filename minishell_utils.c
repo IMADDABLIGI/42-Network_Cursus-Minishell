@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:05:47 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/09 13:58:33 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/09 16:48:10 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,18 @@ t_glb global;
 
 //---------------------------------------------------------------//
 
+// void	ft_re_env()
+// {
+// 	global.old_pwd = ft_strjoin("OLDPWD=", global.old_pwd);
+// 	printf("%s\n", global.old_pwd);
+// }
+
+//---------------------------------------------------------------//
+
 void	ft_cd(t_list *data, int check, char *path, char *pwd)
 {
+	if (global.old_pwd)
+		free(global.old_pwd);
 	global.old_pwd = getcwd(NULL,0);
 	if (data->next)
 	{
@@ -46,7 +56,7 @@ void	ft_cd(t_list *data, int check, char *path, char *pwd)
 			perror("cd");
 		return ;
 	}
-	global.new_pwd = getcwd(NULL, 0);
+	// global.new_pwd = getcwd(NULL, 0);
 	// printf("PWD=%s\n", global.new_pwd);
 	// printf("OLDPWD=%s\n", global.old_pwd);
 	// ft_re_env();
@@ -98,7 +108,6 @@ int	ft_get_heredoc( int count, int fd, int check)
 
 	itoa = ft_itoa(count);
 	join = ft_strjoin("/tmp/", itoa);
-	free (itoa);
 	if (check)
 	{
 		unlink(join);

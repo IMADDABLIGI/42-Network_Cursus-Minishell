@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:05:47 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/09 16:48:10 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/09 20:46:05 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ t_glb global;
 
 void	ft_cd(t_list *data, int check, char *path, char *pwd)
 {
-	if (global.old_pwd)
-		free(global.old_pwd);
-	global.old_pwd = getcwd(NULL,0);
+	// if (global.old_pwd)
+	// 	free(global.old_pwd);
+	// global.old_pwd = getcwd(NULL,0);
 	if (data->next)
 	{
 		if ((data->next->tatto == 5) || (data->next->tatto == 6) || (data->next->tatto == 7)
@@ -85,8 +85,8 @@ void	*ft_memcpy(void *dst, const char *src, int n)
 
 void	ft_run_doc(t_list *data, t_store *store)
 {
-	global.gbl_doc = 1;
-	global.gbl_check_doc = 1;
+	// global.gbl_doc = 1;
+	// global.gbl_check_doc = 1;
 	while (data)
 	{
 		if (data->tatto == 7)
@@ -96,7 +96,7 @@ void	ft_run_doc(t_list *data, t_store *store)
 		}
 		data = data->next;
 	}
-	global.gbl_check_doc = 0;
+	// global.gbl_check_doc = 0;
 }
 
 //---------------------------------------------------------------//
@@ -128,7 +128,7 @@ int	ft_get_heredoc( int count, int fd, int check)
 int	ft_here_doc(t_list *data, int doc, int num, char *line)
 {
 	num = ft_get_heredoc(doc, 0, 1);
-	while (global.gbl_doc)
+	while (1)
 	{
 		line = readline("> ");
 		if (line == NULL)

@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/09 10:01:25 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/09 13:43:01 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -261,7 +261,7 @@ void ft_execute_builtins(t_list *data, t_data *a)
 
 int ft_check_builtins(t_list *data)
 {
-	if (!ft_strcmp(data->arg,"echo") || !ft_strcmp(data->arg,"cd") || !ft_strcmp(data->arg,"pwd")|| !ft_strcmp(data->arg,"export") || !ft_strcmp(data->arg,"unset")  || !ft_strcmp(data->arg,"env") || !ft_strcmp(data->arg,"exit"))
+	if (!ft_strcmp(data->arg,"echo") || !ft_strcmp(data->arg,"cd") || !ft_strcmp(data->arg,"pwd") || !ft_strcmp(data->arg,"export") || !ft_strcmp(data->arg,"unset")  || !ft_strcmp(data->arg,"env") || !ft_strcmp(data->arg,"exit"))
 		return(1);
 	return(0);
 }

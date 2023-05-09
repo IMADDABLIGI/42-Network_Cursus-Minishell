@@ -6,7 +6,11 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/05/09 11:19:55 by hznagui          ###   ########.fr       */
+=======
+/*   Updated: 2023/05/09 13:29:30 by idabligi         ###   ########.fr       */
+>>>>>>> 5c88340112a6006318d6df83f825e7bfc2346bb2
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +30,8 @@
 typedef struct t_global
 {
 	int			gbl_doc;
+	char		*old_pwd;
+	char		*new_pwd;
 	int			gbl_check_doc;
 }				t_glb;
 					

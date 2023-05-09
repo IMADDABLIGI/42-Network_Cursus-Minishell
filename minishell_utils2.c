@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/08 17:49:32 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/09 16:47:54 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	ft_check_arg(t_list *data, t_store *store)
 	t_list	*ptr;
 
 	ptr = data;
-	store->doc = 0;
+	// store->doc = 0;
 	store->exec = 0;
 	store->pipe = 0;
 	store->built = 0;
@@ -79,11 +79,12 @@ void	ft_check_arg(t_list *data, t_store *store)
 			|| ptr->tatto == 8 || ptr->tatto == 1)
 			{
 				ft_check_red(ptr, store, 0, 0);
-				store->exec = 1;
+                if (ptr->tatto != 1)
+				    store->exec = 1;
 			}
 		ptr = ptr->next;
 	}
-	store->doc = 0;
+	// store->doc = 0;
 	return ;
 }
 

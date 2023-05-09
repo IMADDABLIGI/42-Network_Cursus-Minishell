@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:05:47 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/09 14:38:07 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/09 16:48:10 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,17 +16,19 @@ t_glb global;
 
 //---------------------------------------------------------------//
 
-void	ft_re_env()
-{
-	global.old_pwd = ft_strjoin("OLDPWD=", global.old_pwd);
-	printf("%s\n", global.old_pwd);
-}
+// void	ft_re_env()
+// {
+// 	global.old_pwd = ft_strjoin("OLDPWD=", global.old_pwd);
+// 	printf("%s\n", global.old_pwd);
+// }
 
 //---------------------------------------------------------------//
 
 void	ft_cd(t_list *data, int check, char *path, char *pwd)
 {
-	// global.old_pwd = getcwd(NULL,0);
+	if (global.old_pwd)
+		free(global.old_pwd);
+	global.old_pwd = getcwd(NULL,0);
 	if (data->next)
 	{
 		if ((data->next->tatto == 5) || (data->next->tatto == 6) || (data->next->tatto == 7)

@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/08 16:04:05 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/08 18:41:53 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -239,7 +239,7 @@ void ft_pwd(t_list *data)
 		free(cwd);
 }
 
-void ft_execute_builtins(t_list *data,t_data *a)
+void ft_execute_builtins(t_list *data, t_data *a)
 {
 	while(data && (data->tatto != 1))
 		data = data->next;

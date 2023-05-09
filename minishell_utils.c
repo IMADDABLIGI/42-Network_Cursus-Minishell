@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:05:47 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/08 17:18:24 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/09 11:13:21 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,33 +16,28 @@ t_glb global;
 
 //---------------------------------------------------------------//
 
-void	ft_cd(t_list *data)
+void	ft_cd(t_list *data, int check, char *path, char *pwd)
 {
-	int		check;
-	char	*pwd;
-	char	*path;
-
-	path = NULL;
-	pwd = getcwd(NULL,0);
 	if (data->next)
 	{
-		if ((data->tatto == 5) || (data->tatto == 6) || (data->tatto == 7)
-			|| (data->tatto == 8))
+		if ((data->next->tatto == 5) || (data->next->tatto == 6) || (data->next->tatto == 7)
+			|| (data->next->tatto == 8) || (data->next->tatto == 4))
 			return ;
+	    pwd = getcwd(NULL,0);
 		if (data->next->arg[0] == '/')
-			path = data->next->arg;
+            check = chdir(data->next->arg);
 		else
+        {
 			path = ft_strjoin2(pwd, data->next->arg);
-		check = chdir(path);
+            check = chdir(path);
+            free (path);
+        }
 	}
 	else
 		check = chdir("/Users/idabligi");
+    free (pwd);
 	if (check == -1)
-	{
 		perror("cd");
-		return ;
-	}
-	return ;
 }
 
 //---------------------------------------------------------------//

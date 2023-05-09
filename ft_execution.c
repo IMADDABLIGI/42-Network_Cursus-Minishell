@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/08 19:00:50 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/09 10:00:12 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,5 @@ void	ft_execution(t_list *data, t_store *store,t_data *a , int fd)
 		close(store->save);
     }
     else if (store->exec == 1)
-    {
-        write(1, "here\n", 5);
-		ft_exec(data, store, 1, 1, a);
-    }
+	    ft_exec(data, store, 1, 1, a);
 }

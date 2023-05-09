@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/09 13:43:01 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/09 14:57:16 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -370,63 +370,6 @@ char	*ft_strnstr(char *haystack,char *needle)
 		return (0);
 }
 
-size_t ft_expand(t_data *a)
-{
-	a->x++;
-	a->strenv = NULL;
-	char *tmp;
-	while (a->tab[a->i][a->x] && (ft_isalnum(a->tab[a->i][a->x]) || a->tab[a->i][a->x] == '_'))
-	{
-		a->strenv=ft_strjoin22(a->strenv,a->tab[a->i][a->x]);
-		a->x++;
-	}
-	a->x--;
-	a->strenv=ft_strjoin22(a->strenv,'=');
-	a->tmp = a->e;
-	while (a->tmp)
-	{
-		tmp = ft_strnstr(a->tmp->arg,a->strenv);
-		if (tmp)
-			return(free(a->strenv),ft_strlen(tmp));
-		a->tmp = a->tmp->next;
-	}
-	return(free(a->strenv),0);
-} 
-void change1(t_data *a)
-{
-	int i;
-	i=0;
-	while (a->strtmp[i])
-	{
-		a->ret[a->k]=a->strtmp[i];
-		a->k++;
-		i++;
-	}
- 
-}
-void ft_change(t_data *a)
-{
-	a->x++;
-	a->strenv = NULL;
-	
-	while (a->tab[a->i][a->x] && (ft_isalnum(a->tab[a->i][a->x]) || a->tab[a->i][a->x] == '_'))
-	{
-		a->strenv=ft_strjoin22(a->strenv,a->tab[a->i][a->x]);
-		a->x++;
-	}
-	a->x--;
-	a->strenv=ft_strjoin22(a->strenv,'=');
-	a->tmp = a->e;
-	while (a->tmp)
-	{
-		a->strtmp = ft_strnstr(a->tmp->arg,a->strenv);
-		if (a->strtmp)
-			change1(a);
-		a->tmp = a->tmp->next;
-	}
-	free(a->strenv);
-	return ;
-}
 size_t ft_length(t_data *a,int *tatto)
 {
 	size_t len;
@@ -449,8 +392,6 @@ size_t ft_length(t_data *a,int *tatto)
 		}
 		else if (((a->t == '"' || !a->t) && a->tab[a->i][a->x] == '$' && ft_isdigit(a->tab[a->i][a->x + 1]))||(a->tab[a->i][a->x] == '$' && (a->tab[a->i][a->x+1] == 39 || a->tab[a->i][a->x+1] == 34) && !a->lock))
 			a->x++;
-		else if ((a->t == '"' || !a->t) && a->tab[a->i][a->x] == '$' && a->tab[a->i][a->x + 1] && (ft_isalnum(a->tab[a->i][a->x+1]) || a->tab[a->i][a->x+1] == '_'))
-			len += ft_expand(a);
 		else
 			len++;
 		a->x++;
@@ -479,8 +420,6 @@ char *str(t_data *a,int *tatto)
 		}
 		else if (((a->t == '"' || !a->t) && a->tab[a->i][a->x] == '$' && ft_isdigit(a->tab[a->i][a->x + 1]))||(a->tab[a->i][a->x] == '$' && (a->tab[a->i][a->x+1] == 39 || a->tab[a->i][a->x+1] == 34) && !a->lock))
 			a->x++;
-		else if ((a->t == '"' || !a->t) && a->tab[a->i][a->x] == '$' && a->tab[a->i][a->x + 1]&& (ft_isalnum(a->tab[a->i][a->x+1]) || a->tab[a->i][a->x+1] == '_'))
-			ft_change(a);
 		else
 		{
 			a->ret[a->k]=a->tab[a->i][a->x];
@@ -527,13 +466,6 @@ void create_linked(t_data *a)
 	}
 	else 
 		printf(" %s: command not found\n",a->tmp1->arg);
-	// o = a->p;
-	// while (o)
-	// {
-	//     printf("%d\t",o->tatto);
-	//    o = o->next;
-	// }
-	// printf("\n");
 }
 
 size_t ft_export2(t_data *a,t_list *data,int i,int index)
@@ -562,12 +494,200 @@ size_t ft_export2(t_data *a,t_list *data,int i,int index)
 	}
 	return(free(a->strenv),0);
 }
+/**************************************************************/
+void change1(t_data *a)
+{
+	int i;
+	i=0;
+	while (a->strtmp[i])
+	{
+		a->ret[a->k]=a->strtmp[i];
+		a->k++;
+		i++;
+	}
+ 
+}
+void change2(t_data *a)
+{
+	size_t i;
+	size_t lock;
+	lock = 0;
+	i = 0;
+	while (a->strtmp[i])
+	{
+		if (a->strtmp[i] != 32 && lock == 0)
+		{
+			a->ret[a->k]='"';
+			a->k++;
+			lock=1;
+		}
+		else if(a->strtmp[i] == 32 && lock == 1)
+		{
+			a->ret[a->k]='"';
+			a->k++;
+			lock=0;
+		}
+		else
+		{
+			a->ret[a->k]=a->strtmp[i];
+			a->k++;
+			i++;	
+		}
+	}
+	if (lock == 1)
+	{
+			a->ret[a->k]='"';
+			a->k++;
+	}
+}
+void ft_change(t_data *a,int index)
+{
+	a->x++;
+	a->strenv = NULL;
+	
+	while (a->input[a->x] && (ft_isalnum(a->input[a->x]) || a->input[a->x] == '_'))
+	{
+		a->strenv=ft_strjoin22(a->strenv,a->input[a->x]);
+		a->x++;
+	}
+	a->x--;
+	a->strenv=ft_strjoin22(a->strenv,'=');
+	a->tmp = a->e;
+	while (a->tmp)
+	{
+		a->strtmp = ft_strnstr(a->tmp->arg,a->strenv);
+		if (a->strtmp&& index ==0)
+			change1(a);
+		else if (a->strtmp&& index == 1)
+		{
+			change2(a);
+		}
+		a->tmp = a->tmp->next;
+	}
+	free(a->strenv);
+	return ;
+}
+size_t strlen_expand(char *str)
+{
+	size_t i;
+	size_t len;
+	int lock;
+	lock =0;
+	i=0;
+	len=0;
 
-
+	while (str[i])
+	{
+		if (str[i] != 32 && lock == 0)
+		{
+			lock=1;
+			len+=2;
+		}
+		else if (str[i] == 32 && lock == 1)
+			lock=0;
+		i++;
+		len++;
+	}
+	return(len);
+}
+size_t ft_expand_length(t_data *a,int index)
+{
+	a->x++;
+	a->strenv = NULL;
+	char *tmp;
+	while (a->input[a->x] && (ft_isalnum(a->input[a->x]) || a->input[a->x] == '_'))
+	{
+		a->strenv=ft_strjoin22(a->strenv,a->input[a->x]);
+		a->x++;
+	}
+	a->x--;
+	
+	a->strenv=ft_strjoin22(a->strenv,'=');
+	a->tmp = a->e;
+	while (a->tmp)
+	{
+		tmp = ft_strnstr(a->tmp->arg,a->strenv);
+		if (tmp && index == 0)
+			return(free(a->strenv),ft_strlen(tmp));
+		else if (tmp && index == 1)
+			return(free(a->strenv),strlen_expand(tmp));
+		a->tmp = a->tmp->next;
+	}
+	return(free(a->strenv),0);
+} 
+size_t ft_length1(t_data *a)
+{
+	size_t len;
+	
+	a->lock = 0;
+	a->x = 0;
+	a->t='\0';
+	len = 0;
+	while (a->input[a->x])
+	{
+		if ((a->input[a->x] == 39 || a->input[a->x] == 34) && !a->lock)
+		{
+			a->lock = 1;
+			a->t = a->input[a->x];
+		}
+		else if (a->t == a->input[a->x] && a->lock)
+		{
+			a->lock = 0;
+			a->t = '\0';
+		}
+		if (((a->t == '"' || !a->t) && a->input[a->x] == '$' && ft_isdigit(a->input[a->x + 1]))||(a->input[a->x] == '$' && (a->input[a->x+1] == 39 || a->input[a->x+1] == 34) && !a->lock))
+			a->x++;
+		else if ((a->t == '"') && a->input[a->x] == '$' && a->input[a->x + 1] && (ft_isalnum(a->input[a->x+1]) || a->input[a->x+1] == '_'))
+			len += ft_expand_length(a,0);		
+		else if ((!a->t) && a->input[a->x] == '$' && a->input[a->x + 1] && (ft_isalnum(a->input[a->x+1]) || a->input[a->x+1] == '_'))
+			len += ft_expand_length(a,1);
+		else
+			len++;
+		a->x++;
+	}
+	return (len);
+}
+char *expand(t_data *a)
+{
+	a->ret = malloc(sizeof(char)*ft_length1(a));
+	if (!a->ret)
+		ft_abort(1);
+	a->k=0;
+	a->lock = 0;
+	a->x = 0;
+	while (a->input[a->x])
+	{
+		if ((a->input[a->x] == 39 || a->input[a->x] == 34) && !a->lock)
+		{
+			a->lock = 1;
+			a->t = a->input[a->x];
+		}
+		else if (a->t == a->input[a->x] && a->lock)
+		{
+			a->lock = 0;
+			a->t = '\0';
+		}
+		if (((a->t == '"' || !a->t) && a->input[a->x] == '$' && ft_isdigit(a->input[a->x + 1]))||(a->input[a->x] == '$' && (a->input[a->x+1] == 39 || a->input[a->x+1] == 34) && !a->lock))
+			a->x++;
+		else if ((a->t == '"') && a->input[a->x] == '$' && a->input[a->x + 1]&& (ft_isalnum(a->input[a->x+1]) || a->input[a->x+1] == '_'))
+			ft_change(a,0);
+		else if ((!a->t) && a->input[a->x] == '$' && a->input[a->x + 1]&& (ft_isalnum(a->input[a->x+1]) || a->input[a->x+1] == '_'))
+			ft_change(a,1);
+		else
+		{
+			a->ret[a->k]=a->input[a->x];
+			a->k++;
+		}
+		a->x++;
+	}
+	a->ret[a->k]='\0';
+	return(free(a->input),a->ret);
+}
+/**************************************************************/
 int ft_separit(t_data *a)
 {
 	if (!ft_split22(a))
-		return(printf("problem in malloc !\n"));
+		return(ft_abort(1),1);
 	a->i = 0;
 	create_linked(a);
 	return(0);
@@ -600,6 +720,7 @@ void open_quote(t_data *a)
 		printf("\e[1;31m open quotes!\n\e[0m");
 	else
 	{
+		// ft_separit(a);
 		if (!ft_separit(a))
 			free_all22(a->tab,a->length);
 		ft_lstclear(&a->p); 
@@ -669,11 +790,14 @@ int main(int argc,char **argv,char **env){
 		if (*(a.input))
 		{
 			add_history(a.input);
+		expand(&a);
+		a.input=a.ret;
 			if (!ft_nothing(a.input))
 				open_quote(&a);
 		}
 		free(a.input);
 		
+
 	}
 	return 0;
 }

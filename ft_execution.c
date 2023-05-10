@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/10 10:58:32 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/10 12:39:22 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,22 +68,42 @@ void	ft_exec(t_list *data, t_store *store, int i, int pid, t_data *a)
 
 //---------------------------------------------------------------------------//
 
+int	ft_check_built_input(t_list *data, int input)
+{
+	while (data)
+	{
+		if (data->tatto == 5)
+		{
+			if (((input = open(data->next->arg, O_RDONLY)) < 0))
+				return (0);
+			else
+				close (input);
+		}
+		data = data->next;
+	}
+	return (1);
+}
+
+//---------------------------------------------------------------------------//
+
 void	ft_execution(t_list *data, t_store *store,t_data *a , int fd)
 {
 	if (!(store->count))
 		return ;
 	if ((store->built) && !(store->pipe))//just IN Parent
 	{
-		ft_checkinput(data, 0, 1, store);
-		if ((fd = ft_checkoutput(data, store, 1, 0)))
-		{
-			store->save = dup(STDOUT_FILENO);
-			dup2(fd, STDOUT_FILENO);
-			close(fd);
+		if (ft_check_built_input(data, 0))
+		{		
+			if ((fd = ft_checkoutput(data, store, 1, 0)))
+			{
+				store->save = dup(STDOUT_FILENO);
+				dup2(fd, STDOUT_FILENO);
+				close(fd);
+			}
+			ft_execute_builtins(data, a);
+			dup2(store->save, STDOUT_FILENO);
+			close(store->save);
 		}
-		ft_execute_builtins(data, a);
-		dup2(store->save, STDOUT_FILENO);
-		close(store->save);
 	}
 	else
 	{

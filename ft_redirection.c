@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_redirection.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 01:36:49 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/10 10:35:34 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/10 12:18:43 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ void	ft_redirect(t_list *data, t_store *store, int i, t_data *a)
 		}
 		if (ptr && (ptr->tatto != 1))
 			exit (0);
-	}
+	} 
 	if (ft_check_builtins(ptr) == 0)
 	{
 		store->path = ft_getpath(ptr->arg);

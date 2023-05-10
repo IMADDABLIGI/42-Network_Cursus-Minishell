@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/10 10:21:55 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/10 10:58:32 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,39 +35,7 @@ int	ft_creatfile(t_list *data)
 
 //---------------------------------------------------------------------------//
 
-void	ft_exec1(t_list *data, t_store *store, t_data *a)
-{
-	int pid;
-
-	pid = fork();
-	if (pid == 0)
-	{
-		if (!data)
-			return ;
-		if (!ft_check_builtins(data))
-		{
-		store->path = ft_getpath(data->arg);
-		store->arg = ft_arg(data, data, NULL, 0);
-		execve(store->path, store->arg, a->env22);
-		perror("execve");
-		exit(EXIT_FAILURE);
-		}
-		else 
-		{
-			ft_execute_builtins(data,a);
-			// exit(0);
-		}
-	}
-	else
-	{
-		waitpid(pid, NULL, 0);
-		return ;
-	}
-}
-
-//---------------------------------------------------------------------------//
-
-void	ft_exec2(t_list *data, t_store *store, int i, int pid, t_data *a)
+void	ft_exec(t_list *data, t_store *store, int i, int pid, t_data *a)
 {
 	ft_creatfile(data);
 	while ((i <= store->count) && (data))
@@ -117,14 +85,9 @@ void	ft_execution(t_list *data, t_store *store,t_data *a , int fd)
 		dup2(store->save, STDOUT_FILENO);
 		close(store->save);
 	}
-	else if (store->exec == 0)
-	{
-		// write(1, "here1\n", 6);
-		ft_exec1(data, store,a);
-	}
-	else if (store->exec == 1)//In Child Process
+	else
 	{
 		// write(1, "here2\n", 6);
-		ft_exec2(data, store, 1, 1, a);
+		ft_exec(data, store, 1, 1, a);
 	}
 }

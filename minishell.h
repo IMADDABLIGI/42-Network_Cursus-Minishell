@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/10 11:15:27 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/10 13:23:28 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,10 @@ typedef struct t_shell
 typedef struct t_data
 {
 	int				doc;
-	int				exec;
 	int				pipe;
-	int				save;
 	int				built;
 	int				count;
+	int				save;
 	int				check;
 	char			*path;
 	char			**arg;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:05:47 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/10 11:15:04 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/10 13:20:34 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void	ft_run_doc(t_list *data, t_store *store)
 {
 	// global.gbl_doc = 1;
 	// global.gbl_check_doc = 1;
+	store->doc = 0;
 	while (data)
 	{
 		if (data->tatto == 7)
@@ -96,6 +97,7 @@ void	ft_run_doc(t_list *data, t_store *store)
 		}
 		data = data->next;
 	}
+	store->doc = 0;
 	// global.gbl_check_doc = 0;
 }
 

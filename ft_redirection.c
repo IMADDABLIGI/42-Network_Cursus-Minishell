@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_redirection.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 01:36:49 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/10 12:18:43 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/10 17:50:41 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //---------------------------------------------------------------------------//
 
-int	ft_check_redirections(t_list *data, int output)
+int	ft_check_redirections(t_list *data, int output, t_store *store)
 {
 	while ((data) && (data->tatto != 4))
 	{
@@ -36,6 +36,10 @@ int	ft_check_redirections(t_list *data, int output)
 			else
 				output = open(data->next->arg, O_WRONLY | O_APPEND | O_CREAT, 0644);
 		}
+		if ((output < 0) && ((store->built) && !(store->pipe)))
+			return (-1);
+		if (output < 0)
+			exit (1);
 		data = data->next;
 	}
 	return (output);
@@ -45,7 +49,7 @@ int	ft_check_redirections(t_list *data, int output)
 
 int	ft_checkoutput(t_list *data, t_store *store, int i, int output)
 {
-	if ((output = ft_check_redirections(data, 0)))
+	if ((output = ft_check_redirections(data, 0, store)))
 		return (output);
 
 	if (i == store->count)
@@ -68,12 +72,11 @@ void	ft_checkinput(t_list *data, int input, int i, t_store *store)
 	{
 		if ((data->tatto == 5) && ((store->built == 0) || (store->pipe == 1)))
 		{
-            ft_creatfile(data);
-			if ((open(data->next->arg, O_RDONLY)) < 0)
+			ft_creatfile(data);
+			if (((input = open(data->next->arg, O_RDONLY)) < 0))
 				exit (0);
-			if ((open(data->next->arg, O_RDONLY)) >= 0)
+			else
 			{
-				input = open(data->next->arg, O_RDONLY);
 				dup2(input, STDIN_FILENO);
 				close(input); 
 			}
@@ -88,13 +91,12 @@ void	ft_checkinput(t_list *data, int input, int i, t_store *store)
 		}
 		data = data->next;
 	}
-	
 	if (input)
 		return ;
 	else
 	{
 		if (i == 1)
-		    return ;
+			return ;
 		if ((i % 2) == 0)
 			input = open("/tmp/input", O_RDONLY);
 		else if ((i % 2) != 0)
@@ -124,13 +126,12 @@ void	ft_redirect(t_list *data, t_store *store, int i, t_data *a)
 		}
 		if (ptr && (ptr->tatto != 1))
 			exit (0);
-	} 
+	}
 	if (ft_check_builtins(ptr) == 0)
 	{
 		store->path = ft_getpath(ptr->arg);
 		store->arg = ft_arg(ptr, ptr, NULL, 0);
 	}
-
 	if ((output = ft_checkoutput(data, store, i, 0)))
 	{
 		dup2(output, STDOUT_FILENO);
@@ -139,7 +140,7 @@ void	ft_redirect(t_list *data, t_store *store, int i, t_data *a)
 
 	if (ft_check_builtins(ptr) == 1)
 	{
-		ft_execute_builtins(ptr,a);
+		ft_execute_builtins(ptr, a);
 		exit(0);
 	}
 

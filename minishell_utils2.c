@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/10 10:59:09 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/10 17:37:43 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,11 @@ void	ft_check_red(t_list *data, t_store *store, int num, int fd)
 			fd = open(data->next->arg, O_WRONLY | O_TRUNC | O_CREAT, 0644);
 		else if (data->tatto == 8)
 			fd = open(data->next->arg, O_WRONLY | O_APPEND | O_CREAT, 0644);
+		if (fd < 0)
+		{
+			ft_printerror(": Is a directory", data->next->arg);
+			store->check = 1;    
+		}
 		close (fd);
 	}
 }
@@ -55,7 +60,6 @@ void	ft_check_arg(t_list *data, t_store *store)
 	t_list	*ptr;
 
 	ptr = data;
-	store->doc = 0;
 	store->pipe = 0;
 	store->built = 0;
 	store->count = 0;
@@ -65,7 +69,6 @@ void	ft_check_arg(t_list *data, t_store *store)
 	{
 		if ((ptr->tatto == 1) && !(store->count))
 			store->count++;
-
 		if (ptr->tatto == 4)
 		{
 			if (store->count == 0)
@@ -73,16 +76,11 @@ void	ft_check_arg(t_list *data, t_store *store)
 			else
 				store->count++;
 		}
-
 		if (ptr->tatto == 4 || ptr->tatto == 5 || ptr->tatto == 6
-			|| ptr->tatto == 7 || ptr->tatto == 8 || ptr->tatto == 1)
-			{
+			|| ptr->tatto == 8 || ptr->tatto == 1)
 				ft_check_red(ptr, store, 0, 0);
-			}
 		ptr = ptr->next;
 	}
-	store->doc = 0;
-	return ;
 }
 
 /*-------------------------------------------------------------------------------------*/

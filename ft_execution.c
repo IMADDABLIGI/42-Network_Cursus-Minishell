@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/10 12:39:22 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/10 17:13:26 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ void	ft_execution(t_list *data, t_store *store,t_data *a , int fd)
 		{		
 			if ((fd = ft_checkoutput(data, store, 1, 0)))
 			{
+                if (fd == -1)
+                    return ;
 				store->save = dup(STDOUT_FILENO);
 				dup2(fd, STDOUT_FILENO);
 				close(fd);
@@ -106,8 +108,5 @@ void	ft_execution(t_list *data, t_store *store,t_data *a , int fd)
 		}
 	}
 	else
-	{
-		// write(1, "here2\n", 6);
 		ft_exec(data, store, 1, 1, a);
-	}
 }

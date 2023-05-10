@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/09 17:40:38 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/10 11:15:27 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void				ft_redirect(t_list *data, t_store *store, int i, t_data *a);
 void				ft_check_arg(t_list *data, t_store *store);
 void				ft_check_next(t_list *data);
 void				ft_run_doc(t_list *data, t_store *store);
-int					ft_here_doc(t_list *data, int doc, int num, char *line);
+void				ft_here_doc(t_list *data, int doc, int num, char *line);
 int					ft_strcmp(char *s1, char *s2);
 char				*ft_itoa(int n);
 char				*ft_strjoin(char *s1, char *s2);

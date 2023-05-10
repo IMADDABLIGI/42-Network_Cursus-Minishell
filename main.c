@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/10 16:13:29 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/10 17:51:27 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -235,7 +235,7 @@ void ft_export(t_list *data, t_data *a)
 	{
 		while (a->tmp)
 		{
-			write(1,"declare -x ",12);
+			write(1,"declare -x ",11);
 			ft_print(a->tmp->arg);
 			a->tmp =a->tmp->next;
 		}

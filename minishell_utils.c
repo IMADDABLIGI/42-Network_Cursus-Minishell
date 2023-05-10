@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:05:47 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/10 13:20:34 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/10 20:44:26 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,12 @@ t_glb global;
 
 void	ft_cd(t_list *data, int check, char *path, char *pwd)
 {
-	// if (global.old_pwd)
-	// 	free(global.old_pwd);
-	// global.old_pwd = getcwd(NULL,0);
+	if (global.old_pwd)
+		free(global.old_pwd);
+	global.old_pwd = getcwd(NULL,0);
+	pwd = getcwd(NULL,0);
+	if (!pwd)
+		pwd = global.old_pwd;
 	if (data->next)
 	{
 		if ((data->next->tatto == 5) || (data->next->tatto == 6) || (data->next->tatto == 7)
@@ -36,11 +39,12 @@ void	ft_cd(t_list *data, int check, char *path, char *pwd)
 			return ;
 		if ((data->next->arg[0] == '~') && (data->next->arg[1] == '\0'))
 			check = chdir("/Users/idabligi");
+		else if ((pwd == NULL) && (data->next->arg[0] == '.') && (data->next->arg[1] == '\0'))
+			printf("cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n");
 		else if (data->next->arg[0] == '/')
 			check = chdir(data->next->arg);
 		else
 		{
-			pwd = getcwd(NULL,0);
 			path = ft_strjoin2(pwd, data->next->arg);
 			check = chdir(path);
 			free (path);

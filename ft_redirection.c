@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 01:36:49 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/08 12:02:00 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/10 10:35:34 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,12 @@ void	ft_checkinput(t_list *data, int input, int i, t_store *store)
 		if (data->tatto == 7)
 		{
 			store->doc++;
-			input = ft_get_heredoc( store->doc, 0, 0);
-			open("heredoc", O_RDONLY);
+			input = ft_get_heredoc(store->doc, 0, 0);
 			if (dup2(input, STDIN_FILENO) < 0)
 				write(1, "error\n", 6);
 			close(input); 
 		}
-		data = data->next; 
+		data = data->next;
 	}
 	
 	if (input)

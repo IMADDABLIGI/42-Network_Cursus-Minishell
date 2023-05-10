@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/09 21:57:51 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/10 10:21:55 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	ft_execution(t_list *data, t_store *store,t_data *a , int fd)
 {
 	if (!(store->count))
 		return ;
-	if ((store->built) && !(store->pipe))
+	if ((store->built) && !(store->pipe))//just IN Parent
 	{
 		ft_checkinput(data, 0, 1, store);
 		if ((fd = ft_checkoutput(data, store, 1, 0)))
@@ -122,7 +122,7 @@ void	ft_execution(t_list *data, t_store *store,t_data *a , int fd)
 		// write(1, "here1\n", 6);
 		ft_exec1(data, store,a);
 	}
-	else if (store->exec == 1)
+	else if (store->exec == 1)//In Child Process
 	{
 		// write(1, "here2\n", 6);
 		ft_exec2(data, store, 1, 1, a);

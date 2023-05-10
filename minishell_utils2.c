@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/10 17:37:43 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/10 18:20:41 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_printerror(char *str, char *cmd)
 
 /*-------------------------------------------------------------------------------------*/
 
-void	ft_check_red(t_list *data, t_store *store, int num, int fd)
+void	ft_check_red(t_list *data, t_store *store, int fd)
 {
 	if ((data->tatto == 1) && (ft_check_builtins(data)))
 		store->built = 1;
@@ -32,11 +32,9 @@ void	ft_check_red(t_list *data, t_store *store, int num, int fd)
 	}
 	else if ((data->tatto == 5) && (store->check == 0))
 	{
-		if (((num = open(data->next->arg, O_RDONLY)) < 0))
-		{
+		if (((fd = open(data->next->arg, O_RDONLY)) < 0))
 			ft_printerror(": No such file or directory", data->next->arg);
-			store->check = 1;
-		}
+		close (fd);
 	}
 	else if (((data->tatto == 6) || (data->tatto == 8)) && (store->check == 0))
 	{
@@ -45,12 +43,11 @@ void	ft_check_red(t_list *data, t_store *store, int num, int fd)
 		else if (data->tatto == 8)
 			fd = open(data->next->arg, O_WRONLY | O_APPEND | O_CREAT, 0644);
 		if (fd < 0)
-		{
 			ft_printerror(": Is a directory", data->next->arg);
-			store->check = 1;    
-		}
 		close (fd);
 	}
+	if (fd < 0)
+		store->check = 1;
 }
 
 /*-------------------------------------------------------------------------------------*/
@@ -78,7 +75,7 @@ void	ft_check_arg(t_list *data, t_store *store)
 		}
 		if (ptr->tatto == 4 || ptr->tatto == 5 || ptr->tatto == 6
 			|| ptr->tatto == 8 || ptr->tatto == 1)
-				ft_check_red(ptr, store, 0, 0);
+				ft_check_red(ptr, store, 0);
 		ptr = ptr->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 01:36:49 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/10 17:50:41 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/10 18:50:58 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,9 @@
 
 //---------------------------------------------------------------------------//
 
-int	ft_check_redirections(t_list *data, int output, t_store *store)
-{
-	while ((data) && (data->tatto != 4))
-	{
-		if (data->tatto == 6)
-		{
-			if (output)
-				close (output);
-			if (!ft_strcmp(data->next->arg, "/dev/stdout"))
-				output = 0;
-			else
-				output = open(data->next->arg, O_WRONLY | O_TRUNC | O_CREAT, 0644);
-		}
-		else if (data->tatto == 8)
-		{
-			if (output)
-				close (output);
-			if (!ft_strcmp(data->next->arg, "/dev/stdout"))
-				output = 0;
-			else
-				output = open(data->next->arg, O_WRONLY | O_APPEND | O_CREAT, 0644);
-		}
-		if ((output < 0) && ((store->built) && !(store->pipe)))
-			return (-1);
-		if (output < 0)
-			exit (1);
-		data = data->next;
-	}
-	return (output);
-}
-
-//---------------------------------------------------------------------------//
-
 int	ft_checkoutput(t_list *data, t_store *store, int i, int output)
 {
-	if ((output = ft_check_redirections(data, 0, store)))
+	if ((output = ft_check_redirections2(data, 0, store)))
 		return (output);
 
 	if (i == store->count)
@@ -63,35 +30,12 @@ int	ft_checkoutput(t_list *data, t_store *store, int i, int output)
 	return (output);
 }
 
+
 //---------------------------------------------------------------------------//
 
 void	ft_checkinput(t_list *data, int input, int i, t_store *store)
 {
-
-	while (data && (data->tatto != 4))
-	{
-		if ((data->tatto == 5) && ((store->built == 0) || (store->pipe == 1)))
-		{
-			ft_creatfile(data);
-			if (((input = open(data->next->arg, O_RDONLY)) < 0))
-				exit (0);
-			else
-			{
-				dup2(input, STDIN_FILENO);
-				close(input); 
-			}
-		}
-		if (data->tatto == 7)
-		{
-			store->doc++;
-			input = ft_get_heredoc(store->doc, 0, 0);
-			if (dup2(input, STDIN_FILENO) < 0)
-				write(1, "error\n", 6);
-			close(input); 
-		}
-		data = data->next;
-	}
-	if (input)
+	if ((input = ft_check_redirections(data, store, 0)))
 		return ;
 	else
 	{

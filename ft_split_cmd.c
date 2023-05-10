@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/01 12:20:00 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/01 12:28:02 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/10 18:37:12 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,7 @@ static char	**ft_callstg(char **ptr, char *s, char c)
 	}
 	ptr = malloc((count + 1) * sizeof(char *));
 	if (!ptr)
-	{
-		free(ptr);
-		return (0);
-	}
+        ft_abort(1);
 	ptr[count] = 0;
 	return (ptr);
 }
@@ -82,6 +79,7 @@ static char	**free_all(char **ptr, size_t i)
 	while (i--)
 		free(ptr[i]);
 	free(ptr);
+    ft_abort(1);
 	return (0);
 }
 

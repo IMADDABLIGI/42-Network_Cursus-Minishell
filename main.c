@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/09 17:44:53 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/10 16:13:29 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,21 @@ int	ft_strcmp(char *s1, char *s2)
 	}
 	return (0);
 }
+int ft_check_n(char *str)
+{
+	int i;
+	i = 0;
+	if (str[i] != '-')
+		return(0);
+	i++;
+	while (str[i])
+	{
+		if (str[i] != 'n')
+			return(0);
+		i++;
+	}
+	return(1);
+}
 void ft_echo(t_list *data)
 {
 	t_list *k;
@@ -35,7 +50,7 @@ void ft_echo(t_list *data)
 	a=0;
 	k=data;
 	k=k->next;
-	while (k && !ft_strcmp(k->arg,"-n"))
+	while (k && ft_check_n(k->arg))
 	{
 		k=k->next;
 		a=1;
@@ -162,13 +177,13 @@ void ft_unset(t_list *data, t_data *a)
 		{
 	a->i=0;
 			if (!ft_isalpha(k->arg[a->i]))
-					printf("export: `%s': not a valid identifier\n",k->arg);
+					printf("unset: `%s': not a valid identifier\n",k->arg);
 			while (k->arg[a->i] && (ft_isalnum(k->arg[a->i]) == 1 || k->arg[a->i] == '_'))
 				a->i++;
 			if (!k->arg[a->i])
 				ft_unset2(a,k);
 			else
-					printf("export: `%s': not a valid identifier\n",k->arg);
+					printf("unset: `%s': not a valid identifier\n",k->arg);
 			k=k->next;
 		}
 }
@@ -461,8 +476,8 @@ void create_linked(t_data *a)
 	a->tmp1=a->p;
 	if (!ft_nothing(a->tmp1->arg))
 	{
-	ft_check_arg(a->tmp1, &store);
-	ft_execution(a->tmp1, &store, a, 0);
+			ft_check_arg(a->tmp1, &store);
+			ft_execution(a->tmp1, &store, a, 0);
 	}
 	else 
 		printf(" %s: command not found\n",a->tmp1->arg);
@@ -649,7 +664,7 @@ size_t ft_length1(t_data *a)
 }
 char *expand(t_data *a)
 {
-	a->ret = malloc(sizeof(char)*ft_length1(a));
+	a->ret = malloc(sizeof(char)*ft_length1(a)+1);
 	if (!a->ret)
 		ft_abort(1);
 	a->k=0;
@@ -792,6 +807,7 @@ int main(int argc,char **argv,char **env){
 			add_history(a.input);
 		expand(&a);
 		a.input=a.ret;
+		// printf("%s  \n",a.input);
 			if (!ft_nothing(a.input))
 				open_quote(&a);
 		}

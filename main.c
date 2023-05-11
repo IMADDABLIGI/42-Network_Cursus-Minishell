@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/11 13:57:32 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/11 15:03:24 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -813,7 +813,7 @@ int main(int argc,char **argv,char **env){
 			add_history(a.input);
 		expand(&a);
 		a.input=a.ret;
-		printf("%s  \n",a.input);
+		// printf("%s  \n",a.input);
 			if (!ft_nothing(a.input))
 				open_quote(&a);
 		}

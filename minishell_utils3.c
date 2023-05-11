@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils3.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 12:08:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/11 13:47:29 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/11 14:22:00 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,6 @@ char	*ft_strjoin2(char *s1, char *s2)
 	if (!string)
 		ft_abort(1);
 	ft_memcpy(string, s1, lens1);
-	// free(s1);
 	string[lens1] = '/';
 	ft_memcpy(string + lens1 + 1, s2, lens2);
 	string[mix] = '\0';

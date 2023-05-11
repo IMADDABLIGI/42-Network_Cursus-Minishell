@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/11 12:29:49 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/11 14:40:00 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ int	                ft_get_heredoc(int count, int fd, int check);
 int	                ft_creatfile(t_list *data);
 void	            ft_cd(t_list *data, int check, char *path, char *pwd);
 char				*ft_strjoin2(char *s1, char *s2);
+char				*ft_strjoin3(char *s1, char *s2);
 int					ft_check_redirections(t_list *data, t_store *store, int input);
 int					ft_check_redirections2(t_list *data, int output, t_store *store);
 

@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/10 19:05:10 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/11 12:29:49 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 typedef struct t_global
 {
 	int			gbl_doc;
+	char		*home;
 	char		*old_pwd;
 	char		*new_pwd;
 	int			gbl_check_doc;

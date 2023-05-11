@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:05:47 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/11 11:26:33 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/11 12:48:06 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ t_glb global;
 
 char	*ft_initial_cd(char *pwd, char *home)
 {
-	home = NULL;
+	if (!home)
+		global.home = getenv("HOME");
 	pwd = getcwd(NULL, 0);
 	if (pwd)
 	{
@@ -39,30 +40,34 @@ void	ft_cd(t_list *data, int check, char *path, char *pwd)
 	{
 		if ((data->next->tatto == 5) || (data->next->tatto == 6) || (data->next->tatto == 7)
 			|| (data->next->tatto == 8) || (data->next->tatto == 4))
-			return ;
-		if ((data->next->arg[0] == '~') && (data->next->arg[1] == '\0'))
-			check = chdir("/Users/idabligi");
-		else if ((pwd == NULL) && (data->next->arg[0] == '.') && (data->next->arg[1] == '\0'))
+			check = chdir(global.home);
+
+		else if ((data->next->arg[0] == '~') && (data->next->arg[1] == '\0'))
+			check = chdir(global.home);
+
+		else if (!pwd && (data->next->arg[0] == '.') && (data->next->arg[1] == '\0'))
 			printf("cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n");
+
 		else if (data->next->arg[0] == '/')
 			check = chdir(data->next->arg);
+
+		else if (!pwd && (data->next->arg[0] == '.') && (data->next->arg[1] == '.') && (data->next->arg[2] == '\0'))
+			check = chdir(global.old_pwd);
+
 		else
 		{
-			if (!pwd && (data->next->arg[0] == '.') && (data->next->arg[1] == '.') && (data->next->arg[2] == '\0'))
-				path = global.old_pwd;
-			else
+			if (!pwd)
+				check = -1;
+			else 
 			{
-				if (!pwd)
-					pwd = global.old_pwd;
 				path = ft_strjoin2(pwd, data->next->arg);
-			}
-			check = chdir(path);
-			if (path)
+				check = chdir(path);
 				free (path);
+			}
 		}
 	}
 	else
-		check = chdir("/Users/idabligi");
+		check = chdir(global.home);
 	if (check == -1)
 	{
 		if (data->next)

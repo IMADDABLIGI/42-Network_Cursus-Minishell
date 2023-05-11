@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/10 20:42:14 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/11 10:26:40 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -251,7 +251,7 @@ void ft_pwd(t_list *data)
 
     cwd = getcwd(NULL,0);
     if (!cwd)
-        printf("%s\n", global.old_pwd);
+        printf("%s\n", global.new_pwd);
     else
         printf("%s\n",cwd);
     if (cwd)

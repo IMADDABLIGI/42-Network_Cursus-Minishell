@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils3.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 12:08:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/11 10:28:54 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/11 13:47:29 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ static char	*ft_return(char *p, char  *s1, char *s2)
 		p[y + a] = s2[a];
 		a++;
 	}
-	free(s2);
+	free(s1);
 	return (p);
 }
 

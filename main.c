@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/11 12:50:20 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/11 13:57:32 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -198,6 +198,16 @@ void ft_export(t_list *data, t_data *a)
 			if (!k->arg[a->i])
 			{
 				if (!ft_export2(a,k,0,0))
+				{
+					a->tmp = ft_lstnew_env(k->arg);
+					if (!a->tmp)
+						ft_abort(1);
+					ft_lstadd_back_env(&a->e,a->tmp);
+				}
+			}
+			else if (k->arg[a->i] == '+' && k->arg[a->i+1] == '=')
+			{
+				if (!ft_export2(a,k,0,2))
 				{
 					a->tmp = ft_lstnew_env(k->arg);
 					if (!a->tmp)
@@ -487,6 +497,8 @@ size_t ft_export2(t_data *a,t_list *data,int i,int index)
 	before = ft_strdup(a->strenv);
 	if (index == 1)
 		a->strenv=ft_strjoin22(a->strenv,'=');
+	else if (index == 2)
+		before = ft_strjoin(before,"+=");
 	a->tmp = a->e;
 	while (a->tmp)
 	{
@@ -498,6 +510,8 @@ size_t ft_export2(t_data *a,t_list *data,int i,int index)
 			free(a->tmp->arg);
 			a->tmp->arg = ft_strdup(data->arg);
 			}
+			else if (index == 2)
+				a->tmp->arg = ft_strjoin(a->tmp->arg,ft_strnstr(data->arg,before));
 			return (free(a->strenv),free(before),1);
 		}
 		a->tmp = a->tmp->next;

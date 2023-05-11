@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/11 15:31:14 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/11 15:33:35 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -498,7 +498,7 @@ size_t ft_export2(t_data *a,t_list *data,int i,int index)
 	if (index == 1)
 		a->strenv=ft_strjoin22(a->strenv,'=');
 	else if (index == 2)
-		before = ft_strjoin(before,"+=");
+		before = ft_strjoin(before,"+=",1);
 	a->tmp = a->e;
 	while (a->tmp)
 	{

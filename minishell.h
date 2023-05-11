@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/11 14:40:00 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/11 15:31:03 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ void				ft_run_doc(t_list *data, t_store *store);
 void				ft_here_doc(t_list *data, int doc, int num, char *line);
 int					ft_strcmp(char *s1, char *s2);
 char				*ft_itoa(int n);
-char				*ft_strjoin(char *s1, char *s2);
+char				*ft_strjoin(char *s1, char *s2,int index);
 int	                ft_get_heredoc(int count, int fd, int check);
 int	                ft_creatfile(t_list *data);
 void	            ft_cd(t_list *data, int check, char *path, char *pwd);

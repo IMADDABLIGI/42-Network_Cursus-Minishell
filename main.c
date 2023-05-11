@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/11 15:03:24 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/11 15:31:14 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -511,7 +511,7 @@ size_t ft_export2(t_data *a,t_list *data,int i,int index)
 			a->tmp->arg = ft_strdup(data->arg);
 			}
 			else if (index == 2)
-				a->tmp->arg = ft_strjoin(a->tmp->arg,ft_strnstr(data->arg,before));
+				a->tmp->arg = ft_strjoin(a->tmp->arg,ft_strnstr(data->arg,before),1);
 			return (free(a->strenv),free(before),1);
 		}
 		a->tmp = a->tmp->next;
@@ -813,7 +813,7 @@ int main(int argc,char **argv,char **env){
 			add_history(a.input);
 		expand(&a);
 		a.input=a.ret;
-		// printf("%s  \n",a.input);
+		printf("%s  \n",a.input);
 			if (!ft_nothing(a.input))
 				open_quote(&a);
 		}

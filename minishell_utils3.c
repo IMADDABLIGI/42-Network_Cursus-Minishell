@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils3.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 12:08:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/11 14:22:00 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/11 15:30:54 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	*ft_itoa(int n)
 
 //---------------------------------------------------------------------------//
 
-static char	*ft_return(char *p, char  *s1, char *s2)
+static char	*ft_return(char *p, char  *s1, char *s2,int index)
 {
 	size_t	y;
 	size_t	a;
@@ -84,13 +84,16 @@ static char	*ft_return(char *p, char  *s1, char *s2)
 		p[y + a] = s2[a];
 		a++;
 	}
-	free(s1);
+	if	(index == 1)
+		free(s1);
+	else if (index == 0)
+		free(s2);
 	return (p);
 }
 
 //----------------------------------------------------------------------------//
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin(char *s1, char *s2,int index)
 {
 	char	*p;
 
@@ -103,7 +106,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	p = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
 	if (!p)
 		ft_abort(1);
-	return (ft_return(p, s1, s2));
+	return (ft_return(p, s1, s2,index));
 }
 
 //---------------------------------------------------------------------------//

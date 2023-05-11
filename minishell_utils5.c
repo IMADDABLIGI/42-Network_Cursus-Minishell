@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:48:03 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/11 15:11:32 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/11 15:17:26 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	ft_cd(t_list *data, int check, char *path, char *pwd)
 			|| (data->next->tatto == 8) || (data->next->tatto == 4))
 			return ;
 		if ((data->next->arg[0] == '~') && (data->next->arg[1] == '\0'))
-			check = chdir("/Users/idabligi");
+			check = chdir(global.home);
 
 		else if ((data->next->arg[0] == '~') && (data->next->arg[1] == '/'))
 			check = ft_get_home(data, NULL, 0);

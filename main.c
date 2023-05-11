@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/11 11:49:17 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/11 12:50:20 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,7 @@ void ft_echo(t_list *data)
 	if (!a)
 		printf("\n");
 }
-// void ft_cd(t_list *data)
-// {
-// 	t_list *k;
-// 	printf("salam\n");
-// 	k=data;
-// 	k = k->next;
-// 	if (chdir(k->arg))
-// 	{
-// 		printf("cd: %s :No such file or directory\n",k->arg);
-// 	}
-// }
+
 int find_(char *a)
 {
 	int p;
@@ -198,7 +188,7 @@ void ft_export(t_list *data, t_data *a)
 	{
 		while (k && k->tatto == 2)
 		{
-	a->i=0;
+			a->i=0;
 			if (!ft_isalpha(k->arg[a->i]))
 					printf("export: `%s': not a valid identifier\n",k->arg);
 			else
@@ -214,18 +204,15 @@ void ft_export(t_list *data, t_data *a)
 						ft_abort(1);
 					ft_lstadd_back_env(&a->e,a->tmp);
 				}
-				}
+			}
 			else if (k->arg[a->i] != '=')
 					printf("export: `%s': not a valid identifier\n",k->arg);
-			else 
-			{				
-				if (!ft_export2(a,k,0,1))
-				{
+			else if (!ft_export2(a,k,0,1))
+			{
 					a->tmp = ft_lstnew_env(k->arg);
 					if (!a->tmp)
 						ft_abort(1);
 					ft_lstadd_back_env(&a->e,a->tmp);
-				}
 			}
 			} 
 		k=k->next;
@@ -251,7 +238,7 @@ void ft_pwd(t_list *data)
 
     cwd = getcwd(NULL,0);
     if (!cwd)
-        printf("%s\n", global.old_pwd);
+        printf("%s\n", global.new_pwd);
     else
         printf("%s\n",cwd);
     if (cwd)
@@ -491,27 +478,31 @@ size_t ft_export2(t_data *a,t_list *data,int i,int index)
 {
 	a->strenv = NULL;
 	char *tmp;
+	char *before;
 	while (data->arg[i] && (ft_isalnum(data->arg[i]) || data->arg[i] == '_'))
 	{
 		a->strenv=ft_strjoin22(a->strenv,data->arg[i]);
 		i++;
 	}
+	before = ft_strdup(a->strenv);
 	if (index == 1)
 		a->strenv=ft_strjoin22(a->strenv,'=');
 	a->tmp = a->e;
 	while (a->tmp)
 	{
 		tmp = ft_strnstr(a->tmp->arg,a->strenv);
-		if (tmp)
+		if (tmp || !(ft_strcmp(before,a->tmp->arg)))
 		{
-			free(a->strenv);
+			if (index == 1)
+			{
 			free(a->tmp->arg);
 			a->tmp->arg = ft_strdup(data->arg);
-			return (1);
+			}
+			return (free(a->strenv),free(before),1);
 		}
 		a->tmp = a->tmp->next;
 	}
-	return(free(a->strenv),0);
+	return(free(a->strenv),free(before),0);
 }
 /**************************************************************/
 void change1(t_data *a)
@@ -575,12 +566,10 @@ void ft_change(t_data *a,int index)
 	while (a->tmp)
 	{
 		a->strtmp = ft_strnstr(a->tmp->arg,a->strenv);
-		if (a->strtmp&& index ==0)
+		if (a->strtmp && index ==0)
 			change1(a);
 		else if (a->strtmp&& index == 1)
-		{
 			change2(a);
-		}
 		a->tmp = a->tmp->next;
 	}
 	free(a->strenv);
@@ -739,7 +728,6 @@ void open_quote(t_data *a)
 		printf("\e[1;31m open quotes!\n\e[0m");
 	else
 	{
-		// ft_separit(a);
 		if (!ft_separit(a))
 			free_all22(a->tab,a->length);
 		ft_lstclear(&a->p); 

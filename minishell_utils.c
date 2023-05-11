@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:05:47 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/10 20:44:26 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/11 12:01:43 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,27 +16,30 @@ t_glb global;
 
 //---------------------------------------------------------------//
 
-// void	ft_re_env()
-// {
-// 	global.old_pwd = ft_strjoin("OLDPWD=", global.old_pwd);
-// 	printf("%s\n", global.old_pwd);
-// }
+char	*ft_initial_cd(char *pwd, char *home)
+{
+	home = NULL;
+	pwd = getcwd(NULL, 0);
+	if (pwd)
+	{
+		if (global.old_pwd)
+			free (global.old_pwd);
+		global.old_pwd = pwd;
+	}
+	return (pwd);
+}
 
 //---------------------------------------------------------------//
 
 void	ft_cd(t_list *data, int check, char *path, char *pwd)
 {
-	if (global.old_pwd)
-		free(global.old_pwd);
-	global.old_pwd = getcwd(NULL,0);
-	pwd = getcwd(NULL,0);
-	if (!pwd)
-		pwd = global.old_pwd;
+	pwd = ft_initial_cd(NULL, NULL);
+	printf("OLDPWD=%s\n", global.old_pwd);
 	if (data->next)
 	{
-		if ((data->next->tatto == 5) || (data->next->tatto == 6) || (data->next->tatto == 7)
-			|| (data->next->tatto == 8) || (data->next->tatto == 4))
-			return ;
+		// if ((data->next->tatto == 5) || (data->next->tatto == 6) || (data->next->tatto == 7)
+		// 	|| (data->next->tatto == 8) || (data->next->tatto == 4))
+		// 	return ;
 		if ((data->next->arg[0] == '~') && (data->next->arg[1] == '\0'))
 			check = chdir("/Users/idabligi");
 		else if ((pwd == NULL) && (data->next->arg[0] == '.') && (data->next->arg[1] == '\0'))
@@ -45,9 +48,17 @@ void	ft_cd(t_list *data, int check, char *path, char *pwd)
 			check = chdir(data->next->arg);
 		else
 		{
-			path = ft_strjoin2(pwd, data->next->arg);
+			if (!pwd && (data->next->arg[0] == '.') && (data->next->arg[1] == '.') && (data->next->arg[2] == '\0'))
+				path = global.old_pwd;
+			else
+			{
+				if (!pwd)
+					pwd = global.old_pwd;
+				path = ft_strjoin2(pwd, data->next->arg);
+			}
 			check = chdir(path);
-			free (path);
+			if (path)
+				free (path);
 		}
 	}
 	else
@@ -60,9 +71,14 @@ void	ft_cd(t_list *data, int check, char *path, char *pwd)
 			perror("cd");
 		return ;
 	}
-	// global.new_pwd = getcwd(NULL, 0);
-	// printf("PWD=%s\n", global.new_pwd);
-	// printf("OLDPWD=%s\n", global.old_pwd);
+	printf("NEWPWD=%s\n", global.new_pwd);
+	if (pwd)
+	{
+		if (global.new_pwd)
+			free (global.new_pwd);
+		global.new_pwd = getcwd(NULL, 0);
+	}
+	printf("NEWPWD=%s\n", global.new_pwd);
 	// ft_re_env();
 }
 

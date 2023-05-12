@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:48:03 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/12 14:52:17 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/12 15:07:14 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ void	ft_re_env(t_data *a,char *old_path,char *new_path)
 						ft_abort(1);
 					ft_lstadd_back_env(&a->e,a->tmp);
 				}
+				free(old_path);
+				free(new_path);
 }
 //---------------------------------------------------------------//
 void	ft_cd(t_list *data, char *path, char *pwd,t_data *a)

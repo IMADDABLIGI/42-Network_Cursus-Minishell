@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:05:47 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/11 15:32:43 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/12 09:50:55 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ void	*ft_memcpy(void *dst, const char *src, int n)
 
 void	ft_run_doc(t_list *data, t_store *store)
 {
-	// global.gbl_doc = 1;
-	// global.gbl_check_doc = 1;
 	store->doc = 0;
 	while (data)
 	{
@@ -50,7 +48,6 @@ void	ft_run_doc(t_list *data, t_store *store)
 		data = data->next;
 	}
 	store->doc = 0;
-	// global.gbl_check_doc = 0;
 }
 
 //---------------------------------------------------------------//
@@ -61,7 +58,7 @@ int	ft_get_heredoc( int count, int fd, int check)
 	char	*join;
 
 	itoa = ft_itoa(count);
-	join = ft_strjoin("/tmp/", itoa,0);
+	join = ft_strjoin("/tmp/", itoa, 0);
 	if (check)
 	{
 		unlink(join);
@@ -93,7 +90,6 @@ void	ft_here_doc(t_list *data, int doc, int num, char *line)
 			close (num);
 			return ;
 		}
-		
 		write(num, line, ft_strlen(line));
 		write(num, "\n", 1);
 		free(line);

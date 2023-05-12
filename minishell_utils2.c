@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/10 18:20:41 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/12 09:52:28 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@ void	ft_check_red(t_list *data, t_store *store, int fd)
 		store->pipe = 1;
 		store->check = 0;
 	}
-	else if ((data->tatto == 5) && (store->check == 0))
+	else if ((data->tatto == 5) && !store->check)
 	{
 		if (((fd = open(data->next->arg, O_RDONLY)) < 0))
 			ft_printerror(": No such file or directory", data->next->arg);
 		close (fd);
 	}
-	else if (((data->tatto == 6) || (data->tatto == 8)) && (store->check == 0))
+	else if (((data->tatto == 6) || (data->tatto == 8)) && !store->check)
 	{
 		if (data->tatto == 6)
 			fd = open(data->next->arg, O_WRONLY | O_TRUNC | O_CREAT, 0644);

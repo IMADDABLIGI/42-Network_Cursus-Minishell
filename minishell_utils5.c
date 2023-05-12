@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:48:03 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/11 15:17:26 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/12 10:47:27 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ char	*ft_initial_cd(char *pwd, char *home)
 int ft_get_home(t_list *data, char *path, int check)
 {
 	path = ft_strjoin3(global.home, data->next->arg);
-	// printf("arg %s\n", path);
 	check = chdir(path);
 	if (check == -1)
 	{
@@ -51,13 +50,13 @@ int ft_get_home(t_list *data, char *path, int check)
 void	ft_cd(t_list *data, int check, char *path, char *pwd)
 {
 	pwd = ft_initial_cd(NULL, NULL);
-	// printf("OLDPWD=%s\n", global.old_pwd);
+	printf("OLDPWD=%s\n", global.old_pwd);
 	if (data->next)
 	{
 		if ((data->next->tatto == 5) || (data->next->tatto == 6) || (data->next->tatto == 7)
 			|| (data->next->tatto == 8) || (data->next->tatto == 4))
-			return ;
-		if ((data->next->arg[0] == '~') && (data->next->arg[1] == '\0'))
+				check = chdir(global.home);
+		else if ((data->next->arg[0] == '~') && (data->next->arg[1] == '\0'))
 			check = chdir(global.home);
 
 		else if ((data->next->arg[0] == '~') && (data->next->arg[1] == '/'))
@@ -96,13 +95,12 @@ void	ft_cd(t_list *data, int check, char *path, char *pwd)
 	}
 	if (check == -2)
 		return ;
-	// printf("NEWPWD=%s\n", global.new_pwd);
 	if (pwd)
 	{
 		if (global.new_pwd)
 			free (global.new_pwd);
 		global.new_pwd = getcwd(NULL, 0);
 	}
-	// printf("NEWPWD=%s\n", global.new_pwd);
+	printf("NEWPWD=%s\n", global.new_pwd);
 	// ft_re_env();
 }

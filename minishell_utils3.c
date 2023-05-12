@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils3.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 12:08:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/11 15:30:54 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/11 16:17:54 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ char	*ft_strjoin(char *s1, char *s2,int index)
 	p = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
 	if (!p)
 		ft_abort(1);
-	return (ft_return(p, s1, s2,index));
+	return (ft_return(p, s1, s2, index));
 }
 
 //---------------------------------------------------------------------------//

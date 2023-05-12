@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:42:51 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/11 14:42:35 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/12 10:30:42 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	ft_check_redirections(t_list *data, t_store *store, int input)
 			else
 			{
 				dup2(input, STDIN_FILENO);
-				close(input); 
+				close(input);
 			}
 		}
 		else if (data->tatto == 7)
@@ -35,7 +35,7 @@ int	ft_check_redirections(t_list *data, t_store *store, int input)
 			store->doc++;
 			input = ft_get_heredoc(store->doc, 0, 0);
 			if (dup2(input, STDIN_FILENO) < 0)
-				write(1, "error\n", 6);
+				perror("dup2");
 			close(input);
 		}
 		data = data->next;

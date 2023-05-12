@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:48:03 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/12 15:14:02 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/12 15:16:33 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,28 +107,21 @@ void	ft_cd(t_list *data, char *path, char *pwd,t_data *a)
 				a->check = chdir(global.home);
 		else if ((data->next->arg[0] == '~') && (data->next->arg[1] == '\0'))
 			a->check = chdir(global.home);
-
 		else if ((data->next->arg[0] == '~') && (data->next->arg[1] == '/'))
 			a->check = ft_get_home(data, NULL, 0);
-		
 		else if ((pwd == NULL) && (data->next->arg[0] == '.') && (data->next->arg[1] == '\0'))
 			printf("cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n");
 		else if (data->next->arg[0] == '/')
 			a->check = chdir(data->next->arg);
-
 		else if (!pwd && (data->next->arg[0] == '.') && (data->next->arg[1] == '.') && (data->next->arg[2] == '\0'))
 			a->check = chdir(global.old_pwd);
-
+        else if (!pwd)
+			return ;
 		else
 		{
-			if (!pwd)
-				a->check = -1;
-			else
-			{
-				path = ft_strjoin2(pwd, data->next->arg);
-				a->check = chdir(path);
-				free (path);
-			}
+            path = ft_strjoin2(pwd, data->next->arg);
+            a->check = chdir(path);
+            free (path);
 		}
 	}
 	else

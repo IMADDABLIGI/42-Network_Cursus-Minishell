@@ -6,7 +6,7 @@
 #    By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/16 18:27:52 by hznagui           #+#    #+#              #
-#    Updated: 2023/05/12 10:45:02 by hznagui          ###   ########.fr        #
+#    Updated: 2023/05/12 15:02:34 by hznagui          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,8 @@ SRC_FILE = 	main.c\
 			tools1.c\
 			tools2.c\
 			tools3.c\
+			tools4.c\
+			tools5.c\
 			ft_split_cmd.c\
 			ft_execution.c\
 			ft_redirection.c\

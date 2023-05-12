@@ -6,21 +6,21 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/12 14:58:13 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/12 15:13:09 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <stdio.h>
 # include <fcntl.h>
-#include <sys/stat.h>
+# include <stdio.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <signal.h>
 # include <stdbool.h>
 # include <stdlib.h>
+# include <sys/stat.h>
 # include <sys/wait.h>
 # include <unistd.h>
 
@@ -72,7 +72,7 @@ typedef struct data
 	int				z;
 	int				lock;
 	int				lock1;
-	 int check;
+	int				check;
 	size_t			k;
 	size_t			length;
 	size_t			i;
@@ -93,19 +93,25 @@ char				**ft_split22(t_data *a);
 char				**free_all22(char **str, int max);
 char				*ft_strdup(char *s1);
 size_t				ft_strlen(char *s);
+void				ft_echo(t_list *data);
 char				*ft_strnstr(char *haystack, char *needle);
 char				*ft_substr(char *s, unsigned int start, size_t len);
 void				ft_lstadd_back_env(t_env **lst, t_env *new);
 t_env				*ft_lstnew_env(char *table);
-size_t ft_export2(t_data *a,char *arg,int i,int index);
+size_t				ft_export2(t_data *a, char *arg, int i, int index);
 char				*ft_strjoin22(char *s1, char s2);
 void				ft_abort(int id);
-char *expand_her(t_data *a);
-int	ft_isalnum(int c);
-int	ft_isdigit(int c);
+char				*expand_her(t_data *a);
+int					ft_isalnum(int c);
+int	ft_check_n(char *str);
+void	ft_env(t_data *a, t_list *data);
+void	ft_unset(t_list *data, t_data *a);
+void	ft_print(char *arg);
+int	ft_isalpha(int c);
+int					ft_isdigit(int c);
 int					ft_check_builtins(t_list *data);
 void				ft_execute_builtins(t_list *data, t_data *a);
-size_t ft_export2(t_data *a,char *arg,int i,int index);
+size_t				ft_export2(t_data *a, char *arg, int i, int index);
 /*new*/
 void				ft_checkinput(t_list *data, int input, int i,
 						t_store *store);
@@ -119,7 +125,7 @@ void				ft_execution(t_list *data, t_store *store, t_data *a,
 char				**ft_arg(t_list *data, t_list *ptr, char **arg, int i);
 void				ft_printerror(char *str, char *cmd);
 void				ft_redirect(t_list *data, t_store *store, int i, t_data *a);
-void	ft_check_arg(t_list *data, t_store *store,t_data *a);
+void				ft_check_arg(t_list *data, t_store *store, t_data *a);
 void				ft_check_next(t_list *data);
 void				ft_run_doc(t_list *data, t_store *store, t_data *a);
 void				ft_here_doc(t_list *data, int doc, int num, t_data *a);
@@ -128,7 +134,7 @@ char				*ft_itoa(int n);
 char				*ft_strjoin(char *s1, char *s2, int index);
 int					ft_get_heredoc(int count, int fd, int check);
 int					ft_creatfile(t_list *data);
-void	ft_cd(t_list *data, char *path, char *pwd,t_data *a);
+void				ft_cd(t_list *data, char *path, char *pwd, t_data *a);
 char				*ft_strjoin2(char *s1, char *s2);
 char				*ft_strjoin3(char *s1, char *s2);
 int					ft_check_redirections(t_list *data, t_store *store, int input);

@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/12 15:13:09 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/12 18:37:56 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 
 typedef struct t_global
 {
+	int				doc;
+	int				save;
 	char			*home;
 	char			*old_pwd;
 	char			*new_pwd;
@@ -125,9 +127,9 @@ void				ft_execution(t_list *data, t_store *store, t_data *a,
 char				**ft_arg(t_list *data, t_list *ptr, char **arg, int i);
 void				ft_printerror(char *str, char *cmd);
 void				ft_redirect(t_list *data, t_store *store, int i, t_data *a);
-void				ft_check_arg(t_list *data, t_store *store, t_data *a);
+int					ft_check_arg(t_list *data, t_store *store, t_data *a);
 void				ft_check_next(t_list *data);
-void				ft_run_doc(t_list *data, t_store *store, t_data *a);
+int					ft_run_doc(t_list *data, t_store *store, t_data *a);
 void				ft_here_doc(t_list *data, int doc, int num, t_data *a);
 int					ft_strcmp(char *s1, char *s2);
 char				*ft_itoa(int n);

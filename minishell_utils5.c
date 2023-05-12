@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:48:03 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/12 15:50:38 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/12 21:07:25 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ t_glb global;
 
 //---------------------------------------------------------------//
 
-char	*ft_initial_cd(char *pwd, char *home,t_data *a)
+char	*ft_initial_cd(char *pwd, char *home, t_data *a)
 {
-	a->check=0;
+	a->check = 0;
 	if (!home)
 		global.home = getenv("HOME");
 	pwd = getcwd(NULL, 0);
@@ -41,7 +41,7 @@ int ft_get_home(t_list *data, char *path, int check)
 	stat(path, &sb);
 	if (S_ISREG(sb.st_mode))
 	{
-    	printf("cd: %s: Not a directory\n", path);
+		printf("cd: %s: Not a directory\n", path);
 		free(path);
 		return (-2);
 	}
@@ -53,21 +53,6 @@ int ft_get_home(t_list *data, char *path, int check)
 		return (-2);
 	}
 	free (path);
-	return (1);
-}
-
-//---------------------------------------------------------------//
-
-int	ft_check_dr(char *path)
-{
-	struct stat sb;
-
-	stat(path, &sb);
-	if (S_ISREG(sb.st_mode))
-	{
-    	printf("cd: %s: Not a directory\n", path);
-		return (0);
-	}
 	return (1);
 }
 
@@ -94,37 +79,47 @@ void	ft_re_env(t_data *a,char *old_path,char *new_path)
 	free(old_path);
 	free(new_path);
 }
+
 //---------------------------------------------------------------//
-void	ft_cd(t_list *data, char *path, char *pwd,t_data *a)
+
+int	ft_cds(t_list *data, char *pwd, int check, char *path)
+{
+	if (!ft_check_dr(data->next->arg))
+			return (-2);
+	if ((data->next->tatto == 5) || (data->next->tatto == 6) || (data->next->tatto == 7)
+		|| (data->next->tatto == 8) || (data->next->tatto == 4))
+			check = chdir(global.home);
+	else if ((data->next->arg[0] == '~') && (data->next->arg[1] == '\0'))
+		check = chdir(global.home);
+	else if ((data->next->arg[0] == '~') && (data->next->arg[1] == '/'))
+		check = ft_get_home(data, NULL, 0);
+	else if ((pwd == NULL) && (data->next->arg[0] == '.') && (data->next->arg[1] == '\0'))
+		printf("cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n");
+	else if (data->next->arg[0] == '/')
+		check = chdir(data->next->arg);
+	else if (!pwd && (data->next->arg[0] == '.') && (data->next->arg[1] == '.') && (data->next->arg[2] == '\0'))
+		check = chdir(global.old_pwd);
+	else if (!pwd)
+		return (-2);
+	else
+	{
+		path = ft_strjoin2(pwd, data->next->arg);
+		check = chdir(path);
+		free (path);
+	}
+	return (check);
+}
+
+//---------------------------------------------------------------//
+
+void	ft_cd(t_list *data, char *pwd,t_data *a)
 {
 	pwd = ft_initial_cd(NULL, NULL,a);
 	if (data->next)
-	{
-		if (!ft_check_dr(data->next->arg))
-			return ;
-		if ((data->next->tatto == 5) || (data->next->tatto == 6) || (data->next->tatto == 7)
-			|| (data->next->tatto == 8) || (data->next->tatto == 4))
-				a->check = chdir(global.home);
-		else if ((data->next->arg[0] == '~') && (data->next->arg[1] == '\0'))
-			a->check = chdir(global.home);
-		else if ((data->next->arg[0] == '~') && (data->next->arg[1] == '/'))
-			a->check = ft_get_home(data, NULL, 0);
-		else if ((pwd == NULL) && (data->next->arg[0] == '.') && (data->next->arg[1] == '\0'))
-			printf("cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n");
-		else if (data->next->arg[0] == '/')
-			a->check = chdir(data->next->arg);
-		else if (!pwd && (data->next->arg[0] == '.') && (data->next->arg[1] == '.') && (data->next->arg[2] == '\0'))
-			a->check = chdir(global.old_pwd);
-        else if (!pwd)
-			return ;
-		else
-		{
-            path = ft_strjoin2(pwd, data->next->arg);
-            a->check = chdir(path);
-            free (path);
-		}
-	}
-	else
+		a->check = ft_cds(data, pwd, 0, NULL);
+	if (a->check == -2)
+		return ;
+	else if (!data->next)
 		a->check = chdir(global.home);
 	if (a->check == -1)
 	{
@@ -134,13 +129,11 @@ void	ft_cd(t_list *data, char *path, char *pwd,t_data *a)
 			perror("cd ");
 		return ;
 	}
-	if (a->check == -2)
-		return ;
 	if (pwd || (!pwd && (data->next->arg[0] == '.') && (data->next->arg[1] == '.') && (data->next->arg[2] == '\0')))
 	{
 		if (global.new_pwd)
 			free (global.new_pwd);
 		global.new_pwd = getcwd(NULL, 0);
 	}
-	ft_re_env(a,NULL,NULL);
+	ft_re_env(a, NULL, NULL);
 }

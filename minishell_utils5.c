@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:48:03 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/12 14:44:06 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/12 14:49:37 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,6 @@ void	ft_re_env(t_data *a,char *old_path,char *new_path)
 void	ft_cd(t_list *data, int check, char *path, char *pwd,t_data *a)
 {
 	pwd = ft_initial_cd(NULL, NULL);
-	(void)a;
-	// printf("OLDPWD=%s\n", global.old_pwd);
 	if (data->next)
 	{
 		if (!ft_check_dr(data->next->arg))

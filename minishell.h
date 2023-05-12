@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/12 14:56:52 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/12 14:58:13 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,7 @@ int					ft_creatfile(t_list *data);
 void	ft_cd(t_list *data, char *path, char *pwd,t_data *a);
 char				*ft_strjoin2(char *s1, char *s2);
 char				*ft_strjoin3(char *s1, char *s2);
-int					ft_check_redirections(t_list *data, t_store *store,
-						int input);
+int					ft_check_redirections(t_list *data, t_store *store, int input);
 int					ft_check_redirections2(t_list *data, int output,
 						t_store *store);
 

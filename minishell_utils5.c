@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:48:03 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/12 14:57:29 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/12 15:10:41 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,20 +77,22 @@ void	ft_re_env(t_data *a,char *old_path,char *new_path)
 {
 	old_path = ft_strjoin("OLDPWD=",global.old_pwd,3);
 	new_path = ft_strjoin("PWD=",global.new_pwd,3);
-			if (!ft_export2(a,old_path,0,1))
-				{
-					a->tmp = ft_lstnew_env(old_path);
-					if (!a->tmp)
-						ft_abort(1);
-					ft_lstadd_back_env(&a->e,a->tmp);
-				}
-			if (!ft_export2(a,new_path,0,1))
-				{
-					a->tmp = ft_lstnew_env(new_path);
-					if (!a->tmp)
-						ft_abort(1);
-					ft_lstadd_back_env(&a->e,a->tmp);
-				}
+	if (!ft_export2(a,old_path,0,1))
+	{
+		a->tmp = ft_lstnew_env(old_path);
+		if (!a->tmp)
+			ft_abort(1);
+		ft_lstadd_back_env(&a->e,a->tmp);
+	}
+	if (!ft_export2(a,new_path,0,1))
+	{
+		a->tmp = ft_lstnew_env(new_path);
+		if (!a->tmp)
+			ft_abort(1);
+		ft_lstadd_back_env(&a->e,a->tmp);
+	}
+	free(old_path);
+	free(new_path);
 }
 //---------------------------------------------------------------//
 void	ft_cd(t_list *data, char *path, char *pwd,t_data *a)

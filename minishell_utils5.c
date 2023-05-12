@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:48:03 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/12 15:07:14 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/12 15:11:14 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,21 @@ char	*ft_initial_cd(char *pwd, char *home,t_data *a)
 
 int ft_get_home(t_list *data, char *path, int check)
 {
+	struct stat sb;
+
 	path = ft_strjoin3(global.home, data->next->arg);
+	stat(path, &sb);
+	if (S_ISREG(sb.st_mode))
+	{
+    	printf("cd: %s: Not a directory\n", path);
+		free(path);
+		return (-2);
+	}
 	check = chdir(path);
 	if (check == -1)
 	{
 		printf("cd: %s: No such file or directory\n", path);
+		free (path);
 		return (-2);
 	}
 	free (path);
@@ -60,6 +70,7 @@ int	ft_check_dr(char *path)
 	}
 	return (1);
 }
+
 //---------------------------------------------------------------//
 
 void	ft_re_env(t_data *a,char *old_path,char *new_path)
@@ -102,7 +113,6 @@ void	ft_cd(t_list *data, char *path, char *pwd,t_data *a)
 		
 		else if ((pwd == NULL) && (data->next->arg[0] == '.') && (data->next->arg[1] == '\0'))
 			printf("cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n");
-
 		else if (data->next->arg[0] == '/')
 			a->check = chdir(data->next->arg);
 

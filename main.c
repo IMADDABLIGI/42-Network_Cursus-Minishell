@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/12 15:03:51 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/12 15:10:53 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -653,27 +653,27 @@ void	handler(int status)
 {
 	(void)status;
 	global.gbl_doc = 0;
-	if (!global.gbl_check_doc)
-	{
-		printf("\n"); // Move to a new line
-		rl_replace_line("", 0);
-		rl_on_new_line(); // Regenerate the prompt on a newline
-		rl_redisplay();
-	}
-	else
-	{
-		printf("\n"); // Move to a new line
-		rl_redisplay();
-		rl_on_new_line(); // Regenerate the prompt on a newline
-		rl_replace_line("MINISHELL>> ", 0);
-	}
+    if (!global.gbl_check_doc)
+    {
+        printf("\n"); // Move to a new line
+        rl_replace_line("", 0);
+        rl_on_new_line(); // Regenerate the prompt on a newline
+        rl_redisplay();
+    }
+    else
+    {
+        printf("\n"); // Move to a new line
+        rl_redisplay();
+        rl_on_new_line(); // Regenerate the prompt on a newline
+        rl_replace_line("MINISHELL>> ", 0);
+    }
 }
 
 int	main(int argc, char **argv, char **env)
 {
 	t_data a;
-	global.gbl_check_doc = 0;
-
+    global.gbl_check_doc = 0;
+    
 	if (argc != 1)
 		ft_abort(2);
 	(void)argv;

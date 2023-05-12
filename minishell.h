@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/12 15:10:06 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/12 15:11:06 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,9 @@
 
 typedef struct t_global
 {
-	int				gbl_doc;
 	char			*home;
 	char			*old_pwd;
 	char			*new_pwd;
-	int				gbl_check_doc;
 }					t_glb;
 
 typedef struct t_shell

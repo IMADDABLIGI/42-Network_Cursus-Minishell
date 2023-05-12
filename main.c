@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/12 14:34:31 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/12 14:51:45 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -260,7 +260,7 @@ void ft_execute_builtins(t_list *data, t_data *a)
 	while(data && (data->tatto != 1))
 		data = data->next;
 	if (!ft_strcmp(data->arg,"cd"))
-		ft_cd(data, 0, NULL, NULL,a);
+		ft_cd(data, NULL, NULL,a);
 	else if (!ft_strcmp(data->arg,"echo"))
 		ft_echo(data);
 	else if (!ft_strcmp(data->arg,"export"))

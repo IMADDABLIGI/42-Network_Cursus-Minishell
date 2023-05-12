@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:48:03 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/12 10:47:27 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/12 13:07:08 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,29 @@ int ft_get_home(t_list *data, char *path, int check)
 
 //---------------------------------------------------------------//
 
+int	ft_check_dr(char *path)
+{
+	struct stat sb;
+
+	stat(path, &sb);
+	if (S_ISREG(sb.st_mode))
+	{
+    	printf("cd: %s: Not a directory\n", path);
+		return (0);
+	}
+	return (1);
+}
+
+//---------------------------------------------------------------//
+
 void	ft_cd(t_list *data, int check, char *path, char *pwd)
 {
 	pwd = ft_initial_cd(NULL, NULL);
 	printf("OLDPWD=%s\n", global.old_pwd);
 	if (data->next)
 	{
+		if (!ft_check_dr(data->next->arg))
+			return ;
 		if ((data->next->tatto == 5) || (data->next->tatto == 6) || (data->next->tatto == 7)
 			|| (data->next->tatto == 8) || (data->next->tatto == 4))
 				check = chdir(global.home);
@@ -95,7 +112,7 @@ void	ft_cd(t_list *data, int check, char *path, char *pwd)
 	}
 	if (check == -2)
 		return ;
-	if (pwd)
+	if (pwd || (!pwd && (data->next->arg[0] == '.') && (data->next->arg[1] == '.') && (data->next->arg[2] == '\0')))
 	{
 		if (global.new_pwd)
 			free (global.new_pwd);

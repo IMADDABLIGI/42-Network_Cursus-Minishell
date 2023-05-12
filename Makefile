@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+         #
+#    By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/16 18:27:52 by hznagui           #+#    #+#              #
-#    Updated: 2023/05/11 14:49:47 by idabligi         ###   ########.fr        #
+#    Updated: 2023/05/12 10:45:02 by hznagui          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ FLAGS = -Wall -Wextra -Werror
 SRC_FILE = 	main.c\
 			tools1.c\
 			tools2.c\
+			tools3.c\
 			ft_split_cmd.c\
 			ft_execution.c\
 			ft_redirection.c\

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/10 18:20:41 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/12 10:06:46 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_check_red(t_list *data, t_store *store, int fd)
 
 /*-------------------------------------------------------------------------------------*/
 
-void	ft_check_arg(t_list *data, t_store *store)
+void	ft_check_arg(t_list *data, t_store *store,t_data *a)
 {
 	t_list	*ptr;
 
@@ -61,7 +61,7 @@ void	ft_check_arg(t_list *data, t_store *store)
 	store->built = 0;
 	store->count = 0;
 	store->check = 0;
-	ft_run_doc(data, store);
+	ft_run_doc(data, store,a);
 	while (ptr)
 	{
 		if ((ptr->tatto == 1) && !(store->count))

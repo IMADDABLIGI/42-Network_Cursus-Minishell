@@ -6,37 +6,37 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/11 15:31:03 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/12 10:47:29 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <fcntl.h>
-# include <stdlib.h>
 # include <stdio.h>
+# include <fcntl.h>
 # include <readline/history.h>
 # include <readline/readline.h>
 # include <signal.h>
 # include <stdbool.h>
+# include <stdlib.h>
 # include <sys/wait.h>
 # include <unistd.h>
 
 typedef struct t_global
 {
-	int			gbl_doc;
-	char		*home;
-	char		*old_pwd;
-	char		*new_pwd;
-	int			gbl_check_doc;
-}				t_glb;
-					
+	int				gbl_doc;
+	char			*home;
+	char			*old_pwd;
+	char			*new_pwd;
+	int				gbl_check_doc;
+}					t_glb;
+
 typedef struct t_shell
 {
 	char			*arg;
 	int				tatto;
-	int split;
+	int				split;
 	struct t_shell	*next;
 
 }					t_list;
@@ -55,17 +55,19 @@ typedef struct t_data
 
 typedef struct env
 {
-	char *			arg;
+	char			*arg;
 	struct env		*next;
-}		t_env;
+}					t_env;
 
 typedef struct data
 {
-	char **env22;
+	char			**env22;
 	char			*input;
-	char *strenv;
-	char *ret;
-	char *strtmp;
+	char			*strenv;
+	char			*ret;
+	char			*ret1;
+	char			*line;
+	char			*strtmp;
 	char			**tab;
 	char			t;
 	int				z;
@@ -74,11 +76,11 @@ typedef struct data
 	size_t			k;
 	size_t			length;
 	size_t			i;
-	size_t x;
+	size_t			x;
 	t_list			*p;
 	t_list			*tmp1;
-	t_env *e;
-	t_env *tmp;
+	t_env			*e;
+	t_env			*tmp;
 }					t_data;
 
 /*parsing function*/
@@ -91,38 +93,46 @@ char				**ft_split22(t_data *a);
 char				**free_all22(char **str, int max);
 char				*ft_strdup(char *s1);
 size_t				ft_strlen(char *s);
-char	*ft_strnstr(char *haystack,char *needle);
+char				*ft_strnstr(char *haystack, char *needle);
 char				*ft_substr(char *s, unsigned int start, size_t len);
-void	ft_lstadd_back_env(t_env **lst, t_env *new);
-t_env	*ft_lstnew_env(char *table);
-char	*ft_strjoin22(char *s1, char s2);
-void ft_abort(int id);
-int ft_check_builtins(t_list *data);
-void ft_execute_builtins(t_list *data,t_data *a);
-size_t ft_export2(t_data *a,t_list *data,int i,int index);
+void				ft_lstadd_back_env(t_env **lst, t_env *new);
+t_env				*ft_lstnew_env(char *table);
+char				*ft_strjoin22(char *s1, char s2);
+void				ft_abort(int id);
+char *expand_her(t_data *a);
+int	ft_isalnum(int c);
+int	ft_isdigit(int c);
+int					ft_check_builtins(t_list *data);
+void				ft_execute_builtins(t_list *data, t_data *a);
+size_t				ft_export2(t_data *a, t_list *data, int i, int index);
 /*new*/
-void				ft_checkinput(t_list *data, int input, int i, t_store *store);
-int					ft_checkoutput(t_list *data, t_store *store, int i, int output);
-void				*ft_memcpy(void *dst,const  char *src, int n);
+void				ft_checkinput(t_list *data, int input, int i,
+						t_store *store);
+int					ft_checkoutput(t_list *data, t_store *store, int i,
+						int output);
+void				*ft_memcpy(void *dst, const char *src, int n);
 char				**ft_split_cmd(char *s, char c, char *cmd);
 char				*ft_getpath(char *cmd);
-void				ft_execution(t_list *data, t_store *store,t_data *a , int fd);
+void				ft_execution(t_list *data, t_store *store, t_data *a,
+						int fd);
 char				**ft_arg(t_list *data, t_list *ptr, char **arg, int i);
 void				ft_printerror(char *str, char *cmd);
 void				ft_redirect(t_list *data, t_store *store, int i, t_data *a);
-void				ft_check_arg(t_list *data, t_store *store);
+void	ft_check_arg(t_list *data, t_store *store,t_data *a);
 void				ft_check_next(t_list *data);
-void				ft_run_doc(t_list *data, t_store *store);
-void				ft_here_doc(t_list *data, int doc, int num, char *line);
+void				ft_run_doc(t_list *data, t_store *store, t_data *a);
+void				ft_here_doc(t_list *data, int doc, int num, t_data *a);
 int					ft_strcmp(char *s1, char *s2);
 char				*ft_itoa(int n);
-char				*ft_strjoin(char *s1, char *s2,int index);
-int	                ft_get_heredoc(int count, int fd, int check);
-int	                ft_creatfile(t_list *data);
-void	            ft_cd(t_list *data, int check, char *path, char *pwd);
+char				*ft_strjoin(char *s1, char *s2, int index);
+int					ft_get_heredoc(int count, int fd, int check);
+int					ft_creatfile(t_list *data);
+void				ft_cd(t_list *data, int check, char *path, char *pwd);
 char				*ft_strjoin2(char *s1, char *s2);
 char				*ft_strjoin3(char *s1, char *s2);
-int					ft_check_redirections(t_list *data, t_store *store, int input);
-int					ft_check_redirections2(t_list *data, int output, t_store *store);
+int					ft_check_redirections(t_list *data, t_store *store,
+						int input);
+int					ft_check_redirections2(t_list *data, int output,
+						t_store *store);
 
 #endif

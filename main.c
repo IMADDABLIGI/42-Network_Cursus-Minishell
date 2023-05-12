@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/11 15:35:15 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/12 10:54:36 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -477,7 +477,7 @@ void create_linked(t_data *a)
 	a->tmp1=a->p;
 	if (!ft_nothing(a->tmp1->arg))
 	{
-			ft_check_arg(a->tmp1, &store);
+			ft_check_arg(a->tmp1, &store,a);
 			ft_execution(a->tmp1, &store, a, 0);
 	}
 	else 

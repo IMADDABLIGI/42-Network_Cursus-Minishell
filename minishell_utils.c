@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:05:47 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/12 09:50:55 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/12 10:53:44 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	*ft_memcpy(void *dst, const char *src, int n)
 
 //---------------------------------------------------------------//
 
-void	ft_run_doc(t_list *data, t_store *store)
+void	ft_run_doc(t_list *data, t_store *store,t_data *a)
 {
 	store->doc = 0;
 	while (data)
@@ -43,7 +43,8 @@ void	ft_run_doc(t_list *data, t_store *store)
 		if (data->tatto == 7)
 		{
 			store->doc++;
-			ft_here_doc(data, store->doc, 0, NULL);
+			a->line=NULL;
+			ft_here_doc(data, store->doc, 0,a);
 		}
 		data = data->next;
 	}
@@ -76,23 +77,24 @@ int	ft_get_heredoc( int count, int fd, int check)
 
 //---------------------------------------------------------------//
 
-void	ft_here_doc(t_list *data, int doc, int num, char *line)
+void	ft_here_doc(t_list *data, int doc, int num,t_data *a)
 {
 	num = ft_get_heredoc(doc, 0, 1);
 	while (1)
 	{
-		line = readline("> ");
-		if (line == NULL)
+		a->line = readline("> ");
+		if (a->line == NULL)
 			return ;
-		if (!ft_strcmp(line, data->next->arg))
+		if (!ft_strcmp(a->line, data->next->arg))
 		{
-			free (line);
+			free (a->line);
 			close (num);
 			return ;
 		}
-		write(num, line, ft_strlen(line));
+		a->line = expand_her(a);
+		write(num, a->line, ft_strlen(a->line));
 		write(num, "\n", 1);
-		free(line);
+		free(a->line);
 	}
 	return ;
 }

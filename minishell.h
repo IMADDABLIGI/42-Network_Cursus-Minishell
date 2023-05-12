@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/12 11:52:47 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/12 14:34:52 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,7 @@ char				*ft_strnstr(char *haystack, char *needle);
 char				*ft_substr(char *s, unsigned int start, size_t len);
 void				ft_lstadd_back_env(t_env **lst, t_env *new);
 t_env				*ft_lstnew_env(char *table);
+size_t ft_export2(t_data *a,char *arg,int i,int index);
 char				*ft_strjoin22(char *s1, char s2);
 void				ft_abort(int id);
 char *expand_her(t_data *a);
@@ -105,7 +106,7 @@ int	ft_isalnum(int c);
 int	ft_isdigit(int c);
 int					ft_check_builtins(t_list *data);
 void				ft_execute_builtins(t_list *data, t_data *a);
-size_t				ft_export2(t_data *a, t_list *data, int i, int index);
+size_t ft_export2(t_data *a,char *arg,int i,int index);
 /*new*/
 void				ft_checkinput(t_list *data, int input, int i,
 						t_store *store);
@@ -128,7 +129,7 @@ char				*ft_itoa(int n);
 char				*ft_strjoin(char *s1, char *s2, int index);
 int					ft_get_heredoc(int count, int fd, int check);
 int					ft_creatfile(t_list *data);
-void				ft_cd(t_list *data, int check, char *path, char *pwd);
+void	ft_cd(t_list *data, int check, char *path, char *pwd,t_data *a);
 char				*ft_strjoin2(char *s1, char *s2);
 char				*ft_strjoin3(char *s1, char *s2);
 int					ft_check_redirections(t_list *data, t_store *store,

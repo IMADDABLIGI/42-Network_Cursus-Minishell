@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils5.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:48:03 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/12 13:07:08 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/12 14:44:06 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,36 @@ int	ft_check_dr(char *path)
 	}
 	return (1);
 }
+//---------------------------------------------------------------//
+
+void	ft_re_env(t_data *a,char *old_path,char *new_path)
+{
+	old_path = ft_strjoin("OLDPWD=",global.old_pwd,3);
+	new_path = ft_strjoin("PWD=",global.new_pwd,3);
+			if (!ft_export2(a,old_path,0,1))
+				{
+					a->tmp = ft_lstnew_env(old_path);
+					if (!a->tmp)
+						ft_abort(1);
+					ft_lstadd_back_env(&a->e,a->tmp);
+				}
+			if (!ft_export2(a,new_path,0,1))
+				{
+					a->tmp = ft_lstnew_env(new_path);
+					if (!a->tmp)
+						ft_abort(1);
+					ft_lstadd_back_env(&a->e,a->tmp);
+				}
+}
+
 
 //---------------------------------------------------------------//
 
-void	ft_cd(t_list *data, int check, char *path, char *pwd)
+void	ft_cd(t_list *data, int check, char *path, char *pwd,t_data *a)
 {
 	pwd = ft_initial_cd(NULL, NULL);
-	printf("OLDPWD=%s\n", global.old_pwd);
+	(void)a;
+	// printf("OLDPWD=%s\n", global.old_pwd);
 	if (data->next)
 	{
 		if (!ft_check_dr(data->next->arg))
@@ -118,6 +141,6 @@ void	ft_cd(t_list *data, int check, char *path, char *pwd)
 			free (global.new_pwd);
 		global.new_pwd = getcwd(NULL, 0);
 	}
-	printf("NEWPWD=%s\n", global.new_pwd);
-	// ft_re_env();
+	// printf("NEWPWD=%s\n", global.new_pwd);
+	ft_re_env(a,NULL,NULL);
 }

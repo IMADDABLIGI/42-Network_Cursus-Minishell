@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/12 10:54:36 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/12 14:34:31 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,14 +190,14 @@ void ft_export(t_list *data, t_data *a)
 		{
 			a->i=0;
 			if (!ft_isalpha(k->arg[a->i]))
-					printf("export: `%s': not a valid identifier\n",k->arg);
+					ft_printerror("export",k->arg);
 			else
 			{
 			while (k->arg[a->i] && (ft_isalnum(k->arg[a->i]) == 1 || k->arg[a->i] == '_'))
 				a->i++;
 			if (!k->arg[a->i])
 			{
-				if (!ft_export2(a,k,0,0))
+				if (!ft_export2(a,k->arg,0,0))
 				{
 					a->tmp = ft_lstnew_env(k->arg);
 					if (!a->tmp)
@@ -207,7 +207,7 @@ void ft_export(t_list *data, t_data *a)
 			}
 			else if (k->arg[a->i] == '+' && k->arg[a->i+1] == '=')
 			{
-				if (!ft_export2(a,k,0,2))
+				if (!ft_export2(a,k->arg,0,2))
 				{
 					a->tmp = ft_lstnew_env(k->arg);
 					if (!a->tmp)
@@ -216,8 +216,8 @@ void ft_export(t_list *data, t_data *a)
 				}
 			}
 			else if (k->arg[a->i] != '=')
-					printf("export: `%s': not a valid identifier\n",k->arg);
-			else if (!ft_export2(a,k,0,1))
+					ft_printerror("export",k->arg);
+			else if (!ft_export2(a,k->arg,0,1))
 			{
 					a->tmp = ft_lstnew_env(k->arg);
 					if (!a->tmp)
@@ -260,7 +260,7 @@ void ft_execute_builtins(t_list *data, t_data *a)
 	while(data && (data->tatto != 1))
 		data = data->next;
 	if (!ft_strcmp(data->arg,"cd"))
-		ft_cd(data, 0, NULL, NULL);
+		ft_cd(data, 0, NULL, NULL,a);
 	else if (!ft_strcmp(data->arg,"echo"))
 		ft_echo(data);
 	else if (!ft_strcmp(data->arg,"export"))
@@ -484,14 +484,14 @@ void create_linked(t_data *a)
 		printf(" %s: command not found\n",a->tmp1->arg);
 }
 
-size_t ft_export2(t_data *a,t_list *data,int i,int index)
+size_t ft_export2(t_data *a,char *arg,int i,int index)
 {
 	a->strenv = NULL;
 	char *tmp;
 	char *before;
-	while (data->arg[i] && (ft_isalnum(data->arg[i]) || data->arg[i] == '_'))
+	while (arg[i] && (ft_isalnum(arg[i]) || arg[i] == '_'))
 	{
-		a->strenv=ft_strjoin22(a->strenv,data->arg[i]);
+		a->strenv=ft_strjoin22(a->strenv,arg[i]);
 		i++;
 	}
 	before = ft_strdup(a->strenv);
@@ -507,11 +507,11 @@ size_t ft_export2(t_data *a,t_list *data,int i,int index)
 		{
 			if (index == 1)
 			{
-			free(a->tmp->arg);
-			a->tmp->arg = ft_strdup(data->arg);
+				free(a->tmp->arg);
+				a->tmp->arg = ft_strdup(arg);
 			}
 			else if (index == 2)
-				a->tmp->arg = ft_strjoin(a->tmp->arg,ft_strnstr(data->arg,before),1);
+				a->tmp->arg = ft_strjoin(a->tmp->arg,ft_strnstr(arg,before),1);
 			return (free(a->strenv),free(before),1);
 		}
 		a->tmp = a->tmp->next;

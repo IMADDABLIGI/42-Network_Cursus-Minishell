@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/13 14:35:21 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/13 15:46:15 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	main2(t_data *a)
 {
-    a->pid = 1;
+	a->pid = 1;
 	add_history(a->input);
 	expand(a);
 	a->input = a->ret;
@@ -33,6 +33,7 @@ int	main(int argc, char **argv, char **env)
 	ft_create_env(&a, env);
 	signal(SIGQUIT, (void *)sigignore);
 	a.env22 = env;
+	g_global.status = 0;
 	while (1)
 	{
 		signal(SIGINT, handler);

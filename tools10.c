@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools10.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:10:24 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/13 14:01:12 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/13 15:24:02 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ void	ft_create_env(t_data *a, char **env)
 
 void	handler(int status)
 {
-    g_global.status = 1;
+	g_global.status = 1;
 	(void)status;
 	printf("\n");
 	rl_replace_line("", 0);

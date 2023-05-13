@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:37:19 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/13 11:53:14 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/13 15:44:13 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,14 @@ size_t	ft_expand_length(t_data *a, int index)
 
 void	ft_length2(t_data *a)
 {
-	if (((a->t == '"' || !a->t) && a->input[a->x] == '$'
+	if ((a->t == '"' || !a->t) && a->input[a->x] == '$'
+		&& a->input[a->x + 1] == '?')
+	{
+			a->status = ft_itoa(g_global.status);
+			a->len += ft_strlen(a->status);
+			a->x++;
+	}
+	else if (((a->t == '"' || !a->t) && a->input[a->x] == '$'
 			&& ft_isdigit(a->input[a->x + 1])) || (a->input[a->x] == '$'
 			&& (a->input[a->x + 1] == 39 || a->input[a->x + 1] == 34)
 			&& !a->lock))
@@ -87,7 +94,13 @@ size_t	ft_length1(t_data *a)
 
 void	ft_expand2(t_data *a)
 {
-	if (((a->t == '"' || !a->t) && a->input[a->x] == '$'
+	if ((a->t == '"' || !a->t) && a->input[a->x] == '$'
+		&& a->input[a->x + 1] == '?')
+	{
+		ft_copie_nb(a);
+		a->x++;
+	}
+	else if (((a->t == '"' || !a->t) && a->input[a->x] == '$'
 			&& ft_isdigit(a->input[a->x + 1])) || (a->input[a->x] == '$'
 			&& (a->input[a->x + 1] == 39 || a->input[a->x + 1] == 34)
 			&& !a->lock))

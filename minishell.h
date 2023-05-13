@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/13 17:25:25 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/13 18:12:04 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,15 +127,17 @@ void				ft_expand2(t_data *a);
 void				ft_export(t_list *data, t_data *a);
 int					ft_isalnum(int c);
 void				handler(int status);
+int					check_nothing(char *argv, int i, int z);
 void				ft_copie_nb(t_data *a, int index);
 void				ft_change(t_data *a, int index);
 size_t				strlen_expand(char *str);
-void				ft_unset6(t_data *a, t_list *data);
+void				ft_unset6(t_data *a);
 int					ft_check_n(char *str);
 void				ft_env(t_data *a, t_list *data);
 void				ft_unset(t_list *data, t_data *a);
 void				ft_print(char *arg);
 int					ft_isalpha(int c);
+void				ft_exit(t_list *data, t_data *a);
 int					ft_isdigit(int c);
 void				ft_change_her(t_data *a);
 char				**ft_return22(t_data *a);
@@ -143,6 +145,7 @@ size_t				nbr_of_words22(t_data *a);
 size_t				ft_length1_her(t_data *a);
 int					parse_check(t_data *a);
 void				ft_pwd(t_list *data);
+int					check(char *argv);
 int					ft_check_builtins(t_list *data);
 void				ft_execute_builtins(t_list *data, t_data *a);
 size_t				ft_export2(t_data *a, char *arg, int i, int index);

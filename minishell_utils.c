@@ -6,13 +6,11 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:05:47 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/13 09:06:15 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/13 09:33:19 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-t_glb global;
 
 //---------------------------------------------------------------//
 
@@ -35,7 +33,7 @@ void	*ft_memcpy(void *dst, const char *src, int n)
 
 //---------------------------------------------------------------//
 
-int	ft_run_doc(t_list *data, t_store *store,t_data *a)
+int	ft_run_doc(t_list *data, t_store *store, t_data *a)
 {
 	store->doc = 0;
 	global.doc = 1;
@@ -49,7 +47,7 @@ int	ft_run_doc(t_list *data, t_store *store,t_data *a)
 			if (!global.doc)
 			{
 				dup2(global.save, STDIN_FILENO);
-				close (global.save);
+				close(global.save);
 				return (0);
 			}
 		}
@@ -61,7 +59,7 @@ int	ft_run_doc(t_list *data, t_store *store,t_data *a)
 
 //---------------------------------------------------------------//
 
-int	ft_get_heredoc( int count, int fd, int check)
+int	ft_get_heredoc(int count, int fd, int check)
 {
 	char	*itoa;
 	char	*join;
@@ -74,28 +72,29 @@ int	ft_get_heredoc( int count, int fd, int check)
 		if ((fd = open(join, O_CREAT | O_APPEND | O_WRONLY, 0644)) < 0)
 		{
 			perror("Error Creating heredoc file");
-			exit (1);
+			exit(1);
 		}
 	}
 	else
 		fd = open(join, O_RDONLY);
-	free (join);
+	free(join);
 	return (fd);
 }
 
 //---------------------------------------------------------------//
 
-void    ft_handlec()
+void	ft_handlec(int sig)
 {
+	(void)sig;
 	global.save = dup(STDIN_FILENO);
 	global.doc = 0;
 	rl_replace_line("", 0);
-	close (0);
+	close(0);
 }
 
 //---------------------------------------------------------------//
 
-void	ft_here_doc(t_list *data, int doc, int num,t_data *a)
+void	ft_here_doc(t_list *data, int doc, int num, t_data *a)
 {
 	num = ft_get_heredoc(doc, 0, 1);
 	while (global.doc)
@@ -106,8 +105,8 @@ void	ft_here_doc(t_list *data, int doc, int num,t_data *a)
 			return ;
 		if (!ft_strcmp(a->line, data->next->arg))
 		{
-			free (a->line);
-			close (num);
+			free(a->line);
+			close(num);
 			return ;
 		}
 		a->line = expand_her(a);
@@ -116,4 +115,3 @@ void	ft_here_doc(t_list *data, int doc, int num,t_data *a)
 		free(a->line);
 	}
 }
-

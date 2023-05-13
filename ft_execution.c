@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execution.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/12 21:09:37 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/13 09:21:35 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,20 @@ t_glb	global;
 
 int	ft_creatfile(t_list *data)
 {
-	if ((data->tatto == 5 || data->tatto == 6) && !ft_strcmp(data->next->arg, "/dev/stdout"))
+	if ((data->tatto == 5 || data->tatto == 6) && !ft_strcmp(data->next->arg,
+			"/dev/stdout"))
 		return (1);
 	unlink("/tmp/input");
 	unlink("/tmp/output");
 	if (open("/tmp/input", O_CREAT, 0644) < 0)
 	{
 		perror("Error Creating input file");
-		exit (1);
+		exit(1);
 	}
 	if (open("/tmp/output", O_CREAT, 0644) < 0)
 	{
 		perror("Error Creating output file");
-		exit (1);
+		exit(1);
 	}
 	return (1);
 }
@@ -44,14 +45,15 @@ void	ft_exec(t_list *data, t_store *store, int i, int pid, t_data *a)
 		if ((pid = fork()) == -1)
 		{
 			perror("fork ");
-			exit (1);	
+			exit(1);
 		}
 		if (pid == 0)
-			ft_redirect(data, store, i,a);
+			ft_redirect(data, store, i, a);
 		else
 		{
 			waitpid(pid, &global.status, 0);
-				// printf("Child exited with status %d\n", WEXITSTATUS(global.status));
+			// printf("Child exited with status %d\n",
+					WEXITSTATUS(global.status);
 			if (data->tatto == 5)
 				data = data->next;
 			data = data->next;
@@ -79,7 +81,7 @@ int	ft_check_built_input(t_list *data, int input)
 			if (((input = open(data->next->arg, O_RDONLY)) < 0))
 				return (0);
 			else
-				close (input);
+				close(input);
 		}
 		data = data->next;
 	}
@@ -88,14 +90,14 @@ int	ft_check_built_input(t_list *data, int input)
 
 //---------------------------------------------------------------------------//
 
-void	ft_execution(t_list *data, t_store *store,t_data *a , int fd)
+void	ft_execution(t_list *data, t_store *store, t_data *a, int fd)
 {
 	if (!(store->count))
 		return ;
-	if ((store->built) && !(store->pipe))//just IN Parent
+	if ((store->built) && !(store->pipe))
 	{
 		if (ft_check_built_input(data, 0))
-		{		
+		{
 			if ((fd = ft_checkoutput(data, store, 1, 0)))
 			{
 				if (fd == -1)

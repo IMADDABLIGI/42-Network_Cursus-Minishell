@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils3.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/06 12:08:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/11 16:17:54 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/13 09:24:13 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char	*ft_itoa(int n)
 
 //---------------------------------------------------------------------------//
 
-static char	*ft_return(char *p, char  *s1, char *s2,int index)
+static char	*ft_return(char *p, char *s1, char *s2, int index)
 {
 	size_t	y;
 	size_t	a;
@@ -84,7 +84,7 @@ static char	*ft_return(char *p, char  *s1, char *s2,int index)
 		p[y + a] = s2[a];
 		a++;
 	}
-	if	(index == 1)
+	if (index == 1)
 		free(s1);
 	else if (index == 0)
 		free(s2);
@@ -93,7 +93,7 @@ static char	*ft_return(char *p, char  *s1, char *s2,int index)
 
 //----------------------------------------------------------------------------//
 
-char	*ft_strjoin(char *s1, char *s2,int index)
+char	*ft_strjoin(char *s1, char *s2, int index)
 {
 	char	*p;
 
@@ -132,4 +132,3 @@ char	*ft_strjoin2(char *s1, char *s2)
 	string[mix] = '\0';
 	return (string);
 }
-

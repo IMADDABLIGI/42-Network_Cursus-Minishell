@@ -6,24 +6,11 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/13 09:06:26 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/13 09:28:46 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-t_glb	global;
-
-
-
-
-
-
-
-
-
-
-
 
 void	ft_export(t_list *data, t_data *a)
 {
@@ -88,51 +75,6 @@ void	ft_export(t_list *data, t_data *a)
 	}
 }
 
-void	ft_pwd(t_list *data)
-{
-	char	*cwd;
-	t_list	*k;
-
-	k = data;
-	k = k->next;
-	cwd = getcwd(NULL, 0);
-	if (!cwd)
-		printf("%s\n", global.new_pwd);
-	else
-		printf("%s\n", cwd);
-	if (cwd)
-		free(cwd);
-}
-
-void	ft_execute_builtins(t_list *data, t_data *a)
-{
-	while (data && (data->tatto != 1))
-		data = data->next;
-	if (!ft_strcmp(data->arg, "cd"))
-		ft_cd(data, NULL, a);
-	else if (!ft_strcmp(data->arg, "echo"))
-		ft_echo(data);
-	else if (!ft_strcmp(data->arg, "export"))
-		ft_export(data, a);
-	else if (!ft_strcmp(data->arg, "exit"))
-		exit(0);
-	else if (!ft_strcmp(data->arg, "env"))
-		ft_env(a, data);
-	else if (!ft_strcmp(data->arg, "pwd"))
-		ft_pwd(data);
-	else if (!ft_strcmp(data->arg, "unset"))
-		ft_unset(data, a);
-}
-
-int	ft_check_builtins(t_list *data)
-{
-	if (!ft_strcmp(data->arg, "echo") || !ft_strcmp(data->arg, "cd")
-		|| !ft_strcmp(data->arg, "pwd") || !ft_strcmp(data->arg, "export")
-		|| !ft_strcmp(data->arg, "unset") || !ft_strcmp(data->arg, "env")
-		|| !ft_strcmp(data->arg, "exit"))
-		return (1);
-	return (0);
-}
 int	parse_check(t_data *a)
 {
 	a->tmp1 = a->p;
@@ -162,78 +104,6 @@ int	parse_check(t_data *a)
 		a->tmp1 = a->tmp1->next;
 	}
 	return (0);
-}
-void	tato(t_data *a)
-{
-	a->tmp1 = a->p;
-	while (a->tmp1)
-	{
-		if (a->tmp1->tatto == 0)
-		{
-			a->tmp1->tatto = 1;
-			a->tmp1 = a->tmp1->next;
-			while (a->tmp1 && a->tmp1->tatto == 0)
-			{
-				a->tmp1->tatto = 2;
-				a->tmp1 = a->tmp1->next;
-			}
-		}
-		else if (a->tmp1->tatto != 4)
-		{
-			a->tmp1 = a->tmp1->next;
-			if (a->tmp1->tatto == 0)
-				a->tmp1->tatto = 2;
-			a->tmp1 = a->tmp1->next;
-		}
-		else
-			a->tmp1 = a->tmp1->next;
-	}
-}
-
-void	check_tato(t_data *a, int *tatto)
-{
-	if (!ft_strcmp(a->tab[a->i], ">>"))
-		*tatto = 8;
-	else if (!ft_strcmp(a->tab[a->i], "<<"))
-		*tatto = 7;
-	else if (!ft_strcmp(a->tab[a->i], "<"))
-		*tatto = 5;
-	else if (!ft_strcmp(a->tab[a->i], ">"))
-		*tatto = 6;
-	else if (!ft_strcmp(a->tab[a->i], "|"))
-		*tatto = 4;
-}
-
-int	ft_isdigit(int c)
-{
-	if (c >= 48 && c <= 57)
-		return (1);
-	else
-		return (0);
-}
-
-char	*ft_strnstr(char *haystack, char *needle)
-{
-	size_t	i;
-	size_t	j;
-	char	*p;
-
-	p = haystack;
-	j = 0;
-	i = 0;
-	while (p[i + j] && needle[j])
-	{
-		if (p[i + j] == needle[j])
-			j++;
-		else if (p[i + j] == '=')
-			return (0);
-		else
-			return (0);
-	}
-	if (needle[j] == '\0')
-		return (p + j);
-	else
-		return (0);
 }
 
 size_t	ft_length(t_data *a, int *tatto)
@@ -304,45 +174,6 @@ char	*str(t_data *a, int *tatto)
 	a->ret[a->k] = '\0';
 	return (a->ret);
 }
-int	ft_nothing(char *a)
-{
-	int	i;
-
-	i = 0;
-	while (a[i])
-	{
-		if (a[i] != 32)
-			return (0);
-		i++;
-	}
-	return (1);
-}
-void	create_linked(t_data *a)
-{
-	t_store	store;
-
-	a->i = 0;
-	a->p = NULL;
-	while (a->tab[a->i])
-	{
-		a->tmp1 = ft_lstnew(a);
-		if (!a->tmp1)
-			ft_lstclear(&a->p);
-		ft_lstadd_back(&a->p, a->tmp1);
-		a->i++;
-	}
-	if (parse_check(a))
-		return ;
-	tato(a);
-	a->tmp1 = a->p;
-	if (!ft_nothing(a->tmp1->arg))
-	{
-		if (ft_check_arg(a->tmp1, &store, a))
-		    ft_execution(a->tmp1, &store, a, 0);
-	}
-	else
-		printf(" %s: command not found\n", a->tmp1->arg);
-}
 
 size_t	ft_export2(t_data *a, char *arg, int i, int index)
 {
@@ -381,18 +212,7 @@ size_t	ft_export2(t_data *a, char *arg, int i, int index)
 	return (free(a->strenv), free(before), 0);
 }
 /**************************************************************/
-void	change1(t_data *a)
-{
-	int	i;
 
-	i = 0;
-	while (a->strtmp[i])
-	{
-		a->ret[a->k] = a->strtmp[i];
-		a->k++;
-		i++;
-	}
-}
 void	change2(t_data *a)
 {
 	size_t	i;
@@ -656,30 +476,29 @@ void	handler(int status)
 	{
 		rl_getc_function = getc;
 	}
-	else 
+	else
 	{
-    printf("\n");
-    rl_replace_line("", 0);
-    rl_on_new_line();
-    rl_redisplay();
+		printf("\n");
+		rl_replace_line("", 0);
+		rl_on_new_line();
+		rl_redisplay();
 	}
-    
 }
 
 int	main(int argc, char **argv, char **env)
 {
 	t_data a;
-    
+
 	if (argc != 1)
 		ft_abort(2);
 	(void)argv;
 	ft_create_env(&a, env);
-    // rl_set_signals();
+	// rl_set_signals();
 	signal(SIGQUIT, (void *)sigignore);
 	a.env22 = env;
 	while (1)
 	{
-	    signal(SIGINT, handler);
+		signal(SIGINT, handler);
 		rl_catch_signals = 0;
 		a.input = readline("MINISHELL>> ");
 		if (a.input == NULL)

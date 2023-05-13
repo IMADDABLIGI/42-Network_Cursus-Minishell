@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/13 09:05:32 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/13 09:32:05 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ typedef struct t_global
 	int				status;
 	char			*home;
 	char			*old_pwd;
-	int her;
+	int				her;
 	char			*new_pwd;
 }					t_glb;
 
@@ -87,6 +87,8 @@ typedef struct data
 	t_env			*tmp;
 }					t_data;
 
+t_glb				global;
+
 /*parsing function*/
 t_list				*ft_lstnew(t_data *a);
 t_list				*ft_lstclear(t_list **lst);
@@ -106,16 +108,20 @@ size_t				ft_export2(t_data *a, char *arg, int i, int index);
 char				*ft_strjoin22(char *s1, char s2);
 void				ft_abort(int id);
 char				*expand_her(t_data *a);
+void				ft_export(t_list *data, t_data *a);
 int					ft_isalnum(int c);
-int	ft_check_n(char *str);
-void	ft_env(t_data *a, t_list *data);
-void	ft_unset(t_list *data, t_data *a);
-void	ft_print(char *arg);
-int	ft_isalpha(int c);
+int					ft_check_n(char *str);
+void				ft_env(t_data *a, t_list *data);
+void				ft_unset(t_list *data, t_data *a);
+void				ft_print(char *arg);
+int					ft_isalpha(int c);
 int					ft_isdigit(int c);
+int	parse_check(t_data *a);
+void				ft_pwd(t_list *data);
 int					ft_check_builtins(t_list *data);
 void				ft_execute_builtins(t_list *data, t_data *a);
 size_t				ft_export2(t_data *a, char *arg, int i, int index);
+void				check_tato(t_data *a, int *tatto);
 /*new*/
 void				ft_checkinput(t_list *data, int input, int i,
 						t_store *store);
@@ -138,12 +144,15 @@ char				*ft_itoa(int n);
 char				*ft_strjoin(char *s1, char *s2, int index);
 int					ft_get_heredoc(int count, int fd, int check);
 int					ft_creatfile(t_list *data);
-void				ft_cd(t_list *data, char *pwd,t_data *a);
+void				ft_cd(t_list *data, char *pwd, t_data *a);
 char				*ft_strjoin2(char *s1, char *s2);
 char				*ft_strjoin3(char *s1, char *s2);
 int					ft_check_dr(char *path);
-int					ft_check_redirections(t_list *data, t_store *store, int input);
+int					ft_check_redirections(t_list *data, t_store *store,
+						int input);
 int					ft_check_redirections2(t_list *data, int output,
 						t_store *store);
-
+void	change1(t_data *a);
+int	ft_nothing(char *a);
+void	create_linked(t_data *a);
 #endif

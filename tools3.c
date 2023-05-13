@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 09:49:33 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/12 15:06:19 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/13 09:25:18 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +93,12 @@ size_t	ft_length1_her(t_data *a)
 			a->t = '\0';
 		}
 		if (((a->t == '"' || !a->t) && a->line[a->x] == '$'
-					&& ft_isdigit(a->line[a->x + 1])) || (a->line[a->x] == '$'
-					&& (a->line[a->x + 1] == 39 || a->line[a->x + 1] == 34)
-					&& !a->lock))
+				&& ft_isdigit(a->line[a->x + 1])) || (a->line[a->x] == '$'
+				&& (a->line[a->x + 1] == 39 || a->line[a->x + 1] == 34)
+				&& !a->lock))
 			a->x++;
 		else if ((a->t == '"' || !a->t) && a->line[a->x] == '$' && a->line[a->x
-					+ 1] && (ft_isalnum(a->line[a->x + 1]) || a->line[a->x
+				+ 1] && (ft_isalnum(a->line[a->x + 1]) || a->line[a->x
 					+ 1] == '_'))
 			len += ft_expand_length_her(a);
 		else

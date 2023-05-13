@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/12 18:37:32 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/13 09:24:08 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	ft_check_red(t_list *data, t_store *store, int fd)
 	{
 		if (((fd = open(data->next->arg, O_RDONLY)) < 0))
 			ft_printerror(": No such file or directory", data->next->arg);
-		close (fd);
+		close(fd);
 	}
 	else if (((data->tatto == 6) || (data->tatto == 8)) && !store->check)
 	{
@@ -44,7 +44,7 @@ void	ft_check_red(t_list *data, t_store *store, int fd)
 			fd = open(data->next->arg, O_WRONLY | O_APPEND | O_CREAT, 0644);
 		if (fd < 0)
 			ft_printerror(": Is a directory", data->next->arg);
-		close (fd);
+		close(fd);
 	}
 	if (fd < 0)
 		store->check = 1;
@@ -52,7 +52,7 @@ void	ft_check_red(t_list *data, t_store *store, int fd)
 
 /*-------------------------------------------------------------------------------------*/
 
-int	ft_check_arg(t_list *data, t_store *store,t_data *a)
+int	ft_check_arg(t_list *data, t_store *store, t_data *a)
 {
 	t_list	*ptr;
 
@@ -61,7 +61,7 @@ int	ft_check_arg(t_list *data, t_store *store,t_data *a)
 	store->built = 0;
 	store->count = 0;
 	store->check = 0;
-	if (!ft_run_doc(data, store,a))
+	if (!ft_run_doc(data, store, a))
 		return (0);
 	while (ptr)
 	{
@@ -76,14 +76,13 @@ int	ft_check_arg(t_list *data, t_store *store,t_data *a)
 		}
 		if (ptr->tatto == 4 || ptr->tatto == 5 || ptr->tatto == 6
 			|| ptr->tatto == 8 || ptr->tatto == 1)
-				ft_check_red(ptr, store, 0);
+			ft_check_red(ptr, store, 0);
 		ptr = ptr->next;
 	}
 	return (1);
 }
 
 /*-------------------------------------------------------------------------------------*/
-
 
 char	*ft_getpath(char *cmd)
 {
@@ -98,7 +97,7 @@ char	*ft_getpath(char *cmd)
 		ft_printerror(": No such file or directory", cmd);
 	}
 	else if (((cmd[0] == '.') && (cmd[1] == '/')) || ((cmd[0] == '.')
-			&& (cmd[1] == '.')))
+				&& (cmd[1] == '.')))
 	{
 		if (access((cmd), X_OK) == 0)
 			return (cmd);
@@ -118,7 +117,7 @@ char	*ft_getpath(char *cmd)
 		}
 		ft_printerror(": command not found", cmd);
 	}
-	exit (1);
+	exit(1);
 }
 
 /*----------------------------------------------------------------*/
@@ -127,10 +126,11 @@ char	**ft_arg(t_list *data, t_list *ptr, char **arg, int i)
 {
 	while ((ptr) && (ptr->tatto != 4))
 	{
-		if ((ptr->tatto == 5) || (ptr->tatto == 6) || (ptr->tatto == 7) || (ptr->tatto == 8))
-			ptr=ptr->next->next;
+		if ((ptr->tatto == 5) || (ptr->tatto == 6) || (ptr->tatto == 7)
+			|| (ptr->tatto == 8))
+			ptr = ptr->next->next;
 		else
-		{	
+		{
 			ptr = ptr->next;
 			i++;
 		}
@@ -141,9 +141,10 @@ char	**ft_arg(t_list *data, t_list *ptr, char **arg, int i)
 	i = 0;
 	while ((data) && (data->tatto != 4))
 	{
-		if ((data->tatto == 5) || (data->tatto == 6) || (data->tatto == 7) || (data->tatto == 8))
+		if ((data->tatto == 5) || (data->tatto == 6) || (data->tatto == 7)
+			|| (data->tatto == 8))
 			data = data->next->next;
-		else 
+		else
 		{
 			arg[i++] = ft_strdup(data->arg);
 			data = data->next;
@@ -152,4 +153,3 @@ char	**ft_arg(t_list *data, t_list *ptr, char **arg, int i)
 	arg[i] = NULL;
 	return (arg);
 }
-

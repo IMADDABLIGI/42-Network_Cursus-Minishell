@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils4.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:42:51 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/12 20:50:03 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/13 09:24:17 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	ft_check_redirections(t_list *data, t_store *store, int input)
 		{
 			ft_creatfile(data);
 			if (((input = open(data->next->arg, O_RDONLY)) < 0))
-				exit (0);
+				exit(0);
 			else
 			{
 				dup2(input, STDIN_FILENO);
@@ -50,25 +50,27 @@ int	ft_check_redirections2(t_list *data, int output, t_store *store)
 	while ((data) && (data->tatto != 4))
 	{
 		if (output && ((data->tatto == 6) || (data->tatto == 8)))
-			close (output);
+			close(output);
 		if (data->tatto == 6)
 		{
 			if (!ft_strcmp(data->next->arg, "/dev/stdout"))
 				output = 0;
 			else
-				output = open(data->next->arg, O_WRONLY | O_TRUNC | O_CREAT, 0644);
+				output = open(data->next->arg, O_WRONLY | O_TRUNC | O_CREAT,
+						0644);
 		}
 		else if (data->tatto == 8)
 		{
 			if (!ft_strcmp(data->next->arg, "/dev/stdout"))
 				output = 0;
 			else
-				output = open(data->next->arg, O_WRONLY | O_APPEND | O_CREAT, 0644);
+				output = open(data->next->arg, O_WRONLY | O_APPEND | O_CREAT,
+						0644);
 		}
 		if ((output < 0) && ((store->built) && !(store->pipe)))
 			return (-1);
 		if (output < 0)
-			exit (1);
+			exit(1);
 		data = data->next;
 	}
 	return (output);
@@ -101,12 +103,12 @@ char	*ft_strjoin3(char *s1, char *s2)
 
 int	ft_check_dr(char *path)
 {
-	struct stat sb;
+	struct stat	sb;
 
 	stat(path, &sb);
 	if (S_ISREG(sb.st_mode))
 	{
-    	printf("cd: %s: Not a directory\n", path);
+		printf("cd: %s: Not a directory\n", path);
 		return (0);
 	}
 	return (1);

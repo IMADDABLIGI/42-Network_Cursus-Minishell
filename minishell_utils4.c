@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils4.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:42:51 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/13 11:31:39 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/13 12:23:35 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ int	ft_check_dr(char *path)
 
 //---------------------------------------------------------------------------//
 
-void	ft_print_error2()
+void	ft_print_error2(void)
 {
 	write(1, "cd: error retrieving current directory:", 40);
 	write(1, " getcwd: cannot access parent directories:", 43);

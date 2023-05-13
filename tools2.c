@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 17:42:15 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/13 09:25:03 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/13 09:46:24 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,10 @@ t_list	*ft_lstnew(t_data *a)
 		ft_abort(1);
 	p -> next = NULL;
 	p -> tatto = 0;
-	p -> arg = str(a,&p->tatto);
+	p -> arg = str(a, &p->tatto);
 	return (p);
 }
+
 /*----------------------------------------------------------------*/
 t_env	*ft_lstnew_env(char *table)
 {
@@ -56,6 +57,7 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 		p -> next = new ;
 	}
 }
+
 /*----------------------------------------------------------------*/
 void	ft_lstadd_back_env(t_env **lst, t_env *new)
 {

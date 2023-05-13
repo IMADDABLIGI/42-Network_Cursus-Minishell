@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 09:49:33 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/13 09:25:18 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/13 10:32:38 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,14 +72,27 @@ size_t	ft_expand_length_her(t_data *a)
 	return (free(a->strenv), 0);
 }
 
+void	ft_length1_her2(t_data *a)
+{
+	if (((a->t == '"' || !a->t) && a->line[a->x] == '$'
+			&& ft_isdigit(a->line[a->x + 1])) || (a->line[a->x] == '$'
+			&& (a->line[a->x + 1] == 39 || a->line[a->x + 1] == 34)
+			&& !a->lock))
+		a->x++;
+	else if ((a->t == '"' || !a->t) && a->line[a->x] == '$' && a->line[a->x
+			+ 1] && (ft_isalnum(a->line[a->x + 1]) || a->line[a->x
+				+ 1] == '_'))
+		a->len += ft_expand_length_her(a);
+	else
+		a->len++;
+}
+
 size_t	ft_length1_her(t_data *a)
 {
-	size_t	len;
-
 	a->lock = 0;
 	a->x = 0;
 	a->t = '\0';
-	len = 0;
+	a->len = 0;
 	while (a->line[a->x])
 	{
 		if ((a->line[a->x] == 39 || a->line[a->x] == 34) && !a->lock)
@@ -92,58 +105,8 @@ size_t	ft_length1_her(t_data *a)
 			a->lock = 0;
 			a->t = '\0';
 		}
-		if (((a->t == '"' || !a->t) && a->line[a->x] == '$'
-				&& ft_isdigit(a->line[a->x + 1])) || (a->line[a->x] == '$'
-				&& (a->line[a->x + 1] == 39 || a->line[a->x + 1] == 34)
-				&& !a->lock))
-			a->x++;
-		else if ((a->t == '"' || !a->t) && a->line[a->x] == '$' && a->line[a->x
-				+ 1] && (ft_isalnum(a->line[a->x + 1]) || a->line[a->x
-					+ 1] == '_'))
-			len += ft_expand_length_her(a);
-		else
-			len++;
+		ft_length1_her2(a);
 		a->x++;
 	}
-	return (len);
-}
-
-char	*expand_her(t_data *a)
-{
-	a->ret1 = malloc(sizeof(char) * ft_length1_her(a) + 1);
-	if (!a->ret1)
-		ft_abort(1);
-	a->k = 0;
-	a->lock = 0;
-	a->x = 0;
-	while (a->line[a->x])
-	{
-		if ((a->line[a->x] == 39 || a->line[a->x] == 34) && !a->lock)
-		{
-			a->lock = 1;
-			a->t = a->line[a->x];
-		}
-		else if (a->t == a->line[a->x] && a->lock)
-		{
-			a->lock = 0;
-			a->t = '\0';
-		}
-		if (((a->t == '"' || !a->t) && a->line[a->x] == '$'
-				&& ft_isdigit(a->line[a->x + 1])) || (a->line[a->x] == '$'
-				&& (a->line[a->x + 1] == 39 || a->line[a->x + 1] == 34)
-				&& !a->lock))
-			a->x++;
-		else if ((a->t == '"' || !a->t) && a->line[a->x] == '$' && a->line[a->x
-				+ 1] && (ft_isalnum(a->line[a->x + 1]) || a->line[a->x
-					+ 1] == '_'))
-			ft_change_her(a);
-		else
-		{
-			a->ret1[a->k] = a->line[a->x];
-			a->k++;
-		}
-		a->x++;
-	}
-	a->ret1[a->k] = '\0';
-	return (free(a->line), a->ret1);
+	return (a->len);
 }

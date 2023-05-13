@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/13 09:32:05 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/13 12:21:28 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,8 @@ typedef struct data
 	char			*input;
 	char			*strenv;
 	char			*ret;
+	char			*strtmp2;
+	char			*before;
 	char			*ret1;
 	char			*line;
 	char			*strtmp;
@@ -78,11 +80,15 @@ typedef struct data
 	int				lock1;
 	int				check;
 	size_t			k;
+	size_t			len;
+	size_t			end;
+	size_t			start;
 	size_t			length;
 	size_t			i;
 	size_t			x;
 	t_list			*p;
 	t_list			*tmp1;
+	t_list			*kp;
 	t_env			*e;
 	t_env			*tmp;
 }					t_data;
@@ -91,6 +97,7 @@ t_glb				global;
 
 /*parsing function*/
 t_list				*ft_lstnew(t_data *a);
+void				open_quote(t_data *a);
 t_list				*ft_lstclear(t_list **lst);
 void				tato(t_data *a);
 char				*str(t_data *a, int *tatto);
@@ -107,16 +114,28 @@ t_env				*ft_lstnew_env(char *table);
 size_t				ft_export2(t_data *a, char *arg, int i, int index);
 char				*ft_strjoin22(char *s1, char s2);
 void				ft_abort(int id);
+size_t				ft_length(t_data *a, int *tatto);
+int					ft_separit(t_data *a);
+void				ft_create_env(t_data *a, char **env);
 char				*expand_her(t_data *a);
+char				*expand(t_data *a);
+void				ft_expand2(t_data *a);
 void				ft_export(t_list *data, t_data *a);
 int					ft_isalnum(int c);
+void				handler(int status);
+void				ft_change(t_data *a, int index);
+size_t				strlen_expand(char *str);
 int					ft_check_n(char *str);
 void				ft_env(t_data *a, t_list *data);
 void				ft_unset(t_list *data, t_data *a);
 void				ft_print(char *arg);
 int					ft_isalpha(int c);
 int					ft_isdigit(int c);
-int	parse_check(t_data *a);
+void				ft_change_her(t_data *a);
+char				**ft_return22(t_data *a);
+size_t				nbr_of_words22(t_data *a);
+size_t				ft_length1_her(t_data *a);
+int					parse_check(t_data *a);
 void				ft_pwd(t_list *data);
 int					ft_check_builtins(t_list *data);
 void				ft_execute_builtins(t_list *data, t_data *a);
@@ -152,7 +171,7 @@ int					ft_check_redirections(t_list *data, t_store *store,
 						int input);
 int					ft_check_redirections2(t_list *data, int output,
 						t_store *store);
-void	change1(t_data *a);
-int	ft_nothing(char *a);
-void	create_linked(t_data *a);
+void				change1(t_data *a);
+int					ft_nothing(char *a);
+void				create_linked(t_data *a);
 #endif

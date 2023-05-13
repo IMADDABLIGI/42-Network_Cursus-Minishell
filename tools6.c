@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 09:08:51 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/13 09:11:45 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/13 17:33:13 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_execute_builtins(t_list *data, t_data *a)
 	else if (!ft_strcmp(data->arg, "export"))
 		ft_export(data, a);
 	else if (!ft_strcmp(data->arg, "exit"))
-		exit(0);
+		ft_exit(data, a);
 	else if (!ft_strcmp(data->arg, "env"))
 		ft_env(a, data);
 	else if (!ft_strcmp(data->arg, "pwd"))

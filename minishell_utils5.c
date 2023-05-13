@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:48:03 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/13 13:47:52 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/13 17:03:18 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,15 +117,17 @@ void	ft_cd(t_list *data, char *pwd, t_data *a)
 	if (data->next)
 		a->check = ft_cds(data, pwd, 0, NULL);
 	if (a->check == -2)
+	{
+		g_global.status = 1;
 		return ;
+	}
 	else if (!data->next)
 		a->check = chdir(g_global.home);
 	if (a->check == -1)
 	{
 		if (data->next)
 			printf("cd: %s: No such file or directory\n", data->next->arg);
-		else
-			perror("cd ");
+		g_global.status = 1;
 		return ;
 	}
 	if (pwd || (!pwd && (data->next->arg[0] == '.')

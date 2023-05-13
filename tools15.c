@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools15.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 15:55:02 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/13 15:56:55 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/13 17:25:14 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,13 @@ int	ft_get_strlencmd(t_list *ptr, int i)
 		}
 	}
 	return (i);
+}
+/**************************************************************/
+
+void	ft_unset6(t_data *a, t_list *data)
+{
+	g_global.status = 1;
+	write(2, "unset: `", 9);
+	write(2, a->kp->arg, ft_strlen(a->kp->arg));
+	write(2, "': not a valid identifier\n", 27);
 }

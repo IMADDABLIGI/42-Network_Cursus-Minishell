@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 14:56:16 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/12 14:58:17 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/13 16:56:40 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	ft_echo(t_list *data)
 	}
 	if (!a)
 		printf("\n");
+	g_global.status = 0;
 }
 /*----------------------------------------------------------------*/
 
@@ -74,7 +75,12 @@ void	ft_env(t_data *a, t_list *data)
 	k = data;
 	k = k->next;
 	if (k && k->tatto == 2)
-		printf("env: %s :No such file or directory\n", k->arg);
+	{	
+		write(2, "env: ", 6);
+		write(2, k->arg, ft_strlen(k->arg));
+		write(2, ": No such file or directory\n", 29);
+		g_global.status = 127;
+	}
 	else
 	{
 		a->tmp = a->e;
@@ -84,6 +90,7 @@ void	ft_env(t_data *a, t_list *data)
 				printf("%s\n", a->tmp->arg);
 			a->tmp = a->tmp->next;
 		}
+		g_global.status = 0;
 	}
 }
 /*----------------------------------------------------------------*/

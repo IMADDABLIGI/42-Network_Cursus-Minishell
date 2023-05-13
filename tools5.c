@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 15:02:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/12 15:05:16 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/13 17:25:51 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,23 +95,21 @@ size_t	ft_unset2(t_data *a, t_list *data)
 /*----------------------------------------------------------------*/
 void	ft_unset(t_list *data, t_data *a)
 {
-	t_list	*k;
-
-	k = data;
-	k = k->next;
+	a->k = data;
+	a->kp = a->kp->next;
 	a->tmp = a->e;
-	while (k && k->tatto == 2)
+	while (a->kp && a->kp->tatto == 2)
 	{
 		a->i = 0;
-		if (!ft_isalpha(k->arg[a->i]))
-			printf("unset: `%s': not a valid identifier\n", k->arg);
-		while (k->arg[a->i] && (ft_isalnum(k->arg[a->i]) == 1
-				|| k->arg[a->i] == '_'))
+		if (!ft_isalpha(a->kp->arg[a->i]))
+			ft_unset6(a, data);
+		while (a->kp->arg[a->i] && (ft_isalnum(a->kp->arg[a->i]) == 1
+				|| a->kp->arg[a->i] == '_'))
 			a->i++;
-		if (!k->arg[a->i])
-			ft_unset2(a, k);
+		if (!a->kp->arg[a->i])
+			ft_unset2(a, a->kp);
 		else
-			printf("unset: `%s': not a valid identifier\n", k->arg);
-		k = k->next;
+			ft_unset6(a, data);
+		a->kp = a->kp->next;
 	}
 }

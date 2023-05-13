@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 12:10:17 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/13 12:15:59 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/13 17:27:59 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,10 @@ void	ft_export3(t_data *a)
 {
 	a->i = 0;
 	if (!ft_isalpha(a->kp->arg[a->i]))
+	{
 		ft_printerror("export", a->kp->arg);
+		g_global.status = 1;
+	}
 	else
 	{
 		while (a->kp->arg[a->i] && (ft_isalnum(a->kp->arg[a->i]) == 1
@@ -78,7 +81,10 @@ void	ft_export3(t_data *a)
 		else if (a->kp->arg[a->i] == '+' && a->kp->arg[a->i + 1] == '=')
 			ft_export1(a, 2);
 		else if (a->kp->arg[a->i] != '=')
+		{
 			ft_printerror("export", a->kp->arg);
+			g_global.status = 1;
+		}
 		else
 			ft_export1(a, 1);
 	}

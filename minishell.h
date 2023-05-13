@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/13 16:02:05 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/13 17:25:25 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ void				handler(int status);
 void				ft_copie_nb(t_data *a, int index);
 void				ft_change(t_data *a, int index);
 size_t				strlen_expand(char *str);
+void				ft_unset6(t_data *a, t_list *data);
 int					ft_check_n(char *str);
 void				ft_env(t_data *a, t_list *data);
 void				ft_unset(t_list *data, t_data *a);

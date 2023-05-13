@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/13 14:22:57 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/13 15:14:14 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ typedef struct data
 	int				lock1;
 	int				check;
 	int				pid;
+	int				output;
 	size_t			k;
 	size_t			len;
 	size_t			end;
@@ -179,4 +180,5 @@ void				change1(t_data *a);
 int					ft_nothing(char *a);
 void				create_linked(t_data *a);
 int					ft_check_red2(t_list *data, int fd);
+t_list				*ft_get_tatto1(t_list *ptr);
 #endif

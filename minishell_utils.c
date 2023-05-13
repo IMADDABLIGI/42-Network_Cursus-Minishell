@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:05:47 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/13 14:14:54 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/13 15:04:43 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void	ft_handlec(int sig)
 	(void)sig;
 	g_global.save = dup(STDIN_FILENO);
 	g_global.doc = 0;
-    g_global.status = 1;
+	g_global.status = 1;
 	rl_replace_line("", 0);
 	close(0);
 }
@@ -109,7 +109,7 @@ void	ft_here_doc(t_list *data, int doc, int num, t_data *a)
 		{
 			free(a->line);
 			close(num);
-            g_global.status = 0;
+			g_global.status = 0;
 			return ;
 		}
 		a->line = expand_her(a);

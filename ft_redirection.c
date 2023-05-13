@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_redirection.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 01:36:49 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/13 09:21:47 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/13 15:16:07 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 
 int	ft_checkoutput(t_list *data, t_store *store, int i, int output)
 {
-	if ((output = ft_check_redirections2(data, 0, store)))
+	output = ft_check_redirections2(data, 0, store);
+	if (output)
 		return (output);
 	if (i == store->count)
 		return (0);
@@ -33,7 +34,8 @@ int	ft_checkoutput(t_list *data, t_store *store, int i, int output)
 
 void	ft_checkinput(t_list *data, int input, int i, t_store *store)
 {
-	if ((input = ft_check_redirections(data, store, 0)))
+	input = ft_check_redirections(data, store, 0);
+	if (input)
 		return ;
 	else
 	{
@@ -52,31 +54,22 @@ void	ft_checkinput(t_list *data, int input, int i, t_store *store)
 
 void	ft_redirect(t_list *data, t_store *store, int i, t_data *a)
 {
-	int		output;
 	t_list	*ptr;
 
 	ptr = data;
 	ft_checkinput(data, 0, i, store);
-	if (!(ptr->tatto == 1))
-	{
-		while (ptr && (ptr->tatto != 1))
-		{
-			if (ptr->tatto == 4)
-				exit(0);
-			ptr = ptr->next;
-		}
-		if (ptr && (ptr->tatto != 1))
-			exit(0);
-	}
+	if (ptr->tatto != 1)
+		ptr = ft_get_tatto1(ptr);
 	if (!ft_check_builtins(ptr))
 	{
 		store->path = ft_getpath(ptr->arg);
 		store->arg = ft_arg(ptr, ptr, NULL, 0);
 	}
-	if ((output = ft_checkoutput(data, store, i, 0)))
+	a->output = ft_checkoutput(data, store, i, 0);
+	if (a->output)
 	{
-		dup2(output, STDOUT_FILENO);
-		close(output);
+		dup2(a->output, STDOUT_FILENO);
+		close(a->output);
 	}
 	if (ft_check_builtins(ptr) == 1)
 	{
@@ -85,7 +78,7 @@ void	ft_redirect(t_list *data, t_store *store, int i, t_data *a)
 	}
 	execve(store->path, store->arg, a->env22);
 	perror("execve");
-	exit(EXIT_FAILURE);
+	exit(126);
 }
 
 //---------------------------------------------------------------------------//

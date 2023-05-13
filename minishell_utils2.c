@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/13 14:09:35 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/13 14:49:05 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ char	*ft_getpath(char *cmd)
 		if (access((cmd), X_OK) == 0)
 			return (cmd);
 		ft_printerror(": No such file or directory", cmd);
+		exit(127);
 	}
 	else if (((cmd[0] == '.') && (cmd[1] == '/')) || ((cmd[0] == '.')
 			&& (cmd[1] == '.')))
@@ -103,6 +104,7 @@ char	*ft_getpath(char *cmd)
 			ft_printerror(": Permission denied", cmd);
 		else
 			ft_printerror(": No such file or directory", cmd);
+		exit(1);
 	}
 	else
 	{
@@ -114,6 +116,7 @@ char	*ft_getpath(char *cmd)
 			i++;
 		}
 		ft_printerror(": command not found", cmd);
+		exit(127);
 	}
 	exit(1);
 }

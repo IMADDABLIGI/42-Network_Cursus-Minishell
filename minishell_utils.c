@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:05:47 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/12 17:31:42 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/13 09:06:15 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,28 @@ void	*ft_memcpy(void *dst, const char *src, int n)
 
 //---------------------------------------------------------------//
 
-void	ft_run_doc(t_list *data, t_store *store,t_data *a)
+int	ft_run_doc(t_list *data, t_store *store,t_data *a)
 {
 	store->doc = 0;
+	global.doc = 1;
 	while (data)
 	{
 		if (data->tatto == 7)
 		{
 			store->doc++;
-			a->line=NULL;
-			ft_here_doc(data, store->doc, 0,a);
+			a->line = NULL;
+			ft_here_doc(data, store->doc, 0, a);
+			if (!global.doc)
+			{
+				dup2(global.save, STDIN_FILENO);
+				close (global.save);
+				return (0);
+			}
 		}
 		data = data->next;
 	}
 	store->doc = 0;
+	return (1);
 }
 
 //---------------------------------------------------------------//
@@ -77,12 +85,22 @@ int	ft_get_heredoc( int count, int fd, int check)
 
 //---------------------------------------------------------------//
 
+void    ft_handlec()
+{
+	global.save = dup(STDIN_FILENO);
+	global.doc = 0;
+	rl_replace_line("", 0);
+	close (0);
+}
+
+//---------------------------------------------------------------//
+
 void	ft_here_doc(t_list *data, int doc, int num,t_data *a)
 {
 	num = ft_get_heredoc(doc, 0, 1);
-	while (1)
+	while (global.doc)
 	{
-		global.her =1;
+		signal(SIGINT, ft_handlec);
 		a->line = readline("> ");
 		if (a->line == NULL)
 			return ;
@@ -97,6 +115,5 @@ void	ft_here_doc(t_list *data, int doc, int num,t_data *a)
 		write(num, "\n", 1);
 		free(a->line);
 	}
-	return ;
 }
 

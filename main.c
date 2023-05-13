@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/12 18:17:54 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/13 09:06:26 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ void	ft_execute_builtins(t_list *data, t_data *a)
 	while (data && (data->tatto != 1))
 		data = data->next;
 	if (!ft_strcmp(data->arg, "cd"))
-		ft_cd(data, NULL, NULL, a);
+		ft_cd(data, NULL, a);
 	else if (!ft_strcmp(data->arg, "echo"))
 		ft_echo(data);
 	else if (!ft_strcmp(data->arg, "export"))
@@ -337,8 +337,8 @@ void	create_linked(t_data *a)
 	a->tmp1 = a->p;
 	if (!ft_nothing(a->tmp1->arg))
 	{
-		ft_check_arg(a->tmp1, &store, a);
-		ft_execution(a->tmp1, &store, a, 0);
+		if (ft_check_arg(a->tmp1, &store, a))
+		    ft_execution(a->tmp1, &store, a, 0);
 	}
 	else
 		printf(" %s: command not found\n", a->tmp1->arg);
@@ -669,18 +669,17 @@ void	handler(int status)
 int	main(int argc, char **argv, char **env)
 {
 	t_data a;
-    // global.gbl_check_doc = 0;
     
 	if (argc != 1)
 		ft_abort(2);
 	(void)argv;
 	ft_create_env(&a, env);
-	signal(SIGINT, handler);
+    // rl_set_signals();
 	signal(SIGQUIT, (void *)sigignore);
 	a.env22 = env;
 	while (1)
 	{
-		global.her=0;
+	    signal(SIGINT, handler);
 		rl_catch_signals = 0;
 		a.input = readline("MINISHELL>> ");
 		if (a.input == NULL)

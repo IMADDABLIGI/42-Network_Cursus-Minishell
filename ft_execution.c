@@ -6,12 +6,13 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/12 10:00:51 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/12 21:09:37 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+t_glb	global;
 //---------------------------------------------------------------------------//
 
 int	ft_creatfile(t_list *data)
@@ -49,7 +50,8 @@ void	ft_exec(t_list *data, t_store *store, int i, int pid, t_data *a)
 			ft_redirect(data, store, i,a);
 		else
 		{
-			waitpid(pid, NULL, 0);
+			waitpid(pid, &global.status, 0);
+				// printf("Child exited with status %d\n", WEXITSTATUS(global.status));
 			if (data->tatto == 5)
 				data = data->next;
 			data = data->next;
@@ -96,8 +98,8 @@ void	ft_execution(t_list *data, t_store *store,t_data *a , int fd)
 		{		
 			if ((fd = ft_checkoutput(data, store, 1, 0)))
 			{
-                if (fd == -1)
-                    return ;
+				if (fd == -1)
+					return ;
 				store->save = dup(STDOUT_FILENO);
 				dup2(fd, STDOUT_FILENO);
 				close(fd);

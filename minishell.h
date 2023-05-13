@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/12 17:31:31 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/13 09:05:32 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@
 
 typedef struct t_global
 {
+	int				doc;
+	int				save;
+	int				status;
 	char			*home;
 	char			*old_pwd;
 	int her;
@@ -126,18 +129,19 @@ void				ft_execution(t_list *data, t_store *store, t_data *a,
 char				**ft_arg(t_list *data, t_list *ptr, char **arg, int i);
 void				ft_printerror(char *str, char *cmd);
 void				ft_redirect(t_list *data, t_store *store, int i, t_data *a);
-void				ft_check_arg(t_list *data, t_store *store, t_data *a);
+int					ft_check_arg(t_list *data, t_store *store, t_data *a);
 void				ft_check_next(t_list *data);
-void				ft_run_doc(t_list *data, t_store *store, t_data *a);
+int					ft_run_doc(t_list *data, t_store *store, t_data *a);
 void				ft_here_doc(t_list *data, int doc, int num, t_data *a);
 int					ft_strcmp(char *s1, char *s2);
 char				*ft_itoa(int n);
 char				*ft_strjoin(char *s1, char *s2, int index);
 int					ft_get_heredoc(int count, int fd, int check);
 int					ft_creatfile(t_list *data);
-void				ft_cd(t_list *data, char *path, char *pwd, t_data *a);
+void				ft_cd(t_list *data, char *pwd,t_data *a);
 char				*ft_strjoin2(char *s1, char *s2);
 char				*ft_strjoin3(char *s1, char *s2);
+int					ft_check_dr(char *path);
 int					ft_check_redirections(t_list *data, t_store *store, int input);
 int					ft_check_redirections2(t_list *data, int output,
 						t_store *store);

@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/12 10:54:21 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/12 18:37:32 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_check_red(t_list *data, t_store *store, int fd)
 
 /*-------------------------------------------------------------------------------------*/
 
-void	ft_check_arg(t_list *data, t_store *store,t_data *a)
+int	ft_check_arg(t_list *data, t_store *store,t_data *a)
 {
 	t_list	*ptr;
 
@@ -61,7 +61,8 @@ void	ft_check_arg(t_list *data, t_store *store,t_data *a)
 	store->built = 0;
 	store->count = 0;
 	store->check = 0;
-	ft_run_doc(data, store,a);
+	if (!ft_run_doc(data, store,a))
+		return (0);
 	while (ptr)
 	{
 		if ((ptr->tatto == 1) && !(store->count))
@@ -78,6 +79,7 @@ void	ft_check_arg(t_list *data, t_store *store,t_data *a)
 				ft_check_red(ptr, store, 0);
 		ptr = ptr->next;
 	}
+	return (1);
 }
 
 /*-------------------------------------------------------------------------------------*/

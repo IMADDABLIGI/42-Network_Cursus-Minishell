@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:42:51 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/12 10:30:42 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/12 20:50:03 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,4 +95,19 @@ char	*ft_strjoin3(char *s1, char *s2)
 	ft_memcpy(string + lens1, (s2 + 1), lens2);
 	string[mix] = '\0';
 	return (string);
+}
+
+//---------------------------------------------------------------------------//
+
+int	ft_check_dr(char *path)
+{
+	struct stat sb;
+
+	stat(path, &sb);
+	if (S_ISREG(sb.st_mode))
+	{
+    	printf("cd: %s: Not a directory\n", path);
+		return (0);
+	}
+	return (1);
 }

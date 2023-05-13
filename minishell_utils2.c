@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/13 15:51:30 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/13 15:56:16 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,17 +110,7 @@ char	*ft_getpath(char *cmd, char **p_cmd, int i)
 
 char	**ft_arg(t_list *data, t_list *ptr, char **arg, int i)
 {
-	while ((ptr) && (ptr->tatto != 4))
-	{
-		if ((ptr->tatto == 5) || (ptr->tatto == 6) || (ptr->tatto == 7)
-			|| (ptr->tatto == 8))
-			ptr = ptr->next->next;
-		else
-		{
-			ptr = ptr->next;
-			i++;
-		}
-	}
+	i = ft_get_strlencmd(ptr, 0);
 	arg = malloc((i + 1) * sizeof(char *));
 	if (!arg)
 		ft_abort(1);

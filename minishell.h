@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/13 15:54:22 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/13 15:56:48 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,4 +185,5 @@ int					ft_check_red2(t_list *data, int fd);
 t_list				*ft_get_tatto1(t_list *ptr);
 void				ft_init_store(t_store *store);
 char				*ft_get_path2(char *cmd);
+int					ft_get_strlencmd(t_list *ptr, int i);
 #endif

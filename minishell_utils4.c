@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils4.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:42:51 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/13 09:24:17 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/13 10:32:02 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,35 +45,33 @@ int	ft_check_redirections(t_list *data, t_store *store, int input)
 
 //---------------------------------------------------------------------------//
 
-int	ft_check_redirections2(t_list *data, int output, t_store *store)
+int	ft_check_redirections2(t_list *data, int ot, t_store *store)
 {
 	while ((data) && (data->tatto != 4))
 	{
-		if (output && ((data->tatto == 6) || (data->tatto == 8)))
-			close(output);
+		if (ot && ((data->tatto == 6) || (data->tatto == 8)))
+			close(ot);
 		if (data->tatto == 6)
 		{
 			if (!ft_strcmp(data->next->arg, "/dev/stdout"))
-				output = 0;
+				ot = 0;
 			else
-				output = open(data->next->arg, O_WRONLY | O_TRUNC | O_CREAT,
-						0644);
+				ot = open(data->next->arg, O_WRONLY | O_TRUNC | O_CREAT, 0644);
 		}
 		else if (data->tatto == 8)
 		{
 			if (!ft_strcmp(data->next->arg, "/dev/stdout"))
-				output = 0;
+				ot = 0;
 			else
-				output = open(data->next->arg, O_WRONLY | O_APPEND | O_CREAT,
-						0644);
+				ot = open(data->next->arg, O_WRONLY | O_APPEND | O_CREAT, 0644);
 		}
-		if ((output < 0) && ((store->built) && !(store->pipe)))
+		if ((ot < 0) && ((store->built) && !(store->pipe)))
 			return (-1);
-		if (output < 0)
+		if (ot < 0)
 			exit(1);
 		data = data->next;
 	}
-	return (output);
+	return (ot);
 }
 
 //---------------------------------------------------------------------------//

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools7.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 09:16:54 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/13 09:31:37 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/13 10:38:20 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_pwd(t_list *data)
 	k = k->next;
 	cwd = getcwd(NULL, 0);
 	if (!cwd)
-		printf("%s\n", global.new_pwd);
+		printf("%s\n", g_global.new_pwd);
 	else
 		printf("%s\n", cwd);
 	if (cwd)

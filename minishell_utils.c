@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:05:47 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/13 09:33:19 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/13 10:37:04 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	*ft_memcpy(void *dst, const char *src, int n)
 int	ft_run_doc(t_list *data, t_store *store, t_data *a)
 {
 	store->doc = 0;
-	global.doc = 1;
+	g_global.doc = 1;
 	while (data)
 	{
 		if (data->tatto == 7)
@@ -44,10 +44,10 @@ int	ft_run_doc(t_list *data, t_store *store, t_data *a)
 			store->doc++;
 			a->line = NULL;
 			ft_here_doc(data, store->doc, 0, a);
-			if (!global.doc)
+			if (!g_global.doc)
 			{
-				dup2(global.save, STDIN_FILENO);
-				close(global.save);
+				dup2(g_global.save, STDIN_FILENO);
+				close(g_global.save);
 				return (0);
 			}
 		}
@@ -86,8 +86,8 @@ int	ft_get_heredoc(int count, int fd, int check)
 void	ft_handlec(int sig)
 {
 	(void)sig;
-	global.save = dup(STDIN_FILENO);
-	global.doc = 0;
+	g_global.save = dup(STDIN_FILENO);
+	g_global.doc = 0;
 	rl_replace_line("", 0);
 	close(0);
 }
@@ -97,7 +97,7 @@ void	ft_handlec(int sig)
 void	ft_here_doc(t_list *data, int doc, int num, t_data *a)
 {
 	num = ft_get_heredoc(doc, 0, 1);
-	while (global.doc)
+	while (g_global.doc)
 	{
 		signal(SIGINT, ft_handlec);
 		a->line = readline("> ");

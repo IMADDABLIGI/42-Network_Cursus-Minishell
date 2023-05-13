@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/13 09:28:46 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/13 10:36:36 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -472,7 +472,7 @@ void	ft_abort(int id)
 void	handler(int status)
 {
 	(void)status;
-	if (global.her)
+	if (g_global.her)
 	{
 		rl_getc_function = getc;
 	}

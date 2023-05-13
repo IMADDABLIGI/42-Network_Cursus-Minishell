@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/13 09:24:08 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/13 11:34:54 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	ft_printerror(char *str, char *cmd)
 	write(1, "\n", 1);
 }
 
-/*-------------------------------------------------------------------------------------*/
+//---------------------------------------------------------------------------//
 
 void	ft_check_red(t_list *data, t_store *store, int fd)
 {
@@ -32,7 +32,8 @@ void	ft_check_red(t_list *data, t_store *store, int fd)
 	}
 	else if ((data->tatto == 5) && !store->check)
 	{
-		if (((fd = open(data->next->arg, O_RDONLY)) < 0))
+		fd = open(data->next->arg, O_RDONLY);
+		if (fd < 0)
 			ft_printerror(": No such file or directory", data->next->arg);
 		close(fd);
 	}
@@ -50,7 +51,7 @@ void	ft_check_red(t_list *data, t_store *store, int fd)
 		store->check = 1;
 }
 
-/*-------------------------------------------------------------------------------------*/
+//---------------------------------------------------------------------------//
 
 int	ft_check_arg(t_list *data, t_store *store, t_data *a)
 {
@@ -82,7 +83,7 @@ int	ft_check_arg(t_list *data, t_store *store, t_data *a)
 	return (1);
 }
 
-/*-------------------------------------------------------------------------------------*/
+//---------------------------------------------------------------------------//
 
 char	*ft_getpath(char *cmd)
 {
@@ -120,7 +121,7 @@ char	*ft_getpath(char *cmd)
 	exit(1);
 }
 
-/*----------------------------------------------------------------*/
+/*-----------------------------------------------------------*/
 
 char	**ft_arg(t_list *data, t_list *ptr, char **arg, int i)
 {

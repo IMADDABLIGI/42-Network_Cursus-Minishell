@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:48:03 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/13 10:37:47 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/13 11:37:06 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,20 +84,19 @@ int	ft_cds(t_list *data, char *pwd, int check, char *path)
 {
 	if (!ft_check_dr(data->next->arg))
 		return (-2);
-	if ((data->next->tatto == 5) || (data->next->tatto == 6) || (data->next->tatto == 7)
-		|| (data->next->tatto == 8) || (data->next->tatto == 4))
+	if (data->next->tatto == 5 || data->next->tatto == 6 || data->next->tatto
+		== 7 || data->next->tatto == 8 || data->next->tatto == 4)
 		check = chdir(g_global.home);
 	else if ((data->next->arg[0] == '~') && (data->next->arg[1] == '\0'))
 		check = chdir(g_global.home);
 	else if ((data->next->arg[0] == '~') && (data->next->arg[1] == '/'))
 		check = ft_get_home(data, NULL, 0);
-	else if ((pwd == NULL) && (data->next->arg[0] == '.')
-			&& (data->next->arg[1] == '\0'))
-		printf("cd: error retrieving current directory: getcwd: cannot access parent directories: No such file or directory\n");
+	else if (!pwd && (data->next->arg[0] == '.') && data->next->arg[1] == '\0')
+		ft_print_error2();
 	else if (data->next->arg[0] == '/')
 		check = chdir(data->next->arg);
 	else if (!pwd && (data->next->arg[0] == '.') && (data->next->arg[1] == '.')
-			&& (data->next->arg[2] == '\0'))
+		&& (data->next->arg[2] == '\0'))
 		check = chdir(g_global.old_pwd);
 	else if (!pwd)
 		return (-2);

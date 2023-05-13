@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:42:51 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/13 10:32:02 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/13 11:31:39 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,18 @@ int	ft_check_redirections(t_list *data, t_store *store, int input)
 		if (data->tatto == 5)
 		{
 			ft_creatfile(data);
-			if (((input = open(data->next->arg, O_RDONLY)) < 0))
+			input = open(data->next->arg, O_RDONLY);
+			if (input < 0)
 				exit(0);
-			else
-			{
-				dup2(input, STDIN_FILENO);
-				close(input);
-			}
+			dup2(input, STDIN_FILENO);
+			close(input);
 		}
 		else if (data->tatto == 7)
 		{
 			ft_creatfile(data);
 			store->doc++;
 			input = ft_get_heredoc(store->doc, 0, 0);
-			if (dup2(input, STDIN_FILENO) < 0)
-				perror("dup2");
+			dup2(input, STDIN_FILENO);
 			close(input);
 		}
 		data = data->next;
@@ -110,4 +107,13 @@ int	ft_check_dr(char *path)
 		return (0);
 	}
 	return (1);
+}
+
+//---------------------------------------------------------------------------//
+
+void	ft_print_error2()
+{
+	write(1, "cd: error retrieving current directory:", 40);
+	write(1, " getcwd: cannot access parent directories:", 43);
+	write(1, " No such file or directory\n", 28);
 }

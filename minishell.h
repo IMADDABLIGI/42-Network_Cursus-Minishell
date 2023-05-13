@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/13 10:35:26 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/13 11:31:48 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,6 +134,7 @@ void				ft_execution(t_list *data, t_store *store, t_data *a,
 						int fd);
 char				**ft_arg(t_list *data, t_list *ptr, char **arg, int i);
 void				ft_printerror(char *str, char *cmd);
+void				ft_print_error2();
 void				ft_redirect(t_list *data, t_store *store, int i, t_data *a);
 int					ft_check_arg(t_list *data, t_store *store, t_data *a);
 void				ft_check_next(t_list *data);

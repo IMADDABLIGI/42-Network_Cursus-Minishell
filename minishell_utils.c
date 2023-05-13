@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:05:47 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/13 10:37:04 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/13 11:16:51 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,8 @@ int	ft_get_heredoc(int count, int fd, int check)
 	if (check)
 	{
 		unlink(join);
-		if ((fd = open(join, O_CREAT | O_APPEND | O_WRONLY, 0644)) < 0)
+		fd = open(join, O_CREAT | O_APPEND | O_WRONLY, 0644);
+		if (fd < 0)
 		{
 			perror("Error Creating heredoc file");
 			exit(1);

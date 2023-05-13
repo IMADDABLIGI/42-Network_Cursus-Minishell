@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/13 15:21:20 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/13 15:51:30 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,7 @@ int	ft_check_arg(t_list *data, t_store *store, t_data *a)
 	t_list	*ptr;
 
 	ptr = data;
-	store->pipe = 0;
-	store->built = 0;
-	store->count = 0;
-	store->check = 0;
+	ft_init_store(store);
 	if (!ft_run_doc(data, store, a))
 		return (0);
 	while (ptr)
@@ -82,12 +79,8 @@ int	ft_check_arg(t_list *data, t_store *store, t_data *a)
 
 //---------------------------------------------------------------------------//
 
-char	*ft_getpath(char *cmd)
+char	*ft_getpath(char *cmd, char **p_cmd, int i)
 {
-	int		i;
-	char	**p_cmd;
-
-	i = 0;
 	if (cmd[0] == '/')
 	{
 		if (access((cmd), X_OK) == 0)
@@ -97,15 +90,7 @@ char	*ft_getpath(char *cmd)
 	}
 	else if (((cmd[0] == '.') && (cmd[1] == '/')) || ((cmd[0] == '.')
 			&& (cmd[1] == '.')))
-	{
-		if (access((cmd), X_OK) == 0)
-			return (cmd);
-		else if (access((cmd), F_OK) == 0)
-			ft_printerror(": Permission denied", cmd);
-		else
-			ft_printerror(": No such file or directory", cmd);
-		exit(1);
-	}
+		return (ft_get_path2(cmd));
 	else
 	{
 		p_cmd = ft_split_cmd(getenv("PATH"), ':', cmd);
@@ -127,7 +112,7 @@ char	**ft_arg(t_list *data, t_list *ptr, char **arg, int i)
 {
 	while ((ptr) && (ptr->tatto != 4))
 	{
-		if ((ptr->tatto == 5) || (ptr->tatto == 6) || (ptr->tatto == 7 )
+		if ((ptr->tatto == 5) || (ptr->tatto == 6) || (ptr->tatto == 7)
 			|| (ptr->tatto == 8))
 			ptr = ptr->next->next;
 		else

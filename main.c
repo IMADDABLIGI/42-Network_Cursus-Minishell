@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/12 15:13:49 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/12 18:17:54 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -652,10 +652,17 @@ void	ft_abort(int id)
 void	handler(int status)
 {
 	(void)status;
-    printf("\n"); // Move to a new line
+	if (global.her)
+	{
+		rl_getc_function = getc;
+	}
+	else 
+	{
+    printf("\n");
     rl_replace_line("", 0);
-    rl_on_new_line(); // Regenerate the prompt on a newline
+    rl_on_new_line();
     rl_redisplay();
+	}
     
 }
 
@@ -673,6 +680,7 @@ int	main(int argc, char **argv, char **env)
 	a.env22 = env;
 	while (1)
 	{
+		global.her=0;
 		rl_catch_signals = 0;
 		a.input = readline("MINISHELL>> ");
 		if (a.input == NULL)

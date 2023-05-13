@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:05:47 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/12 10:53:44 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/12 17:31:42 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	ft_here_doc(t_list *data, int doc, int num,t_data *a)
 	num = ft_get_heredoc(doc, 0, 1);
 	while (1)
 	{
+		global.her =1;
 		a->line = readline("> ");
 		if (a->line == NULL)
 			return ;

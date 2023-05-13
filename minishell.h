@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/13 15:58:51 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/13 16:02:05 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ int					ft_checkoutput(t_list *data, t_store *store, int i,
 						int output);
 void				*ft_memcpy(void *dst, const char *src, int n);
 char				**ft_split_cmd(char *s, char c, char *cmd);
-char				*ft_getpath(char *cmd);
+char				*ft_getpath(char *cmd, char **p_cmd, int i);
 void				ft_execution(t_list *data, t_store *store, t_data *a,
 						int fd);
 char				**ft_arg(t_list *data, t_list *ptr, char **arg, int i);
@@ -183,4 +183,7 @@ int					ft_nothing(char *a);
 void				create_linked(t_data *a);
 int					ft_check_red2(t_list *data, int fd);
 t_list				*ft_get_tatto1(t_list *ptr);
+void				ft_init_store(t_store *store);
+char				*ft_get_path2(char *cmd);
+int					ft_get_strlencmd(t_list *ptr, int i);
 #endif

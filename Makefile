@@ -6,7 +6,7 @@
 #    By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/16 18:27:52 by hznagui           #+#    #+#              #
-#    Updated: 2023/05/13 13:52:18 by idabligi         ###   ########.fr        #
+#    Updated: 2023/05/13 15:57:42 by idabligi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRC_FILE = 	main.c\
 			tools12.c\
 			tools13.c\
 			tools14.c\
+			tools15.c\
 			ft_split_cmd.c\
 			ft_execution.c\
 			ft_redirection.c\

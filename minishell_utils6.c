@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:52:45 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/13 15:19:44 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/13 15:49:16 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,27 @@ t_list	*ft_get_tatto1(t_list *ptr)
 	if (ptr && (ptr->tatto != 1))
 		exit(1);
 	return (ptr);
+}
+
+//---------------------------------------------------------------------------//
+
+void	ft_init_store(t_store *store)
+{
+	store->pipe = 0;
+	store->built = 0;
+	store->count = 0;
+	store->check = 0;
+}
+
+//---------------------------------------------------------------------------//
+
+char	*ft_get_path2(char *cmd)
+{
+	if (access((cmd), X_OK) == 0)
+		return (cmd);
+	else if (access((cmd), F_OK) == 0)
+		ft_printerror(": Permission denied", cmd);
+	else
+		ft_printerror(": No such file or directory", cmd);
+	exit(1);
 }

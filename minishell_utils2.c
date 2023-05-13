@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/13 14:49:05 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/13 15:21:20 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,8 @@ char	**ft_arg(t_list *data, t_list *ptr, char **arg, int i)
 {
 	while ((ptr) && (ptr->tatto != 4))
 	{
-		if (ptr->tatto == 5 || ptr->tatto == 6 || ptr->tatto == 7 || ptr->tatto == 8)
+		if ((ptr->tatto == 5) || (ptr->tatto == 6) || (ptr->tatto == 7 )
+			|| (ptr->tatto == 8))
 			ptr = ptr->next->next;
 		else
 		{

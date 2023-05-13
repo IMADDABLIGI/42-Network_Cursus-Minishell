@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/13 15:02:18 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/13 15:20:01 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void	ft_exec(t_list *data, t_store *store, int i, t_data *a)
 		else
 		{
 			waitpid(a->pid, &g_global.intg, 0);
-			// printf("status : %d\n", WEXITSTATUS(g_global.intg));
 			g_global.status = WEXITSTATUS(g_global.intg);
 			if (data->tatto == 5)
 				data = data->next;

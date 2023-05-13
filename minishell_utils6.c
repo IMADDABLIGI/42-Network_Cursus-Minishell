@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:52:45 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/13 15:09:13 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/13 15:19:44 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,15 +56,15 @@ int	ft_check_red2(t_list *data, int fd)
 
 //---------------------------------------------------------------------------//
 
-t_list  *ft_get_tatto1(t_list *ptr)
+t_list	*ft_get_tatto1(t_list *ptr)
 {
-    while (ptr && (ptr->tatto != 1))
+	while (ptr && (ptr->tatto != 1))
 	{
-        if (ptr->tatto == 4)
-            exit(1);
-        ptr = ptr->next;
-    }
-    if (ptr && (ptr->tatto != 1))
-        exit(1);
-    return (ptr);
+		if (ptr->tatto == 4)
+			exit(1);
+		ptr = ptr->next;
+	}
+	if (ptr && (ptr->tatto != 1))
+		exit(1);
+	return (ptr);
 }

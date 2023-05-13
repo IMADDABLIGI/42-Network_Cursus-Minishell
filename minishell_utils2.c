@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/13 11:34:54 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/13 13:51:46 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ char	*ft_getpath(char *cmd)
 		ft_printerror(": No such file or directory", cmd);
 	}
 	else if (((cmd[0] == '.') && (cmd[1] == '/')) || ((cmd[0] == '.')
-				&& (cmd[1] == '.')))
+			&& (cmd[1] == '.')))
 	{
 		if (access((cmd), X_OK) == 0)
 			return (cmd);
@@ -127,8 +127,7 @@ char	**ft_arg(t_list *data, t_list *ptr, char **arg, int i)
 {
 	while ((ptr) && (ptr->tatto != 4))
 	{
-		if ((ptr->tatto == 5) || (ptr->tatto == 6) || (ptr->tatto == 7)
-			|| (ptr->tatto == 8))
+		if (ptr->tatto == 5 || ptr->tatto == 6 || ptr->tatto == 7 || ptr->tatto == 8)
 			ptr = ptr->next->next;
 		else
 		{

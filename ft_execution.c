@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/13 10:48:49 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/13 11:41:09 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_exec(t_list *data, t_store *store, int i, int pid, t_data *a)
 		else
 		{
 			waitpid(pid, &g_global.status, 0);
-			printf("Child exited with status %d\n", WEXITSTATUS(g_global.status));
+			// printf("Child exited with status %d\n", WEXITSTATUS(g_global.status));
 			if (data->tatto == 5)
 				data = data->next;
 			data = data->next;

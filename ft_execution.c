@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execution.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/13 09:21:35 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/13 10:48:49 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_glb	global;
 //---------------------------------------------------------------------------//
 
 int	ft_creatfile(t_list *data)
@@ -51,9 +50,8 @@ void	ft_exec(t_list *data, t_store *store, int i, int pid, t_data *a)
 			ft_redirect(data, store, i, a);
 		else
 		{
-			waitpid(pid, &global.status, 0);
-			// printf("Child exited with status %d\n",
-					WEXITSTATUS(global.status);
+			waitpid(pid, &g_global.status, 0);
+			printf("Child exited with status %d\n", WEXITSTATUS(g_global.status));
 			if (data->tatto == 5)
 				data = data->next;
 			data = data->next;

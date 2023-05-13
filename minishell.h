@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/13 12:21:28 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/13 12:23:40 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ typedef struct data
 	t_env			*tmp;
 }					t_data;
 
-t_glb				global;
+t_glb				g_global;
 
 /*parsing function*/
 t_list				*ft_lstnew(t_data *a);
@@ -153,6 +153,7 @@ void				ft_execution(t_list *data, t_store *store, t_data *a,
 						int fd);
 char				**ft_arg(t_list *data, t_list *ptr, char **arg, int i);
 void				ft_printerror(char *str, char *cmd);
+void				ft_print_error2(void);
 void				ft_redirect(t_list *data, t_store *store, int i, t_data *a);
 int					ft_check_arg(t_list *data, t_store *store, t_data *a);
 void				ft_check_next(t_list *data);
@@ -169,7 +170,7 @@ char				*ft_strjoin3(char *s1, char *s2);
 int					ft_check_dr(char *path);
 int					ft_check_redirections(t_list *data, t_store *store,
 						int input);
-int					ft_check_redirections2(t_list *data, int output,
+int					ft_check_redirections2(t_list *data, int ot,
 						t_store *store);
 void				change1(t_data *a);
 int					ft_nothing(char *a);

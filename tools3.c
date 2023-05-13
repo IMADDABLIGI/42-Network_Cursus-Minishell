@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 09:49:33 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/13 10:32:38 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/13 15:54:42 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,14 @@ size_t	ft_expand_length_her(t_data *a)
 
 void	ft_length1_her2(t_data *a)
 {
-	if (((a->t == '"' || !a->t) && a->line[a->x] == '$'
+	if ((a->t == '"' || !a->t) && a->line[a->x] == '$'
+		&& a->line[a->x + 1] == '?')
+	{
+			a->status = ft_itoa(g_global.status);
+			a->len += ft_strlen(a->status);
+			a->x++;
+	}
+	else if (((a->t == '"' || !a->t) && a->line[a->x] == '$'
 			&& ft_isdigit(a->line[a->x + 1])) || (a->line[a->x] == '$'
 			&& (a->line[a->x + 1] == 39 || a->line[a->x + 1] == 34)
 			&& !a->lock))

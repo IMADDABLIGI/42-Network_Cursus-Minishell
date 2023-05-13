@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 10:05:07 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/13 15:23:41 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/13 15:59:10 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,13 @@ char	*ft_strjoin22(char *s1, char s2)
 
 void	expand_her2(t_data *a)
 {
-	if (((a->t == '"' || !a->t) && a->line[a->x] == '$'
+	if ((a->t == '"' || !a->t) && a->line[a->x] == '$'
+		&& a->line[a->x + 1] == '?')
+	{
+		ft_copie_nb(a, 0);
+		a->x++;
+	}
+	else if (((a->t == '"' || !a->t) && a->line[a->x] == '$'
 			&& ft_isdigit(a->line[a->x + 1])) || (a->line[a->x] == '$'
 			&& (a->line[a->x + 1] == 39 || a->line[a->x + 1] == 34)
 			&& !a->lock))

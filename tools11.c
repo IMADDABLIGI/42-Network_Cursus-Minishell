@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:37:19 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/13 15:44:13 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/13 15:58:58 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	ft_expand2(t_data *a)
 	if ((a->t == '"' || !a->t) && a->input[a->x] == '$'
 		&& a->input[a->x + 1] == '?')
 	{
-		ft_copie_nb(a);
+		ft_copie_nb(a, 1);
 		a->x++;
 	}
 	else if (((a->t == '"' || !a->t) && a->input[a->x] == '$'

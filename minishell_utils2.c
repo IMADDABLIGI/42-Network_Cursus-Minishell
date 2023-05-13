@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/13 15:56:16 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/13 17:25:06 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	ft_printerror(char *str, char *cmd)
 {
-	write(1, cmd, ft_strlen(cmd));
-	write(1, str, ft_strlen(str));
-	write(1, "\n", 1);
+	write(2, cmd, ft_strlen(cmd));
+	write(2, str, ft_strlen(str));
+	write(2, "\n", 1);
 }
 
 //---------------------------------------------------------------------------//

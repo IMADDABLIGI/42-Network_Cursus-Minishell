@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/13 13:52:28 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/13 14:22:57 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct t_global
 	int				doc;
 	int				save;
 	int				status;
+	int				intg;
 	char			*home;
 	char			*old_pwd;
 	int				her;
@@ -79,6 +80,7 @@ typedef struct data
 	int				lock;
 	int				lock1;
 	int				check;
+	int				pid;
 	size_t			k;
 	size_t			len;
 	size_t			end;
@@ -176,4 +178,5 @@ int					ft_check_redirections2(t_list *data, int ot,
 void				change1(t_data *a);
 int					ft_nothing(char *a);
 void				create_linked(t_data *a);
+int					ft_check_red2(t_list *data, int fd);
 #endif

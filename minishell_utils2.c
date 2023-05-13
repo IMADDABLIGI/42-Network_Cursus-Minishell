@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/13 13:51:46 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/13 14:09:35 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,14 @@ void	ft_check_red(t_list *data, t_store *store, int fd)
 		close(fd);
 	}
 	else if (((data->tatto == 6) || (data->tatto == 8)) && !store->check)
-	{
-		if (data->tatto == 6)
-			fd = open(data->next->arg, O_WRONLY | O_TRUNC | O_CREAT, 0644);
-		else if (data->tatto == 8)
-			fd = open(data->next->arg, O_WRONLY | O_APPEND | O_CREAT, 0644);
-		if (fd < 0)
-			ft_printerror(": Is a directory", data->next->arg);
-		close(fd);
-	}
+		fd = ft_check_red2(data, 0);
 	if (fd < 0)
+	{
+		g_global.status = 1;
 		store->check = 1;
+	}
+	else if (fd > 0)
+		g_global.status = 0;
 }
 
 //---------------------------------------------------------------------------//

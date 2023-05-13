@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/13 12:23:40 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/13 15:21:56 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ void				ft_expand2(t_data *a);
 void				ft_export(t_list *data, t_data *a);
 int					ft_isalnum(int c);
 void				handler(int status);
+void				ft_continue(t_data *a);
 void				ft_change(t_data *a, int index);
 size_t				strlen_expand(char *str);
 int					ft_check_n(char *str);

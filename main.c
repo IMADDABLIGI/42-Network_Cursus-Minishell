@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/13 12:22:31 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/13 15:13:40 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int	main(int argc, char **argv, char **env)
 	ft_create_env(&a, env);
 	signal(SIGQUIT, (void *)sigignore);
 	a.env22 = env;
+	g_global.status = 0;
 	while (1)
 	{
 		signal(SIGINT, handler);

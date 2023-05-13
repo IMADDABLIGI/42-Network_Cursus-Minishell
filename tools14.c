@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 12:19:21 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/13 12:20:23 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/13 15:21:44 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,4 +102,11 @@ void	ft_change(t_data *a, int index)
 	}
 	free(a->strenv);
 	return ;
+}
+/**************************************************************/
+
+void	ft_continue(t_data *a)
+{
+	a->ret[a->k] = a->input[a->x];
+	a->k++;
 }

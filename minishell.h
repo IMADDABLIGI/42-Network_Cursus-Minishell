@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/13 15:21:56 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/13 15:45:21 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ typedef struct t_global
 	int				doc;
 	int				save;
 	int				status;
+	int				intg;
 	char			*home;
 	char			*old_pwd;
 	int				her;
@@ -72,6 +73,7 @@ typedef struct data
 	char			*before;
 	char			*ret1;
 	char			*line;
+	char			*status;
 	char			*strtmp;
 	char			**tab;
 	char			t;
@@ -79,6 +81,8 @@ typedef struct data
 	int				lock;
 	int				lock1;
 	int				check;
+	int				pid;
+	int				output;
 	size_t			k;
 	size_t			len;
 	size_t			end;
@@ -123,7 +127,7 @@ void				ft_expand2(t_data *a);
 void				ft_export(t_list *data, t_data *a);
 int					ft_isalnum(int c);
 void				handler(int status);
-void				ft_continue(t_data *a);
+void				ft_copie_nb(t_data *a);
 void				ft_change(t_data *a, int index);
 size_t				strlen_expand(char *str);
 int					ft_check_n(char *str);
@@ -169,6 +173,7 @@ void				ft_cd(t_list *data, char *pwd, t_data *a);
 char				*ft_strjoin2(char *s1, char *s2);
 char				*ft_strjoin3(char *s1, char *s2);
 int					ft_check_dr(char *path);
+int					ft_cd_old_path(char *path, int check, int i, int j);
 int					ft_check_redirections(t_list *data, t_store *store,
 						int input);
 int					ft_check_redirections2(t_list *data, int ot,
@@ -176,4 +181,6 @@ int					ft_check_redirections2(t_list *data, int ot,
 void				change1(t_data *a);
 int					ft_nothing(char *a);
 void				create_linked(t_data *a);
+int					ft_check_red2(t_list *data, int fd);
+t_list				*ft_get_tatto1(t_list *ptr);
 #endif

@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 12:19:21 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/13 15:21:44 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/13 15:44:58 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ void	ft_length002(t_data *a)
 	else if (((a->t == '"' || !a->t) && a->tab[a->i][a->x] == '$'
 		&& ft_isdigit(a->tab[a->i][a->x + 1]))
 					|| (a->tab[a->i][a->x] == '$' && (a->tab[a->i][a->x
-					+ 1] == 39 || a->tab[a->i][a->x + 1] == 34)
-					&& !a->lock))
+					+ 1] == 39 || a->tab[a->i][a->x + 1] == 34) && !a->lock))
 		a->x++;
 	else
 		a->len++;
@@ -49,7 +48,7 @@ size_t	ft_length(t_data *a, int *tatto)
 }
 
 /**************************************************************/
-void	change2(t_data *a, size_t	lock, size_t	i)
+void	change2(t_data *a, size_t lock, size_t i)
 {
 	while (a->strtmp[i])
 	{
@@ -105,8 +104,16 @@ void	ft_change(t_data *a, int index)
 }
 /**************************************************************/
 
-void	ft_continue(t_data *a)
+void	ft_copie_nb(t_data *a)
 {
-	a->ret[a->k] = a->input[a->x];
-	a->k++;
+	int	i;
+
+	i = 0;
+	while (a->status[i])
+	{
+		a->ret[a->k] = a->status[i];
+		i++;
+		a->k++;
+	}
+	free(a->status);
 }

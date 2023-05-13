@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/13 11:34:54 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/13 15:21:20 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,17 +38,14 @@ void	ft_check_red(t_list *data, t_store *store, int fd)
 		close(fd);
 	}
 	else if (((data->tatto == 6) || (data->tatto == 8)) && !store->check)
-	{
-		if (data->tatto == 6)
-			fd = open(data->next->arg, O_WRONLY | O_TRUNC | O_CREAT, 0644);
-		else if (data->tatto == 8)
-			fd = open(data->next->arg, O_WRONLY | O_APPEND | O_CREAT, 0644);
-		if (fd < 0)
-			ft_printerror(": Is a directory", data->next->arg);
-		close(fd);
-	}
+		fd = ft_check_red2(data, 0);
 	if (fd < 0)
+	{
+		g_global.status = 1;
 		store->check = 1;
+	}
+	else if (fd > 0)
+		g_global.status = 0;
 }
 
 //---------------------------------------------------------------------------//
@@ -96,9 +93,10 @@ char	*ft_getpath(char *cmd)
 		if (access((cmd), X_OK) == 0)
 			return (cmd);
 		ft_printerror(": No such file or directory", cmd);
+		exit(127);
 	}
 	else if (((cmd[0] == '.') && (cmd[1] == '/')) || ((cmd[0] == '.')
-				&& (cmd[1] == '.')))
+			&& (cmd[1] == '.')))
 	{
 		if (access((cmd), X_OK) == 0)
 			return (cmd);
@@ -106,6 +104,7 @@ char	*ft_getpath(char *cmd)
 			ft_printerror(": Permission denied", cmd);
 		else
 			ft_printerror(": No such file or directory", cmd);
+		exit(1);
 	}
 	else
 	{
@@ -117,6 +116,7 @@ char	*ft_getpath(char *cmd)
 			i++;
 		}
 		ft_printerror(": command not found", cmd);
+		exit(127);
 	}
 	exit(1);
 }
@@ -127,7 +127,7 @@ char	**ft_arg(t_list *data, t_list *ptr, char **arg, int i)
 {
 	while ((ptr) && (ptr->tatto != 4))
 	{
-		if ((ptr->tatto == 5) || (ptr->tatto == 6) || (ptr->tatto == 7)
+		if ((ptr->tatto == 5) || (ptr->tatto == 6) || (ptr->tatto == 7 )
 			|| (ptr->tatto == 8))
 			ptr = ptr->next->next;
 		else

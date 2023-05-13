@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/13 10:48:49 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/13 15:20:01 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,22 +36,19 @@ int	ft_creatfile(t_list *data)
 
 //---------------------------------------------------------------------------//
 
-void	ft_exec(t_list *data, t_store *store, int i, int pid, t_data *a)
+void	ft_exec(t_list *data, t_store *store, int i, t_data *a)
 {
-	ft_creatfile(data);
 	while ((i <= store->count) && (data))
 	{
-		if ((pid = fork()) == -1)
-		{
-			perror("fork ");
-			exit(1);
-		}
-		if (pid == 0)
+		a->pid = fork();
+		if (a->pid == -1)
+			ft_abort(3);
+		if (a->pid == 0)
 			ft_redirect(data, store, i, a);
 		else
 		{
-			waitpid(pid, &g_global.status, 0);
-			printf("Child exited with status %d\n", WEXITSTATUS(g_global.status));
+			waitpid(a->pid, &g_global.intg, 0);
+			g_global.status = WEXITSTATUS(g_global.intg);
 			if (data->tatto == 5)
 				data = data->next;
 			data = data->next;
@@ -76,7 +73,8 @@ int	ft_check_built_input(t_list *data, int input)
 	{
 		if (data->tatto == 5)
 		{
-			if (((input = open(data->next->arg, O_RDONLY)) < 0))
+			input = open(data->next->arg, O_RDONLY);
+			if (input < 0)
 				return (0);
 			else
 				close(input);
@@ -96,7 +94,8 @@ void	ft_execution(t_list *data, t_store *store, t_data *a, int fd)
 	{
 		if (ft_check_built_input(data, 0))
 		{
-			if ((fd = ft_checkoutput(data, store, 1, 0)))
+			fd = ft_checkoutput(data, store, 1, 0);
+			if (fd)
 			{
 				if (fd == -1)
 					return ;
@@ -110,5 +109,8 @@ void	ft_execution(t_list *data, t_store *store, t_data *a, int fd)
 		}
 	}
 	else
-		ft_exec(data, store, 1, 1, a);
+	{
+		ft_creatfile(data);
+		ft_exec(data, store, 1, a);
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 10:05:07 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/13 11:28:53 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/13 15:23:41 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,7 @@ void	ft_abort(int id)
 		printf("\e[1;31mmalloc problem\n\e[0m");
 	else if (id == 2)
 		printf("\e[1;31mno argument please!\n\e[0m");
+	else if (id == 3)
+		printf("\e[1;31mno Error Fork!\n\e[0m");
 	exit(1);
 }

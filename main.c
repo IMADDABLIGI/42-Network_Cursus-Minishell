@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 17:16:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/13 15:13:40 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/13 15:46:15 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void	main2(t_data *a)
 {
+	a->pid = 1;
 	add_history(a->input);
 	expand(a);
 	a->input = a->ret;

@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:37:19 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/13 15:22:27 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/13 15:44:13 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,8 @@ void	ft_length2(t_data *a)
 	if ((a->t == '"' || !a->t) && a->input[a->x] == '$'
 		&& a->input[a->x + 1] == '?')
 	{
-			a->len++;
+			a->status = ft_itoa(g_global.status);
+			a->len += ft_strlen(a->status);
 			a->x++;
 	}
 	else if (((a->t == '"' || !a->t) && a->input[a->x] == '$'
@@ -96,9 +97,8 @@ void	ft_expand2(t_data *a)
 	if ((a->t == '"' || !a->t) && a->input[a->x] == '$'
 		&& a->input[a->x + 1] == '?')
 	{
-			a->ret[a->k] = g_global.status + 48;
-			a->k += 1;
-			a->x++;
+		ft_copie_nb(a);
+		a->x++;
 	}
 	else if (((a->t == '"' || !a->t) && a->input[a->x] == '$'
 			&& ft_isdigit(a->input[a->x + 1])) || (a->input[a->x] == '$'
@@ -114,7 +114,10 @@ void	ft_expand2(t_data *a)
 				+ 1] == '_'))
 		ft_change(a, 1);
 	else
-		ft_continue(a);
+	{
+		a->ret[a->k] = a->input[a->x];
+		a->k++;
+	}
 	a->x++;
 }
 /**************************************************************/

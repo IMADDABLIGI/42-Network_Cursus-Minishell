@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:48:03 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/13 11:37:06 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/13 13:47:52 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ int	ft_cds(t_list *data, char *pwd, int check, char *path)
 		check = chdir(data->next->arg);
 	else if (!pwd && (data->next->arg[0] == '.') && (data->next->arg[1] == '.')
 		&& (data->next->arg[2] == '\0'))
-		check = chdir(g_global.old_pwd);
+		check = ft_cd_old_path(g_global.old_pwd, 0, 0, 0);
 	else if (!pwd)
 		return (-2);
 	else

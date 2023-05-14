@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 09:16:54 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/14 18:38:26 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/14 19:57:58 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	create_linked(t_data *a)
 	a->tmp1 = a->p;
 	if (!ft_nothing(a->tmp1->arg))
 	{
+		signal(SIGINT, (void *)sigignore);
 		if (ft_check_arg(a->tmp1, &store, a))
 			ft_execution(a->tmp1, &store, a, 0);
 	}

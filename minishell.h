@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/13 18:12:04 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/14 10:16:20 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,7 @@ void				ft_print(char *arg);
 int					ft_isalpha(int c);
 void				ft_exit(t_list *data, t_data *a);
 int					ft_isdigit(int c);
+int					ft_atoi(char *str);
 void				ft_change_her(t_data *a);
 char				**ft_return22(t_data *a);
 size_t				nbr_of_words22(t_data *a);

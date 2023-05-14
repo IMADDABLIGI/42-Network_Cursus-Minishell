@@ -6,44 +6,48 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 09:59:15 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/13 10:00:45 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/14 10:07:53 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	nbr_of_words223(t_data *a)
+void	nbr_of_words223(t_data *a, int index)
 {
-	if (!a->lock1)
+	if (index == 1)
 	{
-		a->t = a->input[a->k];
-		a->lock1 = 1;
-		if (a->lock == 1)
-			a->length--;
-		a->lock = 1;
-	}
-	else if (a->input[a->k] == a->t && a->lock1)
-	{
-		a->lock = 0;
-		a->lock1 = 0;
-		if (!a->input[a->k + 1] || a->input[a->k + 1] == ' ' || a->input[a->k
-				+ 1] == '<' || a->input[a->k + 1] == '>' || a->input[a->k
-				+ 1] == '|')
 			a->length++;
+			a->lock = 1;
+	}
+	else if (index == 2)
+	{
+		if (!a->lock1)
+		{
+			a->t = a->input[a->k];
+			a->lock1 = 1;
+			if (a->lock == 1)
+				a->length--;
+			a->lock = 1;
+		}
+		else if (a->input[a->k] == a->t && a->lock1)
+		{
+			a->lock = 0;
+			a->lock1 = 0;
+			if (!a->input[a->k + 1] || a->input[a->k + 1] == ' '
+				|| a->input[a->k + 1] == '<' || a->input[a->k + 1] == '>'
+				|| a->input[a->k + 1] == '|')
+				a->length++;
+		}
 	}
 }
 
-void	nbr_of_words222(t_data *a)
+void	nbr_of_words224(t_data *a)
 {
-	if (a->input[a->k] != 39 && a->input[a->k] != 34 && a->input[a->k] != ' '
-		&& a->input[a->k] != '<' && a->input[a->k] != '>'
-		&& a->input[a->k] != '|' && a->lock == 0)
-	{
-		a->length++;
-		a->lock = 1;
-	}
-	else if (a->input[a->k] == 39 || a->input[a->k] == 34)
-		nbr_of_words223(a);
+	if ((a->input[a->k] == '<' && a->input[a->k + 1] == '<')
+		|| (a->input[a->k] == '>' && a->input[a->k + 1] == '>'))
+		a->k += 1;
+	a->length++;
+	a->lock = 0;
 }
 
 size_t	nbr_of_words22(t_data *a)
@@ -58,16 +62,12 @@ size_t	nbr_of_words22(t_data *a)
 		if (a->input[a->k] != 39 && a->input[a->k] != 34
 			&& a->input[a->k] != ' ' && a->input[a->k] != '<'
 			&& a->input[a->k] != '>' && a->input[a->k] != '|' && a->lock == 0)
-			nbr_of_words222(a);
+			nbr_of_words223(a, 1);
+		else if (a->input[a->k] == 39 || a->input[a->k] == 34)
+			nbr_of_words223(a, 2);
 		else if ((a->input[a->k] == '<' || a->input[a->k] == '>'
 				|| a->input[a->k] == '|') && !a->lock1)
-		{
-			if ((a->input[a->k] == '<' && a->input[a->k + 1] == '<')
-				|| (a->input[a->k] == '>' && a->input[a->k + 1] == '>'))
-				a->k += 1;
-			a->length++;
-			a->lock = 0;
-		}
+			nbr_of_words224(a);
 		else if (a->input[a->k] == ' ' && a->lock == 1 && a->lock1 == 0)
 			a->lock = 0;
 		a->k++;

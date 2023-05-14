@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 15:55:02 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/13 18:22:48 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/14 10:23:28 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,14 @@ void	ft_exit(t_list *data, t_data *a)
 	{
 		write(2, "bash: exit: ", 13);
 		write(2, a->kp->arg, ft_strlen(a->kp->arg));
-		write(2, "numeric argument required", 26);
+		write(2, ": numeric argument required", 28);
 		exit(255);
 	}
-	printf(" salam\n");
+	else
+	{
+		g_global.status = ft_atoi(a->kp->arg) % 256;
+		exit(g_global.status);
+	}
 }
 /**************************************************************/
 
@@ -66,7 +70,7 @@ static int	ft_return(int c)
 		return (0);
 }
 
-int	ft_atoi(const char *str)
+int	ft_atoi(char *str)
 {
 	int		c;
 	size_t	z;
@@ -75,8 +79,8 @@ int	ft_atoi(const char *str)
 	i = 0;
 	z = 0;
 	c = 1;
-	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\r'
-		|| str[i] == '\f' || str[i] == '\n' || str[i] == '\v' )
+	while (str[i] == ' ' || str[i] == '\t' || str[i] == '\r' || str[i] == '\f'
+		|| str[i] == '\n' || str[i] == '\v')
 		i++;
 	if (str[i] == '-' || str[i] == '+')
 	{
@@ -92,48 +96,4 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	return (z * c);
-}
-/**************************************************************/
-
-int	check(char *argv)
-{
-	int	i;
-	
-	i = 0;
-	while (argv[i])
-	{
-		if ((argv[i] >= 58 && argv[i] <= 127) ||
-			(argv[i] >= 33 && argv[i] <= 42) ||
-			(argv[i] >= '.' && argv[i] <= '/') ||
-			(argv[i] == ',') || (argv[i] == '+' && ((argv[i
-							+ 1] > '9' || argv[i + 1] < '0')
-						|| (argv[i - 1] != '\0' && argv[i
-							- 1] != ' '))))
-			return (1);
-		i++;
-	}
-	return (0);
-}
-/**************************************************************/
-
-int	check_nothing(char *argv, int i, int z)
-{
-	int	k;
-	k = 0;
-	z = 0;
-	i = 0;
-	while (argv[i])
-	{
-		if ((argv[i] >= '0' && argv[i] <= '9') && z == 0)
-		{
-			z = 1;
-			k += 1;
-		}
-		else if (!(argv[i] >= '0' && argv[i] <= '9') && z == 1)
-			z = 0;
-		i++;
-	}
-	if (k != 1)
-		return (1);
-	return (0);
 }

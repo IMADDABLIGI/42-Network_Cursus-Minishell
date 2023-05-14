@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 09:16:54 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/13 18:27:21 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/14 10:18:35 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,6 @@ void	create_linked(t_data *a)
 	if (parse_check(a))
 		return ;
 	tato(a);
-	// a->tmp1 = a->p;
-	// while (a->tmp1)
-	// {
-	// 	printf("<%s>\n",a->tmp1->arg);
-	// 	a->tmp1=a->tmp1->next;
-	// }
 	a->tmp1 = a->p;
 	if (!ft_nothing(a->tmp1->arg))
 	{

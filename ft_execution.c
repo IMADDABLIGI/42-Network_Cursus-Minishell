@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/14 20:10:13 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/14 21:23:25 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,6 @@ void	ft_exec(t_list *data, t_store *store, int i, t_data *a)
 
 			if (i == store->count)
 			{
-				printf("last arg : \n");
 				waitpid(a->pid, &g_global.intg, 0);
 				if (WIFEXITED(g_global.intg))
 					g_global.status = WEXITSTATUS(g_global.intg);
@@ -117,7 +116,7 @@ void	ft_execution(t_list *data, t_store *store, t_data *a, int fd)
 	{
 		if (ft_check_built_input(data, 0))
 		{
-			fd = ft_checkoutput(data, store, 1, 0);
+			fd = ft_check_redirections2(data, 0, store);
 			if (fd)
 			{
 				if (fd == -1)
@@ -132,8 +131,5 @@ void	ft_execution(t_list *data, t_store *store, t_data *a, int fd)
 		}
 	}
 	else
-	{
-		ft_creatfile(data);
 		ft_exec(data, store, 1, a);
-	}
 }

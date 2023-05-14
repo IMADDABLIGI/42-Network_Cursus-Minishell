@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/14 20:16:15 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/14 20:50:17 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,7 +158,7 @@ void				check_tato(t_data *a, int *tatto);
 void				ft_checkinput(t_list *data, int input, int i,
 						t_store *store);
 int					ft_checkoutput(t_list *data, t_store *store, int i,
-						int output);
+						int output, int *fd);
 void				*ft_memcpy(void *dst, const char *src, int n);
 char				**ft_split_cmd(char *s, char c, char *cmd);
 char				*ft_getpath(char *cmd, char **p_cmd, int i, t_data *a);

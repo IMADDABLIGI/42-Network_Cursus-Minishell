@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 01:36:49 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/14 12:01:33 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/14 20:12:17 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,28 @@ void	ft_checkinput(t_list *data, int input, int i, t_store *store)
 
 //----------------------------------------------------------------------------//
 
-void	ft_redirect(t_list *data, t_store *store, int i, t_data *a)
+void	ft_redirect(t_list *data, t_store *store, int i, t_data *a, int *fd)
 {
 	a->ptr = data;
 	signal(SIGQUIT, ft_quit);
-	ft_checkinput(data, 0, i, store);
+	// ft_checkinput(data, 0, i, store);
+    if ((i == 1) && (i != store->count))
+    {
+        dup2(fd[1], STDOUT_FILENO);
+        close (fd[0]);
+        close (fd[1]);
+    }
+    else if (i == store->count)
+    {
+        close (fd[0]);
+        close (fd[1]);
+    }
+    else
+    {
+        dup2(fd[1], STDOUT_FILENO);
+        close (fd[0]);
+        close (fd[1]);
+    }
 	if (a->ptr->tatto != 1)
 		a->ptr = ft_get_tatto1(a->ptr);
 	if (!ft_check_builtins(a->ptr))
@@ -64,7 +81,7 @@ void	ft_redirect(t_list *data, t_store *store, int i, t_data *a)
 		store->path = ft_getpath(a->ptr->arg, NULL, 0, a);
 		store->arg = ft_arg(a->ptr, a->ptr, NULL, 0);
 	}
-	a->output = ft_checkoutput(data, store, i, 0);
+	// a->output = ft_checkoutput(data, store, i, 0);
 	if (a->output)
 	{
 		dup2(a->output, STDOUT_FILENO);

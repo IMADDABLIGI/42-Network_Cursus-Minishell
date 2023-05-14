@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 11:56:01 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/14 12:05:44 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/14 20:05:05 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ t_list	*ft_get_cmd(t_list *data)
 {
 	while (data && (data->tatto != 4))
 	{
-		if ((data->tatto == 6) || (data->tatto == 8))
-			ft_creatfile(data);
 		data = data->next;
 	}
 	return (data);

@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:10:24 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/13 15:24:02 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/14 18:38:23 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,10 @@ void	open_quote(t_data *a)
 	while (a->input[a->i])
 		open_quote2(a);
 	if (a->z == 1)
+	{
 		printf("\e[1;31m open quotes!\n\e[0m");
+		g_global.status = 258;
+	}
 	else
 	{
 		if (!ft_separit(a))
@@ -55,6 +58,7 @@ int	ft_separit(t_data *a)
 	if (!ft_split22(a))
 		return (ft_abort(1), 1);
 	a->i = 0;
+	a->p = NULL;
 	create_linked(a);
 	return (0);
 }

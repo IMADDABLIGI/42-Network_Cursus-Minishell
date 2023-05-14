@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 10:21:10 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/14 11:43:00 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/14 18:25:00 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,4 +78,34 @@ void	ft_return223(t_data *a)
 		|| (a->input[a->end] == '>' && a->input[a->end + 1] == '>'))
 				a->end += 1;
 	a->end++;
+}
+/**************************************************************/
+
+char	*ft_withoutplus(char *str)
+{
+	int		i;
+	int		lock;
+	int		len;
+	char	*tmp;
+
+	i = 0;
+	lock = 1;
+	len = 0;
+	tmp = malloc(ft_strlen(str)-1);
+	if (!tmp)
+		ft_abort(1);
+	while (str[i])
+	{
+		if (str[i] == '+' && lock == 1)
+			lock = 0;
+		else
+		{
+			tmp[len] = str[i];
+			len++;
+		}
+		i++;
+	}
+	tmp[len] = '\0';
+	free(str);
+	return (tmp);
 }

@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 09:59:15 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/14 10:07:53 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/14 11:42:45 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	nbr_of_words223(t_data *a, int index)
 {
 	if (index == 1)
 	{
-			a->length++;
-			a->lock = 1;
+		a->length++;
+		a->lock = 1;
 	}
 	else if (index == 2)
 	{
@@ -34,8 +34,8 @@ void	nbr_of_words223(t_data *a, int index)
 			a->lock = 0;
 			a->lock1 = 0;
 			if (!a->input[a->k + 1] || a->input[a->k + 1] == ' '
-				|| a->input[a->k + 1] == '<' || a->input[a->k + 1] == '>'
-				|| a->input[a->k + 1] == '|')
+				|| a->input[a->k + 1] == 9 || a->input[a->k + 1] == '<'
+				|| a->input[a->k + 1] == '>' || a->input[a->k + 1] == '|')
 				a->length++;
 		}
 	}
@@ -60,15 +60,17 @@ size_t	nbr_of_words22(t_data *a)
 	while (a->input[a->k])
 	{
 		if (a->input[a->k] != 39 && a->input[a->k] != 34
-			&& a->input[a->k] != ' ' && a->input[a->k] != '<'
-			&& a->input[a->k] != '>' && a->input[a->k] != '|' && a->lock == 0)
+			&& a->input[a->k] != ' ' && a->input[a->k] != 9
+			&& a->input[a->k] != '<' && a->input[a->k] != '>'
+			&& a->input[a->k] != '|' && a->lock == 0)
 			nbr_of_words223(a, 1);
 		else if (a->input[a->k] == 39 || a->input[a->k] == 34)
 			nbr_of_words223(a, 2);
 		else if ((a->input[a->k] == '<' || a->input[a->k] == '>'
 				|| a->input[a->k] == '|') && !a->lock1)
 			nbr_of_words224(a);
-		else if (a->input[a->k] == ' ' && a->lock == 1 && a->lock1 == 0)
+		else if ((a->input[a->k] == ' ' || a->input[a->k] == 9) && a->lock == 1
+			&& a->lock1 == 0)
 			a->lock = 0;
 		a->k++;
 	}
@@ -79,8 +81,9 @@ size_t	nbr_of_words22(t_data *a)
 void	ft_return222(t_data *a)
 {
 	while ((((a->input[a->end] != '<' && a->input[a->end] != '>'
-					&& a->input[a->end] != '|' && a->input[a->end] != ' ')
-				|| a->lock1 == 1) && a->input[a->end] != '\0'))
+					&& a->input[a->end] != '|' && a->input[a->end] != ' '
+					&& a->input[a->end] != 9) || a->lock1 == 1)
+			&& a->input[a->end] != '\0'))
 	{
 		if ((a->input[a->end] == 39 || a->input[a->end] == 34) && !a->lock1)
 		{
@@ -99,17 +102,14 @@ char	**ft_return22(t_data *a)
 	a->start = 0;
 	while (a->i < a->length)
 	{
-		while (a->input[a->start] == ' ' && a->input[a->start] != '\0')
+		while ((a->input[a->start] == ' ' || a->input[a->start] == 9)
+			&& a->input[a->start] != '\0')
 			a->start++;
 		a->end = a->start;
 		if ((a->input[a->end] == '<' || a->input[a->end] == '>'
-				|| a->input[a->end] == '|' || a->input[a->end] == ' '))
-		{
-			if ((a->input[a->end] == '<' && a->input[a->end + 1] == '<')
-				|| (a->input[a->end] == '>' && a->input[a->end + 1] == '>'))
-				a->end += 1;
-			a->end++;
-		}
+				|| a->input[a->end] == '|' || a->input[a->end] == ' '
+				|| a->input[a->end] == 9))
+			ft_return223(a);
 		else
 			ft_return222(a);
 		a->tab[a->i] = ft_substr(a->input, a->start, a->end - a->start);

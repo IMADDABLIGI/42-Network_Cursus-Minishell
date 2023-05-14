@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 12:19:21 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/14 10:31:19 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/14 11:29:27 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,12 @@ void	change2(t_data *a, size_t lock, size_t i)
 {
 	while (a->strtmp[i])
 	{
-		if (a->strtmp[i] != 32 && lock == 0)
+		if ((a->strtmp[i] != 32 && a->strtmp[i] != 9) && lock == 0)
 		{
 			a->ret[a->k++] = '"';
 			lock = 1;
 		}
-		else if (a->strtmp[i] == 32 && lock == 1)
+		else if ((a->strtmp[i] == 32 || a->strtmp[i] == 9) && lock == 1)
 		{
 			a->ret[a->k++] = '"';
 			lock = 0;

@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/14 10:16:20 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/14 10:52:45 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ int					ft_separit(t_data *a);
 void				ft_create_env(t_data *a, char **env);
 char				*expand_her(t_data *a);
 char				*expand(t_data *a);
+char				*find_path(t_data *a);
 void				ft_expand2(t_data *a);
 void				ft_export(t_list *data, t_data *a);
 int					ft_isalnum(int c);
@@ -158,7 +159,7 @@ int					ft_checkoutput(t_list *data, t_store *store, int i,
 						int output);
 void				*ft_memcpy(void *dst, const char *src, int n);
 char				**ft_split_cmd(char *s, char c, char *cmd);
-char				*ft_getpath(char *cmd, char **p_cmd, int i);
+char				*ft_getpath(char *cmd, char **p_cmd, int i, t_data *a);
 void				ft_execution(t_list *data, t_store *store, t_data *a,
 						int fd);
 char				**ft_arg(t_list *data, t_list *ptr, char **arg, int i);

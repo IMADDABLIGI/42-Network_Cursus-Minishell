@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/14 10:48:49 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/14 10:58:27 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	ft_check_arg(t_list *data, t_store *store, t_data *a)
 
 //---------------------------------------------------------------------------//
 
-char	*ft_getpath(char *cmd, char **p_cmd, int i)
+char	*ft_getpath(char *cmd, char **p_cmd, int i, t_data *a)
 {
 	if (cmd[0] == '/')
 	{
@@ -93,16 +93,16 @@ char	*ft_getpath(char *cmd, char **p_cmd, int i)
 		return (ft_get_path2(cmd));
 	else
 	{
-		p_cmd = ft_split_cmd(getenv("PATH"), ':', cmd);
-        if (p_cmd)
-        {
-            while (p_cmd[i])
-            {
-                if (access(p_cmd[i], X_OK) == 0)
-                    return (p_cmd[i]);
-                i++;
-            }
-        }
+		p_cmd = ft_split_cmd(find_path(a), ':', cmd);
+		if (p_cmd)
+		{
+			while (p_cmd[i])
+			{
+				if (access(p_cmd[i], X_OK) == 0)
+					return (p_cmd[i]);
+				i++;
+			}
+		}
 		ft_printerror(": command not found", cmd);
 		exit(127);
 	}

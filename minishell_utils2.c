@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/14 10:43:18 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/14 10:48:49 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,6 @@ char	*ft_getpath(char *cmd, char **p_cmd, int i)
 		ft_printerror(": command not found", cmd);
 		exit(127);
 	}
-	exit(1);
 }
 
 /*-----------------------------------------------------------*/

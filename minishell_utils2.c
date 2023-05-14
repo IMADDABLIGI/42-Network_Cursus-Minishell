@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/13 17:25:06 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/14 10:43:18 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,12 +94,15 @@ char	*ft_getpath(char *cmd, char **p_cmd, int i)
 	else
 	{
 		p_cmd = ft_split_cmd(getenv("PATH"), ':', cmd);
-		while (p_cmd[i])
-		{
-			if (access(p_cmd[i], X_OK) == 0)
-				return (p_cmd[i]);
-			i++;
-		}
+        if (p_cmd)
+        {
+            while (p_cmd[i])
+            {
+                if (access(p_cmd[i], X_OK) == 0)
+                    return (p_cmd[i]);
+                i++;
+            }
+        }
 		ft_printerror(": command not found", cmd);
 		exit(127);
 	}

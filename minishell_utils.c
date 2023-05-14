@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 15:05:47 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/13 15:04:43 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/13 18:30:14 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,8 @@ void	ft_here_doc(t_list *data, int doc, int num, t_data *a)
 			return ;
 		if (!ft_strcmp(a->line, data->next->arg))
 		{
-			free(a->line);
 			close(num);
+			free(a->line);
 			g_global.status = 0;
 			return ;
 		}

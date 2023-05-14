@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:52:45 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/13 15:49:16 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/13 18:40:34 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ int	ft_cd_old_path(char *path, int check, int i, int j)
 {
 	char	*n_path;
 
+	n_path = NULL;
 	check = chdir(g_global.old_pwd);
 	if (check > 0)
 		return (check);
 	free (g_global.new_pwd);
 		g_global.new_pwd = g_global.old_pwd;
-	ft_print_error2();
 	while (path[i])
 		i++;
 	i--;
@@ -83,11 +83,13 @@ void	ft_init_store(t_store *store)
 
 char	*ft_get_path2(char *cmd)
 {
-	if (access((cmd), X_OK) == 0)
+	if ((cmd[0] == '.') && (cmd[1] == '/') && (cmd[2] == '\0'))
+		write(2, "./: is a directory\n", 20);
+	else if (access((cmd), X_OK) == 0)
 		return (cmd);
 	else if (access((cmd), F_OK) == 0)
 		ft_printerror(": Permission denied", cmd);
 	else
 		ft_printerror(": No such file or directory", cmd);
-	exit(1);
+	exit(126);
 }

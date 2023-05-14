@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:57:51 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/14 11:35:29 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/14 18:31:25 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,20 @@ int	parse_check2(t_data *a)
 	if (a->tmp1->tatto != 0 && !a->tmp1->next)
 	{
 		printf("\e[1;31m parse error!\n\e[0m");
+		g_global.status = 258;
 		return (1);
 	}
 	else if (a->tmp1->tatto == 4 && (a->tmp1->next->tatto == 4))
 	{
 		printf("\e[1;31m parse error!\n\e[0m");
+		g_global.status = 258;
 		return (1);
 	}
 	else if ((a->tmp1->tatto != 0 && a->tmp1->tatto != 4)
 		&& a->tmp1->next->tatto != 0)
 	{
 		printf("\e[1;31m parse error!\n\e[0m");
+		g_global.status = 258;
 		return (1);
 	}
 	a->tmp1 = a->tmp1->next;
@@ -40,6 +43,7 @@ int	parse_check(t_data *a)
 	if (a->tmp1->tatto == 4)
 	{
 		printf("\e[1;31m parse error!\n\e[0m");
+		g_global.status = 258;
 		return (1);
 	}
 	while (a->tmp1)

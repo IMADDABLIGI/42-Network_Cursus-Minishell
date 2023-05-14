@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 09:16:54 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/14 11:30:21 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/14 19:57:58 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,6 @@ void	create_linked(t_data *a)
 {
 	t_store	store;
 
-	a->i = 0;
-	a->p = NULL;
 	while (a->tab[a->i])
 	{
 		a->tmp1 = ft_lstnew(a);
@@ -78,11 +76,15 @@ void	create_linked(t_data *a)
 	a->tmp1 = a->p;
 	if (!ft_nothing(a->tmp1->arg))
 	{
+		signal(SIGINT, (void *)sigignore);
 		if (ft_check_arg(a->tmp1, &store, a))
 			ft_execution(a->tmp1, &store, a, 0);
 	}
 	else
+	{
 		printf(" %s: command not found\n", a->tmp1->arg);
+		g_global.status = 127;
+	}
 }
 /*----------------------------------------------------------------*/
 

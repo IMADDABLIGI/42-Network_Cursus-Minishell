@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 15:55:02 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/14 11:45:53 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/14 18:26:55 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_exit(t_list *data, t_data *a)
 {
 	a->kp = data;
 	if (!a->kp->next)
-		exit(0);
+		exit(g_global.status % 256);
 	a->kp = a->kp->next;
 	if (a->kp->next)
 	{

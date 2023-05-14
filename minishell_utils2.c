@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/13 17:25:06 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/14 10:52:25 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int	ft_check_arg(t_list *data, t_store *store, t_data *a)
 
 //---------------------------------------------------------------------------//
 
-char	*ft_getpath(char *cmd, char **p_cmd, int i)
+char	*ft_getpath(char *cmd, char **p_cmd, int i, t_data *a)
 {
 	if (cmd[0] == '/')
 	{
@@ -93,7 +93,7 @@ char	*ft_getpath(char *cmd, char **p_cmd, int i)
 		return (ft_get_path2(cmd));
 	else
 	{
-		p_cmd = ft_split_cmd(getenv("PATH"), ':', cmd);
+		p_cmd = ft_split_cmd(find_path(a), ':', cmd);
 		while (p_cmd[i])
 		{
 			if (access(p_cmd[i], X_OK) == 0)

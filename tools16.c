@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 10:21:10 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/14 10:23:12 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/14 10:55:23 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	check(char *argv)
 				&& argv[i] <= 42) || (argv[i] >= '.' && argv[i] <= '/')
 			|| (argv[i] == ',') || (argv[i] == '+' && ((argv[i + 1] > '9'
 						|| argv[i + 1] < '0') || (argv[i - 1] != '\0' && argv[i
-							- 1] != ' '))))
+						- 1] != ' '))))
 			return (1);
 		i++;
 	}
@@ -52,4 +52,21 @@ int	check_nothing(char *argv, int i, int z)
 	if (k != 1)
 		return (1);
 	return (0);
+}
+
+/**************************************************************/
+char	*find_path(t_data *a)
+{
+	a->tmp = a->e;
+	a->strenv = ft_strdup("PATH=");
+	while (a->tmp)
+	{
+		a->strtmp2 = ft_strnstr(a->tmp->arg, a->strenv);
+		if (a->strtmp2)
+		{
+			return (free(a->strenv), a->strtmp2);
+		}
+		a->tmp = a->tmp->next;
+	}
+	return (free(a->strenv), NULL);
 }

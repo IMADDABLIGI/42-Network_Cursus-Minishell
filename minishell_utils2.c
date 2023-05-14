@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/14 10:52:25 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/14 10:56:39 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,16 +94,18 @@ char	*ft_getpath(char *cmd, char **p_cmd, int i, t_data *a)
 	else
 	{
 		p_cmd = ft_split_cmd(find_path(a), ':', cmd);
-		while (p_cmd[i])
+		if (p_cmd)
 		{
-			if (access(p_cmd[i], X_OK) == 0)
-				return (p_cmd[i]);
-			i++;
+			while (p_cmd[i])
+			{
+				if (access(p_cmd[i], X_OK) == 0)
+					return (p_cmd[i]);
+				i++;
+			}
 		}
 		ft_printerror(": command not found", cmd);
 		exit(127);
 	}
-	exit(1);
 }
 
 /*-----------------------------------------------------------*/

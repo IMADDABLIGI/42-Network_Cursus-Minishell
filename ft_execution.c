@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/14 21:23:25 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/14 21:28:43 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,15 @@ int	ft_creatfile(t_list *data)
 
 //---------------------------------------------------------------------------//
 
+void	ft_dupp(int *fd)
+{
+	dup2(fd[0], STDIN_FILENO);
+	close (fd[0]);
+	close (fd[1]);
+}
+
+//---------------------------------------------------------------------------//
+
 void	ft_exec(t_list *data, t_store *store, int i, t_data *a)
 {
 	int	fd[2];
@@ -59,9 +68,10 @@ void	ft_exec(t_list *data, t_store *store, int i, t_data *a)
 			ft_redirect(data, store, i, a, fd);
 		else
 		{
-			dup2(fd[0], STDIN_FILENO);
-			close (fd[0]);
-			close (fd[1]);
+			ft_dupp(fd);
+			// dup2(fd[0], STDIN_FILENO);
+			// close (fd[0]);
+			// close (fd[1]);
 
 			if (data->tatto == 5)
 				data = data->next;

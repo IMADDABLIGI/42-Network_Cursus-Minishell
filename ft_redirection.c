@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 01:36:49 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/14 21:13:10 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/14 21:24:57 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //---------------------------------------------------------------------------//
 
-int	ft_checkoutput(t_list *data, t_store *store, int i, int output, int *fd)
+void	ft_checkoutput(t_list *data, t_store *store, int i, int output, int *fd)
 {
 	output = ft_check_redirections2(data, 0, store);
 	if (output)
@@ -26,7 +26,7 @@ int	ft_checkoutput(t_list *data, t_store *store, int i, int output, int *fd)
 		dup2(fd[1], STDOUT_FILENO);
 	close (fd[0]);
 	close (fd[1]);
-	return (output);
+	return ;
 }
 
 //---------------------------------------------------------------------------//
@@ -63,9 +63,7 @@ void	ft_redirect(t_list *data, t_store *store, int i, t_data *a, int *fd)
 		store->path = ft_getpath(a->ptr->arg, NULL, 0, a);
 		store->arg = ft_arg(a->ptr, a->ptr, NULL, 0);
 	}
-	
 	ft_checkoutput(data, store, i, 0, fd);
-
 	if (ft_check_builtins(a->ptr) == 1)
 	{
 		ft_execute_builtins(a->ptr, a);

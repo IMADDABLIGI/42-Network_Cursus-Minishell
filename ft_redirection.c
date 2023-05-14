@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_redirection.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 01:36:49 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/14 10:53:00 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/14 12:01:33 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,16 +54,15 @@ void	ft_checkinput(t_list *data, int input, int i, t_store *store)
 
 void	ft_redirect(t_list *data, t_store *store, int i, t_data *a)
 {
-	t_list	*ptr;
-
-	ptr = data;
+	a->ptr = data;
+	signal(SIGQUIT, ft_quit);
 	ft_checkinput(data, 0, i, store);
-	if (ptr->tatto != 1)
-		ptr = ft_get_tatto1(ptr);
-	if (!ft_check_builtins(ptr))
+	if (a->ptr->tatto != 1)
+		a->ptr = ft_get_tatto1(a->ptr);
+	if (!ft_check_builtins(a->ptr))
 	{
-		store->path = ft_getpath(ptr->arg, NULL, 0, a);
-		store->arg = ft_arg(ptr, ptr, NULL, 0);
+		store->path = ft_getpath(a->ptr->arg, NULL, 0, a);
+		store->arg = ft_arg(a->ptr, a->ptr, NULL, 0);
 	}
 	a->output = ft_checkoutput(data, store, i, 0);
 	if (a->output)
@@ -71,9 +70,9 @@ void	ft_redirect(t_list *data, t_store *store, int i, t_data *a)
 		dup2(a->output, STDOUT_FILENO);
 		close(a->output);
 	}
-	if (ft_check_builtins(ptr) == 1)
+	if (ft_check_builtins(a->ptr) == 1)
 	{
-		ft_execute_builtins(ptr, a);
+		ft_execute_builtins(a->ptr, a);
 		exit(g_global.status);
 	}
 	execve(store->path, store->arg, a->env22);

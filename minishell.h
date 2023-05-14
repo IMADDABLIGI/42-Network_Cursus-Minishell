@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/14 10:52:45 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/14 12:05:13 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,7 @@ typedef struct data
 	t_list			*p;
 	t_list			*tmp1;
 	t_list			*kp;
+	t_list			*ptr;
 	t_env			*e;
 	t_env			*tmp;
 }					t_data;
@@ -192,4 +193,7 @@ t_list				*ft_get_tatto1(t_list *ptr);
 void				ft_init_store(t_store *store);
 char				*ft_get_path2(char *cmd);
 int					ft_get_strlencmd(t_list *ptr, int i);
+void				ft_quit(int sig);
+void				ft_handle_sig(int sig);
+t_list				*ft_get_cmd(t_list *data);
 #endif

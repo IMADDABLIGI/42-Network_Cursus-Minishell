@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/13 15:20:01 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/14 12:03:50 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,14 @@ void	ft_exec(t_list *data, t_store *store, int i, t_data *a)
 		else
 		{
 			waitpid(a->pid, &g_global.intg, 0);
-			g_global.status = WEXITSTATUS(g_global.intg);
+			if (WIFEXITED(g_global.intg))
+				g_global.status = WEXITSTATUS(g_global.intg);
+			else if (WIFSIGNALED(g_global.intg))
+				ft_handle_sig(WTERMSIG(g_global.intg));
 			if (data->tatto == 5)
 				data = data->next;
 			data = data->next;
-			while (data && (data->tatto != 4))
-			{
-				if ((data->tatto == 6) || (data->tatto == 8))
-					ft_creatfile(data);
-				data = data->next;
-			}
+			data = ft_get_cmd(data);
 			if ((data) && (data->tatto == 4))
 				data = data->next;
 			i++;

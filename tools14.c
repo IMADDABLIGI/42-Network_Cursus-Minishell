@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 12:19:21 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/13 16:01:54 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/14 10:31:19 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,7 @@ void	ft_copie_nb(t_data *a, int index)
 	int	i;
 
 	i = 0;
+	a->status = ft_itoa(g_global.status);
 	while (a->status[i])
 	{
 		if (index == 1)

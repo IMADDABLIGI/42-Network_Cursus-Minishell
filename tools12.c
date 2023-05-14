@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:57:51 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/13 12:09:15 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/14 11:35:29 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,12 +105,12 @@ size_t	strlen_expand(char *str)
 	len = 0;
 	while (str[i])
 	{
-		if (str[i] != 32 && lock == 0)
+		if ((str[i] != 32 && str[i] != 9) && lock == 0)
 		{
 			lock = 1;
 			len += 2;
 		}
-		else if (str[i] == 32 && lock == 1)
+		else if ((str[i] == 32 || str[i] == 9) && lock == 1)
 			lock = 0;
 		i++;
 		len++;

@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 11:56:01 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/14 20:05:05 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/15 11:03:10 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,12 @@ void	ft_handle_sig(int sig)
 
 t_list	*ft_get_cmd(t_list *data)
 {
-	while (data && (data->tatto != 4))
-	{
+	if (data->tatto == 5)
 		data = data->next;
-	}
+	data = data->next;
+	while (data && (data->tatto != 4))
+		data = data->next;
+	if ((data) && (data->tatto == 4))
+		data = data->next;
 	return (data);
 }

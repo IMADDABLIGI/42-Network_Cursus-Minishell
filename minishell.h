@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/14 21:25:24 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/15 11:10:51 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct t_shell
 
 typedef struct t_data
 {
+	int				i;
 	int				doc;
 	int				pipe;
 	int				built;
@@ -82,6 +83,8 @@ typedef struct data
 	int				lock1;
 	int				check;
 	int				pid;
+	int				fd[2];
+	int				save_input;
 	int				output;
 	size_t			k;
 	size_t			len;
@@ -157,18 +160,18 @@ void				check_tato(t_data *a, int *tatto);
 /*new*/
 void				ft_checkinput(t_list *data, int input, int i,
 						t_store *store);
-void				ft_checkoutput(t_list *data, t_store *store, int i,
-						int output, int *fd);
+void				ft_checkoutput(t_list *data, t_store *store, int *fd,
+						int output);
 void				*ft_memcpy(void *dst, const char *src, int n);
 char				**ft_split_cmd(char *s, char c, char *cmd);
 char				*ft_getpath(char *cmd, char **p_cmd, int i, t_data *a);
 void				ft_return223(t_data *a);
-void				ft_execution(t_list *data, t_store *store, t_data *a,
-						int fd);
+void				ft_execution(t_list *data, t_store *store, t_data *a);
 char				**ft_arg(t_list *data, t_list *ptr, char **arg, int i);
 void				ft_printerror(char *str, char *cmd);
 void				ft_print_error2(void);
-void				ft_redirect(t_list *data, t_store *store, int i, t_data *a, int *fd);
+void				ft_redirect(t_list *data, t_store *store, t_data *a,
+						int *fd);
 int					ft_check_arg(t_list *data, t_store *store, t_data *a);
 void				ft_check_next(t_list *data);
 int					ft_run_doc(t_list *data, t_store *store, t_data *a);
@@ -177,13 +180,12 @@ int					ft_strcmp(char *s1, char *s2);
 char				*ft_itoa(int n);
 char				*ft_strjoin(char *s1, char *s2, int index);
 int					ft_get_heredoc(int count, int fd, int check);
-int					ft_creatfile(t_list *data);
 void				ft_cd(t_list *data, char *pwd, t_data *a);
 char				*ft_strjoin2(char *s1, char *s2);
 char				*ft_strjoin3(char *s1, char *s2);
 int					ft_check_dr(char *path);
 int					ft_cd_old_path(char *path, int check, int i, int j);
-int					ft_check_redirections(t_list *data, t_store *store,
+void				ft_check_redirections(t_list *data, t_store *store,
 						int input);
 int					ft_check_redirections2(t_list *data, int ot,
 						t_store *store);

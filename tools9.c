@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools9.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 10:05:07 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/13 15:59:10 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/15 10:36:24 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,7 @@ void	ft_abort(int id)
 		printf("\e[1;31mno argument please!\n\e[0m");
 	else if (id == 3)
 		printf("\e[1;31mno Error Fork!\n\e[0m");
+	else if (id == 4)
+		printf("\e[1;31mno Error Pipe!\n\e[0m");
 	exit(1);
 }

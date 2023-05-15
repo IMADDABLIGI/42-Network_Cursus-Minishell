@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools7.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 09:16:54 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/14 19:57:58 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/15 10:56:54 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	create_linked(t_data *a)
 	{
 		signal(SIGINT, (void *)sigignore);
 		if (ft_check_arg(a->tmp1, &store, a))
-			ft_execution(a->tmp1, &store, a, 0);
+			ft_execution(a->tmp1, &store, a);
 	}
 	else
 	{

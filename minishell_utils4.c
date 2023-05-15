@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:42:51 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/14 20:54:17 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/15 10:19:49 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,12 @@
 
 //---------------------------------------------------------------------------//
 
-int	ft_check_redirections(t_list *data, t_store *store, int input)
+void	ft_check_redirections(t_list *data, t_store *store, int input)
 {
 	while (data && (data->tatto != 4))
 	{
 		if (data->tatto == 5)
 		{
-			ft_creatfile(data);
 			input = open(data->next->arg, O_RDONLY);
 			if (input < 0)
 				exit(0);
@@ -29,7 +28,6 @@ int	ft_check_redirections(t_list *data, t_store *store, int input)
 		}
 		else if (data->tatto == 7)
 		{
-			ft_creatfile(data);
 			store->doc++;
 			input = ft_get_heredoc(store->doc, 0, 0);
 			dup2(input, STDIN_FILENO);
@@ -37,7 +35,7 @@ int	ft_check_redirections(t_list *data, t_store *store, int input)
 		}
 		data = data->next;
 	}
-	return (input);
+	return ;
 }
 
 //---------------------------------------------------------------------------//

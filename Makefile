@@ -6,7 +6,7 @@
 #    By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/16 18:27:52 by hznagui           #+#    #+#              #
-#    Updated: 2023/05/14 11:59:57 by idabligi         ###   ########.fr        #
+#    Updated: 2023/05/17 19:06:39 by idabligi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,6 +41,7 @@ SRC_FILE = 	main.c\
 			minishell_utils5.c\
 			minishell_utils6.c\
 			minishell_utils7.c\
+			minishell_utils8.c\
 
 COLOUR_GREEN=\033[1;32m
 

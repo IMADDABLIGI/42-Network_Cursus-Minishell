@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:48:03 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/13 17:03:18 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/17 20:01:09 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 
 //---------------------------------------------------------------//
 
-char	*ft_initial_cd(char *pwd, char *home, t_data *a)
+char	*ft_initial_cd(char *pwd, t_data *a)
 {
 	a->check = 0;
-	if (!home)
-		g_global.home = getenv("HOME");
+	g_global.home = find_cd(a);
 	pwd = getcwd(NULL, 0);
 	if (pwd)
 	{
@@ -113,16 +112,16 @@ int	ft_cds(t_list *data, char *pwd, int check, char *path)
 
 void	ft_cd(t_list *data, char *pwd, t_data *a)
 {
-	pwd = ft_initial_cd(NULL, NULL, a);
-	if (data->next)
+	pwd = ft_initial_cd(NULL, a);
+	if (ft_cd_home(data, a, 0) && !data->next)
+		return ;
+	else if (data->next)
 		a->check = ft_cds(data, pwd, 0, NULL);
 	if (a->check == -2)
 	{
 		g_global.status = 1;
 		return ;
 	}
-	else if (!data->next)
-		a->check = chdir(g_global.home);
 	if (a->check == -1)
 	{
 		if (data->next)

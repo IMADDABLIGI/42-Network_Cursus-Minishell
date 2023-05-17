@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools5.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 15:02:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/13 18:43:25 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/16 10:11:15 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ size_t	ft_unset2(t_data *a, t_list *data)
 	c = ft_strdup(data->arg);
 	a->strenv = ft_strjoin22(a->strenv, '=');
 	a->tmp = a->e;
+	g_global.status = 0;
 	while (a->tmp)
 	{
 		tmp = ft_strnstr(a->tmp->arg, a->strenv);

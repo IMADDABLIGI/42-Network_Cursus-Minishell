@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 15:02:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/18 16:28:12 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/18 18:27:10 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,8 @@ void	ft_unset(t_list *data, t_data *a)
 	while (a->kp && a->kp->tatto == 2)
 	{
 		a->i = 0;
-		if (!ft_isalpha(a->kp->arg[a->i]))
-			ft_unset6(a);
+		if (!ft_isalpha(a->kp->arg[a->i]) && a->kp->arg[a->i] != '_')
+			return (ft_unset6(a));
 		while (a->kp->arg[a->i] && (ft_isalnum(a->kp->arg[a->i]) == 1
 				|| a->kp->arg[a->i] == '_'))
 			a->i++;

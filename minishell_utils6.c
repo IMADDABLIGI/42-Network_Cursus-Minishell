@@ -6,37 +6,35 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:52:45 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/17 19:59:21 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/18 12:07:58 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_cd_old_path(char *path, int check, int i, int j)
+int	ft_cd_old_path(char *path, int i, int j, t_data *a)
 {
-	char	*n_path;
-
-	n_path = NULL;
-	check = chdir(g_global.old_pwd);
-	if (check > 0)
-		return (check);
-	free (g_global.new_pwd);
-		g_global.new_pwd = g_global.old_pwd;
+	if (chdir(g_global.old_pwd) > 0)
+		return (1);
+	if (g_global.new_pwd)
+		free (g_global.new_pwd);
+	g_global.new_pwd = g_global.old_pwd;
+	ft_re_env(a, NULL, NULL);
 	while (path[i])
 		i++;
 	i--;
 	while (path[i] && (path[i] != '/') && (i > 0))
 		i--;
-	n_path = malloc((i + 1) * sizeof(char));
-	if (!n_path)
+	a->n_path = malloc((i + 1) * sizeof(char));
+	if (!a->n_path)
 		ft_abort(1);
 	while (path[j] && (j != i))
 	{
-		n_path[j] = path[j];
+		a->n_path[j] = path[j];
 		j++;
 	}
-	n_path[j] = '\0';
-	g_global.old_pwd = n_path;
+	a->n_path[j] = '\0';
+	g_global.old_pwd = a->n_path;
 	return (-2);
 }
 

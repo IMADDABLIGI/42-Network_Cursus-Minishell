@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/17 19:28:18 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/18 12:01:20 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,9 +70,11 @@ typedef struct data
 	char			*input;
 	char			*strenv;
 	char			*ret;
+	char			*path;
 	char			*strtmp2;
 	char			*before;
 	char			*ret1;
+	char			*n_path;
 	char			*line;
 	char			*status;
 	char			*strtmp;
@@ -184,7 +186,7 @@ void				ft_cd(t_list *data, char *pwd, t_data *a);
 char				*ft_strjoin2(char *s1, char *s2);
 char				*ft_strjoin3(char *s1, char *s2);
 int					ft_check_dr(char *path);
-int					ft_cd_old_path(char *path, int check, int i, int j);
+int					ft_cd_old_path(char *path, int i, int j, t_data *a);
 void				ft_check_redirections(t_list *data, t_store *store,
 						int input);
 int					ft_check_redirections2(t_list *data, int ot,

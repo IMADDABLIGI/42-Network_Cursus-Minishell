@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:48:03 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/17 20:01:09 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/18 12:00:43 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 char	*ft_initial_cd(char *pwd, t_data *a)
 {
 	a->check = 0;
+	a->n_path = NULL;
 	g_global.home = find_cd(a);
 	pwd = getcwd(NULL, 0);
 	if (pwd)
@@ -79,7 +80,7 @@ void	ft_re_env(t_data *a, char *old_path, char *new_path)
 
 //---------------------------------------------------------------//
 
-int	ft_cds(t_list *data, char *pwd, int check, char *path)
+int	ft_cds(t_list *data, char *pwd, int check, t_data *a)
 {
 	if (!ft_check_dr(data->next->arg))
 		return (-2);
@@ -96,14 +97,14 @@ int	ft_cds(t_list *data, char *pwd, int check, char *path)
 		check = chdir(data->next->arg);
 	else if (!pwd && (data->next->arg[0] == '.') && (data->next->arg[1] == '.')
 		&& (data->next->arg[2] == '\0'))
-		check = ft_cd_old_path(g_global.old_pwd, 0, 0, 0);
+		check = ft_cd_old_path(g_global.old_pwd, 0, 0, a);
 	else if (!pwd)
 		return (-2);
 	else
 	{
-		path = ft_strjoin2(pwd, data->next->arg);
-		check = chdir(path);
-		free(path);
+		a->path = ft_strjoin2(pwd, data->next->arg);
+		check = chdir(a->path);
+		free(a->path);
 	}
 	return (check);
 }
@@ -116,7 +117,7 @@ void	ft_cd(t_list *data, char *pwd, t_data *a)
 	if (ft_cd_home(data, a, 0) && !data->next)
 		return ;
 	else if (data->next)
-		a->check = ft_cds(data, pwd, 0, NULL);
+		a->check = ft_cds(data, pwd, 0, a);
 	if (a->check == -2)
 	{
 		g_global.status = 1;

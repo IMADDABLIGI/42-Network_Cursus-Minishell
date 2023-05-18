@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:52:45 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/18 12:07:58 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/18 21:29:35 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,13 +81,19 @@ void	ft_init_store(t_store *store)
 
 char	*ft_get_path2(char *cmd)
 {
-	if ((cmd[0] == '.') && (cmd[1] == '/') && (cmd[2] == '\0'))
-		write(2, "./: is a directory\n", 20);
-	else if (access((cmd), X_OK) == 0)
-		return (cmd);
-	else if (access((cmd), F_OK) == 0)
-		ft_printerror(": Permission denied", cmd);
-	else
-		ft_printerror(": No such file or directory", cmd);
-	exit(126);
+	struct stat	sb;
+
+	if (access(cmd, F_OK) == 0)
+	{
+		stat(cmd, &sb);
+		if (S_ISDIR(sb.st_mode))
+			ft_printerror(": is a directory", cmd);
+		else if (access((cmd), X_OK) == -1)
+			ft_printerror(": Permission denied", cmd);
+		else
+			return (cmd);
+		exit(126);
+	}
+	ft_printerror(": No such file or directory", cmd);
+	exit(127);
 }

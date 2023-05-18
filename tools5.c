@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 15:02:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/16 10:11:15 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/18 16:28:12 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_check_n(char *str)
 	int	i;
 
 	i = 0;
-	if (str[i] != '-')
+	if (str[i] != '-' || !str[i + 1])
 		return (0);
 	i++;
 	while (str[i])
@@ -71,9 +71,8 @@ size_t	ft_unset2(t_data *a, t_list *data)
 	char	*c;
 
 	before = NULL;
-	a->strenv = ft_strdup(data->arg);
 	c = ft_strdup(data->arg);
-	a->strenv = ft_strjoin22(a->strenv, '=');
+	a->strenv = ft_strjoin22(ft_strdup(data->arg), '=');
 	a->tmp = a->e;
 	g_global.status = 0;
 	while (a->tmp)
@@ -83,9 +82,10 @@ size_t	ft_unset2(t_data *a, t_list *data)
 		{
 			if (before)
 				before->next = a->tmp->next;
-			a->tmp->next = NULL;
-			return (free(a->strenv), free(c), free(a->tmp->arg), free(a->tmp),
-				1);
+			else
+				a->e = a->e->next;
+			return (a->tmp->next = NULL, free(a->strenv), free(c),
+				free(a->tmp->arg), free(a->tmp), 1);
 		}
 		before = a->tmp;
 		a->tmp = a->tmp->next;

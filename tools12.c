@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:57:51 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/14 18:31:25 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/18 18:02:49 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	str2(t_data *a)
 
 char	*str(t_data *a, int *tatto)
 {
-	a->ret = malloc(sizeof(char) * ft_length(a, tatto));
+	a->ret = malloc(sizeof(char) * ft_length(a, tatto) + 1);
 	if (!a->ret)
 		ft_abort(1);
 	a->k = 0;

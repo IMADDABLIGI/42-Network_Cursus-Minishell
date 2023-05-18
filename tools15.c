@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 15:55:02 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/14 18:26:55 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/18 18:33:52 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,13 @@ void	ft_exit(t_list *data, t_data *a)
 	if (a->kp->next)
 	{
 		g_global.status = 1;
-		write(2, "bash: exit: too many arguments", 31);
+		write(2, "bash: exit: too many arguments\n", 32);
 	}
 	else if (check(a->kp->arg) || check_nothing(a->kp->arg, 0, 0))
 	{
 		write(2, "bash: exit: ", 13);
 		write(2, a->kp->arg, ft_strlen(a->kp->arg));
-		write(2, ": numeric argument required", 28);
+		write(2, ": numeric argument required\n", 29);
 		exit(255);
 	}
 	else

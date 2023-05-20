@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 19:02:11 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/18 21:39:40 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/20 11:37:59 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,41 @@ char	*find_cd(t_data *a)
 		a->tmp = a->tmp->next;
 	}
 	return (free(a->strenv), NULL);
+}
+
+//---------------------------------------------------------------//
+
+int	ft_lstsize(t_env *lst)
+{
+	int	count;
+
+	if (!lst)
+		return (0);
+	count = 0;
+	while (lst != NULL)
+	{
+		count++;
+		lst = lst->next;
+	}
+	return (count);
+}
+
+//---------------------------------------------------------------//
+
+char	**ft_get_env(t_env *env, int len, int i, char **envv)
+{
+	if (!env)
+		return (NULL);
+	len = ft_lstsize(env);
+	envv = malloc((len + 1) * sizeof(char *));
+	if (!envv)
+		ft_abort(1);
+	while (i < len)
+	{
+		envv[i] = ft_strdup(env->arg);
+		env = env->next;
+		i++;
+	}
+	envv[i] = NULL;
+	return (envv);
 }

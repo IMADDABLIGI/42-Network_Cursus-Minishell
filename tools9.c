@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tools9.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 10:05:07 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/15 10:36:24 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/20 17:12:13 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	expand_her2(t_data *a)
 			&& (a->line[a->x + 1] == 39 || a->line[a->x + 1] == 34)
 			&& !a->lock))
 		a->x++;
-	else if ((a->t == '"' || !a->t) && a->line[a->x] == '$' && a->line[a->x + 1]
+	else if (a->line[a->x] == '$' && a->line[a->x + 1]
 		&& (ft_isalnum(a->line[a->x + 1]) || a->line[a->x + 1] == '_'))
 		ft_change_her(a);
 	else
@@ -83,16 +83,6 @@ char	*expand_her(t_data *a)
 	a->x = 0;
 	while (a->line[a->x])
 	{
-		if ((a->line[a->x] == 39 || a->line[a->x] == 34) && !a->lock)
-		{
-			a->lock = 1;
-			a->t = a->line[a->x];
-		}
-		else if (a->t == a->line[a->x] && a->lock)
-		{
-			a->lock = 0;
-			a->t = '\0';
-		}
 		expand_her2(a);
 		a->x++;
 	}

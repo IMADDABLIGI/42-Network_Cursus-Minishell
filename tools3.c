@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 09:49:33 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/14 10:32:50 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/20 17:12:35 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ void	ft_length1_her2(t_data *a)
 			&& (a->line[a->x + 1] == 39 || a->line[a->x + 1] == 34)
 			&& !a->lock))
 		a->x++;
-	else if ((a->t == '"' || !a->t) && a->line[a->x] == '$' && a->line[a->x
+	else if (a->line[a->x] == '$' && a->line[a->x
 			+ 1] && (ft_isalnum(a->line[a->x + 1]) || a->line[a->x
 				+ 1] == '_'))
 		a->len += ft_expand_length_her(a);
@@ -103,16 +103,6 @@ size_t	ft_length1_her(t_data *a)
 	a->len = 0;
 	while (a->line[a->x])
 	{
-		if ((a->line[a->x] == 39 || a->line[a->x] == 34) && !a->lock)
-		{
-			a->lock = 1;
-			a->t = a->line[a->x];
-		}
-		else if (a->t == a->line[a->x] && a->lock)
-		{
-			a->lock = 0;
-			a->t = '\0';
-		}
 		ft_length1_her2(a);
 		a->x++;
 	}

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+         #
+#    By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/16 18:27:52 by hznagui           #+#    #+#              #
-#    Updated: 2023/05/17 19:06:39 by idabligi         ###   ########.fr        #
+#    Updated: 2023/05/20 12:12:06 by hznagui          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,7 @@ SRC_FILE = 	main.c\
 			tools14.c\
 			tools15.c\
 			tools16.c\
+			tools17.c\
 			ft_split_cmd.c\
 			ft_execution.c\
 			ft_redirection.c\

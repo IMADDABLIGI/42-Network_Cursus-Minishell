@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:37:19 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/14 10:29:18 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/20 18:45:33 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,18 +50,13 @@ void	ft_length2(t_data *a)
 		free(a->status);
 		a->x++;
 	}
-	else if (((a->t == '"' || !a->t) && a->input[a->x] == '$'
-			&& ft_isdigit(a->input[a->x + 1])) || (a->input[a->x] == '$'
-			&& (a->input[a->x + 1] == 39 || a->input[a->x + 1] == 34)
-			&& !a->lock))
-		a->x++;
 	else if ((a->t == '"') && a->input[a->x] == '$' && a->input[a->x + 1]
 		&& (ft_isalnum(a->input[a->x + 1]) || a->input[a->x
-				+ 1] == '_'))
+				+ 1] == '_') && !is_expanded(a))
 		a->len += ft_expand_length(a, 0);
 	else if ((!a->t) && a->input[a->x] == '$' && a->input[a->x + 1]
 		&& (ft_isalnum(a->input[a->x + 1]) || a->input[a->x
-				+ 1] == '_'))
+				+ 1] == '_') && !is_expanded(a))
 		a->len += ft_expand_length(a, 1);
 	else
 		a->len++;
@@ -101,18 +96,13 @@ void	ft_expand2(t_data *a)
 		ft_copie_nb(a, 1);
 		a->x++;
 	}
-	else if (((a->t == '"' || !a->t) && a->input[a->x] == '$'
-			&& ft_isdigit(a->input[a->x + 1])) || (a->input[a->x] == '$'
-			&& (a->input[a->x + 1] == 39 || a->input[a->x + 1] == 34)
-			&& !a->lock))
-		a->x++;
-	else if ((a->t == '"') && a->input[a->x] == '$' && a->input[a->x + 1]
-		&& (ft_isalnum(a->input[a->x + 1]) || a->input[a->x
-				+ 1] == '_'))
+	else if (((a->t == '"') && a->input[a->x] == '$' && a->input[a->x + 1]
+			&& (ft_isalnum(a->input[a->x + 1]) || a->input[a->x
+					+ 1] == '_')) && !is_expanded(a))
 		ft_change(a, 0);
-	else if ((!a->t) && a->input[a->x] == '$' && a->input[a->x + 1]
-		&& (ft_isalnum(a->input[a->x + 1]) || a->input[a->x
-				+ 1] == '_'))
+	else if (((!a->t) && a->input[a->x] == '$' && a->input[a->x + 1]
+			&& (ft_isalnum(a->input[a->x + 1]) || a->input[a->x
+					+ 1] == '_')) && !is_expanded(a))
 		ft_change(a, 1);
 	else
 	{

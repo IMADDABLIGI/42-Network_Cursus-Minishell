@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 19:02:11 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/20 18:57:21 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/20 19:00:35 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ int	ft_cd_home(t_list *data, t_data *a, int check, int tat)
 			printf("cd: %s: No such file or directory\n", g_global.home);
 			g_global.status = 1;
 		}
+		if (g_global.new_pwd)
+			free (g_global.new_pwd);
+		g_global.new_pwd = ft_strdup(g_global.home);
 		ft_re_env(a, NULL, NULL);
 	}
 	if (!tat)

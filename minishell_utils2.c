@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/16 23:08:26 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/14 11:05:52 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/18 21:38:01 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,15 +81,7 @@ int	ft_check_arg(t_list *data, t_store *store, t_data *a)
 
 char	*ft_getpath(char *cmd, char **p_cmd, int i, t_data *a)
 {
-	if (cmd[0] == '/')
-	{
-		if (access((cmd), X_OK) == 0)
-			return (cmd);
-		ft_printerror(": No such file or directory", cmd);
-		exit(127);
-	}
-	else if (((cmd[0] == '.') && (cmd[1] == '/')) || ((cmd[0] == '.')
-			&& (cmd[1] == '.')))
+	if ((cmd[0] == '/') || (cmd[0] == '.'))
 		return (ft_get_path2(cmd));
 	else
 	{

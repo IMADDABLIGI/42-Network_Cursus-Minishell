@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_redirection.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/13 01:36:49 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/20 11:55:34 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/20 14:09:51 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_redirect(t_list *data, t_store *store, t_data *a, int *fd)
 		ft_execute_builtins(a->ptr, a);
 		exit(g_global.status);
 	}
-    a->env = ft_get_env(a->e, 0, 0, NULL);
+	a->env = ft_get_env(a->e, 0, 0, NULL);
 	execve(store->path, store->arg, a->env);
 	perror("execve");
 	exit(126);

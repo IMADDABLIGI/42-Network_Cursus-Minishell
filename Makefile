@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+         #
+#    By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/04/16 18:27:52 by hznagui           #+#    #+#              #
-#    Updated: 2023/05/20 12:12:06 by hznagui          ###   ########.fr        #
+#    Updated: 2023/05/20 19:17:24 by idabligi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ SRC_FILE = 	main.c\
 			minishell_utils6.c\
 			minishell_utils7.c\
 			minishell_utils8.c\
+			minishell_utils9.c\
 
 COLOUR_GREEN=\033[1;32m
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/20 19:06:03 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/20 19:27:42 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,4 +217,6 @@ void				ft_re_env(t_data *a, char *old_path, char *new_path);
 int					ft_go_oldpath(t_list *data, t_data *a, int check);
 void				add_to_env(t_data *a, char *str);
 int					ft_shlvl(t_data *a);
+void				ft_status(int num);
+int					ft_go_path(t_list *data, char *pwd, char *path, int check);
 #endif

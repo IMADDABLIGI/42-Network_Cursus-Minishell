@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 19:02:11 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/20 19:00:35 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/20 19:23:04 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,24 +34,6 @@ int	ft_cd_home(t_list *data, t_data *a, int check, int tat)
 	if (!tat)
 		return (1);
 	return (-3);
-}
-
-//---------------------------------------------------------------//
-
-char	*find_cd(t_data *a)
-{
-	a->tmp = a->e;
-	a->strenv = ft_strdup("HOME=");
-	while (a->tmp)
-	{
-		a->strtmp2 = ft_strnstr(a->tmp->arg, a->strenv);
-		if (a->strtmp2)
-		{
-			return (free(a->strenv), a->strtmp2);
-		}
-		a->tmp = a->tmp->next;
-	}
-	return (free(a->strenv), NULL);
 }
 
 //---------------------------------------------------------------//
@@ -114,17 +96,19 @@ char	*find_oldpwd(t_data *a)
 int	ft_go_oldpath(t_list *data, t_data *a, int check)
 {
 	char	*old;
-	if (data->next->arg[0] == '-' && data->next->arg[1] == '-' && data->next->arg[2] == '\0')
+
+	if (data->next->arg[0] == '-' && data->next->arg[1] == '-'
+		&& data->next->arg[2] == '\0')
 		check = ft_cd_home(data, a, 0, 1);
 	else if (data->next->arg[0] == '-' && data->next->arg[1] == '\0')
 	{
 		old = find_oldpwd(a);
-		printf("%s\n", old);
 		if (!old)
 		{
 			write(2, "cd: OLDPWD not set\n", 20);
 			return (-2);
 		}
+		printf("%s\n", old);
 		check = chdir(old);
 		return (1);
 	}

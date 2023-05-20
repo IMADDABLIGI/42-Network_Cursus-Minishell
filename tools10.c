@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:10:24 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/20 14:00:39 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/20 17:27:03 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,10 +69,7 @@ void	ft_create_env(t_data *a, char **env)
 	a->i = 0;
 	while (env[a->i])
 	{
-		a->tmp = ft_lstnew_env(env[a->i]);
-		if (!a->tmp)
-			ft_abort(1);
-		ft_lstadd_back_env(&a->e, a->tmp);
+		add_to_env(a, env[a->i]);
 		a->i++;
 	}
 	if (!a->e)
@@ -91,6 +88,7 @@ void	ft_create_env(t_data *a, char **env)
 	}
 	else
 		ft_shlvl(a);
+	ft_unset2(a, "OLDPWD");
 }
 /*----------------------------------------------------------------*/
 

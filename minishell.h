@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/20 14:04:26 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/20 17:25:31 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef struct data
 	char			**tab;
 	char			**env;
 	char			t;
+	char			t1;
 	int				z;
 	int				lock;
 	int				lock1;
@@ -96,7 +97,9 @@ typedef struct data
 	size_t			start;
 	size_t			length;
 	size_t			i;
+	size_t			i1;
 	size_t			x;
+	int				x1;
 	t_list			*p;
 	t_list			*tmp1;
 	t_list			*kp;
@@ -124,6 +127,7 @@ char				*ft_substr(char *s, unsigned int start, size_t len);
 void				ft_lstadd_back_env(t_env **lst, t_env *new);
 t_env				*ft_lstnew_env(char *table);
 char				*ft_withoutplus(char *str);
+size_t				ft_unset2(t_data *a, char *data);
 size_t				ft_export2(t_data *a, char *arg, int i, int index);
 char				*ft_strjoin22(char *s1, char s2);
 void				ft_abort(int id);
@@ -195,6 +199,8 @@ int					ft_check_redirections2(t_list *data, int ot,
 						t_store *store);
 void				change1(t_data *a);
 int					ft_nothing(char *a);
+int					is_expanded(t_data *a);
+void				ft_return222(t_data *a);
 void				create_linked(t_data *a);
 int					ft_check_red2(t_list *data, int fd);
 t_list				*ft_get_tatto1(t_list *ptr);

@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 15:02:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/18 20:10:04 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/20 17:30:16 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,15 +64,15 @@ void	ft_print(char *arg)
 }
 
 /*----------------------------------------------------------------*/
-size_t	ft_unset2(t_data *a, t_list *data)
+size_t	ft_unset2(t_data *a, char *data)
 {
 	t_env	*before;
 	char	*tmp;
 	char	*c;
 
 	before = NULL;
-	c = ft_strdup(data->arg);
-	a->strenv = ft_strjoin22(ft_strdup(data->arg), '=');
+	c = ft_strdup(data);
+	a->strenv = ft_strjoin22(ft_strdup(data), '=');
 	a->tmp = a->e;
 	g_global.status = 0;
 	while (a->tmp)
@@ -108,7 +108,7 @@ void	ft_unset(t_list *data, t_data *a)
 				|| a->kp->arg[a->i] == '_'))
 			a->i++;
 		if (!a->kp->arg[a->i])
-			ft_unset2(a, a->kp);
+			ft_unset2(a, a->kp->arg);
 		else
 			ft_unset6(a);
 		a->kp = a->kp->next;

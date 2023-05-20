@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 12:07:42 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/20 14:02:59 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/20 18:14:20 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,39 @@ int	ft_shlvl(t_data *a)
 		a->tmp = a->tmp->next;
 	}
 	add_to_env(a, "SHLVL=1");
+	return (0);
+}
+//---------------------------------------------------------------//
+
+int	reverse_expand(t_data *a)
+{
+	a->x1 += 2;
+	a->start = a->x1;
+	while ((a->input[a->start] == ' ' || a->input[a->start] == 9)
+		&& a->input[a->start] != '\0')
+			a->start++;
+	a->end = a->start;
+	ft_return222(a);
+	if ((a->x >= a->start) && (a->x <= a->end))
+		return (1);
+	return (0);
+}
+//---------------------------------------------------------------//
+
+int	is_expanded(t_data *a)
+{
+	a->x1 = a->x;
+	a->t1 = a->t;
+	while (a->x1 >= 0)
+	{
+		if ((a->input[a->x1] == 39 || a->input[a->x1] == 34) && !a->t1)
+			a->t1 = a->input[a->x1];
+		else if (a->t1 == a->input[a->x1])
+			a->t1 = '\0';
+		if ((a->input[a->x1] == '<' && a->input[a->x1 + 1] == '<')
+			&& (!a->t1))
+			return (reverse_expand(a));
+		a->x1--;
+	}
 	return (0);
 }

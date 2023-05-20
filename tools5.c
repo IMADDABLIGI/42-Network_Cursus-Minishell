@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 15:02:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/18 18:27:10 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/18 20:10:04 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_print(char *arg)
 	while (arg[i])
 	{
 		write(1, &arg[i], 1);
-		if (arg[i] == '=')
+		if (arg[i] == '=' && z == 0)
 		{
 			write(1, &p, 1);
 			z = 1;

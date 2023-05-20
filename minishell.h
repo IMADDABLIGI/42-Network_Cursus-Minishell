@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
+/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/18 21:39:52 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/20 14:00:04 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ typedef struct data
 	char			*strenv;
 	char			*ret;
 	char			*path;
+	char			*pwd;
 	char			*strtmp2;
 	char			*before;
 	char			*ret1;
@@ -205,4 +206,6 @@ t_list				*ft_get_cmd(t_list *data);
 int					ft_cd_home(t_list *data, t_data *a, int check);
 char				*find_cd(t_data *a);
 void				ft_re_env(t_data *a, char *old_path, char *new_path);
+void				add_to_env(t_data *a, char *str);
+int					ft_shlvl(t_data *a);
 #endif

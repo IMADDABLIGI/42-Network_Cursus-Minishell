@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 11:10:24 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/14 18:38:23 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/20 14:00:39 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,22 @@ void	ft_create_env(t_data *a, char **env)
 		ft_lstadd_back_env(&a->e, a->tmp);
 		a->i++;
 	}
+	if (!a->e)
+	{
+		a->pwd = getcwd(NULL, 0);
+		if (!a->pwd)
+			a->tmp = ft_lstnew_env(ft_strjoin("getcwd: cannot access parent",
+						" directories: No such file or directory", 7));
+		else
+			a->tmp = ft_lstnew_env(ft_strjoin("PWD=", a->pwd, 2));
+		if (!a->tmp)
+			ft_abort(1);
+		ft_lstadd_back_env(&a->e, a->tmp);
+		add_to_env(a, "_=/usr/bin/env");
+		add_to_env(a, "SHLVL=1");
+	}
+	else
+		ft_shlvl(a);
 }
 /*----------------------------------------------------------------*/
 

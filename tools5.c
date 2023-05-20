@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/12 15:02:18 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/20 17:30:16 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/20 18:55:57 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,16 @@ void	ft_print(char *arg)
 	int		i;
 	int		z;
 	char	p;
+	char	f;
 
 	z = 0;
 	i = 0;
 	p = '"';
+	f = '\\';
 	while (arg[i])
 	{
+		if (arg[i] == '"')
+			write(1, &f, 1);
 		write(1, &arg[i], 1);
 		if (arg[i] == '=' && z == 0)
 		{

@@ -6,7 +6,7 @@
 /*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/20 14:00:04 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/20 14:04:26 by hznagui          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ typedef struct data
 	char			*status;
 	char			*strtmp;
 	char			**tab;
+	char			**env;
 	char			t;
 	int				z;
 	int				lock;
@@ -205,6 +206,7 @@ void				ft_handle_sig(int sig);
 t_list				*ft_get_cmd(t_list *data);
 int					ft_cd_home(t_list *data, t_data *a, int check);
 char				*find_cd(t_data *a);
+char				**ft_get_env(t_env *env, int len, int i, char **envv);
 void				ft_re_env(t_data *a, char *old_path, char *new_path);
 void				add_to_env(t_data *a, char *str);
 int					ft_shlvl(t_data *a);

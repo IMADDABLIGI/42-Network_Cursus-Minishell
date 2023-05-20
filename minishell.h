@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/20 11:36:46 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/20 18:34:34 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,8 +203,9 @@ int					ft_get_strlencmd(t_list *ptr, int i);
 void				ft_quit(int sig);
 void				ft_handle_sig(int sig);
 t_list				*ft_get_cmd(t_list *data);
-int					ft_cd_home(t_list *data, t_data *a, int check);
+int					ft_cd_home(t_list *data, t_data *a, int check, int tat);
 char				*find_cd(t_data *a);
 char				**ft_get_env(t_env *env, int len, int i, char **envv);
 void				ft_re_env(t_data *a, char *old_path, char *new_path);
+int					ft_go_oldpath(t_list *data, t_data *a, int check);
 #endif

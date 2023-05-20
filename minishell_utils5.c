@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils5.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/11 14:48:03 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/18 17:51:26 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/20 18:35:40 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,13 @@ int	ft_cds(t_list *data, char *pwd, int check, t_data *a)
 		return (-2);
 	if (data->next->tatto == 5 || data->next->tatto == 6 || data->next->tatto
 		== 7 || data->next->tatto == 8 || data->next->tatto == 4)
-		check = chdir(g_global.home);
+		check = ft_cd_home(data, a, 0, 1);
 	else if ((data->next->arg[0] == '~') && (data->next->arg[1] == '\0'))
 		check = chdir(g_global.home);
 	else if ((data->next->arg[0] == '~') && (data->next->arg[1] == '/'))
 		check = ft_get_home(data, NULL, 0);
+    else if (data->next->arg[0] == '-')
+        check = ft_go_oldpath(data, a, 0);
 	else if (!pwd && (data->next->arg[0] == '.') && data->next->arg[1] == '\0')
 		ft_print_error2();
 	else if (data->next->arg[0] == '/')
@@ -114,13 +116,14 @@ int	ft_cds(t_list *data, char *pwd, int check, t_data *a)
 void	ft_cd(t_list *data, char *pwd, t_data *a)
 {
 	pwd = ft_initial_cd(NULL, a);
-	if (ft_cd_home(data, a, 0) && !data->next)
+	if (ft_cd_home(data, a, 0, 0) && !data->next)
 		return ;
 	else if (data->next)
 		a->check = ft_cds(data, pwd, 0, a);
-	if (a->check == -2)
+	if (a->check == -2 || a->check == -3)
 	{
-		g_global.status = 1;
+        if (a->check == -2)
+		    g_global.status = 1;
 		return ;
 	}
 	if (a->check == -1)

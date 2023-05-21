@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/17 19:02:11 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/21 12:17:03 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/21 12:33:25 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ int	ft_cd_home(t_list *data, t_data *a, int check, int tat)
 	if (data->next && !tat)
 		return (0);
 	if (!g_global.home)
-    {
-        write(2, "cd: HOME not set\n", 18);
+	{
+		write(2, "cd: HOME not set\n", 18);
 		g_global.status = 1;
-    }
+	}
 	else
 	{
 		check = chdir(g_global.home);

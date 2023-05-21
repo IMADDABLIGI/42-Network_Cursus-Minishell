@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/01 12:17:32 by hznagui           #+#    #+#             */
-/*   Updated: 2023/05/20 19:27:42 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/21 17:12:03 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,7 +193,7 @@ char				*ft_strjoin2(char *s1, char *s2);
 char				*ft_strjoin3(char *s1, char *s2);
 int					ft_check_dr(char *path);
 int					ft_cd_old_path(char *path, int i, int j, t_data *a);
-void				ft_check_redirections(t_list *data, t_store *store,
+int					ft_check_redirections(t_list *data, t_store *store,
 						int input);
 int					ft_check_redirections2(t_list *data, int ot,
 						t_store *store);
@@ -219,4 +219,5 @@ void				add_to_env(t_data *a, char *str);
 int					ft_shlvl(t_data *a);
 void				ft_status(int num);
 int					ft_go_path(t_list *data, char *pwd, char *path, int check);
+void				ft_check_status(void);
 #endif

@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/20 19:11:41 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/20 19:27:23 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/21 17:11:52 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,14 @@ int	ft_go_path(t_list *data, char *pwd, char *path, int check)
 	check = chdir(path);
 	free(path);
 	return (check);
+}
+
+//---------------------------------------------------------------//
+
+void	ft_check_status(void)
+{
+	if (WIFEXITED(g_global.intg))
+		g_global.status = WEXITSTATUS(g_global.intg);
+	else if (WIFSIGNALED(g_global.intg))
+		ft_handle_sig(WTERMSIG(g_global.intg));
 }

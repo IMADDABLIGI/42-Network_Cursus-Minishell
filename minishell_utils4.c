@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell_utils4.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hznagui <hznagui@student.42.fr>            +#+  +:+       +#+        */
+/*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 18:42:51 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/20 11:57:28 by hznagui          ###   ########.fr       */
+/*   Updated: 2023/05/21 17:08:29 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //---------------------------------------------------------------------------//
 
-void	ft_check_redirections(t_list *data, t_store *store, int input)
+int	ft_check_redirections(t_list *data, t_store *store, int input)
 {
 	while (data && (data->tatto != 4))
 	{
@@ -22,7 +22,7 @@ void	ft_check_redirections(t_list *data, t_store *store, int input)
 		{
 			input = open(data->next->arg, O_RDONLY);
 			if (input < 0)
-				exit(0);
+				return (0);
 			dup2(input, STDIN_FILENO);
 			close(input);
 		}
@@ -35,7 +35,7 @@ void	ft_check_redirections(t_list *data, t_store *store, int input)
 		}
 		data = data->next;
 	}
-	return ;
+	return (1);
 }
 
 //---------------------------------------------------------------------------//

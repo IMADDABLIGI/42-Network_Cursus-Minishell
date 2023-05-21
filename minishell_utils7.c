@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/14 11:56:01 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/15 11:03:10 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/21 13:43:23 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,9 @@ void	ft_quit(int sig)
 
 void	ft_handle_sig(int sig)
 {
-	if (sig == 3)
+	if (sig == 2)
+		g_global.status = 130;
+	else if (sig == 3)
 	{
 		write(2, "Quit: 3\n", 9);
 		g_global.status = 131;

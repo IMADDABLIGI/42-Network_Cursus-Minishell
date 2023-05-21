@@ -6,7 +6,7 @@
 /*   By: idabligi <idabligi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 02:21:29 by idabligi          #+#    #+#             */
-/*   Updated: 2023/05/15 11:16:28 by idabligi         ###   ########.fr       */
+/*   Updated: 2023/05/21 17:11:45 by idabligi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	ft_exec(t_list *data, t_store *store, t_data *a)
 {
 	while ((store->i <= store->count) && (data))
 	{
-		ft_check_redirections(data, store, 0);
+		if (!ft_check_redirections(data, store, 0))
+			return ;
 		if (pipe(a->fd) < 0)
 			ft_abort(4);
 		a->pid = fork();
@@ -43,10 +44,7 @@ void	ft_exec(t_list *data, t_store *store, t_data *a)
 			if (store->i == store->count)
 			{
 				waitpid(a->pid, &g_global.intg, 0);
-				if (WIFEXITED(g_global.intg))
-					g_global.status = WEXITSTATUS(g_global.intg);
-				else if (WIFSIGNALED(g_global.intg))
-					ft_handle_sig(WTERMSIG(g_global.intg));
+				ft_check_status();
 			}
 			store->i++;
 		}

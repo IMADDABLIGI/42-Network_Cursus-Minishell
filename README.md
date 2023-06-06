@@ -1,6 +1,6 @@
 # Minishell
   This project is about creating a simple shell.
-# RULE
+# Rule
 - Display a prompt when waiting for a new command.
 - Have a working history.
 - Search and launch the right executable (based on the PATH variable or using a relative or an absolute path).
@@ -29,5 +29,5 @@
   - unset with no options
   - env with no options or arguments
   - exit with no options
-# AVAILABLE FUNCTIONS
+# Available Functions
   readline, rl_clear_history, rl_on_new_line, rl_replace_line, rl_redisplay, add_history, printf, malloc, free, write, access, open, read, close, fork, wait, waitpid, wait3, wait4, signal, sigaction, sigemptyset, sigaddset, kill, exit, getcwd, chdir, stat, lstat, fstat, unlink, execve, dup, dup2, pipe, opendir, readdir, closedir, strerror, perror, isatty, ttyname, ttyslot, ioctl, getenv, tcsetattr, tcgetattr, tgetent, tgetflag, tgetnum, tgetstr, tgoto, tputs
